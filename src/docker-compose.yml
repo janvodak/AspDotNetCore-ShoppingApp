@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+    catalog.api.mongo:
+        image: ${DOCKER_REGISTRY-}catalog-mongo
+        build:
+            context: .
+            dockerfile: Services/Catalog/Catalog.API/Docker/Mongo60/Dockerfile.image
+
+    catalog.api.mongo.client:
+        image: ${DOCKER_REGISTRY-}catalog-mongo-client
+        build:
+            context: .
+            dockerfile: Services/Catalog/Catalog.API/Docker/Mongo-client40/Dockerfile.image
+
+    catalog.api:
+        image: ${DOCKER_REGISTRY-}catalog-api
+        build:
+            context: .
+            dockerfile: Services/Catalog/Catalog.API/Docker/DotNet70/Dockerfile.image
+
+volumes:
+    catalog.api.mongo:
+        name: catalog-api-mongo
