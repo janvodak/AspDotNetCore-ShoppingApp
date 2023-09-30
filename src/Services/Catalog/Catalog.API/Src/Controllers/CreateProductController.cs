@@ -14,11 +14,11 @@ namespace Catalog.API.Controllers
 
 		public CreateProductController(IProductRepository repository)
 		{
-			this._repository = repository ?? throw new ArgumentNullException(nameof(repository));
+			this._repository = repository;
 		}
 
 		[HttpPost]
-		[ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+		[ProducesResponseType(typeof(Product), (int)HttpStatusCode.Created)]
 		public async Task<ActionResult<Product>> CreateProduct([FromBody] Product product)
 		{
 			await this._repository.CreateProduct(product);

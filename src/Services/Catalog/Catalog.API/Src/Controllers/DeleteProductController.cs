@@ -11,19 +11,30 @@ namespace Catalog.API.Controllers
 	public class DeleteProductController : ControllerBase
 	{
 		private readonly IProductRepository _repository;
+		private readonly ILogger<GetProductByIdController> _logger;
 
-		public DeleteProductController(IProductRepository repository)
+		public DeleteProductController(IProductRepository repository, ILogger<GetProductByIdController> logger)
 		{
-			this._repository = repository ?? throw new ArgumentNullException(nameof(repository));
+			this._repository = repository;
+			this._logger = logger;
 		}
 
 		[HttpDelete("{id:length(24)}", Name = "DeleteProduct")]
-		[ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+		[ProducesResponseType(typeof(Product), (int)HttpStatusCode.NoContent)]
+		[ProducesResponseType((int)HttpStatusCode.NotFound)]
 		public async Task<IActionResult> DeleteProductById(string id)
 		{
-			await this._repository.DeleteProduct(id);
+			bool result = await this._repository.DeleteProduct(id);
 
-			return Ok();
+			if (result == false)
+			{
+				string message = $"Product with id: {id} not found";
+				this._logger.LogError(message: message);
+
+				return NotFound();
+			}
+
+			return NoContent();
 		}
 	}
 }

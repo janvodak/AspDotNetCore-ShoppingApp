@@ -14,7 +14,7 @@ namespace Catalog.API.Controllers
 
 		public GetProductsController(IProductRepository repository)
 		{
-			this._repository = repository ?? throw new ArgumentNullException(nameof(repository));
+			this._repository = repository;
 		}
 
 		[HttpGet]
