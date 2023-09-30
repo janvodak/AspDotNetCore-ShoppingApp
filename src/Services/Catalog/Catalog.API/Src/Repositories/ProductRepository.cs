@@ -10,7 +10,7 @@ namespace Catalog.API.Src.Repositories
 
 		public ProductRepository(ICatalogContext catalogContext)
 		{
-			this._productCollection = catalogContext.Products;
+			this._productCollection = catalogContext.GetProductMongoCollection();
 		}
 
 		public async Task CreateProduct(Product product)

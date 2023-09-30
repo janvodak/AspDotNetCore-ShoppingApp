@@ -1,58 +1,33 @@
 ﻿using Catalog.API.Src.Entities;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace Catalog.API.Src.Data
 {
 	public class CatalogContext : ICatalogContext
 	{
-		private const string _connectionStringConfigurationKey = "DatabaseSettings:ConnectionString";
-		private const string _databaseNameConfigurationKey = "DatabaseSettings:DatabaseName";
-		private const string _connectionStringKey = "DatabaseSettings:CollectionName";
+		private readonly IMongoCollection<Product> _productMongoCollection;
 
-		private readonly IMongoClient _mongoClient;
-		private readonly IMongoDatabase _mongoDatabase;
-
-		public IMongoCollection<Product> Products { get; }
-
-		public CatalogContext(IConfiguration configuration)
+		public CatalogContext(IOptions<DatabaseSettings> databaseSettings)
 		{
-			this._mongoClient = CreateClient(configuration);
-			this._mongoDatabase = this.ConnectToMongoDatabase(configuration);
+			MongoClient mongoClient = new(connectionString: databaseSettings.Value.ConnectionString);
+			var mongoDatabase = mongoClient.GetDatabase(databaseSettings.Value.DatabaseName);
 
-			this.Products = GetProductCollection(configuration);
+			this._productMongoCollection = mongoDatabase.GetCollection<Product>(databaseSettings.Value.CollectionName);
 
 			this.SeedDataIfProductsAreEmpty();
 		}
 
-		private MongoClient CreateClient(IConfiguration configuration)
+		public IMongoCollection<Product> GetProductMongoCollection()
 		{
-			string? connectionStringValue = configuration.GetValue<string>(_connectionStringConfigurationKey)
-								   ?? throw new ArgumentNullException(nameof(this._mongoClient));
-
-			return new MongoClient(connectionStringValue);
-		}
-
-		private IMongoDatabase ConnectToMongoDatabase(IConfiguration configuration)
-		{
-			string? databaseName = configuration.GetValue<string>(_databaseNameConfigurationKey)
-						  ?? throw new ArgumentNullException(nameof(this._mongoDatabase));
-
-			return this._mongoClient.GetDatabase(databaseName);
-		}
-
-		private IMongoCollection<Product> GetProductCollection(IConfiguration configuration)
-		{
-			string? collectionName = configuration.GetValue<string>(_connectionStringKey)
-							?? throw new ArgumentNullException(nameof(this.Products));
-
-			return this._mongoDatabase.GetCollection<Product>(collectionName);
+			return _productMongoCollection;
 		}
 
 		private void SeedDataIfProductsAreEmpty()
 		{
-			if (this.Products.Find(p => true).Any() == false)
+			if (this.GetProductMongoCollection().Find(p => true).Any() == false)
 			{
-				CatalogContextSeed.SeedData(this.Products);
+				CatalogContextSeed.SeedData(this.GetProductMongoCollection());
 			}
 		}
 	}
