@@ -4,6 +4,9 @@ using Catalog.API.Src.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.Configure<DatabaseSettings>(
+	builder.Configuration.GetSection("DatabaseSettings"));
+
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICatalogContext, CatalogContext>();
 
