@@ -11,7 +11,7 @@ services:
         image: ${DOCKER_REGISTRY-}catalog-mongo-client
         build:
             context: .
-            dockerfile: Services/Catalog/Catalog.API/Docker/Mongo-client40/Dockerfile.image
+            dockerfile: Services/Catalog/Catalog.API/Docker/MongoClient40/Dockerfile.image
 
     catalog.api:
         image: ${DOCKER_REGISTRY-}catalog-api

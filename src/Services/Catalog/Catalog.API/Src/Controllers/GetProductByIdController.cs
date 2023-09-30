@@ -15,8 +15,8 @@ namespace Catalog.API.Controllers
 
 		public GetProductByIdController(IProductRepository repository, ILogger<GetProductByIdController> logger)
 		{
-			this._repository = repository ?? throw new ArgumentNullException(nameof(repository));
-			this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
+			this._repository = repository;
+			this._logger = logger;
 		}
 
 		[HttpGet("{id:length(24)}", Name = "GetProductById")]
@@ -29,7 +29,7 @@ namespace Catalog.API.Controllers
 			if (product == null)
 			{
 				string message = $"Product with id: {id} not found";
-				this._logger.LogError(message);
+				this._logger.LogError(message: message);
 
 				return NotFound();
 			}
