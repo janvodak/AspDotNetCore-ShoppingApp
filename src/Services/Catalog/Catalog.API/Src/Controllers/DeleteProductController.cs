@@ -11,9 +11,9 @@ namespace Catalog.API.Controllers
 	public class DeleteProductController : ControllerBase
 	{
 		private readonly IProductRepository _repository;
-		private readonly ILogger<GetProductByIdController> _logger;
+		private readonly ILogger<DeleteProductController> _logger;
 
-		public DeleteProductController(IProductRepository repository, ILogger<GetProductByIdController> logger)
+		public DeleteProductController(IProductRepository repository, ILogger<DeleteProductController> logger)
 		{
 			this._repository = repository;
 			this._logger = logger;
