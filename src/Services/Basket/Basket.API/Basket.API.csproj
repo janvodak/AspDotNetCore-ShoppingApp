@@ -4,6 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DockerComposeProjectPath>../../../docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
@@ -19,11 +20,17 @@
     <None Remove="Src\Controllers\" />
     <None Remove="Src\Entities\" />
     <None Remove="Src\Repositories\" />
+    <None Remove="Docker\" />
+    <None Remove="Docker\DotNet70\" />
+    <None Remove="Docker\Redis72\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Src\" />
     <Folder Include="Src\Controllers\" />
     <Folder Include="Src\Entities\" />
     <Folder Include="Src\Repositories\" />
+    <Folder Include="Docker\" />
+    <Folder Include="Docker\DotNet70\" />
+    <Folder Include="Docker\Redis72\" />
   </ItemGroup>
 </Project>
