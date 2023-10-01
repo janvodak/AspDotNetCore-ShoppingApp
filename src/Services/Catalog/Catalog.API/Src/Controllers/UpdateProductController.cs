@@ -11,9 +11,9 @@ namespace Catalog.API.Controllers
 	public class UpdateProductController : ControllerBase
 	{
 		private readonly IProductRepository _repository;
-		private readonly ILogger<GetProductByIdController> _logger;
+		private readonly ILogger<UpdateProductController> _logger;
 
-		public UpdateProductController(IProductRepository repository, ILogger<GetProductByIdController> logger)
+		public UpdateProductController(IProductRepository repository, ILogger<UpdateProductController> logger)
 		{
 			this._repository = repository;
 			this._logger = logger;
