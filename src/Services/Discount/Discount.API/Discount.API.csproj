@@ -15,9 +15,15 @@
   <ItemGroup>
     <None Remove="Src\" />
     <None Remove="Src\Controllers\" />
+    <None Remove="Docker\" />
+    <None Remove="Docker\Postgres16\" />
+    <None Remove="Docker\PgAdmin77\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Src\" />
     <Folder Include="Src\Controllers\" />
+    <Folder Include="Docker\" />
+    <Folder Include="Docker\Postgres16\" />
+    <Folder Include="Docker\PgAdmin77\" />
   </ItemGroup>
 </Project>
