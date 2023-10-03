@@ -31,6 +31,22 @@ services:
             context: .
             dockerfile: Services/Basket/Basket.API/Docker/DotNet70/Dockerfile.image
 
+    discount.api.postgres:
+        image: ${DOCKER_REGISTRY-}discount-postgres
+        build:
+            context: .
+            dockerfile: Services/Basket/Discount.API/Docker/Postgres16/Dockerfile.image
+
+    discount.api.pgadmin:
+        image: ${DOCKER_REGISTRY-}discount-pgadmin
+        build:
+            context: .
+            dockerfile: Services/Basket/Discount.API/Docker/PgAdmin77/Dockerfile.image
+
 volumes:
     catalog.api.mongo:
         name: catalog-api-mongo
+    discount.api.postgres:
+        name: discount-api-postgres
+    discount.api.pgadmin:
+        name: discount-api-pgadmin
