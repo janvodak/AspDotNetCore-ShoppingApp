@@ -20,7 +20,7 @@ services:
             dockerfile: Services/Catalog/Catalog.API/Docker/DotNet70/Dockerfile.image
 
     basket.api.redis:
-        image: ${DOCKER_REGISTRY-}catalog-redis
+        image: ${DOCKER_REGISTRY-}basket-redis
         build:
             context: .
             dockerfile: Services/Basket/Basket.API/Docker/Redis72/Dockerfile.image
