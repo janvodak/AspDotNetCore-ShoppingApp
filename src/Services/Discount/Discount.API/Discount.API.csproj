@@ -10,6 +10,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.11" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Npgsql" Version="7.0.6" />
+    <PackageReference Include="Dapper" Version="2.1.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +20,8 @@
     <None Remove="Docker\" />
     <None Remove="Docker\Postgres16\" />
     <None Remove="Docker\PgAdmin77\" />
+    <None Remove="Src\Entities\" />
+    <None Remove="Src\Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Src\" />
@@ -25,5 +29,7 @@
     <Folder Include="Docker\" />
     <Folder Include="Docker\Postgres16\" />
     <Folder Include="Docker\PgAdmin77\" />
+    <Folder Include="Src\Entities\" />
+    <Folder Include="Src\Repositories\" />
   </ItemGroup>
 </Project>
