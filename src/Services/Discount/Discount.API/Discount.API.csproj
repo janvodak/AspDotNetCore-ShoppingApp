@@ -4,6 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DockerComposeProjectPath>../../../docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
@@ -22,6 +23,7 @@
     <None Remove="Docker\PgAdmin77\" />
     <None Remove="Src\Entities\" />
     <None Remove="Src\Repositories\" />
+    <None Remove="Docker\DotNet70\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Src\" />
@@ -31,5 +33,6 @@
     <Folder Include="Docker\PgAdmin77\" />
     <Folder Include="Src\Entities\" />
     <Folder Include="Src\Repositories\" />
+    <Folder Include="Docker\DotNet70\" />
   </ItemGroup>
 </Project>

@@ -43,6 +43,12 @@ services:
             context: .
             dockerfile: Services/Basket/Discount.API/Docker/PgAdmin77/Dockerfile.image
 
+    discount.api:
+        image: ${DOCKER_REGISTRY-}discount-api
+        build:
+            context: .
+            dockerfile: Services/Discount/Discount.API/Docker/DotNet70/Dockerfile.image
+
 volumes:
     catalog.api.mongo:
         name: catalog-api-mongo

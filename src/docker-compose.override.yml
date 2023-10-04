@@ -60,7 +60,19 @@ services:
             - PGADMIN_DEFAULT_EMAIL=admin@aspnetrun.com
             - PGADMIN_DEFAULT_PASSWORD=admin1234
         restart: always
+        depends_on:
+            - discount.api.postgres
         ports:
             - "5050:80"
         volumes:
             - discount.api.pgadmin:/root/.pgadmin
+
+    discount.api:
+        container_name: discount-api
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - "DatabaseSettings:ConnectionString=Server=discount-api-postgres;Port=5432;Database=DiscountDb;User Id=admin;Password=admin1234;"
+        depends_on:
+            - discount.api.postgres
+        ports:
+            - "8002:80"
