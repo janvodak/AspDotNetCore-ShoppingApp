@@ -71,7 +71,7 @@ services:
         container_name: discount-api
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
-            - "DatabaseSettings:ConnectionString=Server=discount-api-postgres;Port=5432;Database=DiscountDb;User Id=admin;Password=admin1234;"
+            - "DatabaseSettings:Host=discount-api-postgres"
         depends_on:
             - discount.api.postgres
         ports:

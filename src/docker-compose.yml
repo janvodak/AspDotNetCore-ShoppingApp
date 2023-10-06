@@ -35,13 +35,13 @@ services:
         image: ${DOCKER_REGISTRY-}discount-postgres
         build:
             context: .
-            dockerfile: Services/Basket/Discount.API/Docker/Postgres16/Dockerfile.image
+            dockerfile: Services/Discount/Discount.API/Docker/Postgres16/Dockerfile.image
 
     discount.api.pgadmin:
         image: ${DOCKER_REGISTRY-}discount-pgadmin
         build:
             context: .
-            dockerfile: Services/Basket/Discount.API/Docker/PgAdmin77/Dockerfile.image
+            dockerfile: Services/Discount/Discount.API/Docker/PgAdmin77/Dockerfile.image
 
     discount.api:
         image: ${DOCKER_REGISTRY-}discount-api

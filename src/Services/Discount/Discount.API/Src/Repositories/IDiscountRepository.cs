@@ -4,7 +4,7 @@ namespace Discount.API.Src.Repositories
 {
 	public interface IDiscountRepository
 	{
-		Task<DiscountEntity> GetDiscount(string productName);
+		Task<DiscountEntity?> GetDiscount(string productName);
 
 		Task<bool> CreateDiscount(DiscountEntity discount);
 
