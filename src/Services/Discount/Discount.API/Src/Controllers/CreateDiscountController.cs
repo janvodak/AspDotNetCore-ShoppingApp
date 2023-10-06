@@ -18,12 +18,18 @@ namespace Discount.API.Src.Controllers
 		}
 
 		[HttpPost]
-		[ProducesResponseType(typeof(DiscountEntity), (int)HttpStatusCode.Created)]
+		[ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+		[ProducesResponseType(typeof(DiscountEntity), (int)HttpStatusCode.Accepted)]
 		public async Task<ActionResult<DiscountEntity>> CreateDiscount([FromBody] DiscountEntity discount)
 		{
-			await this._repository.CreateDiscount(discount);
+			bool result = await this._repository.CreateDiscount(discount);
 
-			return CreatedAtRoute("GetDiscount", new { productName = discount.ProductName }, discount);
+			if (result == false)
+			{
+				return Problem();
+			}
+
+			return AcceptedAtRoute("GetDiscount", new { productName = discount.ProductName }, discount);
 		}
 	}
 }

@@ -1,35 +1,30 @@
-﻿using Dapper;
+﻿using Discount.API.Src.Data;
 using Discount.API.Src.Entities;
-using Npgsql;
+using Microsoft.EntityFrameworkCore;
 
 namespace Discount.API.Src.Repositories
 {
 	public class DiscountRepository : IDiscountRepository
 	{
-		private readonly IConfiguration _configuration;
+		private readonly DiscountContext _discountContext;
+		private readonly ILogger<DiscountRepository> _logger;
 
-		public DiscountRepository(IConfiguration configuration)
+		public DiscountRepository(DiscountContext discountContext, ILogger<DiscountRepository> logger)
 		{
-			this._configuration = configuration;
+			this._discountContext = discountContext;
+			this._logger = logger;
 		}
 
 		public async Task<bool> CreateDiscount(DiscountEntity discount)
 		{
-			string query = "INSERT INTO Discount (ProductName, Description, Amount) VALUES (@ProductName, @Description, @Amount)";
-			string? connectionString = this._configuration.GetValue<string>("DatabaseSettings:ConnectionString");
-
-			using NpgsqlConnection connection = new(connectionString);
-
-			var result = await connection.ExecuteAsync(
-				query,
-				new {
-					ProductName = discount.ProductName,
-					Description = discount.Description,
-					Amount = discount.Amount
-				});
+			this._discountContext.Discounts.Add(discount);
+			int result = await this._discountContext.SaveChangesAsync();
 
 			if (result == 0)
 			{
+				string message = $"Unable to create discount: '{discount.ToString}'";
+				this._logger.LogError(message: message);
+
 				return false;
 			}
 
@@ -38,45 +33,39 @@ namespace Discount.API.Src.Repositories
 
 		public async Task<bool> DeleteDiscount(string productName)
 		{
-			string query = "DELETE FROM Discount WHERE ProductName = @ProductName";
-			string? connectionString = this._configuration.GetValue<string>("DatabaseSettings:ConnectionString");
+			DiscountEntity? discount = await this._discountContext.Discounts.SingleAsync(d => d.ProductName == productName);
 
-			using NpgsqlConnection connection = new(connectionString);
+			if (discount == null)
+			{
+				string message = $"Discount for product: '{productName}' not found";
+				this._logger.LogError(message: message);
 
-			var result = await connection.ExecuteAsync(
-				query,
-				new
-				{
-					ProductName = productName,
-				});
+				return false;
+			}
+
+			this._discountContext.Discounts.Remove(discount);
+
+			int result = await this._discountContext.SaveChangesAsync();
 
 			if (result == 0)
 			{
+				string message = $"Unable to remove discount: '{discount.ToString}'";
+				this._logger.LogError(message: message);
+
 				return false;
 			}
 
 			return true;
 		}
 
-		public async Task<DiscountEntity> GetDiscount(string productName)
+		public async Task<DiscountEntity?> GetDiscount(string productName)
 		{
-			string query = "SELECT * FROM Discount WHERE ProductName = @ProductName";
-			string? connectionString = this._configuration.GetValue<string>("DatabaseSettings:ConnectionString");
-
-			using NpgsqlConnection connection = new(connectionString);
-
-			DiscountEntity? discount = await connection.QueryFirstOrDefaultAsync<DiscountEntity>(
-				query,
-				new { ProductName = productName });
+			DiscountEntity? discount = await this._discountContext.Discounts.FirstOrDefaultAsync(d => d.ProductName == productName);
 
 			if (discount == null)
 			{
-				return new DiscountEntity
-				{
-					ProductName = "No discount",
-					Amount = 0,
-					Description = "No Discount Desc"
-				};
+				string message = $"Unable to get discount for product '{productName}'";
+				this._logger.LogError(message: message);
 			}
 
 			return discount;
@@ -84,27 +73,26 @@ namespace Discount.API.Src.Repositories
 
 		public async Task<bool> UpdateDiscount(DiscountEntity discount)
 		{
-			string query = "UPDATE Discount SET ProductName=@ProductName, Description=@Description, Amount=@Amount WHERE Id = @Id";
-			string? connectionString = this._configuration.GetValue<string>("DatabaseSettings:ConnectionString");
+			this._discountContext.Attach(discount).State = EntityState.Modified;
 
-			using NpgsqlConnection connection = new(connectionString);
-
-			var result = await connection.ExecuteAsync(
-				query,
-				new {
-					ProductName = discount.ProductName,
-					Description = discount.Description,
-					Amount = discount.Amount,
-					Id = discount.Id
-				});
-
-			if (result == 0)
+			try
 			{
-				return false;
+				int result = await this._discountContext.SaveChangesAsync();
+
+				if (result == 0)
+				{
+					return false;
+				}
+
+				return true;
+			}
+			catch (Exception exception) when (exception is DbUpdateConcurrencyException || exception is DbUpdateException || exception is OperationCanceledException)
+			{
+				string message = $"Unable to update discount '{discount.ToString}'.";
+				this._logger.LogError(exception, message: message);
 			}
 
-			return true;
+			return false;
 		}
 	}
 }
-

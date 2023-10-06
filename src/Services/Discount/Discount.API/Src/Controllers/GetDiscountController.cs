@@ -18,12 +18,19 @@ namespace Discount.API.Src.Controllers
 		}
 
 		[HttpGet("{productName}", Name = "GetDiscount")]
-		[ProducesResponseType(typeof(DiscountEntity), (int)HttpStatusCode.OK)]
+		[ProducesResponseType((int)HttpStatusCode.NotFound)]
+		[ProducesResponseType(typeof(DiscountEntity), (int)HttpStatusCode.Accepted)]
 		public async Task<ActionResult<DiscountEntity>> GetDiscount(string productName)
 		{
-			DiscountEntity discount = await this._repository.GetDiscount(productName);
+			DiscountEntity? discount = await this._repository.GetDiscount(productName);
 
-			return Ok(discount);
+
+			if (discount == null)
+			{
+				return NotFound();
+			}
+
+			return Accepted(discount);
 		}
 	}
 }

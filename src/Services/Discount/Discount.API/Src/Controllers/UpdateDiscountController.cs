@@ -17,13 +17,19 @@ namespace Discount.API.Src.Controllers
 			this._repository = repository;
 		}
 
-		[HttpPost]
-		[ProducesResponseType(typeof(DiscountEntity), (int)HttpStatusCode.OK)]
+		[HttpPut]
+		[ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+		[ProducesResponseType(typeof(DiscountEntity), (int)HttpStatusCode.Accepted)]
 		public async Task<ActionResult<DiscountEntity>> UpdateDiscount([FromBody] DiscountEntity discount)
 		{
-			await this._repository.UpdateDiscount(discount);
+			bool result = await this._repository.UpdateDiscount(discount);
 
-			return CreatedAtRoute("GetDiscount", new { productName = discount.ProductName }, discount);
+			if (result == false)
+			{
+				return Problem();
+			}
+
+			return AcceptedAtRoute("GetDiscount", new { productName = discount.ProductName }, discount);
 		}
 	}
 }
