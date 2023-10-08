@@ -17,9 +17,9 @@ namespace Discount.API.Src.Controllers
 			this._repository = repository;
 		}
 
-		[HttpDelete("{productName}", Name = "DeleteDiscount")]
+		[HttpDelete("{productName}", Name = "DeleteDiscount")]		
+		[ProducesResponseType(typeof(DiscountEntity), (int)HttpStatusCode.NoContent)]
 		[ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-		[ProducesResponseType(typeof(DiscountEntity), (int)HttpStatusCode.Accepted)]
 		public async Task<IActionResult> DeleteDiscount(string productName)
 		{
 			bool result = await this._repository.DeleteDiscount(productName);
@@ -29,7 +29,7 @@ namespace Discount.API.Src.Controllers
 				return Problem();
 			}
 
-			return Accepted();
+			return NoContent();
 		}
 	}
 }

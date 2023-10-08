@@ -20,7 +20,8 @@ namespace Catalog.API.Controllers
 		}
 
 		[HttpPut]
-		[ProducesResponseType(typeof(Product), (int)HttpStatusCode.NoContent)]
+		[ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+		[ProducesResponseType((int)HttpStatusCode.NotFound)]
 		public async Task<IActionResult> UpdateProduct([FromBody] Product product)
 		{
 			bool result = await this._repository.UpdateProduct(product);
@@ -33,7 +34,7 @@ namespace Catalog.API.Controllers
 				return NotFound();
 			}
 
-			return NoContent();
+			return Ok(product);
 		}
 	}
 }

@@ -23,7 +23,7 @@ namespace Basket.API.Src.Controllers
 		{
 			await this._repository.UpdateBasket(basket);
 
-			return CreatedAtRoute("GetBasket", new { userName = basket.UserName }, basket);
+			return Ok(basket);
 		}
 	}
 }

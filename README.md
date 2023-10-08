@@ -8,9 +8,9 @@ To facilitate communication between these microservices, we have adopted a Rabbi
 
 ## API Gateway Integration:
 
-Additionally, we have integrated Ocelot API Gateway into our architecture to manage and route incoming requests to the appropriate microservices, providing a unified entry point for external clients.
+Additionally, Ocelot API Gateway have been integrated into architecture to manage and route incoming requests to the appropriate microservices, providing a unified entry point for external clients.
 
-This combination of microservices, databases, event-driven communication, and API gateway integration forms the foundation of our e-commerce solution.
+This combination of microservices, databases, event-driven communication, and API gateway integration forms the foundation of this e-commerce solution.
 
 **Refer the main repository -> https://github.com/janvodak/AspnetMicroservices**
 
@@ -48,10 +48,10 @@ For your Local Development Environment (Windows/Linux/macOS) you will need follo
 1. Clone the repository: `git clone `.
    
    **Windows users:** If you use Docker on Windows with WSL2 enabled, make sure you clone it directly into the linux partition (e.g.,`\\wsl$\Ubuntu...`).
-1. Go into the project directory
 1. Once Docker for Windows is installed, go to the **Settings > Advanced option**, from the Docker icon in the system tray, to configure the minimum amount of memory and CPU like so:
 	* **Memory: 4 GB**
 	* **CPU: 2**
+1. Go into the project directory
 1. Run
 	* With Portainer (WITH_PORTAINER=1):
 		```
@@ -69,6 +69,7 @@ For your Local Development Environment (Windows/Linux/macOS) you will need follo
 * **Basket API -> http://host.docker.internal:8001/swagger/index.html**
 * **Discount API -> http://host.docker.internal:8002/swagger/index.html**
 * **Portainer -> http://host.docker.internal:9000**   -- admin/admin1234
+* **Mongo Client -> http://host.docker.internal:3000**
 * **pgAdmin PostgreSQL -> http://host.docker.internal:5050**   -- admin@aspnetrun.com/admin1234
 
 

@@ -18,8 +18,8 @@ namespace Discount.API.Src.Controllers
 		}
 
 		[HttpPut]
+		[ProducesResponseType(typeof(DiscountEntity), (int)HttpStatusCode.OK)]
 		[ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-		[ProducesResponseType(typeof(DiscountEntity), (int)HttpStatusCode.Accepted)]
 		public async Task<ActionResult<DiscountEntity>> UpdateDiscount([FromBody] DiscountEntity discount)
 		{
 			bool result = await this._repository.UpdateDiscount(discount);
@@ -29,7 +29,7 @@ namespace Discount.API.Src.Controllers
 				return Problem();
 			}
 
-			return AcceptedAtRoute("GetDiscount", new { productName = discount.ProductName }, discount);
+			return Ok(discount);
 		}
 	}
 }
