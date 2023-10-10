@@ -1,0 +1,20 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Discount.Grpc.Src.Protos";
+
+package discount;
+
+service CreateDiscountProtocolBufferService {
+	rpc CreateDiscount(CreateDiscountRequest) returns (CreateDiscountProtocolBufferEntity);
+}
+
+message CreateDiscountProtocolBufferEntity {
+	int32 id = 1;
+	string productName = 2;
+	string description = 3;
+	int32 amount = 4;
+}
+
+message CreateDiscountRequest {
+	CreateDiscountProtocolBufferEntity discount = 1;
+}
