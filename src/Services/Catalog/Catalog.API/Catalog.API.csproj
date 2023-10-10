@@ -1,38 +1,38 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <DockerComposeProjectPath>../../../docker-compose.dcproj</DockerComposeProjectPath>
+	<TargetFramework>net7.0</TargetFramework>
+	<Nullable>enable</Nullable>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<DockerComposeProjectPath>../../../docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.11" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-    <PackageReference Include="MongoDB.Driver" Version="2.21.0" />
+	<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
+	<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+	<PackageReference Include="MongoDB.Driver" Version="2.22.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="src\ValueObjects\" />
-    <None Remove="Docker\DotNet70\" />
-    <None Remove="Docker\Mongo60\" />
-    <None Remove="Src\" />
-    <None Remove="Src\Controllers\" />
-    <None Remove="Src\Data\" />
-    <None Remove="Src\Entities\" />
-    <None Remove="Src\Repositories\" />
-    <None Remove="Docker\MongoClient40\" />
+	<None Remove="src\ValueObjects\" />
+	<None Remove="Docker\DotNet70\" />
+	<None Remove="Docker\Mongo60\" />
+	<None Remove="Src\" />
+	<None Remove="Src\Controllers\" />
+	<None Remove="Src\Data\" />
+	<None Remove="Src\Entities\" />
+	<None Remove="Src\Repositories\" />
+	<None Remove="Docker\MongoClient40\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Docker\DotNet70\" />
-    <Folder Include="Docker\Mongo60\" />
-    <Folder Include="Src\" />
-    <Folder Include="Src\Controllers\" />
-    <Folder Include="Src\Data\" />
-    <Folder Include="Src\Entities\" />
-    <Folder Include="Src\Repositories\" />
-    <Folder Include="Docker\MongoClient40\" />
+	<Folder Include="Docker\DotNet70\" />
+	<Folder Include="Docker\Mongo60\" />
+	<Folder Include="Src\" />
+	<Folder Include="Src\Controllers\" />
+	<Folder Include="Src\Data\" />
+	<Folder Include="Src\Entities\" />
+	<Folder Include="Src\Repositories\" />
+	<Folder Include="Docker\MongoClient40\" />
   </ItemGroup>
 </Project>
