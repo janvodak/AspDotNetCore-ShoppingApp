@@ -2,7 +2,7 @@
 using Discount.Grpc.Src.Entities;
 using Discount.Grpc.Src.Protos;
 
-namespace DIscount.Grpc.Src.Mapper
+namespace Discount.Grpc.Src.Mapper
 {
 	public class DiscountProfile : Profile
 	{
