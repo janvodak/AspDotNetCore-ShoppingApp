@@ -4,6 +4,7 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<DockerComposeProjectPath>../../../docker-compose.dcproj</DockerComposeProjectPath>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
@@ -28,4 +29,26 @@
 		<Protobuf Include="Src\Protos\createDiscount.proto" GrpcServices="Server" />
 		<Protobuf Include="Src\Protos\updateDiscount.proto" GrpcServices="Server" />
 	</ItemGroup>
+  <ItemGroup>
+	<None Remove="Src\" />
+	<None Remove="Docker\" />
+	<None Remove="Docker\DotNet70\" />
+	<None Remove="Src\Entities\" />
+	<None Remove="Src\Mapper\" />
+	<None Remove="Src\Protos\" />
+	<None Remove="Src\Repositories\" />
+	<None Remove="Src\Data\" />
+	<None Remove="Src\Services\" />
+  </ItemGroup>
+  <ItemGroup>
+	<Folder Include="Src\" />
+	<Folder Include="Docker\" />
+	<Folder Include="Docker\DotNet70\" />
+	<Folder Include="Src\Entities\" />
+	<Folder Include="Src\Mapper\" />
+	<Folder Include="Src\Protos\" />
+	<Folder Include="Src\Repositories\" />
+	<Folder Include="Src\Data\" />
+	<Folder Include="Src\Services\" />
+  </ItemGroup>
 </Project>

@@ -14,7 +14,7 @@ builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 
 builder.Services.AddGrpcClient<GetDiscountProtocolBufferService.GetDiscountProtocolBufferServiceClient>(options =>
 {
-	options.Address = new Uri(uriString: builder.Configuration.GetValue<string>("GrpcSettings:DiscountUrl"));
+	options.Address = new Uri(uriString: builder.Configuration.GetValue<string>("DiscountGrpcSettings:DiscountUrl"));
 });
 
 builder.Services.AddScoped<GetDiscountGrpcService>();

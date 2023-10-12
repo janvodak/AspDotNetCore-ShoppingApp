@@ -37,6 +37,7 @@ services:
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
             - "CacheSettings:ConnectionString=basket-api-redis:6379"
+            - "DiscountGrpcSettings:DiscountUrl=http://discount-grpc"
         depends_on:
             - basket.api.redis
         ports:
@@ -76,3 +77,13 @@ services:
             - discount.api.postgres
         ports:
             - "8002:80"
+
+    discount.grpc:
+        container_name: discount-grpc
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - "DatabaseSettings:Host=discount-api-postgres"
+        depends_on:
+            - discount.api.postgres
+        ports:
+            - "8003:80"

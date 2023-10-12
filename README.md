@@ -4,9 +4,27 @@ In this project, there are implemented a set of microservices that cover various
 
 ## Communication between Microservices:
 
-To facilitate communication between these microservices, we have adopted a RabbitMQ-based Event Driven Communication approach. This allows seamless interaction and data exchange between the different modules.
+To facilitate communication between these microservices,there was adopted a RabbitMQ-based Event Driven Communication approach. This allows seamless interaction and data exchange between the different modules.
 
-## API Gateway Integration:
+### Grpc
+
+In order to enhance the application's functionality, there was introduced gRPC, a modern and efficient Remote Procedure Call (RPC) framework, which is utilized by various services.
+
+**Understanding gRPC:**
+
+gRPC is a high-performance, language-agnostic RPC framework that facilitates efficient communication between various services in a distributed system. It utilizes Protocol Buffers (protobufs) for data serialization and supports multiple programming languages, making it well-suited for microservices architecture.
+
+**Role as a gRPC Server:**
+
+In this configuration, the "Discount Grpc" service functions as a gRPC server, exposing a set of APIs to enable other services, such as the Basket API, to request and receive discount information for products.
+
+**Integration with Basket API as a gRPC Client:**
+
+The Basket API acts as a gRPC client, communicating with the "Discount Grpc" service to request discounts for each product in a user's shopping basket. This client-server interaction ensures efficient discount calculations, resulting in an optimized and responsive user experience.
+
+Utilizing gRPC, the services can communicate seamlessly and perform actions like discount calculations, enhancing the overall functionality of the e-commerce application.
+
+### API Gateway Integration:
 
 Additionally, Ocelot API Gateway have been integrated into architecture to manage and route incoming requests to the appropriate microservices, providing a unified entry point for external clients.
 
@@ -68,10 +86,10 @@ For your Local Development Environment (Windows/Linux/macOS) you will need follo
 * **Catalog API -> http://host.docker.internal:8000/swagger/index.html**
 * **Basket API -> http://host.docker.internal:8001/swagger/index.html**
 * **Discount API -> http://host.docker.internal:8002/swagger/index.html**
+* **Discount Grpc -> http://host.docker.internal:8003**
 * **Portainer -> http://host.docker.internal:9000**   -- admin/admin1234
 * **Mongo Client -> http://host.docker.internal:3000**
 * **pgAdmin PostgreSQL -> http://host.docker.internal:5050**   -- admin@aspnetrun.com/admin1234
-
 
 ## Repository Settings and Best Practices
 

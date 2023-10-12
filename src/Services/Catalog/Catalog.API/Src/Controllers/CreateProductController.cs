@@ -23,7 +23,7 @@ namespace Catalog.API.Controllers
 		{
 			await this._repository.CreateProduct(product);
 
-			return CreatedAtRoute("GetProduct", new { id = product.Id }, product);
+			return CreatedAtRoute("GetProductById", new { id = product.Id }, product);
 		}
 	}
 }
