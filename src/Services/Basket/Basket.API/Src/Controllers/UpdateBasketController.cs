@@ -27,9 +27,12 @@ namespace Basket.API.Src.Controllers
 		{
 			foreach (var product in basket.Products)
 			{
-				GetDiscountProtocolBufferEntity discount = await this._getDiscountGrpcService.GetDiscount(product.Name);
+				GetDiscountProtocolBufferEntity? discount = await this._getDiscountGrpcService.GetDiscount(product.Name);
 
-				product.Price -= discount.Amount;
+				if ( discount != null)
+				{
+					product.Price -= discount.Amount;
+				}
 			}
 
 			await this._repository.UpdateBasket(basket);
