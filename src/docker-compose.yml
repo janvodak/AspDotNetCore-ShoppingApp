@@ -49,6 +49,12 @@ services:
             context: .
             dockerfile: Services/Discount/Discount.API/Docker/DotNet70/Dockerfile.image
 
+    discount.grpc:
+        image: ${DOCKER_REGISTRY-}discount-grpc
+        build:
+            context: .
+            dockerfile: Services/Discount/Discount.Grpc/Docker/DotNet70/Dockerfile.image
+
 volumes:
     catalog.api.mongo:
         name: catalog-api-mongo
