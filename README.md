@@ -1,141 +1,69 @@
 # AspnetMicroservices
 
-In this project, there are implemented a set of microservices that cover various e-commerce modules, including Product, Basket, Discount, and Ordering. These microservices leverage a combination of NoSQL databases (MongoDB, Redis) and Relational databases (PostgreSQL, SQL Server) for data storage.
+## Table of Contents
 
-## Communication between Microservices:
+- [Introduction](#introduction)
+- [Installation](docs/installation.md)
+- [Usage](docs/usage.md)
+- [Architecture](docs/architecture.md)
+- [Contributing](docs/contributing.md)
 
-To facilitate communication between these microservices,there was adopted a RabbitMQ-based Event Driven Communication approach. This allows seamless interaction and data exchange between the different modules.
+## Introduction
 
-### Grpc
+Welcome to my ASP.NET Core Web API-based microservices project! This application utilizes a wide range of frameworks and technologies to create a powerful and efficient basis for e-commerce platform.
 
-In order to enhance the application's functionality, there was introduced gRPC, a modern and efficient Remote Procedure Call (RPC) framework, which is utilized by various services.
+In this project, there are implemented a set of microservices that cover various e-commerce modules, including Product, Basket, Discount, and Ordering.
+These microservices leverage a combination of NoSQL databases (MongoDB, Redis) and Relational databases (PostgreSQL, SQL Server) for data storage.
 
-**Understanding gRPC:**
+Here's a glimpse of what you'll find:
 
-gRPC is a high-performance, language-agnostic RPC framework that facilitates efficient communication between various services in a distributed system. It utilizes Protocol Buffers (protobufs) for data serialization and supports multiple programming languages, making it well-suited for microservices architecture.
+- **ASP.NET Core Web Application**: The project includes an ASP.NET Core web application, featuring Bootstrap 4 and Razor templates for a user-friendly interface.
 
-**Role as a gRPC Server:**
+- **Microservices Development**: This project is designed as a collection of microservices, following REST API principles for CRUD (Create, Read, Update, Delete) operations.
 
-In this configuration, the "Discount Grpc" service functions as a gRPC server, exposing a set of APIs to enable other services, such as the Basket API, to request and receive discount information for products.
+- **Architectural Best Practices**: The project follows these principles, ensuring code quality and maintainability:
 
-**Integration with Basket API as a gRPC Client:**
+    - **Hexagonal Architecture**: The Hexagonal Architecture have been adopted, which promotes a clear separation of concerns and the independence of application layers for better maintainability.
 
-The Basket API acts as a gRPC client, communicating with the "Discount Grpc" service to request discounts for each product in a user's shopping basket. This client-server interaction ensures efficient discount calculations, resulting in an optimized and responsive user experience.
+    - **Domain-Driven Design (DDD)**: Our project follows Domain-Driven Design principles, which encourage a clear focus on the business domain, resulting in clean and maintainable code.
+    DDD ensures that our code is designed around the core concepts of the application's domain.
 
-Utilizing gRPC, the services can communicate seamlessly and perform actions like discount calculations, enhancing the overall functionality of the e-commerce application.
+    - **Command Query Responsibility Segregation (CQRS)**:
+    In application there was implemented CQRS principles to separate the handling of commands (changes to the system's state) from queries (requests for information).
+    This separation optimizes the performance and scalability of our microservices.
 
-### API Gateway Integration:
+    - **Clean Architecture**: By adhering to these Clean Architecture principles, there is prioritized flexibility, maintainability, and testability,
+    ensuring that our software system remains robust and adaptable to change while focusing on its core business logic.
 
-Additionally, Ocelot API Gateway have been integrated into architecture to manage and route incoming requests to the appropriate microservices, providing a unified entry point for external clients.
+    - **SOLID Principles**: The SOLID principles (Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, Dependency Inversion)
+    been used to design clean, maintainable, and extensible code.
 
-This combination of microservices, databases, event-driven communication, and API gateway integration forms the foundation of this e-commerce solution.
+- **gRPC Service Integration**: Inter-service synchronization is enabled by consuming the Discount gRPC service to calculate product final prices.
+
+- **Message Queue Integration**: MassTransit and RabbitMQ are used to publish BasketCheckout events, facilitating highly performant inter-service communication.
+
+- **RabbitMQ Message-Broker**: Asynchronous microservices communication is established using the RabbitMQ Message-Broker service,
+including a Publish/Subscribe Topic Exchange model and MassTransit abstraction.
+
+- **MediatR, FluentValidation, AutoMapper**: These packages are used to develop CQRS and validation logic for robust application functionality.
+
+- **Ocelot API Gateway**: A microservices API gateway is developed using Ocelot, which aggregates services and enhances routing.
+
+- **Docker Compose**: All microservices are containerized using Docker Compose, simplifying deployment and management.
+
+- **Container Management**: Portainer is used for container management, offering an intuitive user interface to oversee different Docker environments.
+
+- **NoSQL Databases**: Both MongoDB and Redis are used for efficient data storage and retrieval, and they are all containerized within Docker for seamless integration.
+
+- **PostgreSQL Support**: PostgreSQL database connections are made and containerized for an efficient database solution.
+
+- **Entity Framework Core**: SQL Server database connections are established using Entity Framework Core, ensuring smooth data management within Docker containers.
+
+- **Swagger API Documentation**: Swagger Open API is implemented for comprehensive and interactive API documentation.
+
+- **pgAdmin Tools**: For PostgreSQL, pgAdmin, an open-source administration and development platform, enhances database management.
+
+This project combines an array of technologies to provide a highly performant and maintainable microservices architecture.
+Explore further to understand how these components work together to deliver a robust e-commerce solution.
 
 **Refer the main repository -> https://github.com/janvodak/AspnetMicroservices**
-
-## Dependencies
-You will need the following tools:
-
-* [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/)
-* [.Net Core 7 or later](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) 
-* [Docker Desktop](https://www.docker.com/products/docker-desktop)
-
-## Setup Git
-If you are working on **Windows** or Mac, **BEFORE** cloning the repository, you need to set up Git!  
-If you cloned the repository first, you need to remove it and clone it again. Otherwise, you will encounter issues with line endings conversion.
-
-For your Local Development Environment (Windows/Linux/macOS) you will need following:
-
-* [GIT](https://git-scm.com/downloads)
-	* Set correct commit author and email for all your commits (there is validation on GitLab for it)
-		```
-		git config --global user.name "John Doe"
-		git config --global user.email "john.doe@email.com"
-		```
-	* On Windows and macOS set Git line endings to `LF`
-		```
-		git config --global core.autocrlf false
-		git config --global core.eol lf
-		```
-	* Set Git to automatically rebase your changes when you pull
-		```
-		git config --global pull.rebase true
-		```
-* [Docker](https://www.docker.com/get-started) and [Docker Compose](https://docs.docker.com/compose/install)
-
-## Setup application
-1. Clone the repository: `git clone `.
-   
-   **Windows users:** If you use Docker on Windows with WSL2 enabled, make sure you clone it directly into the linux partition (e.g.,`\\wsl$\Ubuntu...`).
-1. Once Docker for Windows is installed, go to the **Settings > Advanced option**, from the Docker icon in the system tray, to configure the minimum amount of memory and CPU like so:
-	* **Memory: 4 GB**
-	* **CPU: 2**
-1. Go into the project directory
-1. Run
-	* With Portainer (WITH_PORTAINER=1):
-		```
-		WITH_PORTAINER=1 bash ./scripts/dc.sh up --detach --build
-		```
-		This command is used to start and manage Docker containers for a specific project or application. The WITH_PORTAINER=1 environment variable is set to enable Portainer, a container management tool, which allows for an easier and more visual way to manage Docker containers.
-	* Without Portainer (WITH_PORTAINER=0 or unset):
-		```
-		bash ./scripts/dc.sh up --detach --build
-		```
-		This command is used to start and manage Docker containers for a specific project or application without using Portainer. You can use this bash script for the manipulation with `docker-compose` command in terminal.
-1. You can **launch microservices** as below urls:
-
-* **Catalog API -> http://host.docker.internal:8000/swagger/index.html**
-* **Basket API -> http://host.docker.internal:8001/swagger/index.html**
-* **Discount API -> http://host.docker.internal:8002/swagger/index.html**
-* **Discount Grpc -> http://host.docker.internal:8003**
-* **Portainer -> http://host.docker.internal:9000**   -- admin/admin1234
-* **Mongo Client -> http://host.docker.internal:3000**
-* **pgAdmin PostgreSQL -> http://host.docker.internal:5050**   -- admin@aspnetrun.com/admin1234
-
-## Repository Settings and Best Practices
-
-1. Git Strategy - Streamline Workflow:
-In this repository, we follow the Streamline Workflow as our Git strategy. This approach encourages a linear and simplified version control process, making it easier to manage changes and releases.
-1. Signed Commits:
-To maintain a high level of code integrity and traceability, all commits made to this repository must be signed. This ensures that each change is associated with a verified author.
-1. Pull Requests and Code Reviews:
-We adhere to a strict pull request-based development process. Every change, whether it's a bug fix, feature, or hotfix, must be submitted as a pull request (PR). Before merging, each PR undergoes a thorough code review by one or more team members to maintain code quality and catch potential issues.
-1. Require Conversation Resolution Before Merging:
-To promote effective communication and collaboration, we require that all conversations (comments, discussions, and feedback) within a PR must be resolved before the PR can be merged. This ensures that no important feedback or concerns are left unaddressed.
-1. Require Status Checks to Pass Before Merging:
-Before a PR can be merged, it must pass a set of defined status checks. These checks may include automated tests, code quality checks, and other validation processes. This ensures that changes meet the defined quality standards and do not introduce regressions.
-1. Branch Management:
-To keep our repository organized and maintain a clear branching strategy, we only allow specific branches:
-	* **feature**: Feature branches are used for developing new features or enhancements. They are created based on the `main` branch.
-	* **hotfix**: Hotfix branches are used for addressing critical issues or bugs in production. They are created based on the `main` branch.
-	* **release**: Release branches are created when preparing for a new release. They are based on the `main` branch and serve as a stabilization phase before deployment.
-	* **main**: The `main` branch represents the stable production-ready codebase. All changes flow into this branch through pull requests.
-By following these GitHub settings and best practices, we aim to maintain a structured and collaborative development process that ensures code quality, security, and a smooth release cycle for our project.
-
-## Using Entity Framework in Your .NET Project
-Entity Framework is a powerful Object-Relational Mapping (ORM) tool for .NET that allows you to interact with your database using .NET objects. In this project, we've integrated Entity Framework to simplify database operations.
-
-To get started with Entity Framework in your .NET project, follow these steps:
-
-### Step 1: Install the dotnet-ef Tool (if not already installed)
-
-* If you haven't already installed the dotnet-ef tool, you can do so globally using the following command:
-	```
-	dotnet tool install -g dotnet-ef
-	```
-* This tool is required to manage Entity Framework migrations and perform database updates.
-
-### Step 2: Create Initial Migration
-
-* To set up the initial database schema, we need to create a migration. Run the following command, specifying the desired migration name and context:
-	```
-	dotnet ef migrations add InitialCreate --context DiscountContext
-	```
-* Replace InitialCreate with a suitable name for your migration if needed. The DiscountContext should match the name of your DbContext class.
-
-### Step 3: Apply the Migration to the Database
-
-* After creating the migration, you can apply it to your database to create the necessary tables and schema:
-	```
-	dotnet ef database update
-	```
-* This command will automatically apply the pending migrations to your database.
