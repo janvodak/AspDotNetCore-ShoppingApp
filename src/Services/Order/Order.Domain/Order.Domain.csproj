@@ -6,4 +6,31 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Src\" />
+    <None Remove="Src\Address\" />
+    <None Remove="Src\Order\" />
+    <None Remove="Src\Shared\" />
+    <None Remove="Src\Payment\" />
+    <None Remove="Src\Price\" />
+    <None Remove="Src\Price\ValueObjects\" />
+    <None Remove="Src\Payment\ValueObjects\" />
+    <None Remove="Src\Customer\" />
+    <None Remove="Src\Customer\ValueObjects\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Src\" />
+    <Folder Include="Src\Address\" />
+    <Folder Include="Src\Order\" />
+    <Folder Include="Src\Shared\" />
+    <Folder Include="Src\Payment\" />
+    <Folder Include="Src\Price\" />
+    <Folder Include="Src\Price\ValueObjects\" />
+    <Folder Include="Src\Address\" />
+    <Folder Include="Src\Address\" />
+    <Folder Include="Src\Order\" />
+    <Folder Include="Src\Payment\ValueObjects\" />
+    <Folder Include="Src\Customer\" />
+    <Folder Include="Src\Customer\ValueObjects\" />
+  </ItemGroup>
 </Project>
