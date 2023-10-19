@@ -9,4 +9,22 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Order.Application\Order.Application.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Src\" />
+	  <None Remove="Src\Persistence\" />
+	  <None Remove="Src\Notifications\" />
+	  <None Remove="Src\Persistence\Context\" />
+	  <None Remove="Src\Persistence\Repositories\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Src\" />
+	  <Folder Include="Src\Persistence\" />
+	  <Folder Include="Src\Notifications\" />
+	  <Folder Include="Src\Persistence\Context\" />
+	  <Folder Include="Src\Persistence\Repositories\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.12" />
+	  <PackageReference Include="SendGrid" Version="9.28.1" />
+	</ItemGroup>
 </Project>
