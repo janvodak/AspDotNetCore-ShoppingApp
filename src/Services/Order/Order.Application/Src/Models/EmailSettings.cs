@@ -1,5 +1,4 @@
-﻿using System;
-namespace Order.Application.Src.Models
+﻿namespace Order.Application.Src.Models
 {
 	public class EmailSettings
 	{
