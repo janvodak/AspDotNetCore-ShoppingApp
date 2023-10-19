@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using Order.Application.Src.Contracts.Infrastructure;
+using Order.Application.Src.Contracts.Notifications;
 using Order.Application.Src.Models;
 using Order.Domain.Src.Order.Entities;
 
@@ -18,9 +18,9 @@ namespace Order.Application.Src.Services
 			this._logger = logger;
 		}
 
-		public async Task SendMail(OrderEntity order)
+		public async Task Send(OrderEntity order)
 		{
-			var email = new Email(to:"ezozkme@gmail.com", subject:"Order was created", body:$"Order was created.");
+			var email = new Email(to:order.EmailAddress, subject:"Order was created", body:$"Order was created.");
 
 			try
 			{

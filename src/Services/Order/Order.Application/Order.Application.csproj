@@ -15,7 +15,6 @@
 	  <None Remove="Src\Contracts\" />
 	  <None Remove="Src\Features\" />
 	  <None Remove="Src\Contracts\Persistence\" />
-	  <None Remove="Src\Contracts\Infrastructure\" />
 	  <None Remove="Src\Models\" />
 	  <None Remove="Src\Mappings\" />
 	  <None Remove="Src\Features\Order\" />
@@ -27,6 +26,7 @@
 	  <None Remove="Src\Services\" />
 	  <None Remove="Src\Features\Order\Commands\DeleteOrder\" />
 	  <None Remove="Src\Exceptions\" />
+	  <None Remove="Src\Contracts\Notifications\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Src\" />
@@ -34,7 +34,6 @@
 	  <Folder Include="Src\Contracts\" />
 	  <Folder Include="Src\Features\" />
 	  <Folder Include="Src\Contracts\Persistence\" />
-	  <Folder Include="Src\Contracts\Infrastructure\" />
 	  <Folder Include="Src\Models\" />
 	  <Folder Include="Src\Mappings\" />
 	  <Folder Include="Src\Features\Order\" />
@@ -46,13 +45,14 @@
 	  <Folder Include="Src\Services\" />
 	  <Folder Include="Src\Features\Order\Commands\DeleteOrder\" />
 	  <Folder Include="Src\Exceptions\" />
+	  <Folder Include="Src\Contracts\Notifications\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="AutoMapper" Version="12.0.1" />
 	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
 	  <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
 	  <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
-	  <PackageReference Include="FluentValidation" Version="11.7.1" />
-	  <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
+	  <PackageReference Include="FluentValidation" Version="11.8.0" />
+	  <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.0" />
 	</ItemGroup>
 </Project>
