@@ -25,12 +25,8 @@ namespace Order.Application.Src.Features.Order.Commands.UpdateOrder
 
 		public async Task<Unit> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
 		{
-			OrderEntity order = await this._orderRepository.GetByIdAsync(request.Id);
-
-			if (order == null)
-			{
-				throw new NotFoundException(nameof(OrderEntity), request.Id);
-			}
+			OrderEntity? order = await this._orderRepository.GetByIdAsync(request.Id)
+				?? throw new NotFoundException(nameof(OrderEntity), request.Id);
 
 			this._mapper.Map(request, order, typeof(UpdateOrderCommand), typeof(OrderEntity));
 
@@ -42,4 +38,3 @@ namespace Order.Application.Src.Features.Order.Commands.UpdateOrder
 		}
 	}
 }
-

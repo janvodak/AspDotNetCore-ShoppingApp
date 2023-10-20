@@ -20,7 +20,10 @@ namespace Order.Application.Src.Services
 
 		public async Task Send(OrderEntity order)
 		{
-			var email = new Email(to:order.EmailAddress, subject:"Order was created", body:$"Order was created.");
+			var email = new Email(
+				to:order.EmailAddress,
+				subject:"Order was created",
+				body:$"Order was created.");
 
 			try
 			{
@@ -28,7 +31,10 @@ namespace Order.Application.Src.Services
 			}
 			catch (Exception exception)
 			{
-				this._logger.LogError($"Unable to send order '{order.Id}' e-mail due to an error with the email service: '{exception.Message}'");
+				this._logger.LogError(
+					"Unable to send order '{OrderId}' e-mail due to an error with the email service: '{PreviousMessage}'",
+					order.Id,
+					exception.Message);
 			}
 		}
 	}

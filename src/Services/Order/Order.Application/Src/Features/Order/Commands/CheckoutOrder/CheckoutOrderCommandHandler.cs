@@ -32,7 +32,9 @@ namespace Order.Application.Src.Features.Order.Commands.CheckoutOrder
 
 			OrderEntity newOrder = await this._orderRepository.AddAsync(orderEntity);
 
-			this._logger.LogInformation($"Order '{newOrder.Id}' was successfully created.");
+			this._logger.LogInformation(
+				"Order '{OrderId}' was successfully created.",
+				newOrder.Id);
 
 			await this._emailService.Send(newOrder);
 

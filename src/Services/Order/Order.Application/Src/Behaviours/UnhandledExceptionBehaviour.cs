@@ -25,7 +25,11 @@ namespace Order.Application.Src.Behaviours
 			{
 				var requestName = typeof(TRequest).Name;
 
-				this._logger.LogError(exception, "Unhandled Exception for Request '{Name}'. Application Request: {@Request}", requestName, request);
+				this._logger.LogError(
+					exception,
+					"Unhandled Exception for Request '{Name}'. Application Request: {@Request}",
+					requestName,
+					request);
 
 				throw;
 			}
