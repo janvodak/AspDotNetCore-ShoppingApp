@@ -2,7 +2,7 @@
 
 namespace Order.Application.Src.Features.Order.Commands.UpdateOrder
 {
-	public class UpdateOrderCommandValidator : AbstractValidator<DeleteOrderCommand>
+	public class UpdateOrderCommandValidator : AbstractValidator<UpdateOrderCommand>
 	{
 		public UpdateOrderCommandValidator()
 		{

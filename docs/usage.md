@@ -28,7 +28,8 @@
 * **pgAdmin PostgreSQL -> http://host.docker.internal:5050**   -- admin@aspnetrun.com/admin1234
 
 ## Using Entity Framework in Your .NET Project
-Entity Framework is a powerful Object-Relational Mapping (ORM) tool for .NET that allows you to interact with your database using .NET objects. In this project, we've integrated Entity Framework to simplify database operations.
+Entity Framework is a powerful Object-Relational Mapping (ORM) tool for .NET that allows you to interact with your database using .NET objects.
+In this project, we've integrated Entity Framework to simplify database operations.
 
 To get started with Entity Framework in your .NET project, follow these steps:
 
@@ -40,13 +41,27 @@ To get started with Entity Framework in your .NET project, follow these steps:
 	```
 * This tool is required to manage Entity Framework migrations and perform database updates.
 
-### Step 2: Create Initial Migration
+### Step 2: Create Migration
 
-* To set up the initial database schema, we need to create a migration. Run the following command, specifying the desired migration name and context:
+* To set up the initial database schema, we need to create a migration. Run the following command, specifying the desired migration name:
 	```
-	dotnet ef migrations add InitialCreate --context DiscountContext
+	dotnet ef migrations add InitialCreate
 	```
-* Replace InitialCreate with a suitable name for your migration if needed. The DiscountContext should match the name of your DbContext class.
+* Replace `InitialCreate` with a suitable name for your migration if needed.
+* You can use options like `startup-project`, `project`, `context` or `output-dir` which can help you with generating.
+For more information you can run `dotnet ef migrations add --help`
+
+> **Note:** If you are working with an architecture like Hexagonal Architecture and you are using `dotnet ef migrations` command in comandline,
+it is also important to set the `startup-project` as the project where you are registering all dependencies for dependency injection and `project` where you want to store migrations.
+Plus in this specific startup project, you need to have these two packages installed:
+
+	1. **Microsoft.EntityFrameworkCore.Tools**
+	2. **Microsoft.EntityFrameworkCore.Design**
+
+	Final command could looks like this (executed from repository root folder):
+	```
+	dotnet ef migrations add InitialCreate --output-dir Src/Persistence/Migrations --startup-project src/Services/Order/Order.Rest/Order.Rest.csproj --project src/Services/Order/Order.Infrastructure/Order.Infrastructure.csproj
+	```
 
 ### Step 3: Apply the Migration to the Database
 
