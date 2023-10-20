@@ -21,12 +21,8 @@ namespace Order.Application.Src.Features.Order.Commands.DeleteOrder
 
 		public async Task<Unit> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
 		{
-			OrderEntity order = await this._orderRepository.GetByIdAsync(request.Id);
-
-			if (order == null)
-			{
-				throw new NotFoundException(nameof(OrderEntity), request.Id);
-			}
+			OrderEntity? order = await this._orderRepository.GetByIdAsync(request.Id)
+				?? throw new NotFoundException(nameof(OrderEntity), request.Id);
 
 			await this._orderRepository.DeleteAsync(order);
 

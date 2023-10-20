@@ -32,18 +32,29 @@ namespace Order.Infrastructure.Src.Notifications
 				Name = this._emailSettings.FromName
 			};
 
-			SendGridMessage sendGridMessage = MailHelper.CreateSingleEmail(from, to, subject, body, body);
+			SendGridMessage sendGridMessage = MailHelper.CreateSingleEmail(
+				from,
+				to,
+				subject,
+				body,
+				body);
 
 			var response = await client.SendEmailAsync(sendGridMessage);
 
 			if (response.StatusCode is System.Net.HttpStatusCode.Accepted
 				|| response.StatusCode is System.Net.HttpStatusCode.OK)
 			{
-				this._logger.LogInformation("Email '{Email}' was successfully sent.", email.ToString());
+				this._logger.LogInformation(
+					"Email '{Email}' was successfully sent.",
+					email.ToString());
+
 				return true;
 			}
 
-			this._logger.LogError("Unable to send email '{Email}' due to error.", email.ToString());
+			this._logger.LogError(
+				"Unable to send email '{Email}' due to error.",
+				email.ToString());
+
 			return false;
 		}
 	}

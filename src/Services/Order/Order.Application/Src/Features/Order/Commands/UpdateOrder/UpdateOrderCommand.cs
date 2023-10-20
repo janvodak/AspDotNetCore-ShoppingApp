@@ -25,4 +25,3 @@ namespace Order.Application.Src.Features.Order.Commands.UpdateOrder
 		public string CardVerificationValue { get; set; } = null!;
 	}
 }
-

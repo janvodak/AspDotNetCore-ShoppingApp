@@ -23,4 +23,3 @@
 		public string CardVerificationValue { get; set; } = null!;
 	}
 }
-

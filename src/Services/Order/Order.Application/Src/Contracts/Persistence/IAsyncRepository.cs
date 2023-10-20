@@ -15,7 +15,6 @@ namespace Order.Application.Src.Contracts.Persistence
 			string? includeString = null,
 			bool disableTracking = true);
 
-
 		Task<IReadOnlyList<T>> GetAsync(
 			Expression<Func<T, bool>>? predicate = null,
 			Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,

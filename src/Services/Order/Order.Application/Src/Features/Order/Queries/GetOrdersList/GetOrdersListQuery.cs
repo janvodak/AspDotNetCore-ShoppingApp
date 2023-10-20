@@ -12,4 +12,3 @@ namespace Order.Application.Src.Features.Order.Queries.GetOrdersList
 		}
 	}
 }
-
