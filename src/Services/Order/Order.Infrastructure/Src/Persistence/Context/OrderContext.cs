@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Order.Application.Src.Models;
 using Order.Domain.Src.Order.Entities;
 using Order.Domain.Src.Shared;
 
@@ -8,6 +7,8 @@ namespace Order.Infrastructure.Src.Persistence.Context
 {
 	public class OrderContext : DbContext
 	{
+		private const string AUTOMAT_NAME = "swn";
+
 		public virtual DbSet<OrderEntity> Orders { get; set; } = null!;
 
 		private readonly string _connectionString;
@@ -15,11 +16,11 @@ namespace Order.Infrastructure.Src.Persistence.Context
 		public OrderContext(IOptions<DatabaseSettings> databaseSettings)
 		{
 			this._connectionString = String.Format(
-				"User ID={0};Password={1};Host={2};Database={3};",
+				format: databaseSettings.Value.ConnectionStringTemplate,
+				databaseSettings.Value.Server,
+				databaseSettings.Value.DBname,
 				databaseSettings.Value.User,
-				databaseSettings.Value.Password,
-				databaseSettings.Value.Host,
-				databaseSettings.Value.DBname);
+				databaseSettings.Value.Password);
 		}
 
 		public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -30,11 +31,11 @@ namespace Order.Infrastructure.Src.Persistence.Context
 				{
 					case EntityState.Added:
 						entry.Entity.CreatedDate = DateTime.Now;
-						entry.Entity.CreatedBy = "swn";
+						entry.Entity.CreatedBy = OrderContext.AUTOMAT_NAME;
 						break;
 					case EntityState.Modified:
 						entry.Entity.LastModifiedDate = DateTime.Now;
-						entry.Entity.LastModifiedBy = "swn";
+						entry.Entity.LastModifiedBy = OrderContext.AUTOMAT_NAME;
 						break;
 					default:
 						break;

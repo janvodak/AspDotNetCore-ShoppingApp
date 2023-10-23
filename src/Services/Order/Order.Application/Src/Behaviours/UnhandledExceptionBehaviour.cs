@@ -5,9 +5,9 @@ namespace Order.Application.Src.Behaviours
 {
 	public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 	{
-		private readonly ILogger _logger;
+		private readonly ILogger<TRequest> _logger;
 
-		public UnhandledExceptionBehaviour(ILogger logger)
+		public UnhandledExceptionBehaviour(ILogger<TRequest> logger)
 		{
 			this._logger = logger;
 		}
@@ -36,4 +36,3 @@ namespace Order.Application.Src.Behaviours
 		}
 	}
 }
-

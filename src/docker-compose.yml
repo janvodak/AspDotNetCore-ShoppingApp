@@ -55,6 +55,18 @@ services:
             context: .
             dockerfile: Services/Discount/Discount.Grpc/Docker/DotNet70/Dockerfile.image
 
+    order.api.mssql:
+        image: ${DOCKER_REGISTRY-}order-mssql
+        build:
+            context: .
+            dockerfile: Services/Order/Order.Rest/Docker/MicrosoftSQLServer2022-20/Dockerfile
+
+    order.api:
+        image: ${DOCKER_REGISTRY-}order-api
+        build:
+            context: .
+            dockerfile: Services/Order/Order.Rest/Docker/Dotnet70/Dockerfile
+
 volumes:
     catalog.api.mongo:
         name: catalog-api-mongo

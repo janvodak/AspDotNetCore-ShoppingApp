@@ -32,7 +32,7 @@ namespace Order.Application.Src.Features.Order.Commands.UpdateOrder
 
 			await this._orderRepository.UpdateAsync(order);
 
-			this._logger.LogInformation($"Order '{order.Id}' was successfully updated.");
+			this._logger.LogInformation("Order '{OrderId}' was successfully updated.", order.Id);
 
 			return Unit.Value;
 		}
