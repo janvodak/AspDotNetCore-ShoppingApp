@@ -66,7 +66,6 @@ services:
         build:
             context: .
             dockerfile: Services/Order/Order.Rest/Docker/Dotnet70/Dockerfile
-
 volumes:
     catalog.api.mongo:
         name: catalog-api-mongo
