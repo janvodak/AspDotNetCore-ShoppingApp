@@ -19,16 +19,19 @@
 		This command is used to start and manage Docker containers for a specific project or application without using Portainer. You can use this bash script for the manipulation with `docker-compose` command in terminal.
 
 	> **Note:** You can use the `--build` option when you need to rebuild some specific container when your code has changed in that given container.
-		```
-		bash ./scripts/dc.sh up --detach --build basket.api
-		```
+
+	```
+	bash ./scripts/dc.sh up --detach --build basket.api
+	```
 1. You can **launch microservices** as below urls:
 
 * **Catalog API -> http://host.docker.internal:8000/swagger/index.html**
 * **Basket API -> http://host.docker.internal:8001/swagger/index.html**
 * **Discount API -> http://host.docker.internal:8002/swagger/index.html**
 * **Discount Grpc -> http://host.docker.internal:8003**
-* **Portainer -> http://host.docker.internal:9000**   -- admin/admin1234
+* **Order API -> http://host.docker.internal:8004/swagger/index.html**
+* **Rabbit Management Dashboard -> http://host.docker.internal:15672**   -- guest/guest
+* **Portainer -> http://host.docker.internal:9000**
 * **Mongo Client -> http://host.docker.internal:3000**
 * **pgAdmin PostgreSQL -> http://host.docker.internal:5050**   -- admin@aspnetrun.com/admin1234
 
@@ -60,13 +63,13 @@ For more information you can run `dotnet ef migrations add --help`
 it is also important to set the `startup-project` as the project where you are registering all dependencies for dependency injection and `project` where you want to store migrations.
 Plus in this specific startup project, you need to have these two packages installed:
 
-	1. **Microsoft.EntityFrameworkCore.Tools**
-	2. **Microsoft.EntityFrameworkCore.Design**
+1. **Microsoft.EntityFrameworkCore.Tools**
+2. **Microsoft.EntityFrameworkCore.Design**
 
-	Final command could looks like this (executed from repository root folder):
-	```
-	dotnet ef migrations add InitialCreate --output-dir Src/Persistence/Migrations --startup-project src/Services/Order/Order.Rest/Order.Rest.csproj --project src/Services/Order/Order.Infrastructure/Order.Infrastructure.csproj
-	```
+Final command could looks like this (executed from repository root folder):
+```
+dotnet ef migrations add InitialCreate --output-dir Src/Persistence/Migrations --startup-project src/Services/Order/Order.Rest/Order.Rest.csproj --project src/Services/Order/Order.Infrastructure/Order.Infrastructure.csproj
+```
 
 ### Step 3: Apply the Migration to the Database
 
