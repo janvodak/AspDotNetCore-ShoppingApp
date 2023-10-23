@@ -11,26 +11,27 @@ namespace Order.Infrastructure.Src.Persistence.Extensions
 			Action<TContext, IServiceProvider> seeder,
 			int maxRetries = 50) where TContext : DbContext
 		{
-			int retries = 0;
+			int retries = 1;
 
-			while (retries < maxRetries)
+			while (retries <= maxRetries)
 			{
 				using IServiceScope scope = serviceProvider.CreateScope();
 				ILogger<TContext> logger = scope.ServiceProvider.GetRequiredService<ILogger<TContext>>();
 				TContext context = scope.ServiceProvider.GetRequiredService<TContext>();
 
+				logger.LogInformation(
+					"{Atempt}. atempt of migrating database associated with context {DbContextName}.",
+					retries,
+					typeof(TContext).Name);
+
 				try
 				{
-					logger.LogInformation(
-						"Migrating database associated with context {DbContextName}",
-						typeof(TContext).Name);
-
 					context.Database.Migrate();
 
 					seeder(context, serviceProvider);
 
 					logger.LogInformation(
-						"Migrated database associated with context {DbContextName}",
+						"Database associated with context {DbContextName} was migrated successfully.",
 						typeof(TContext).Name);
 
 					break;
@@ -39,14 +40,10 @@ namespace Order.Infrastructure.Src.Persistence.Extensions
 				{
 					logger.LogError(
 						ex,
-						"An error occurred while migrating the database used on context {DbContextName}",
+						"An error occurred while migrating the database used on context {DbContextName}.",
 						typeof(TContext).Name);
 
-					if (retries < maxRetries - 1)
-					{
-						// Implement a delay before retrying
-						Thread.Sleep(2000);
-					}
+					Thread.Sleep(2000);
 
 					retries++;
 				}

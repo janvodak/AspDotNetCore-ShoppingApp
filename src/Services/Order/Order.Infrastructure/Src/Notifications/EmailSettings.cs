@@ -1,4 +1,4 @@
-﻿namespace Order.Application.Src.Models
+﻿namespace Order.Infrastructure.Src.Notifications
 {
 	public class EmailSettings
 	{

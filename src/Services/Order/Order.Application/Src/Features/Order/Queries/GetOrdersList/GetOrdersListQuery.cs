@@ -8,7 +8,7 @@ namespace Order.Application.Src.Features.Order.Queries.GetOrdersList
 
 		public GetOrdersListQuery(string userName)
 		{
-			UserName = userName;
+			this.UserName = userName;
 		}
 	}
 }

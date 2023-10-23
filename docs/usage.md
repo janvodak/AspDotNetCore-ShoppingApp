@@ -9,14 +9,19 @@
 1. Run
 	* With Portainer (WITH_PORTAINER=1):
 		```
-		WITH_PORTAINER=1 bash ./scripts/dc.sh up --detach --build
+		WITH_PORTAINER=1 bash ./scripts/dc.sh up --detach
 		```
 		This command is used to start and manage Docker containers for a specific project or application. The WITH_PORTAINER=1 environment variable is set to enable Portainer, a container management tool, which allows for an easier and more visual way to manage Docker containers.
 	* Without Portainer (WITH_PORTAINER=0 or unset):
 		```
-		bash ./scripts/dc.sh up --detach --build
+		bash ./scripts/dc.sh up --detach
 		```
 		This command is used to start and manage Docker containers for a specific project or application without using Portainer. You can use this bash script for the manipulation with `docker-compose` command in terminal.
+
+	> **Note:** You can use the `--build` option when you need to rebuild some specific container when your code has changed in that given container.
+		```
+		bash ./scripts/dc.sh up --detach --build basket.api
+		```
 1. You can **launch microservices** as below urls:
 
 * **Catalog API -> http://host.docker.internal:8000/swagger/index.html**

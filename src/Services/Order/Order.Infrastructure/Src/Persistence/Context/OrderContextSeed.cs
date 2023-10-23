@@ -23,16 +23,22 @@ namespace Order.Infrastructure.Src.Persistence.Context
 		{
 			return new List<OrderEntity>
 			{
-				new OrderEntity()
-				{
-					UserName = "swn",
-					FirstName = "Jan",
-					LastName = "Vodak",
-					EmailAddress = "janvodak92@gmail.com",
-					AddressLine = "Brno",
-					Country = "Czech republic",
-					TotalPrice = 350
-				}
+				new OrderEntity(
+					"swn",
+					350,
+					"Jan",
+					"Vodak",
+					"janvodak92@gmail.com",
+					"Brno",
+					"Czech republic",
+					"Czech republic",
+					"60200",
+					"Test Card",
+					"5555555555554444",
+					"03/2030",
+					"737",
+					1
+				)
 			};
 		}
 	}

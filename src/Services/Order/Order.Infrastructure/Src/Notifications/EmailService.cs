@@ -12,7 +12,9 @@ namespace Order.Infrastructure.Src.Notifications
 		private readonly EmailSettings _emailSettings;
 		private readonly ILogger<EmailService> _logger;
 
-		public EmailService(IOptions<EmailSettings> emailSettings, ILogger<EmailService> logger)
+		public EmailService(
+			IOptions<EmailSettings> emailSettings,
+			ILogger<EmailService> logger)
 		{
 			this._emailSettings = emailSettings.Value;
 			this._logger = logger;
@@ -59,4 +61,3 @@ namespace Order.Infrastructure.Src.Notifications
 		}
 	}
 }
-

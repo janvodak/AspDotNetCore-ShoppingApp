@@ -12,7 +12,7 @@ using Order.Infrastructure.Src.Persistence.Context;
 namespace Order.Infrastructure.Src.Persistence.Migrations
 {
     [DbContext(typeof(OrderContext))]
-    [Migration("20231020091801_InitialCreate")]
+    [Migration("20231023082205_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -37,15 +37,15 @@ namespace Order.Infrastructure.Src.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CVV")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CardName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CardNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CardVerificationValue")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -73,7 +73,6 @@ namespace Order.Infrastructure.Src.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastModifiedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModifiedDate")
@@ -91,7 +90,7 @@ namespace Order.Infrastructure.Src.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(5, 2)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
