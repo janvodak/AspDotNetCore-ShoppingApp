@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Src\" />
+    <None Remove="Src\Events\" />
+    <None Remove="Src\Shared\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Src\" />
+    <Folder Include="Src\Events\" />
+    <Folder Include="Src\Shared\" />
+  </ItemGroup>
+</Project>
