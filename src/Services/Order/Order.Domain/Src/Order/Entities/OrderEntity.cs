@@ -11,7 +11,7 @@ namespace Order.Domain.Src.Order.Entities
 	{
 		public string UserName { get; set; } = null!;
 
-		[Column(TypeName = "decimal(5, 2)")]
+		[Column(TypeName = "decimal(6, 2)")]
 		public decimal TotalPrice { get; set; }
 
 		// BillingAddress
