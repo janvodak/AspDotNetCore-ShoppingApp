@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Order.Application.Src.Features.Order.Commands.CheckoutOrder;
 
-namespace Order.Rest.Controllers
+namespace Order.Rest.Src.Controllers
 {
 	[ApiController]
 	[Route("api/v1/order/[controller]")]
