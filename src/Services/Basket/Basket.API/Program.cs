@@ -56,10 +56,9 @@ builder.Services.AddMassTransit(congurator =>
 			h.Password(password);
 		});
 
-		cfg.ConfigureEndpoints(ctx);
+		//cfg.ConfigureEndpoints(ctx);
 	});
 });
-
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

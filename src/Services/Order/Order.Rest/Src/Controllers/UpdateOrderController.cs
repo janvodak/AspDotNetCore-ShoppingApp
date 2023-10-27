@@ -1,32 +1,32 @@
 ﻿using System.Net;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Order.Application.Src.Features.Order.Commands.DeleteOrder;
+using Order.Application.Src.Features.Order.Commands.UpdateOrder;
 
-namespace Order.Rest.Controllers
+namespace Order.Rest.Src.Controllers
 {
 	[ApiController]
 	[Route("api/v1/order/[controller]")]
 	[Produces("application/json")]
-	public class DeleteOrderController : ControllerBase
+	public class UpdateOrderController : ControllerBase
 	{
 		private readonly IMediator _mediator;
 
-		public DeleteOrderController(IMediator mediator)
+		public UpdateOrderController(IMediator mediator)
 		{
 			this._mediator = mediator;
 		}
 
-		[HttpDelete("{id}", Name = "DeleteOrder")]
+		[HttpPut(Name = "UpdateOrder")]
 		[ProducesResponseType((int)HttpStatusCode.NoContent)]
 		[ProducesResponseType((int)HttpStatusCode.NotFound)]
 		[ProducesDefaultResponseType]
-		public async Task<ActionResult> DeleteOrder(int id)
+		public async Task<ActionResult> UpdateOrder([FromBody] UpdateOrderCommand command)
 		{
-			DeleteOrderCommand command = new() { Id = id };
 			await this._mediator.Send(command);
 
 			return NoContent();
 		}
 	}
 }
+

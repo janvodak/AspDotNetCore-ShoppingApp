@@ -19,6 +19,11 @@
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		  <PrivateAssets>all</PrivateAssets>
 		</PackageReference>
+		<PackageReference Include="MassTransit" Version="8.1.1" />
+		<PackageReference Include="MassTransit.RabbitMQ" Version="8.1.1" />
+		<PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
+		<PackageReference Include="AutoMapper" Version="12.0.1" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -28,15 +33,24 @@
 	<ProjectReference Include="..\Order.Infrastructure\Order.Infrastructure.csproj">
 		<GlobalPropertiesToRemove></GlobalPropertiesToRemove>
 	</ProjectReference>
+	<ProjectReference Include="..\..\..\BuildingBlocks\EventBus.Messages\EventBus.Messages.csproj">
+	  <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+	</ProjectReference>
 	</ItemGroup>
 	<ItemGroup>
-	  <None Remove="Controllers\" />
 	  <None Remove="Docker\" />
 	  <None Remove="Docker\MicrosoftSQLServer2022-20\" />
+	  <None Remove="Src\" />
+	  <None Remove="Src\Mappings\" />
+	  <None Remove="Src\Controllers\" />
+	  <None Remove="Src\Consumers\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Controllers\" />
 	  <Folder Include="Docker\" />
 	  <Folder Include="Docker\MicrosoftSQLServer2022-20\" />
+	  <Folder Include="Src\" />
+	  <Folder Include="Src\Mappings\" />
+	  <Folder Include="Src\Controllers\" />
+	  <Folder Include="Src\Consumers\" />
 	</ItemGroup>
 </Project>
