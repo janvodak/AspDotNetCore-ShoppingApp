@@ -21,13 +21,12 @@ _get_docker_compose_file_names() {
 	local filenames=(
 		-f "${SCRIPT_DIR}/../src/docker-compose.yml"
 		-f "${SCRIPT_DIR}/../src/docker-compose.override.yml"
-		-f "${SCRIPT_DIR}/../src/docker-compose.rabbitmq.yml"
 	)
 
 	# Check if an additional file should be added to run portainer
-    if [[ "${WITH_PORTAINER}" == "1" ]]; then
-        filenames+=(-f "${SCRIPT_DIR}/../src/docker-compose.portainer.yml")
-    fi
+	if [[ "${WITH_PORTAINER}" == "1" ]]; then
+		filenames+=(-f "${SCRIPT_DIR}/../src/docker-compose.portainer.yml")
+	fi
 
 	echo "${filenames[@]}"
 }
