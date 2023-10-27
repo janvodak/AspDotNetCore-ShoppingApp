@@ -1,6 +1,13 @@
 version: '3.4'
 
 services:
+    rabbitmq:
+        container_name: rabbitmq
+        restart: always
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+
     catalog.api.mongo:
         container_name: catalog-api-mongo
         restart: always
@@ -40,6 +47,7 @@ services:
             - "DiscountGrpcSettings:DiscountUrl=http://discount-grpc"
         depends_on:
             - basket.api.redis
+            - rabbitmq
         ports:
             - "8001:80"
 
@@ -103,5 +111,6 @@ services:
             - ASPNETCORE_ENVIRONMENT=Development
         depends_on:
             - order.api.mssql
+            - rabbitmq
         ports:
             - "8004:80"

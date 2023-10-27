@@ -1,6 +1,9 @@
 version: '3.4'
 
 services:
+    rabbitmq:
+        image: rabbitmq:3.12.7-management-alpine
+
     catalog.api.mongo:
         image: ${DOCKER_REGISTRY-}catalog-mongo
         build:
@@ -29,7 +32,7 @@ services:
         image: ${DOCKER_REGISTRY-}basket-api
         build:
             context: .
-            dockerfile: Services/Basket/Basket.API/Docker/DotNet70/Dockerfile.image
+            dockerfile: Services/Basket/Basket.API/Docker/DotNet70/Dockerfile
 
     discount.api.postgres:
         image: ${DOCKER_REGISTRY-}discount-postgres

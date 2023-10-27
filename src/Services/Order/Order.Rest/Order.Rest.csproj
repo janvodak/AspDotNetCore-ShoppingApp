@@ -44,6 +44,7 @@
 	  <None Remove="Src\Mappings\" />
 	  <None Remove="Src\Controllers\" />
 	  <None Remove="Src\Consumers\" />
+	  <None Remove="Docker\Dotnet70\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Docker\" />
@@ -52,5 +53,6 @@
 	  <Folder Include="Src\Mappings\" />
 	  <Folder Include="Src\Controllers\" />
 	  <Folder Include="Src\Consumers\" />
+	  <Folder Include="Docker\Dotnet70\" />
 	</ItemGroup>
 </Project>

@@ -17,8 +17,5 @@
     <None Include="docker-compose.portainer.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
-    <None Include="docker-compose.rabbitmq.yml">
-      <DependentUpon>docker-compose.yml</DependentUpon>
-    </None>
   </ItemGroup>
 </Project>
