@@ -31,6 +31,7 @@
 		<None Remove="Docker\Redis72\" />
 		<None Remove="Src\GrpcServices\" />
 		<None Remove="Src\Mapper\" />
+		<None Remove="Src\Publishers\" />
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="Src\" />
@@ -42,6 +43,7 @@
 		<Folder Include="Docker\Redis72\" />
 		<Folder Include="Src\GrpcServices\" />
 		<Folder Include="Src\Mapper\" />
+		<Folder Include="Src\Publishers\" />
 	</ItemGroup>
 	<ItemGroup>
 		<Protobuf Include="..\..\Discount\Discount.Grpc\Src\Protos\getDiscount.proto" GrpcServices="Client">

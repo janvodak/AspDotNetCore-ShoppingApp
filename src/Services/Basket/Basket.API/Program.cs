@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Basket.API.Src.GrpcServices;
+using Basket.API.Src.Publishers;
 using Basket.API.Src.Repositories;
 using Discount.Grpc.Src.Protos;
 using MassTransit;
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+builder.Services.AddScoped<IBasketCheckoutEventPublisher, BasketCheckoutEventPublisher>();
 
 // Redis Configuration
 builder.Services.AddStackExchangeRedisCache(options =>
@@ -31,32 +33,16 @@ builder.Services.AddScoped<GetDiscountGrpcService>();
 // MassTransit-RabbitMQ Configuration
 builder.Services.AddMassTransit(congurator =>
 {
-	//congurator.SetKebabCaseEndpointNameFormatter();
-	//congurator.SetInMemorySagaRepositoryProvider();
-
-	//var entryAssembly = Assembly.GetEntryAssembly();
-
-	//congurator.AddConsumers(entryAssembly);
-	//congurator.AddSagaStateMachines(entryAssembly);
-	//congurator.AddSagas(entryAssembly);
-	//congurator.AddActivities(entryAssembly);
-
-	string host = builder.Configuration.GetValue<string>("EventBusSettings:HostAddress")
-		?? throw new ArgumentNullException("EventBusSettings:HostAddress", "value is missing in appsettings.json");
-	string username = builder.Configuration.GetValue<string>("EventBusSettings:Username")
-		?? throw new ArgumentNullException("EventBusSettings:Username", "value is missing in appsettings.json");
-	string password = builder.Configuration.GetValue<string>("EventBusSettings:Password")
-		?? throw new ArgumentNullException("EventBusSettings:Password", "value is missing in appsettings.json");
+	EventBusSettings eventBusSettings = new();
+	builder.Configuration.GetSection(EventBusSettings.NAME_OF_SECTION).Bind(eventBusSettings);
 
 	congurator.UsingRabbitMq((ctx, cfg) =>
 	{
-		cfg.Host(host, "/", h =>
+		cfg.Host(eventBusSettings.HostAddress, "/", h =>
 		{
-			h.Username(username);
-			h.Password(password);
+			h.Username(eventBusSettings.Username);
+			h.Password(eventBusSettings.Password);
 		});
-
-		//cfg.ConfigureEndpoints(ctx);
 	});
 });
 
