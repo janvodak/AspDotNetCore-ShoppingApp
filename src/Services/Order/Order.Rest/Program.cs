@@ -13,48 +13,32 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
+// General configuration
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddScoped<BasketCheckoutConsumer>();
+
 // MassTransit-RabbitMQ Configuration
 builder.Services.AddMassTransit(congurator =>
 {
-	//congurator.SetKebabCaseEndpointNameFormatter();
-	//congurator.SetInMemorySagaRepositoryProvider();
-
-	//var entryAssembly = Assembly.GetEntryAssembly();
-
-	//congurator.AddConsumers(entryAssembly);
-	//congurator.AddSagaStateMachines(entryAssembly);
-	//congurator.AddSagas(entryAssembly);
-	//congurator.AddActivities(entryAssembly);
+	EventBusSettings eventBusSettings = new();
+	builder.Configuration.GetSection(EventBusSettings.NAME_OF_SECTION).Bind(eventBusSettings);
 
 	congurator.AddConsumer<BasketCheckoutConsumer>();
 
-	string host = builder.Configuration.GetValue<string>("EventBusSettings:HostAddress")
-		?? throw new ArgumentNullException("EventBusSettings:HostAddress", "value is missing in appsettings.json");
-	string username = builder.Configuration.GetValue<string>("EventBusSettings:Username")
-		?? throw new ArgumentNullException("EventBusSettings:Username", "value is missing in appsettings.json");
-	string password = builder.Configuration.GetValue<string>("EventBusSettings:Password")
-		?? throw new ArgumentNullException("EventBusSettings:Password", "value is missing in appsettings.json");
-
 	congurator.UsingRabbitMq((ctx, cfg) =>
 	{
-		cfg.Host(host, "/", h =>
+		cfg.Host(eventBusSettings.HostAddress, "/", h =>
 		{
-			h.Username(username);
-			h.Password(password);
+			h.Username(eventBusSettings.Username);
+			h.Password(eventBusSettings.Password);
 		});
 
 		cfg.ReceiveEndpoint(EventBusConstants.BASKET_CHECKOUT_QUEUE_NAME, c =>
 		{
 			c.ConfigureConsumer<BasketCheckoutConsumer>(ctx);
 		});
-
-		//cfg.ConfigureEndpoints(ctx);
 	});
 });
-
-// General configuration
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-builder.Services.AddScoped<BasketCheckoutConsumer>();
 
 builder.Services.AddControllers();
 

@@ -1,9 +1,6 @@
 ﻿using System.Net;
-using AutoMapper;
 using Basket.API.Src.Entities;
-using Basket.API.Src.Repositories;
-using EventBus.Messages.Src.Events;
-using MassTransit;
+using Basket.API.Src.Publishers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Basket.API.Src.Controllers
@@ -13,18 +10,11 @@ namespace Basket.API.Src.Controllers
 	[Produces("application/json")]
 	public class CheckoutBasketController : ControllerBase
 	{
-		private readonly IBasketRepository _repository;
-		private readonly IMapper _mapper;
-		private readonly IPublishEndpoint _publishEndpoint;
+		private readonly IBasketCheckoutEventPublisher basketCheckoutEventPublisher;
 
-		public CheckoutBasketController(
-			IBasketRepository repository,
-			IMapper mapper,
-			IPublishEndpoint publishEndpoint)
+		public CheckoutBasketController(IBasketCheckoutEventPublisher basketCheckoutEventPublisher)
 		{
-			this._repository = repository;
-			this._mapper = mapper;
-			this._publishEndpoint = publishEndpoint;
+			this.basketCheckoutEventPublisher = basketCheckoutEventPublisher;
 		}
 
 		[HttpPost]
@@ -32,20 +22,14 @@ namespace Basket.API.Src.Controllers
 		[ProducesResponseType(typeof(BasketCheckoutEntity), (int)HttpStatusCode.BadRequest)]
 		public async Task<ActionResult> Checkout([FromBody] BasketCheckoutEntity checkoutBasket)
 		{
-			BasketEntity? basket = await this._repository.GetBasket(checkoutBasket.UserName);
-
-			if (basket == null)
+			try
+			{
+				await this.basketCheckoutEventPublisher.Publish(checkoutBasket);
+			}
+			catch (ArgumentNullException)
 			{
 				return BadRequest();
 			}
-
-			BasketCheckoutEvent eventMessage = this._mapper.Map<BasketCheckoutEvent>(checkoutBasket);
-
-			eventMessage.TotalPrice = basket.TotalPrice;
-
-			await this._publishEndpoint.Publish(eventMessage);
-
-			await this._repository.DeleteBasket(basket.UserName);
 
 			return Accepted();
 		}
