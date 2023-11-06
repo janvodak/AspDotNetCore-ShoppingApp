@@ -1,0 +1,1008 @@
+{
+	"info": {
+		"_postman_id": "5bd51bff-4e4c-4112-9da4-f20c11ff2996",
+		"name": "aspnet_microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10566628"
+	},
+	"item": [
+		{
+			"name": "Product.API",
+			"item": [
+				{
+					"name": "Get products",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{PRODUCT_URL}}/GetProducts",
+							"host": [
+								"{{PRODUCT_URL}}"
+							],
+							"path": [
+								"GetProducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get products by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{PRODUCT_URL}}/GetProductById/{{PRODUCT_ID_IPHONE}}",
+							"host": [
+								"{{PRODUCT_URL}}"
+							],
+							"path": [
+								"GetProductById",
+								"{{PRODUCT_ID_IPHONE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get products by category",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{PRODUCT_URL}}/GetProductsByCategory/{{PRODUCT_CATEGORY_SMART_PHONE}}",
+							"host": [
+								"{{PRODUCT_URL}}"
+							],
+							"path": [
+								"GetProductsByCategory",
+								"{{PRODUCT_CATEGORY_SMART_PHONE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{PRODUCT_ID_TEST}}\",\n  \"name\": \"test\",\n  \"category\": \"testCategory\",\n  \"summary\": \"some summary text\",\n  \"description\": \"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.\",\n  \"imageFile\": \"product-7.png\",\n  \"price\": 950.00\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PRODUCT_URL}}/CreateProduct",
+							"host": [
+								"{{PRODUCT_URL}}"
+							],
+							"path": [
+								"CreateProduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{PRODUCT_ID_TEST}}\",\n  \"name\": \"test\",\n  \"category\": \"testCategory\",\n  \"summary\": \"some summary text\",\n  \"description\": \"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.\",\n  \"imageFile\": \"product-7.png\",\n  \"price\": 1000.00\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PRODUCT_URL}}/UpdateProduct",
+							"host": [
+								"{{PRODUCT_URL}}"
+							],
+							"path": [
+								"UpdateProduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete product",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{PRODUCT_URL}}/DeleteProduct/{{PRODUCT_ID_TEST}}",
+							"host": [
+								"{{PRODUCT_URL}}"
+							],
+							"path": [
+								"DeleteProduct",
+								"{{PRODUCT_ID_TEST}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Basket.API",
+			"item": [
+				{
+					"name": "Get basket",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASKET_URL}}/GetBasket/{{USER_NAME_TEST}}",
+							"host": [
+								"{{BASKET_URL}}"
+							],
+							"path": [
+								"GetBasket",
+								"{{USER_NAME_TEST}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update basket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"UserName\": \"{{USER_NAME_TEST}}\",\n    \"Products\": [\n        {\n            \"Id\": \"60210c2a1556459e153f0554\",\n            \"Name\": \"IPhone X\",\n            \"Quantity\": 2,\n            \"Price\": 500,\n            \"Color\": \"Red\"\n        },\n        {\n            \"Id\": \"60210c2a1556459e153f0555\",\n            \"Name\": \"Samsung 10\",\n            \"Quantity\": 1,\n            \"Price\": 500,\n            \"Color\": \"Blue\"\n        },\n        {\n            \"id\": \"60210c2a1556459e153f0556\",\n            \"Name\": \"Huawei Plus\",\n            \"Quantity\": 1,\n            \"Price\": 650,\n            \"Color\": \"Blue\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{BASKET_URL}}/UpdateBasket",
+							"host": [
+								"{{BASKET_URL}}"
+							],
+							"path": [
+								"UpdateBasket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete basket",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASKET_URL}}/DeleteBasket/{{USER_NAME_TEST}}",
+							"host": [
+								"{{BASKET_URL}}"
+							],
+							"path": [
+								"DeleteBasket",
+								"{{USER_NAME_TEST}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Checkout basket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"userName\": \"{{USER_NAME_TEST}}\",\n        \"firstName\": \"Test\",\n        \"lastName\": \"Test\",\n        \"emailAddress\": \"test@test.com\",\n        \"addressLine\": \"Brno\",\n        \"country\": \"Czech republic\",\n        \"state\": \"Czech republic\",\n        \"zipCode\": \"60200\",\n        \"totalPrice\": 0,\n        \"paymentMethod\": 1,\n        \"cardName\": \"Test Card\",\n        \"cardNumber\": \"5555555555554444\",\n        \"expiration\": \"03/2030\",\n        \"cardVerificationValue\": \"737\"\n    }"
+						},
+						"url": {
+							"raw": "{{BASKET_URL}}/CheckoutBasket",
+							"host": [
+								"{{BASKET_URL}}"
+							],
+							"path": [
+								"CheckoutBasket"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Discount.API",
+			"item": [
+				{
+					"name": "Get discount by product name",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DISCOUNT_URL}}/GetDiscount/{{PRODUCT_NAME_IPHONE}}",
+							"host": [
+								"{{DISCOUNT_URL}}"
+							],
+							"path": [
+								"GetDiscount",
+								"{{PRODUCT_NAME_IPHONE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update discount",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{DISCOUNT_ID_SAMSUNG}},\n  \"productName\": \"Samsung 10\",\n  \"description\": \"Samsung 10 Discount\",\n  \"amount\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DISCOUNT_URL}}/UpdateDiscount",
+							"host": [
+								"{{DISCOUNT_URL}}"
+							],
+							"path": [
+								"UpdateDiscount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create discount",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 0,\n  \"productName\": \"Test\",\n  \"description\": \"Test\",\n  \"amount\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DISCOUNT_URL}}/CreateDiscount",
+							"host": [
+								"{{DISCOUNT_URL}}"
+							],
+							"path": [
+								"CreateDiscount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete discount",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": " application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DISCOUNT_URL}}/DeleteDiscount/{{DISCOUNT_NAME_TEST}}",
+							"host": [
+								"{{DISCOUNT_URL}}"
+							],
+							"path": [
+								"DeleteDiscount",
+								"{{DISCOUNT_NAME_TEST}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order.API",
+			"item": [
+				{
+					"name": "Get user orders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ORDER_URL}}/GetUserOrders/{{USER_NAME_TEST}}",
+							"host": [
+								"{{ORDER_URL}}"
+							],
+							"path": [
+								"GetUserOrders",
+								"{{USER_NAME_TEST}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Checkout order (create)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"userName\": \"{{USER_NAME_SWN}}\",\n        \"firstName\": \"Test\",\n        \"lastName\": \"Test\",\n        \"emailAddress\": \"test@test.com\",\n        \"addressLine\": \"Brno\",\n        \"country\": \"Czech republic\",\n        \"state\": \"Czech republic\",\n        \"zipCode\": \"60200\",\n        \"totalPrice\": 350.00,\n        \"paymentMethod\": 1,\n        \"cardName\": \"Test Card\",\n        \"cardNumber\": \"5555555555554444\",\n        \"expiration\": \"03/2030\",\n        \"cardVerificationValue\": \"737\"\n    }"
+						},
+						"url": {
+							"raw": "{{ORDER_URL}}/CheckoutOrder",
+							"host": [
+								"{{ORDER_URL}}"
+							],
+							"path": [
+								"CheckoutOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n        \"id\": 1,\n        \"userName\": \"{{USER_NAME_SWN}}\",\n        \"firstName\": \"Test update\",\n        \"lastName\": \"Test update\",\n        \"emailAddress\": \"test@test.com\",\n        \"addressLine\": \"Brno\",\n        \"country\": \"Czech republic\",\n        \"state\": \"Czech republic\",\n        \"zipCode\": \"60200\",\n        \"totalPrice\": 350.00,\n        \"paymentMethod\": 1,\n        \"cardName\": \"Test Card\",\n        \"cardNumber\": \"5555555555554444\",\n        \"expiration\": \"03/2030\",\n        \"cardVerificationValue\": \"737\"\n    }"
+						},
+						"url": {
+							"raw": "{{ORDER_URL}}/UpdateOrder",
+							"host": [
+								"{{ORDER_URL}}"
+							],
+							"path": [
+								"UpdateOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete order",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": " application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ORDER_URL}}/DeleteOrder/2",
+							"host": [
+								"{{ORDER_URL}}"
+							],
+							"path": [
+								"DeleteOrder",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ocelot.API.Gateway",
+			"item": [
+				{
+					"name": "Product.API Gateway",
+					"item": [
+						{
+							"name": "Get products",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{PRODUCT_URL_OCELOT_GATEWAY}}/{{PRODUCT_API_PREFIX}}",
+									"host": [
+										"{{PRODUCT_URL_OCELOT_GATEWAY}}"
+									],
+									"path": [
+										"{{PRODUCT_API_PREFIX}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get products by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{PRODUCT_URL_OCELOT_GATEWAY}}/{{PRODUCT_API_PREFIX}}/{{PRODUCT_ID_IPHONE}}",
+									"host": [
+										"{{PRODUCT_URL_OCELOT_GATEWAY}}"
+									],
+									"path": [
+										"{{PRODUCT_API_PREFIX}}",
+										"{{PRODUCT_ID_IPHONE}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get products by category",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{PRODUCT_URL_OCELOT_GATEWAY}}/{{PRODUCT_API_PREFIX}}/GetProductsByCategory/{{PRODUCT_CATEGORY_SMART_PHONE}}",
+									"host": [
+										"{{PRODUCT_URL_OCELOT_GATEWAY}}"
+									],
+									"path": [
+										"{{PRODUCT_API_PREFIX}}",
+										"GetProductsByCategory",
+										"{{PRODUCT_CATEGORY_SMART_PHONE}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create product",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"{{PRODUCT_ID_TEST}}\",\n  \"name\": \"test\",\n  \"category\": \"testCategory\",\n  \"summary\": \"some summary text\",\n  \"description\": \"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.\",\n  \"imageFile\": \"product-7.png\",\n  \"price\": 950.00\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PRODUCT_URL_OCELOT_GATEWAY}}/{{PRODUCT_API_PREFIX}}",
+									"host": [
+										"{{PRODUCT_URL_OCELOT_GATEWAY}}"
+									],
+									"path": [
+										"{{PRODUCT_API_PREFIX}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update product",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"{{PRODUCT_ID_TEST}}\",\n  \"name\": \"test\",\n  \"category\": \"testCategory\",\n  \"summary\": \"some summary text\",\n  \"description\": \"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.\",\n  \"imageFile\": \"product-7.png\",\n  \"price\": 1000.00\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PRODUCT_URL_OCELOT_GATEWAY}}/{{PRODUCT_API_PREFIX}}",
+									"host": [
+										"{{PRODUCT_URL_OCELOT_GATEWAY}}"
+									],
+									"path": [
+										"{{PRODUCT_API_PREFIX}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete product",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"602d2149e773f2a3990b47fb\",\n  \"name\": \"test\",\n  \"category\": \"testCategory\",\n  \"summary\": \"some summary text\",\n  \"description\": \"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.\",\n  \"imageFile\": \"product-7.png\",\n  \"price\": 950.00\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PRODUCT_URL_OCELOT_GATEWAY}}/{{PRODUCT_API_PREFIX}}/{{PRODUCT_ID_TEST}}",
+									"host": [
+										"{{PRODUCT_URL_OCELOT_GATEWAY}}"
+									],
+									"path": [
+										"{{PRODUCT_API_PREFIX}}",
+										"{{PRODUCT_ID_TEST}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Basket.API Gataway",
+					"item": [
+						{
+							"name": "Get basket",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{BASKET_URL_OCELOT_GATEWAY}}/{{BASKET_API_PREFIX}}/{{USER_NAME_TEST}}",
+									"host": [
+										"{{BASKET_URL_OCELOT_GATEWAY}}"
+									],
+									"path": [
+										"{{BASKET_API_PREFIX}}",
+										"{{USER_NAME_TEST}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update basket",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"UserName\": \"{{USER_NAME_TEST}}\",\n    \"Products\": [\n        {\n            \"Id\": \"60210c2a1556459e153f0554\",\n            \"Name\": \"IPhone X\",\n            \"Quantity\": 2,\n            \"Price\": 500,\n            \"Color\": \"Red\"\n        },\n        {\n            \"Id\": \"60210c2a1556459e153f0555\",\n            \"Name\": \"Samsung 10\",\n            \"Quantity\": 1,\n            \"Price\": 500,\n            \"Color\": \"Blue\"\n        },\n        {\n            \"id\": \"60210c2a1556459e153f0556\",\n            \"Name\": \"Huawei Plus\",\n            \"Quantity\": 1,\n            \"Price\": 650,\n            \"Color\": \"Blue\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{BASKET_URL_OCELOT_GATEWAY}}/{{BASKET_API_PREFIX}}",
+									"host": [
+										"{{BASKET_URL_OCELOT_GATEWAY}}"
+									],
+									"path": [
+										"{{BASKET_API_PREFIX}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete basket",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{BASKET_URL_OCELOT_GATEWAY}}/{{BASKET_API_PREFIX}}/{{USER_NAME_TEST}}",
+									"host": [
+										"{{BASKET_URL_OCELOT_GATEWAY}}"
+									],
+									"path": [
+										"{{BASKET_API_PREFIX}}",
+										"{{USER_NAME_TEST}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Checkout basket",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\n        \"userName\": \"{{USER_NAME_TEST}}\",\n        \"firstName\": \"Test\",\n        \"lastName\": \"Test\",\n        \"emailAddress\": \"test@test.com\",\n        \"addressLine\": \"Brno\",\n        \"country\": \"Czech republic\",\n        \"state\": \"Czech republic\",\n        \"zipCode\": \"60200\",\n        \"totalPrice\": 0,\n        \"paymentMethod\": 1,\n        \"cardName\": \"Test Card\",\n        \"cardNumber\": \"5555555555554444\",\n        \"expiration\": \"03/2030\",\n        \"cardVerificationValue\": \"737\"\n    }"
+								},
+								"url": {
+									"raw": "{{BASKET_URL_OCELOT_GATEWAY}}/{{BASKET_API_PREFIX}}/Checkout",
+									"host": [
+										"{{BASKET_URL_OCELOT_GATEWAY}}"
+									],
+									"path": [
+										"{{BASKET_API_PREFIX}}",
+										"Checkout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Discount.API Gataway",
+					"item": [
+						{
+							"name": "Get discount by product name",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{DISCOUNT_URL_OCELOT_GATEWAY}}/{{DISCOUNT_API_PREFIX}}/{{PRODUCT_NAME_IPHONE}}",
+									"host": [
+										"{{DISCOUNT_URL_OCELOT_GATEWAY}}"
+									],
+									"path": [
+										"{{DISCOUNT_API_PREFIX}}",
+										"{{PRODUCT_NAME_IPHONE}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update discount",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": {{DISCOUNT_ID_SAMSUNG}},\n  \"productName\": \"Samsung 10\",\n  \"description\": \"Samsung 10 Discount\",\n  \"amount\": 100\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DISCOUNT_URL_OCELOT_GATEWAY}}/{{DISCOUNT_API_PREFIX}}",
+									"host": [
+										"{{DISCOUNT_URL_OCELOT_GATEWAY}}"
+									],
+									"path": [
+										"{{DISCOUNT_API_PREFIX}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create discount",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 0,\n  \"productName\": \"Test\",\n  \"description\": \"Test\",\n  \"amount\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DISCOUNT_URL_OCELOT_GATEWAY}}/{{DISCOUNT_API_PREFIX}}",
+									"host": [
+										"{{DISCOUNT_URL_OCELOT_GATEWAY}}"
+									],
+									"path": [
+										"{{DISCOUNT_API_PREFIX}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete discount",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{DISCOUNT_URL_OCELOT_GATEWAY}}/{{DISCOUNT_API_PREFIX}}/{{DISCOUNT_NAME_TEST}}",
+									"host": [
+										"{{DISCOUNT_URL_OCELOT_GATEWAY}}"
+									],
+									"path": [
+										"{{DISCOUNT_API_PREFIX}}",
+										"{{DISCOUNT_NAME_TEST}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Order.API Gataway",
+					"item": [
+						{
+							"name": "Get user orders",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ORDER_URL_OCELOT_GATEWAY}}/{{ORDER_API_PREFIX}}/{{USER_NAME_SWN}}",
+									"host": [
+										"{{ORDER_URL_OCELOT_GATEWAY}}"
+									],
+									"path": [
+										"{{ORDER_API_PREFIX}}",
+										"{{USER_NAME_SWN}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
