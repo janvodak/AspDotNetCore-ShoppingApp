@@ -17,7 +17,7 @@ namespace Order.Rest.Src.Controllers
 			this._mediator = mediator;
 		}
 
-		[HttpPut(Name = "UpdateOrder")]
+		[HttpPut]
 		[ProducesResponseType((int)HttpStatusCode.NoContent)]
 		[ProducesResponseType((int)HttpStatusCode.NotFound)]
 		[ProducesDefaultResponseType]

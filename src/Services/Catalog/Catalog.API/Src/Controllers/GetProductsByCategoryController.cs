@@ -17,7 +17,7 @@ namespace Catalog.API.Controllers
 			this._repository = repository;
 		}
 
-		[HttpGet]
+		[HttpGet("{category}")]
 		[ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
 		public async Task<ActionResult<IEnumerable<Product>>> GetProductsByCategory(string category)
 		{

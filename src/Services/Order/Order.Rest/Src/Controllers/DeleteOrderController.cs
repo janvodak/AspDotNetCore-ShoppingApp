@@ -17,7 +17,7 @@ namespace Order.Rest.Src.Controllers
 			this._mediator = mediator;
 		}
 
-		[HttpDelete("{id}", Name = "DeleteOrder")]
+		[HttpDelete("{id}")]
 		[ProducesResponseType((int)HttpStatusCode.NoContent)]
 		[ProducesResponseType((int)HttpStatusCode.NotFound)]
 		[ProducesDefaultResponseType]
