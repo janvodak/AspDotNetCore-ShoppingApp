@@ -17,7 +17,7 @@ namespace Basket.API.Src.Controllers
 			this._repository = repository;
 		}
 
-		[HttpGet("{userName}", Name = "GetBasket")]
+		[HttpGet("{userName}")]
 		[ProducesResponseType(typeof(BasketEntity), (int)HttpStatusCode.OK)]
 		public async Task<ActionResult<BasketEntity>> GetBasket(string userName)
 		{

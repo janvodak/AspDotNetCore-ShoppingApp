@@ -17,7 +17,7 @@ namespace Discount.API.Src.Controllers
 			this._repository = repository;
 		}
 
-		[HttpGet("{productName}", Name = "GetDiscount")]
+		[HttpGet("{productName}")]
 		[ProducesResponseType(typeof(DiscountEntity), (int)HttpStatusCode.OK)]
 		[ProducesResponseType((int)HttpStatusCode.NotFound)]
 		public async Task<ActionResult<DiscountEntity>> GetDiscount(string productName)

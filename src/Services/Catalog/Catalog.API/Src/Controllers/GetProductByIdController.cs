@@ -19,7 +19,7 @@ namespace Catalog.API.Controllers
 			this._logger = logger;
 		}
 
-		[HttpGet("{id:length(24)}", Name = "GetProductById")]
+		[HttpGet("{id:length(24)}")]
 		[ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
 		[ProducesResponseType((int)HttpStatusCode.NotFound)]
 		public async Task<ActionResult<Product>> GetProductById(string id)

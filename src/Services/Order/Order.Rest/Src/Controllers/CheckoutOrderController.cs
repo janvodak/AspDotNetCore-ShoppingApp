@@ -17,7 +17,7 @@ namespace Order.Rest.Src.Controllers
 			this._mediator = mediator;
 		}
 
-		[HttpPost(Name = "CheckoutOrder")]
+		[HttpPost]
 		[ProducesResponseType((int)HttpStatusCode.OK)]
 		public async Task<ActionResult<int>> CheckoutOrder([FromBody] CheckoutOrderCommand command)
 		{

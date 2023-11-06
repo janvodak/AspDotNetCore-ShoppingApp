@@ -17,7 +17,7 @@ namespace Basket.API.Src.Controllers
 			this._repository = repository;
 		}
 
-		[HttpDelete("{userName}", Name = "DeleteBasket")]
+		[HttpDelete("{userName}")]
 		[ProducesResponseType(typeof(BasketEntity), (int)HttpStatusCode.NoContent)]
 		[ProducesResponseType((int)HttpStatusCode.NotFound)]
 		public async Task<IActionResult> DeleteBasket(string userName)

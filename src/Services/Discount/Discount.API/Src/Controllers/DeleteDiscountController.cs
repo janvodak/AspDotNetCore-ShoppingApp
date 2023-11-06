@@ -17,7 +17,7 @@ namespace Discount.API.Src.Controllers
 			this._repository = repository;
 		}
 
-		[HttpDelete("{productName}", Name = "DeleteDiscount")]		
+		[HttpDelete("{productName}")]		
 		[ProducesResponseType(typeof(DiscountEntity), (int)HttpStatusCode.NoContent)]
 		[ProducesResponseType((int)HttpStatusCode.InternalServerError)]
 		public async Task<IActionResult> DeleteDiscount(string productName)

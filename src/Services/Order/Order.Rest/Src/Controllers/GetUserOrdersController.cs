@@ -17,7 +17,7 @@ namespace Order.Rest.Src.Controllers
 			this._mediator = mediator;
 		}
 
-		[HttpGet("{userName}", Name = "GetUserOrders")]
+		[HttpGet("{userName}")]
 		[ProducesResponseType(typeof(IEnumerable<OrderDataTransferObject>), (int)HttpStatusCode.OK)]
 		public async Task<ActionResult<IEnumerable<OrderDataTransferObject>>> GetUserOrders(string userName)
 		{
