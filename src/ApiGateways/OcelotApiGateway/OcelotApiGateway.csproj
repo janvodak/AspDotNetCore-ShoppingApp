@@ -4,11 +4,20 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DockerComposeProjectPath>../../docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
     <PackageReference Include="Ocelot" Version="20.0.0" />
     <PackageReference Include="Ocelot.Cache.CacheManager" Version="20.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Docker\" />
+    <None Remove="Docker\DotNet70\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Docker\" />
+    <Folder Include="Docker\DotNet70\" />
   </ItemGroup>
 </Project>

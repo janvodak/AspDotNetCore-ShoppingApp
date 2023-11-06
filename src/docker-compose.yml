@@ -69,6 +69,13 @@ services:
         build:
             context: .
             dockerfile: Services/Order/Order.Rest/Docker/Dotnet70/Dockerfile
+
+    ocelot.api.gateway:
+        image: ${DOCKER_REGISTRY-}ocelot-apigateway
+        build:
+            context: .
+            dockerfile: ApiGateways/OcelotApiGateway/Docker/Dotnet70/Dockerfile
+
 volumes:
     catalog.api.mongo:
         name: catalog-api-mongo
@@ -76,3 +83,4 @@ volumes:
         name: discount-api-postgres
     discount.api.pgadmin:
         name: discount-api-pgadmin
+
