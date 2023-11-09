@@ -126,3 +126,14 @@ services:
             - order.api
         ports:
             - "8010:80"
+
+    shopping.aggregator:
+        container_name: shopping-aggregator
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+        depends_on:
+            - catalog.api
+            - basket.api
+            - order.api
+        ports:
+            - "8005:80"
