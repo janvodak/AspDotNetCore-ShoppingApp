@@ -1,3 +1,201 @@
 ﻿{
-
+	"Routes": [
+		//Catalog API
+		{
+			"DownstreamPathTemplate": "/api/v1/Catalog/GetProducts",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "8000"
+				}
+			],
+			"UpstreamPathTemplate": "/Product",
+			"UpstreamHttpMethod": [ "GET" ],
+			"FileCacheOptions": { "TtlSeconds": 30 }
+		},
+		{
+			"DownstreamPathTemplate": "/api/v1/Catalog/UpdateProduct",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "8000"
+				}
+			],
+			"UpstreamPathTemplate": "/Product",
+			"UpstreamHttpMethod": [ "PUT" ],
+			"FileCacheOptions": { "TtlSeconds": 30 }
+		},
+		{
+			"DownstreamPathTemplate": "/api/v1/Catalog/CreateProduct",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "8000"
+				}
+			],
+			"UpstreamPathTemplate": "/Product",
+			"UpstreamHttpMethod": [ "POST" ],
+			"FileCacheOptions": { "TtlSeconds": 30 }
+		},
+		{
+			"DownstreamPathTemplate": "/api/v1/Catalog/GetProductsByCategory/{category}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "8000"
+				}
+			],
+			"UpstreamPathTemplate": "/Product/GetProductsByCategory/{category}",
+			"UpstreamHttpMethod": [ "GET" ]
+		},
+		{
+			"DownstreamPathTemplate": "/api/v1/Catalog/GetProductById/{id}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "8000"
+				}
+			],
+			"UpstreamPathTemplate": "/Product/{id}",
+			"UpstreamHttpMethod": [ "GET" ]
+		},
+		{
+			"DownstreamPathTemplate": "/api/v1/Catalog/DeleteProduct/{id}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "8000"
+				}
+			],
+			"UpstreamPathTemplate": "/Product/{id}",
+			"UpstreamHttpMethod": [ "DELETE" ]
+		},
+		//Basket API
+		{
+			"DownstreamPathTemplate": "/api/v1/Basket/GetBasket/{userName}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "8001"
+				}
+			],
+			"UpstreamPathTemplate": "/Basket/{userName}",
+			"UpstreamHttpMethod": [ "GET" ]
+		},
+		{
+			"DownstreamPathTemplate": "/api/v1/Basket/DeleteBasket/{userName}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "8001"
+				}
+			],
+			"UpstreamPathTemplate": "/Basket/{userName}",
+			"UpstreamHttpMethod": [ "DELETE" ]
+		},
+		{
+			"DownstreamPathTemplate": "/api/v1/Basket/UpdateBasket",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "8001"
+				}
+			],
+			"UpstreamPathTemplate": "/Basket",
+			"UpstreamHttpMethod": [ "POST" ]
+		},
+		{
+			"DownstreamPathTemplate": "/api/v1/Basket/CheckoutBasket",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "8001"
+				}
+			],
+			"UpstreamPathTemplate": "/Basket/Checkout",
+			"UpstreamHttpMethod": [ "POST" ],
+			"RateLimitOptions": {
+				"ClientWhitelist": [],
+				"EnableRateLimiting": true,
+				"Period": "3s",
+				"PeriodTimespan": 1,
+				"Limit": 1
+			}
+		},
+		//Discount API
+		{
+			"DownstreamPathTemplate": "/api/v1/Discount/GetDiscount/{productName}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "8002"
+				}
+			],
+			"UpstreamPathTemplate": "/Discount/{productName}",
+			"UpstreamHttpMethod": [ "GET" ]
+		},
+		{
+			"DownstreamPathTemplate": "/api/v1/Discount/DeleteDiscount/{productName}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "8002"
+				}
+			],
+			"UpstreamPathTemplate": "/Discount/{productName}",
+			"UpstreamHttpMethod": [ "DELETE" ]
+		},
+		{
+			"DownstreamPathTemplate": "/api/v1/Discount/UpdateDiscount",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "8002"
+				}
+			],
+			"UpstreamPathTemplate": "/Discount",
+			"UpstreamHttpMethod": [ "PUT" ]
+		},
+		{
+			"DownstreamPathTemplate": "/api/v1/Discount/CreateDiscount",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "8002"
+				}
+			],
+			"UpstreamPathTemplate": "/Discount",
+			"UpstreamHttpMethod": [ "POST" ]
+		},
+		//Order API
+		{
+			"DownstreamPathTemplate": "/api/v1/Order/GetUserOrders/{userName}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "8004"
+				}
+			],
+			"UpstreamPathTemplate": "/Order/{userName}",
+			"UpstreamHttpMethod": [ "GET" ]
+		}
+	],
+	"GlobalConfiguration": {
+		"BaseUrl": "http://localhost:5010"
+	}
 }
