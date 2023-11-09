@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Src\" />
+    <None Remove="Src\Models\" />
+    <None Remove="Src\Services\" />
+    <None Remove="Src\Features\" />
+    <None Remove="Src\Settings\" />
+    <None Remove="Src\Controllers\" />
+    <None Remove="Src\Factories\" />
+    <None Remove="Docker\" />
+    <None Remove="Docker\DotNet70\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Src\" />
+    <Folder Include="Src\Models\" />
+    <Folder Include="Src\Services\" />
+    <Folder Include="Src\Features\" />
+    <Folder Include="Src\Settings\" />
+    <Folder Include="Src\Controllers\" />
+    <Folder Include="Src\Factories\" />
+    <Folder Include="Docker\" />
+    <Folder Include="Docker\DotNet70\" />
+  </ItemGroup>
+</Project>
