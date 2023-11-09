@@ -30,6 +30,7 @@
 * **Discount API -> http://host.docker.internal:8002/swagger/index.html**
 * **Discount Grpc -> http://host.docker.internal:8003**
 * **Order API -> http://host.docker.internal:8004/swagger/index.html**
+* **Shopping.Aggregator -> http://host.docker.internal:8005/swagger/index.html**
 * **API Gateway -> http://host.docker.internal:8010/**
 * **Rabbit Management Dashboard -> http://host.docker.internal:15672**   -- guest/guest
 * **Portainer -> http://host.docker.internal:9000**
