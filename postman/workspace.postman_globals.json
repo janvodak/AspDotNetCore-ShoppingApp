@@ -54,10 +54,16 @@
 			"value": "{{ENVIRONMENT_ORIGIN}}:{{OCELOT_API_PORT}}",
 			"type": "default",
 			"enabled": true
+		},
+		{
+			"key": "SHOPPING_AGGREGATOR_URL",
+			"value": "{{ENVIRONMENT_ORIGIN}}:{{SHOPPING_AGGREGATOR_PORT}}/{{URL_API_VERSION_V1}}/{{SHOPPING_AGGREGATOR_API_PREFIX}}",
+			"type": "default",
+			"enabled": true
 		}
 	],
 	"name": "Globals",
 	"_postman_variable_scope": "globals",
-	"_postman_exported_at": "2023-11-06T13:18:06.786Z",
-	"_postman_exported_using": "Postman/10.19.14"
+	"_postman_exported_at": "2023-11-09T13:45:26.331Z",
+	"_postman_exported_using": "Postman/10.19.17"
 }

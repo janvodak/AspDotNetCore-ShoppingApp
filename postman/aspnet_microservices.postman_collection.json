@@ -225,7 +225,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"UserName\": \"{{USER_NAME_TEST}}\",\n    \"Products\": [\n        {\n            \"Id\": \"60210c2a1556459e153f0554\",\n            \"Name\": \"IPhone X\",\n            \"Quantity\": 2,\n            \"Price\": 500,\n            \"Color\": \"Red\"\n        },\n        {\n            \"Id\": \"60210c2a1556459e153f0555\",\n            \"Name\": \"Samsung 10\",\n            \"Quantity\": 1,\n            \"Price\": 500,\n            \"Color\": \"Blue\"\n        },\n        {\n            \"id\": \"60210c2a1556459e153f0556\",\n            \"Name\": \"Huawei Plus\",\n            \"Quantity\": 1,\n            \"Price\": 650,\n            \"Color\": \"Blue\"\n        }\n    ]\n}"
+							"raw": "{\n    \"UserName\": \"{{USER_NAME_TEST}}\",\n    \"Products\": [\n        {\n            \"Id\": \"{{PRODUCT_ID_IPHONE}}\",\n            \"Name\": \"IPhone X\",\n            \"Quantity\": 2,\n            \"Price\": 500,\n            \"Color\": \"Red\"\n        },\n        {\n            \"Id\": \"{{PRODUCT_ID_SAMSUNG}}\",\n            \"Name\": \"Samsung 10\",\n            \"Quantity\": 1,\n            \"Price\": 500,\n            \"Color\": \"Blue\"\n        },\n        {\n            \"id\": \"{{PRODUCT_ID_HUAWEI}}\",\n            \"Name\": \"Huawei Plus\",\n            \"Quantity\": 1,\n            \"Price\": 650,\n            \"Color\": \"Blue\"\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "{{BASKET_URL}}/UpdateBasket",
@@ -773,7 +773,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"UserName\": \"{{USER_NAME_TEST}}\",\n    \"Products\": [\n        {\n            \"Id\": \"60210c2a1556459e153f0554\",\n            \"Name\": \"IPhone X\",\n            \"Quantity\": 2,\n            \"Price\": 500,\n            \"Color\": \"Red\"\n        },\n        {\n            \"Id\": \"60210c2a1556459e153f0555\",\n            \"Name\": \"Samsung 10\",\n            \"Quantity\": 1,\n            \"Price\": 500,\n            \"Color\": \"Blue\"\n        },\n        {\n            \"id\": \"60210c2a1556459e153f0556\",\n            \"Name\": \"Huawei Plus\",\n            \"Quantity\": 1,\n            \"Price\": 650,\n            \"Color\": \"Blue\"\n        }\n    ]\n}"
+									"raw": "{\n    \"UserName\": \"{{USER_NAME_TEST}}\",\n    \"Products\": [\n        {\n            \"Id\": \"{{PRODUCT_ID_IPHONE}}\",\n            \"Name\": \"IPhone X\",\n            \"Quantity\": 2,\n            \"Price\": 500,\n            \"Color\": \"Red\"\n        },\n        {\n            \"Id\": \"{{PRODUCT_ID_SAMSUNG}}\",\n            \"Name\": \"Samsung 10\",\n            \"Quantity\": 1,\n            \"Price\": 500,\n            \"Color\": \"Blue\"\n        },\n        {\n            \"id\": \"{{PRODUCT_ID_HUAWEI}}\",\n            \"Name\": \"Huawei Plus\",\n            \"Quantity\": 1,\n            \"Price\": 650,\n            \"Color\": \"Blue\"\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "{{BASKET_URL_OCELOT_GATEWAY}}/{{BASKET_API_PREFIX}}",
@@ -1001,6 +1001,35 @@
 							"response": []
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "Shopping.Aggregator",
+			"item": [
+				{
+					"name": "GetUserData",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{SHOPPING_AGGREGATOR_URL}}/GetUserdData/{{USER_NAME_TEST}}",
+							"host": [
+								"{{SHOPPING_AGGREGATOR_URL}}"
+							],
+							"path": [
+								"GetUserdData",
+								"{{USER_NAME_TEST}}"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
