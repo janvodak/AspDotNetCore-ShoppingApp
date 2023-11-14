@@ -77,10 +77,16 @@ services:
             dockerfile: ApiGateways/OcelotApiGateway/Docker/Dotnet70/Dockerfile
 
     shopping.aggregator:
-        image: ${DOCKER_REGISTRY-}shopping
+        image: ${DOCKER_REGISTRY-}shopping-aggregator
         build:
             context: .
             dockerfile: ApiGateways/Shopping.Aggregator/Docker/Dotnet70/Dockerfile
+
+    shopping.webapp:
+        image: ${DOCKER_REGISTRY-}shopping-webapp
+        build:
+            context: .
+            dockerfile: WebApps/Shopping.WebApp/Docker/Dotnet70/Dockerfile
 
 volumes:
     catalog.api.mongo:
