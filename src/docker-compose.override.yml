@@ -137,3 +137,12 @@ services:
             - order.api
         ports:
             - "8005:80"
+
+    shopping.webapp:
+        container_name: shopping-webapp
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+        depends_on:
+            - ocelot.api.gateway
+        ports:
+            - "8080:80"
