@@ -37,6 +37,12 @@
 * **Mongo Client -> http://host.docker.internal:3000**
 * **pgAdmin PostgreSQL -> http://host.docker.internal:5050**   -- admin@aspnetrun.com/admin1234
 
+* **Web UI -> http://host.docker.internal:8080**
+
+1. Launch http://host.docker.internal:8080 in your browser to view the Web UI.
+You can use Web project in order to **call microservices over API Gateway**.
+When you **checkout the basket** you can follow **queue record on RabbitMQ dashboard**.
+
 ## Using Entity Framework in Your .NET Project
 Entity Framework is a powerful Object-Relational Mapping (ORM) tool for .NET that allows you to interact with your database using .NET objects.
 In this project, we've integrated Entity Framework to simplify database operations.
