@@ -5,12 +5,12 @@
 - [Introduction](#introduction)
 - [Installation](docs/installation.md)
 - [Usage](docs/usage.md)
-- [Architecture](docs/architecture.md)
+- [Architecture](docs/architecture-and-design.md)
 - [Contributing](docs/contributing.md)
 
 ## Introduction
 
-Welcome to my ASP.NET Core Web API-based microservices project! This application utilizes a wide range of frameworks and technologies to create a powerful and efficient basis for e-commerce platform.
+Welcome in ASP.NET Core Web API-based microservices project! This application utilizes a wide range of frameworks and technologies to create a powerful and efficient basis for e-commerce platform.
 
 In this project, there are implemented a set of microservices that cover various e-commerce modules, including Product, Basket, Discount, and Ordering.
 These microservices leverage a combination of NoSQL databases (MongoDB, Redis) and Relational databases (PostgreSQL, SQL Server) for data storage.
@@ -20,6 +20,12 @@ Here's a glimpse of what you'll find:
 - **ASP.NET Core Web Application**: The project includes an ASP.NET Core web application, featuring Bootstrap 4 and Razor templates for a user-friendly interface.
 
 - **Microservices Development**: This project is designed as a collection of microservices, following REST API principles for CRUD (Create, Read, Update, Delete) operations.
+This approach is used in specific APIs like Discounts API or Product API which does not play key part in wider context and could be simplified.
+Other more important APIs are following different principles described in text belove.
+
+Architecture in general in this repository embraces a monolithic approach housed within a single, unified repository.
+Despite the widespread adoption of microservices and distributed systems, decision to maintain a monolithic structure within a mono repository is intentional
+and driven by the pursuit of learning and simplicity.
 
 - **Architectural Best Practices**: The project follows these principles, ensuring code quality and maintainability:
 
