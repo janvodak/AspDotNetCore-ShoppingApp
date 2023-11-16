@@ -1,27 +1,27 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <DockerComposeProjectPath>../../docker-compose.dcproj</DockerComposeProjectPath>
+	<TargetFramework>net7.0</TargetFramework>
+	<Nullable>enable</Nullable>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<DockerComposeProjectPath>../../../docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
-    <None Remove="Models\" />
-    <None Remove="Services\" />
-    <None Remove="Settings\" />
-    <None Remove="Features\" />
-    <None Remove="Docker\" />
-    <None Remove="Docker\DotNet70\" />
+	<None Remove="Models\" />
+	<None Remove="Services\" />
+	<None Remove="Settings\" />
+	<None Remove="Features\" />
+	<None Remove="Docker\" />
+	<None Remove="Docker\DotNet70\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Services\" />
-    <Folder Include="Settings\" />
-    <Folder Include="Features\" />
-    <Folder Include="Docker\" />
-    <Folder Include="Docker\DotNet70\" />
+	<Folder Include="Models\" />
+	<Folder Include="Services\" />
+	<Folder Include="Settings\" />
+	<Folder Include="Features\" />
+	<Folder Include="Docker\" />
+	<Folder Include="Docker\DotNet70\" />
   </ItemGroup>
 </Project>

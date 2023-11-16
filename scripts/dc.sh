@@ -19,13 +19,13 @@ _get_docker_compose_file_names() {
 	readonly SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 	local filenames=(
-		-f "${SCRIPT_DIR}/../src/docker-compose.yml"
-		-f "${SCRIPT_DIR}/../src/docker-compose.override.yml"
+		-f "${SCRIPT_DIR}/../docker-compose.yml"
+		-f "${SCRIPT_DIR}/../docker-compose.override.yml"
 	)
 
 	# Check if an additional file should be added to run portainer
 	if [[ "${WITH_PORTAINER}" == "1" ]]; then
-		filenames+=(-f "${SCRIPT_DIR}/../src/docker-compose.portainer.yml")
+		filenames+=(-f "${SCRIPT_DIR}/../docker-compose.portainer.yml")
 	fi
 
 	echo "${filenames[@]}"
