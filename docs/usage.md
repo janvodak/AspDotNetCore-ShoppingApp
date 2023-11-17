@@ -36,6 +36,12 @@
 * **Portainer -> http://host.docker.internal:9000**
 * **Mongo Client -> http://host.docker.internal:3000**
 * **pgAdmin PostgreSQL -> http://host.docker.internal:5050**   -- admin@aspnetrun.com/admin1234
+	* The first time you use it, you need to add a server. Click on the "Add New Server" icon on the main dashboard and fill in:
+		* `Name` in `General` tab. You can use something like this `DiscountServer`, but it does not matter which server name you choose.
+		* `Host name/address` in `Connection` tab. You need to specify the host name which is the name of PostgreSQL container.
+		You can find it in `docker-composer.yml` file, or in `appsettings.json` file for the specific environment. For `Development` environment it is `discount-postgres`.
+		* `Username` in `Connection` tab. In default it is `admin`, but again, you can check the values in `docker-composer.yml` file or in `appsettings.json` file for the specific environment.
+		* `Password` in `Connection` tab. In default it is `admin1234`, but again, you can check the values in `docker-composer.yml` file or in `appsettings.json` file for the specific environment.
 
 * **Web UI -> http://host.docker.internal:8080**
 

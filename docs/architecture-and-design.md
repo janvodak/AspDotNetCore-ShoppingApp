@@ -1,7 +1,7 @@
 # Architecture and Desing in general
 
-Architecture in this repository embraces a monolithic approach housed within a single, unified repository.
-Despite the widespread adoption of microservices and distributed systems, decision to maintain a monolithic structure within a mono repository is intentional
+Architecture in this repository embraces a monorepo approach housed within a single, unified repository.
+Despite the widespread adoption of microservices and distributed systems, decision to maintain a monorepo structure is intentional
 and driven by the pursuit of learning and simplicity.
 
 **Key Aspects:**
@@ -15,10 +15,10 @@ This setup facilitates a comprehensive understanding of the interactions between
 * **Holistic Development Experience:** Developers working within the monorepo benefit from a holistic development experience.
 Changes and updates can be applied uniformly across all components, streamlining the development process.
 
-* **Consolidated Learning:** By choosing a monolithic architecture, learning efforts within a singular context is consolidated.
+* **Consolidated Learning:** By choosing a monorepo, learning efforts within a singular context is consolidated.
 This approach allows for a deeper understanding of the intricacies of each component and their interactions.
 
-While the industry trend often leans towards microservices and distributed architectures, our intentional embrace of a monolithic structure serves as a valuable learning exercise.
+While the industry trend often leans towards microservices and distributed architectures, our intentional embrace of a monorepo structure serves as a valuable learning exercise.
 It provides a controlled environment for experimenting with various techniques and technologies, fostering a comprehensive understanding of our system's intricacies.
 
 ## Software Architecture vs Software Design

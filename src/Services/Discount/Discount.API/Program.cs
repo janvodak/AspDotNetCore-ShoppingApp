@@ -1,11 +1,11 @@
-﻿using Discount.API.Src.Data;
-using Discount.API.Src.Repositories;
+﻿using ShoppingApp.Services.Discount.API.Data;
+using ShoppingApp.Services.Discount.API.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.Configure<DatabaseSettings>(
-	builder.Configuration.GetSection("DatabaseSettings"));
+	builder.Configuration.GetSection(DatabaseSettings.SECTION_NAME));
 
 builder.Services.AddScoped<DiscountContext>();
 builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();

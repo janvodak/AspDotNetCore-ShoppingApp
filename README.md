@@ -23,8 +23,8 @@ Here's a glimpse of what you'll find:
 This approach is used in specific APIs like Discounts API or Product API which does not play key part in wider context and could be simplified.
 Other more important APIs are following different principles described in text belove.
 
-Architecture in general in this repository embraces a monolithic approach housed within a single, unified repository.
-Despite the widespread adoption of microservices and distributed systems, decision to maintain a monolithic structure within a mono repository is intentional
+Architecture in general in this repository embraces a monorepo approach housed within a single, unified repository.
+Despite the widespread adoption of microservices and distributed systems, decision to maintain a monorepo structure is intentional
 and driven by the pursuit of learning and simplicity.
 
 - **Architectural Best Practices**: The project follows these principles, ensuring code quality and maintainability:

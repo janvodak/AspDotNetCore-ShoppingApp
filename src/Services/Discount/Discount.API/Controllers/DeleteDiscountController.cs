@@ -1,9 +1,9 @@
 ﻿using System.Net;
-using Discount.API.Src.Entities;
-using Discount.API.Src.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using ShoppingApp.Services.Discount.API.Models;
+using ShoppingApp.Services.Discount.API.Repositories;
 
-namespace Discount.API.Src.Controllers
+namespace ShoppingApp.Services.Discount.API.Controllers
 {
 	[ApiController]
 	[Route("api/v1/discount/[controller]")]
@@ -14,15 +14,15 @@ namespace Discount.API.Src.Controllers
 
 		public DeleteDiscountController(IDiscountRepository repository)
 		{
-			this._repository = repository;
+			_repository = repository;
 		}
 
-		[HttpDelete("{productName}")]		
-		[ProducesResponseType(typeof(DiscountEntity), (int)HttpStatusCode.NoContent)]
+		[HttpDelete("{productName}")]
+		[ProducesResponseType(typeof(DiscountModel), (int)HttpStatusCode.NoContent)]
 		[ProducesResponseType((int)HttpStatusCode.InternalServerError)]
 		public async Task<IActionResult> DeleteDiscount(string productName)
 		{
-			bool result = await this._repository.DeleteDiscount(productName);
+			bool result = await _repository.DeleteDiscount(productName);
 
 			if (result == false)
 			{
