@@ -5,43 +5,44 @@
 	<Nullable>enable</Nullable>
 	<ImplicitUsings>enable</ImplicitUsings>
 	<DockerComposeProjectPath>../../../../docker-compose.dcproj</DockerComposeProjectPath>
+	<RootNamespace>ShoppingApp.Services.Discount.API</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
 	<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
 	<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-	<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.12">
-	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-	  <PrivateAssets>all</PrivateAssets>
-	</PackageReference>
 	<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.12">
 	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  <PrivateAssets>all</PrivateAssets>
 	</PackageReference>
 	<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
+	<PackageReference Include="AutoMapper" Version="12.0.1" />
+	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.12" />
+	<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.12" />
   </ItemGroup>
 
   <ItemGroup>
-	<None Remove="Src\" />
-	<None Remove="Src\Controllers\" />
 	<None Remove="Docker\" />
 	<None Remove="Docker\Postgres16\" />
 	<None Remove="Docker\PgAdmin77\" />
-	<None Remove="Src\Entities\" />
-	<None Remove="Src\Repositories\" />
 	<None Remove="Docker\DotNet70\" />
-	<None Remove="Src\Data\" />
+	<None Remove="Controllers\" />
+	<None Remove="Data\" />
+	<None Remove="Repositories\" />
+	<None Remove="Models\" />
+	<None Remove="Models\DataTransferObjects\" />
   </ItemGroup>
   <ItemGroup>
-	<Folder Include="Src\" />
-	<Folder Include="Src\Controllers\" />
 	<Folder Include="Docker\" />
 	<Folder Include="Docker\Postgres16\" />
 	<Folder Include="Docker\PgAdmin77\" />
-	<Folder Include="Src\Entities\" />
-	<Folder Include="Src\Repositories\" />
 	<Folder Include="Docker\DotNet70\" />
-	<Folder Include="Src\Data\" />
+	<Folder Include="Controllers\" />
+	<Folder Include="Data\" />
+	<Folder Include="Repositories\" />
+	<Folder Include="Models\" />
+	<Folder Include="Models\DataTransferObjects\" />
   </ItemGroup>
 </Project>

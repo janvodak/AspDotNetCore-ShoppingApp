@@ -1,9 +1,9 @@
 ﻿using System.Net;
-using Discount.API.Src.Entities;
-using Discount.API.Src.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using ShoppingApp.Services.Discount.API.Models;
+using ShoppingApp.Services.Discount.API.Repositories;
 
-namespace Discount.API.Src.Controllers
+namespace ShoppingApp.Services.Discount.API.Controllers
 {
 	[ApiController]
 	[Route("api/v1/discount/[controller]")]
@@ -14,15 +14,15 @@ namespace Discount.API.Src.Controllers
 
 		public GetDiscountController(IDiscountRepository repository)
 		{
-			this._repository = repository;
+			_repository = repository;
 		}
 
 		[HttpGet("{productName}", Name = "GetDiscount")]
-		[ProducesResponseType(typeof(DiscountEntity), (int)HttpStatusCode.OK)]
+		[ProducesResponseType(typeof(DiscountModel), (int)HttpStatusCode.OK)]
 		[ProducesResponseType((int)HttpStatusCode.NotFound)]
-		public async Task<ActionResult<DiscountEntity>> GetDiscount(string productName)
+		public async Task<ActionResult<DiscountModel>> GetDiscount(string productName)
 		{
-			DiscountEntity? discount = await this._repository.GetDiscount(productName);
+			DiscountModel? discount = await _repository.GetDiscount(productName);
 
 
 			if (discount == null)

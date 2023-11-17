@@ -1,19 +1,17 @@
-﻿using Discount.API.Src.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using ShoppingApp.Services.Discount.API.Models;
 
-namespace Discount.API.Src.Data
+namespace ShoppingApp.Services.Discount.API.Data
 {
 	public partial class DiscountContext : DbContext
 	{
-		public virtual DbSet<DiscountEntity> Discounts { get; set; } = null!;
-
 		private readonly string _connectionString;
 
 		public DiscountContext(IOptions<DatabaseSettings> databaseSettings)
 		{
-			this._connectionString = String.Format(
-				"User ID={0};Password={1};Host={2};Port={3};Database={4};",
+			_connectionString = string.Format(
+				databaseSettings.Value.ConnectionStringTemplate,
 				databaseSettings.Value.User,
 				databaseSettings.Value.Password,
 				databaseSettings.Value.Host,
@@ -21,9 +19,11 @@ namespace Discount.API.Src.Data
 				databaseSettings.Value.DBname);
 		}
 
+		public virtual DbSet<DiscountDataTransferObject> Discounts { get; set; } = null!;
+
 		protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
 		{
-			dbContextOptionsBuilder.UseNpgsql(this._connectionString);
+			dbContextOptionsBuilder.UseNpgsql(_connectionString);
 		}
 	}
 }
