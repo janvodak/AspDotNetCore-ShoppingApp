@@ -34,25 +34,25 @@ services:
             context: .
             dockerfile: src/Services/Basket/Basket.API/Docker/DotNet70/Dockerfile
 
-    discount.api.postgres:
+    discount-postgres:
         image: ${DOCKER_REGISTRY-}discount-postgres
         build:
             context: .
-            dockerfile: src/Services/Discount/Discount.API/Docker/Postgres16/Dockerfile.image
+            dockerfile: src/Services/Discount/Discount.API/Docker/Postgres16/Dockerfile
 
-    discount.api.pgadmin:
+    discount-pgadmin:
         image: ${DOCKER_REGISTRY-}discount-pgadmin
         build:
             context: .
-            dockerfile: src/Services/Discount/Discount.API/Docker/PgAdmin77/Dockerfile.image
+            dockerfile: src/Services/Discount/Discount.API/Docker/PgAdmin77/Dockerfile
 
-    discount.api:
+    discount-api:
         image: ${DOCKER_REGISTRY-}discount-api
         build:
             context: .
-            dockerfile: src/Services/Discount/Discount.API/Docker/DotNet70/Dockerfile.image
+            dockerfile: src/Services/Discount/Discount.API/Docker/DotNet70/Dockerfile
 
-    discount.grpc:
+    discount-grpc:
         image: ${DOCKER_REGISTRY-}discount-grpc
         build:
             context: .
@@ -91,7 +91,8 @@ services:
 volumes:
     catalog.api.mongo:
         name: catalog-api-mongo
-    discount.api.postgres:
-        name: discount-api-postgres
-    discount.api.pgadmin:
-        name: discount-api-pgadmin
+    discount-postgres:
+        name: discount-postgres
+    discount-pgadmin:
+        name: discount-pgadmin
+

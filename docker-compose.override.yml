@@ -51,8 +51,8 @@ services:
         ports:
             - "8001:80"
 
-    discount.api.postgres:
-        container_name: discount-api-postgres
+    discount-postgres:
+        container_name: discount-postgres
         environment:
             - POSTGRES_USER=admin
             - POSTGRES_PASSWORD=admin1234
@@ -61,38 +61,37 @@ services:
         ports:
             - "5432:5432"
         volumes:
-            - discount.api.postgres:/var/lib/postgresql/data
+            - discount-postgres:/var/lib/postgresql/data
 
-    discount.api.pgadmin:
-        container_name: discount-api-pgadmin
+    discount-pgadmin:
+        container_name: discount-pgadmin
         environment:
-            - PGADMIN_DEFAULT_EMAIL=admin@aspnetrun.com
+            - PGADMIN_DEFAULT_EMAIL=admin@aspdotnetcore.com
             - PGADMIN_DEFAULT_PASSWORD=admin1234
         restart: always
         depends_on:
-            - discount.api.postgres
+            - discount-postgres
         ports:
             - "5050:80"
         volumes:
-            - discount.api.pgadmin:/root/.pgadmin
+            - discount-pgadmin:/root/.pgadmin
 
-    discount.api:
+    discount-api:
         container_name: discount-api
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
-            - "DatabaseSettings:Host=discount-api-postgres"
         depends_on:
-            - discount.api.postgres
+            - discount-postgres
         ports:
             - "8002:80"
 
-    discount.grpc:
+    discount-grpc:
         container_name: discount-grpc
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
-            - "DatabaseSettings:Host=discount-api-postgres"
+            - "DatabaseSettings:Host=discount-postgres"
         depends_on:
-            - discount.api.postgres
+            - discount-postgres
         ports:
             - "8003:80"
 
@@ -122,7 +121,7 @@ services:
         depends_on:
             - catalog.api
             - basket.api
-            - discount.api
+            - discount-api
             - order.api
         ports:
             - "8010:80"
