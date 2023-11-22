@@ -15,5 +15,16 @@
 		public string Port { get; set; } = null!;
 
 		public string DBname { get; set; } = null!;
+
+		public string GetConnectionString()
+		{
+			return string.Format(
+				ConnectionStringTemplate,
+				User,
+				Password,
+				Host,
+				Port,
+				DBname);
+		}
 	}
 }
