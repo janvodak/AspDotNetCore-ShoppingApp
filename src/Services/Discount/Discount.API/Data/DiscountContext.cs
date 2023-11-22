@@ -6,24 +6,26 @@ namespace ShoppingApp.Services.Discount.API.Data
 {
 	public partial class DiscountContext : DbContext
 	{
-		private readonly string _connectionString;
+		private readonly IOptions<DatabaseSettings> _databaseSettings;
 
 		public DiscountContext(IOptions<DatabaseSettings> databaseSettings)
 		{
-			_connectionString = string.Format(
-				databaseSettings.Value.ConnectionStringTemplate,
-				databaseSettings.Value.User,
-				databaseSettings.Value.Password,
-				databaseSettings.Value.Host,
-				databaseSettings.Value.Port,
-				databaseSettings.Value.DBname);
+			_databaseSettings = databaseSettings;
 		}
 
-		public virtual DbSet<DiscountDataTransferObject> Discounts { get; set; } = null!;
+		public virtual DbSet<DiscountModel> Discounts { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
 		{
-			dbContextOptionsBuilder.UseNpgsql(_connectionString);
+			dbContextOptionsBuilder.UseNpgsql(_databaseSettings.Value.GetConnectionString());
+		}
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			base.OnModelCreating(modelBuilder);
+
+			//modelBuilder.Entity<DiscountModel>().HasData(new DiscountModel(1, "IPhone X", "IPhone Discount", 150));
+			//modelBuilder.Entity<DiscountModel>().HasData(new DiscountModel(2, "Samsung 10", "Samsung Discount", 100));
 		}
 	}
 }
