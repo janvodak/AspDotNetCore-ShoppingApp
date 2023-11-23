@@ -1,8 +1,8 @@
-﻿using Discount.Grpc.Src.Protos;
-using Discount.Grpc.Src.Repositories;
-using Grpc.Core;
+﻿using Grpc.Core;
+using ShoppingApp.Services.Discount.Grpc.Protos;
+using ShoppingApp.Services.Discount.Grpc.Repositories;
 
-namespace Discount.Grpc.Src.Services;
+namespace ShoppingApp.Services.Discount.Grpc.Services;
 
 public class DeleteDiscoutService : DeleteDiscountProtocolBufferService.DeleteDiscountProtocolBufferServiceBase
 {
@@ -10,12 +10,12 @@ public class DeleteDiscoutService : DeleteDiscountProtocolBufferService.DeleteDi
 
 	public DeleteDiscoutService(IDiscountRepository discountRepository)
 	{
-		this._repository = discountRepository;
+		_repository = discountRepository;
 	}
 
 	public override async Task<DeleteDiscountResponse> DeleteDiscount(DeleteDiscountRequest request, ServerCallContext context)
 	{
-		bool isDeleted = await this._repository.DeleteDiscount(request.ProductName);
+		bool isDeleted = await _repository.DeleteDiscount(request.ProductName);
 
 		if (isDeleted == false)
 		{

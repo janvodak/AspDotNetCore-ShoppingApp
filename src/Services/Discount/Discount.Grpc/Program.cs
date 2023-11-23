@@ -1,6 +1,6 @@
-﻿using Discount.Grpc.Src.Data;
-using Discount.Grpc.Src.Repositories;
-using Discount.Grpc.Src.Services;
+﻿using ShoppingApp.Services.Discount.Grpc.Data;
+using ShoppingApp.Services.Discount.Grpc.Repositories;
+using ShoppingApp.Services.Discount.Grpc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

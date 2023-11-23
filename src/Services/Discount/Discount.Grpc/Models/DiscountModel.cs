@@ -1,6 +1,6 @@
-﻿namespace Discount.Grpc.Src.Entities
+﻿namespace ShoppingApp.Services.Discount.Grpc.Models
 {
-	public class DiscountEntity
+	public class DiscountModel
 	{
 		public int Id { get; set; }
 
