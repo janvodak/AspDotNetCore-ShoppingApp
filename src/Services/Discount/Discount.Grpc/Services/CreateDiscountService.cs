@@ -10,25 +10,42 @@ public class CreateDiscoutService : CreateDiscountProtocolBufferService.CreateDi
 {
 	private readonly IMapper _mapper;
 	private readonly IDiscountRepository _repository;
+	private readonly ILogger<CreateDiscoutService> _logger;
 
-	public CreateDiscoutService(IMapper mapper, IDiscountRepository discountRepository)
+	public CreateDiscoutService(
+		IMapper mapper,
+		IDiscountRepository discountRepository,
+		ILogger<CreateDiscoutService> logger)
 	{
 		_mapper = mapper;
 		_repository = discountRepository;
+		_logger = logger;
 	}
 
 	public override async Task<CreateDiscountProtocolBufferEntity> CreateDiscount(CreateDiscountRequest request, ServerCallContext context)
 	{
-		DiscountModel discountEntity = _mapper.Map<DiscountModel>(request.Discount);
+		DiscountModel discountModel = _mapper.Map<DiscountModel>(request.Discount);
 
-		bool isCreated = await _repository.CreateDiscount(discountEntity);
+		int result = await _repository.CreateDiscountAsync(discountModel);
 
-		if (isCreated == false)
+		if (result == 0)
 		{
-			string errorResponseMessage = $"Unable to create discount for product '{discountEntity.ProductName}' with amount {discountEntity.Amount}.";
-			throw new RpcException(new Status(StatusCode.Internal, errorResponseMessage));
+			_logger.LogError(
+				"Unable to create discount: '{Discount}'",
+				discountModel.ToString());
+
+			Status status = new(
+				StatusCode.Internal,
+				$"Unable to create discount for product '{discountModel.ProductName}' with amount {discountModel.Amount}.");
+
+			throw new RpcException(status);
 		}
 
-		return _mapper.Map<CreateDiscountProtocolBufferEntity>(discountEntity);
+		_logger.LogInformation(
+			"Discount for product '{ProductName}' with amount {Amount} was created successfully.",
+			discountModel.ProductName,
+			discountModel.Amount);
+
+		return _mapper.Map<CreateDiscountProtocolBufferEntity>(discountModel);
 	}
 }
