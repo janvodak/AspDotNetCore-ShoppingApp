@@ -11,12 +11,14 @@
 		```
 		WITH_PORTAINER=1 bash ./scripts/dc.sh up --detach
 		```
-		This command is used to start and manage Docker containers for a specific project or application. The WITH_PORTAINER=1 environment variable is set to enable Portainer, a container management tool, which allows for an easier and more visual way to manage Docker containers.
+		This command is used to start and manage Docker containers for a specific project or application. The `WITH_PORTAINER=1` environment variable is set to enable Portainer,
+		a container management tool, which allows for an easier and more visual way to manage Docker containers.
 	* Without Portainer (WITH_PORTAINER=0 or unset):
 		```
 		bash ./scripts/dc.sh up --detach
 		```
-		This command is used to start and manage Docker containers for a specific project or application without using Portainer. You can use this bash script for the manipulation with `docker-compose` command in terminal.
+		This command is used to start and manage Docker containers for a specific project or application without using Portainer.
+		You can use this bash script for the manipulation with `docker-compose` command in terminal.
 
 	> **Note:** You can use the `--build` option when you need to rebuild some specific container when your code has changed in that given container.
 

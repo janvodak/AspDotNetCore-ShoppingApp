@@ -134,7 +134,7 @@
 		},
 		//Discount API
 		{
-			"DownstreamPathTemplate": "/api/v1/Discount/GetDiscount/{productName}",
+			"DownstreamPathTemplate": "/api/v1/Discount/{productName}",
 			"DownstreamScheme": "http",
 			"DownstreamHostAndPorts": [
 				{
@@ -146,7 +146,7 @@
 			"UpstreamHttpMethod": [ "GET" ]
 		},
 		{
-			"DownstreamPathTemplate": "/api/v1/Discount/DeleteDiscount/{productName}",
+			"DownstreamPathTemplate": "/api/v1/Discount/{productName}",
 			"DownstreamScheme": "http",
 			"DownstreamHostAndPorts": [
 				{
@@ -158,7 +158,19 @@
 			"UpstreamHttpMethod": [ "DELETE" ]
 		},
 		{
-			"DownstreamPathTemplate": "/api/v1/Discount/UpdateDiscount",
+			"DownstreamPathTemplate": "/api/v1/Discount",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "8002"
+				}
+			],
+			"UpstreamPathTemplate": "/Discount",
+			"UpstreamHttpMethod": [ "GET" ]
+		},
+		{
+			"DownstreamPathTemplate": "/api/v1/Discount",
 			"DownstreamScheme": "http",
 			"DownstreamHostAndPorts": [
 				{
@@ -170,7 +182,7 @@
 			"UpstreamHttpMethod": [ "PUT" ]
 		},
 		{
-			"DownstreamPathTemplate": "/api/v1/Discount/CreateDiscount",
+			"DownstreamPathTemplate": "/api/v1/Discount",
 			"DownstreamScheme": "http",
 			"DownstreamHostAndPorts": [
 				{
