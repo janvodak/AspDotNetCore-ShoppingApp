@@ -44,7 +44,7 @@ public class GetDiscoutService : GetDiscountProtocolBufferService.GetDiscountPro
 
 		if (discountModel == null)
 		{
-			this._logger.LogError("Unable to get discount for product '{ProductName}'.",
+			this._logger.LogInformation("There is no available discount for product '{ProductName}'.",
 				request.ProductName);
 
 			Status status = new(

@@ -41,7 +41,7 @@ public class DeleteDiscoutService : DeleteDiscountProtocolBufferService.DeleteDi
 
 		if (result == 0)
 		{
-			_logger.LogError("Unable to remove discount for product '{ProductName}'",
+			_logger.LogError("Unable to remove discount for product '{ProductName}.'",
 				request.ProductName);
 
 			Status status = new(

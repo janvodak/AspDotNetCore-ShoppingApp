@@ -1,5 +1,5 @@
 ﻿
-using Discount.Grpc.Src.Protos;
+using ShoppingApp.Services.Discount.Grpc.Protos;
 using Grpc.Core;
 
 namespace Basket.API.Src.GrpcServices
