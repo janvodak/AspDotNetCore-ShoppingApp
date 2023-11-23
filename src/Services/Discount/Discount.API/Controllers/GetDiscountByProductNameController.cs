@@ -9,15 +9,15 @@ namespace ShoppingApp.Services.Discount.API.Controllers
 	[ApiController]
 	[Route("api/v1/Discount")]
 	[Produces("application/json")]
-	public class UpdateDiscountController : ControllerBase
+	public class GetDiscountByProductNameController : ControllerBase
 	{
 		private readonly IDiscountRepository _repository;
-		private readonly ILogger<UpdateDiscountController> _logger;
+		private readonly ILogger<GetDiscountByProductNameController> _logger;
 		private readonly SingleDiscountResponseFactory _responseFactory;
 
-		public UpdateDiscountController(
+		public GetDiscountByProductNameController(
 			IDiscountRepository repository,
-			ILogger<UpdateDiscountController> logger,
+			ILogger<GetDiscountByProductNameController> logger,
 			SingleDiscountResponseFactory responseFactory)
 		{
 			_repository = repository;
@@ -25,39 +25,30 @@ namespace ShoppingApp.Services.Discount.API.Controllers
 			_responseFactory = responseFactory;
 		}
 
-		[HttpPut]
+		[HttpGet("{productName}", Name = "GetDiscount")]
 		[ProducesResponseType(typeof(DiscountDataTransferObject), (int)HttpStatusCode.OK)]
 		[ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-		public async Task<ActionResult<DiscountDataTransferObject>> UpdateDiscount([FromBody] DiscountDataTransferObject discount)
+		public async Task<ActionResult<ResponseDataTransferObject>> GetDiscountByProductNameAsync(string productName)
 		{
-			int result;
+			DiscountDataTransferObject? discount;
 
 			try
 			{
-				result = await _repository.UpdateDiscountAsync(discount);
+				discount = await _repository.GetDiscountByProductNameAsync(productName);
 			}
 			catch (Exception ex)
 			{
-				this._logger.LogError(
-					ex,
-					"Unable to update discount '{Discount}'.",
-					discount.ToString());
-
-				return Problem();
-			}
-
-			if (result == 0)
-			{
 				_logger.LogError(
-					"Unable to update discount '{Discount}'.",
-					discount.ToString());
+					ex,
+					"Unable to get discount for product '{ProductName}'",
+					productName);
 
 				return Problem();
 			}
 
 			ResponseDataTransferObject response = _responseFactory.Create(
 				discount,
-				discount.ProductName);
+				productName);
 
 			return Ok(response);
 		}

@@ -34,6 +34,8 @@
 	<None Remove="Models\" />
 	<None Remove="Models\DataTransferObjects\" />
 	<None Remove="Migrations\" />
+	<None Remove="Mappings\" />
+	<None Remove="Models\DataTransferObjects\Factories\" />
   </ItemGroup>
   <ItemGroup>
 	<Folder Include="Docker\" />
@@ -46,5 +48,7 @@
 	<Folder Include="Models\" />
 	<Folder Include="Models\DataTransferObjects\" />
 	<Folder Include="Migrations\" />
+	<Folder Include="Mappings\" />
+	<Folder Include="Models\DataTransferObjects\Factories\" />
   </ItemGroup>
 </Project>

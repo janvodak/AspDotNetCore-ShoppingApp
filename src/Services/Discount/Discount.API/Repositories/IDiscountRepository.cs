@@ -1,15 +1,17 @@
-﻿using ShoppingApp.Services.Discount.API.Models;
+﻿using ShoppingApp.Services.Discount.API.Models.DataTransferObjects;
 
 namespace ShoppingApp.Services.Discount.API.Repositories
 {
 	public interface IDiscountRepository
 	{
-		Task<DiscountModel?> GetDiscount(string productName);
+		Task<IEnumerable<DiscountDataTransferObject>> GetDiscountsAsync();
 
-		Task<bool> CreateDiscount(DiscountModel discount);
+		Task<DiscountDataTransferObject?> GetDiscountByProductNameAsync(string productName);
 
-		Task<bool> UpdateDiscount(DiscountModel discount);
+		Task<int> CreateDiscountAsync(DiscountDataTransferObject discountDataTransferObject);
 
-		Task<bool> DeleteDiscount(string productName);
+		Task<int> UpdateDiscountAsync(DiscountDataTransferObject discountDataTransferObject);
+
+		Task<int> DeleteDiscountAsync(string productName);
 	}
 }

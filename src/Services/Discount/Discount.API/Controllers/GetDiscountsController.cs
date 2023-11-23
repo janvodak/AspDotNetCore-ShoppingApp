@@ -9,49 +9,43 @@ namespace ShoppingApp.Services.Discount.API.Controllers
 	[ApiController]
 	[Route("api/v1/Discount")]
 	[Produces("application/json")]
-	public class DeleteDiscountController : ControllerBase
+	public class GetDiscountsController : ControllerBase
 	{
 		private readonly IDiscountRepository _repository;
-		private readonly ILogger<DeleteDiscountController> _logger;
-		private readonly SingleDiscountResponseFactory _responseFactory;
+		private readonly ILogger<GetDiscountsController> _logger;
+		private readonly MultipleDiscountsResponseFactory _responseFactory;
 
-		public DeleteDiscountController(
+		public GetDiscountsController(
 			IDiscountRepository repository,
-			ILogger<DeleteDiscountController> logger,
-			SingleDiscountResponseFactory responseFactory)
+			ILogger<GetDiscountsController> logger,
+			MultipleDiscountsResponseFactory responseFactory)
 		{
 			_repository = repository;
 			_logger = logger;
 			_responseFactory = responseFactory;
 		}
 
-		[HttpDelete("{productName}")]
+		[HttpGet]
 		[ProducesResponseType(typeof(DiscountDataTransferObject), (int)HttpStatusCode.OK)]
 		[ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-		public async Task<IActionResult> DeleteDiscount(string productName)
+		public async Task<ActionResult<ResponseDataTransferObject>> GetDiscountsAsync()
 		{
-			int result;
+			IEnumerable<DiscountDataTransferObject> discountDataTransferObjects;
 
 			try
 			{
-				result = await _repository.DeleteDiscountAsync(productName);
+				discountDataTransferObjects = await _repository.GetDiscountsAsync();
 			}
-			catch(Exception)
+			catch (Exception ex)
 			{
-				return Problem();
-			}
-
-			if (result == 0)
-			{
-				_logger.LogError("Unable to remove discount for product '{ProductName}'",
-					productName);
+				_logger.LogError(
+					ex,
+					"Unable to get discounts.");
 
 				return Problem();
 			}
 
-			ResponseDataTransferObject response = _responseFactory.Create(
-				null,
-				productName);
+			ResponseDataTransferObject response = _responseFactory.CreateEnumerableDiscount(discountDataTransferObjects);
 
 			return Ok(response);
 		}

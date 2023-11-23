@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using ShoppingApp.Services.Discount.API.Data;
 using ShoppingApp.Services.Discount.API.Models;
+using ShoppingApp.Services.Discount.API.Models.DataTransferObjects;
 
 namespace ShoppingApp.Services.Discount.API.Repositories
 {
@@ -8,90 +10,69 @@ namespace ShoppingApp.Services.Discount.API.Repositories
 	{
 		private readonly DiscountContext _discountContext;
 		private readonly ILogger<DiscountRepository> _logger;
+		private readonly IMapper _mapper;
 
-		public DiscountRepository(DiscountContext discountContext, ILogger<DiscountRepository> logger)
+		public DiscountRepository(
+			DiscountContext discountContext,
+			ILogger<DiscountRepository> logger,
+			IMapper mapper)
 		{
 			_discountContext = discountContext;
 			_logger = logger;
+			_mapper = mapper;
 		}
 
-		public async Task<bool> CreateDiscount(DiscountModel discount)
+		public async Task<int> CreateDiscountAsync(DiscountDataTransferObject discountDataTransferObject)
 		{
-			_discountContext.Discounts.Add(discount);
-			int result = await _discountContext.SaveChangesAsync();
+			DiscountModel discountModel = _mapper.Map<DiscountModel>(discountDataTransferObject);
 
-			if (result == 0)
-			{
-				_logger.LogError("Unable to create discount: '{Discount}'", discount.ToString());
+			_discountContext.Discounts.Add(discountModel);
 
-				return false;
-			}
-
-			return true;
+			return await _discountContext.SaveChangesAsync();
 		}
 
-		public async Task<bool> DeleteDiscount(string productName)
+		public async Task<int> DeleteDiscountAsync(string productName)
 		{
-			DiscountModel? discount = await _discountContext.Discounts.SingleAsync(d => d.ProductName == productName);
+			DiscountModel? discountModel = await _discountContext.Discounts.SingleAsync(
+				d => d.ProductName.ToLower() == productName.ToLower());
 
-			if (discount == null)
-			{
-				string message = $"Discount for product: '{productName}' not found";
-				_logger.LogError(message);
-
-				return false;
-			}
-
-			_discountContext.Discounts.Remove(discount);
-
-			int result = await _discountContext.SaveChangesAsync();
-
-			if (result == 0)
-			{
-				_logger.LogError("Unable to remove discount: '{Discount}'", discount.ToString());
-
-				return false;
-			}
-
-			return true;
-		}
-
-		public async Task<DiscountModel?> GetDiscount(string productName)
-		{
-			DiscountModel? discount = await _discountContext.Discounts.FirstOrDefaultAsync(d => d.ProductName == productName);
-
-			if (discount == null)
-			{
-				_logger.LogError("Unable to get discount for product '{ProductName}'", productName);
-			}
-
-			return discount;
-		}
-
-		public async Task<bool> UpdateDiscount(DiscountModel discount)
-		{
-			_discountContext.Attach(discount).State = EntityState.Modified;
-
-			try
-			{
-				int result = await _discountContext.SaveChangesAsync();
-
-				if (result == 0)
-				{
-					return false;
-				}
-
-				return true;
-			}
-			catch (Exception exception) when (exception is DbUpdateConcurrencyException || exception is DbUpdateException || exception is OperationCanceledException)
+			if (discountModel == null)
 			{
 				_logger.LogError(
-					exception,
-					"Unable to update discount '{Discount}'.",
-					discount.ToString());
+					"Discount for product: '{ProductName}' not found.",
+					productName);
+
+				throw new Exception();
 			}
 
-			return false;
+			_discountContext.Discounts.Remove(discountModel);
+
+			return await _discountContext.SaveChangesAsync();
+		}
+
+		public async Task<DiscountDataTransferObject?> GetDiscountByProductNameAsync(string productName)
+		{
+			DiscountModel discountModel = await _discountContext.Discounts.FirstAsync(
+				d => d.ProductName.ToLower() == productName.ToLower());
+
+			return _mapper.Map<DiscountDataTransferObject>(discountModel);
+
+		}
+
+		public async Task<IEnumerable<DiscountDataTransferObject>> GetDiscountsAsync()
+		{
+			IEnumerable<DiscountModel> discountModels = await _discountContext.Discounts.ToListAsync();
+
+			return _mapper.Map<IEnumerable<DiscountDataTransferObject>>(discountModels);
+		}
+
+		public async Task<int> UpdateDiscountAsync(DiscountDataTransferObject discountDataTransferObject)
+		{
+			DiscountModel discountModel = _mapper.Map<DiscountModel>(discountDataTransferObject);
+
+			_discountContext.Attach(discountModel).State = EntityState.Modified;
+
+			return await _discountContext.SaveChangesAsync();
 		}
 	}
 }
