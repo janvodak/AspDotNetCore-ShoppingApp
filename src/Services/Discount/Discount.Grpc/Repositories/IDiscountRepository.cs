@@ -4,12 +4,12 @@ namespace ShoppingApp.Services.Discount.Grpc.Repositories
 {
 	public interface IDiscountRepository
 	{
-		Task<DiscountModel?> GetDiscount(string productName);
+		Task<DiscountModel?> GetDiscountByProductNameAsync(string productName);
 
-		Task<bool> CreateDiscount(DiscountModel discount);
+		Task<int> CreateDiscountAsync(DiscountModel discountModel);
 
-		Task<bool> UpdateDiscount(DiscountModel discount);
+		Task<int> UpdateDiscountAsync(DiscountModel discountModel);
 
-		Task<bool> DeleteDiscount(string productName);
+		Task<int> DeleteDiscountAsync(string productName);
 	}
 }

@@ -6,24 +6,18 @@ namespace ShoppingApp.Services.Discount.Grpc.Data
 {
 	public partial class DiscountContext : DbContext
 	{
-		public virtual DbSet<DiscountModel> Discounts { get; set; } = null!;
-
-		private readonly string _connectionString;
+		private readonly IOptions<DatabaseSettings> _databaseSettings;
 
 		public DiscountContext(IOptions<DatabaseSettings> databaseSettings)
 		{
-			_connectionString = string.Format(
-				"User ID={0};Password={1};Host={2};Port={3};Database={4};",
-				databaseSettings.Value.User,
-				databaseSettings.Value.Password,
-				databaseSettings.Value.Host,
-				databaseSettings.Value.Port,
-				databaseSettings.Value.DBname);
+			_databaseSettings = databaseSettings;
 		}
+
+		public virtual DbSet<DiscountModel> Discounts { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
 		{
-			dbContextOptionsBuilder.UseNpgsql(_connectionString);
+			dbContextOptionsBuilder.UseNpgsql(_databaseSettings.Value.GetConnectionString());
 		}
 	}
 }

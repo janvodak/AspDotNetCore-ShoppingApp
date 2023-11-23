@@ -1,4 +1,6 @@
-﻿using ShoppingApp.Services.Discount.Grpc.Data;
+﻿using AutoMapper;
+using ShoppingApp.Services.Discount.Grpc.Data;
+using ShoppingApp.Services.Discount.Grpc.Mappings;
 using ShoppingApp.Services.Discount.Grpc.Repositories;
 using ShoppingApp.Services.Discount.Grpc.Services;
 
@@ -9,12 +11,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.Configure<DatabaseSettings>(
-	builder.Configuration.GetSection("DatabaseSettings"));
+	builder.Configuration.GetSection(DatabaseSettings.SECTION_NAME));
 
 builder.Services.AddScoped<DiscountContext>();
 builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();
 
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
+IMapper mapper = MappingConfiguration.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddGrpc();
 

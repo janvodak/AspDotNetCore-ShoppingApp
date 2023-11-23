@@ -9,105 +9,51 @@ namespace ShoppingApp.Services.Discount.Grpc.Repositories
 		private readonly DiscountContext _discountContext;
 		private readonly ILogger<DiscountRepository> _logger;
 
-		public DiscountRepository(DiscountContext discountContext, ILogger<DiscountRepository> logger)
+		public DiscountRepository(
+			DiscountContext discountContext,
+			ILogger<DiscountRepository> logger)
 		{
 			_discountContext = discountContext;
 			_logger = logger;
 		}
 
-		public async Task<bool> CreateDiscount(DiscountModel discount)
+		public async Task<int> CreateDiscountAsync(DiscountModel discountModel)
 		{
-			_discountContext.Discounts.Add(discount);
-			int result = await _discountContext.SaveChangesAsync();
+			_discountContext.Discounts.Add(discountModel);
 
-			if (result == 0)
-			{
-				string errorMessage = $"Unable to create discount: '{discount.ToString}'.";
-				_logger.LogError(message: errorMessage);
-
-				return false;
-			}
-
-
-			string message = $"Discount for product '{discount.ProductName}' with amount {discount.Amount} was created successfully.";
-			_logger.LogInformation(message: message);
-
-			return true;
+			return await _discountContext.SaveChangesAsync();
 		}
 
-		public async Task<bool> DeleteDiscount(string productName)
+		public async Task<int> DeleteDiscountAsync(string productName)
 		{
-			DiscountModel? discount = await _discountContext.Discounts.SingleAsync(d => d.ProductName == productName);
+			DiscountModel? discountModel = await _discountContext.Discounts.SingleAsync(
+				d => d.ProductName.ToLower() == productName.ToLower());
 
-			if (discount == null)
+			if (discountModel == null)
 			{
-				string errorMessage = $"Discount for product: '{productName}' not found";
-				_logger.LogError(message: errorMessage);
+				_logger.LogError(
+					"Discount for product: '{ProductName}' not found.",
+					productName);
 
-				return false;
+				throw new Exception();
 			}
 
-			_discountContext.Discounts.Remove(discount);
+			_discountContext.Discounts.Remove(discountModel);
 
-			int result = await _discountContext.SaveChangesAsync();
-
-			if (result == 0)
-			{
-				string errorMessage = $"Unable to remove discount: '{discount.ToString}'";
-				_logger.LogError(message: errorMessage);
-
-				return false;
-			}
-
-			string message = $"Discount for product '{discount.ProductName}' with amount {discount.Amount} was removed successfully.";
-			_logger.LogInformation(message: message);
-
-			return true;
+			return await _discountContext.SaveChangesAsync();
 		}
 
-		public async Task<DiscountModel?> GetDiscount(string productName)
+		public async Task<DiscountModel?> GetDiscountByProductNameAsync(string productName)
 		{
-			DiscountModel? discount = await _discountContext.Discounts.FirstOrDefaultAsync(d => d.ProductName == productName);
-
-			if (discount == null)
-			{
-				string errorMessage = $"Unable to get discount for product '{productName}'";
-				_logger.LogError(message: errorMessage);
-
-				return null;
-			}
-
-			string message = $"Discount for product '{discount.ProductName}' and amount {discount.Amount} was returned successfully.";
-			_logger.LogInformation(message: message);
-
-			return discount;
+			return await _discountContext.Discounts.FirstAsync(
+				d => d.ProductName.ToLower() == productName.ToLower());
 		}
 
-		public async Task<bool> UpdateDiscount(DiscountModel discount)
+		public async Task<int> UpdateDiscountAsync(DiscountModel discountModel)
 		{
-			_discountContext.Attach(discount).State = EntityState.Modified;
+			_discountContext.Attach(discountModel).State = EntityState.Modified;
 
-			try
-			{
-				int result = await _discountContext.SaveChangesAsync();
-
-				if (result == 0)
-				{
-					return false;
-				}
-
-				string message = $"Discount for product '{discount.ProductName}' and amount {discount.Amount} was updated successfully.";
-				_logger.LogInformation(message: message);
-
-				return true;
-			}
-			catch (Exception exception) when (exception is DbUpdateConcurrencyException || exception is DbUpdateException || exception is OperationCanceledException)
-			{
-				string message = $"Unable to update discount '{discount.ToString}'.";
-				_logger.LogError(exception, message: message);
-			}
-
-			return false;
+			return await _discountContext.SaveChangesAsync();
 		}
 	}
 }
