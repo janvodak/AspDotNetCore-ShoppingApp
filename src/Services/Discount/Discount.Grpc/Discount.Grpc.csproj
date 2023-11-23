@@ -5,6 +5,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<DockerComposeProjectPath>../../../../docker-compose.dcproj</DockerComposeProjectPath>
+		<RootNamespace>ShoppingApp.Services.Discount.Grpc</RootNamespace>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
@@ -24,31 +25,33 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<Protobuf Include="Src\Protos\getDiscount.proto" GrpcServices="Server" />
-		<Protobuf Include="Src\Protos\deleteDiscount.proto" GrpcServices="Server" />
-		<Protobuf Include="Src\Protos\createDiscount.proto" GrpcServices="Server" />
-		<Protobuf Include="Src\Protos\updateDiscount.proto" GrpcServices="Server" />
+		<Protobuf Include="Protos\createDiscount.proto" GrpcServices="Server" />
+		<Protobuf Include="Protos\deleteDiscount.proto" GrpcServices="Server" />
+		<Protobuf Include="Protos\getDiscount.proto" GrpcServices="Server" />
+		<Protobuf Include="Protos\updateDiscount.proto" GrpcServices="Server" />
 	</ItemGroup>
   <ItemGroup>
-	<None Remove="Src\" />
 	<None Remove="Docker\" />
 	<None Remove="Docker\DotNet70\" />
-	<None Remove="Src\Entities\" />
-	<None Remove="Src\Mapper\" />
-	<None Remove="Src\Protos\" />
-	<None Remove="Src\Repositories\" />
-	<None Remove="Src\Data\" />
-	<None Remove="Src\Services\" />
+	<None Remove="Models\" />
+	<None Remove="Mappers\" />
+	<None Remove="Protos\createDiscount.proto" />
+	<None Remove="Protos\deleteDiscount.proto" />
+	<None Remove="Protos\getDiscount.proto" />
+	<None Remove="Protos\updateDiscount.proto" />
+	<None Remove="Protos\" />
+	<None Remove="Data\" />
+	<None Remove="Repositories\" />
+	<None Remove="Services\" />
   </ItemGroup>
   <ItemGroup>
-	<Folder Include="Src\" />
 	<Folder Include="Docker\" />
 	<Folder Include="Docker\DotNet70\" />
-	<Folder Include="Src\Entities\" />
-	<Folder Include="Src\Mapper\" />
-	<Folder Include="Src\Protos\" />
-	<Folder Include="Src\Repositories\" />
-	<Folder Include="Src\Data\" />
-	<Folder Include="Src\Services\" />
+	<Folder Include="Models\" />
+	<Folder Include="Mappers\" />
+	<Folder Include="Protos\" />
+	<Folder Include="Data\" />
+	<Folder Include="Repositories\" />
+	<Folder Include="Services\" />
   </ItemGroup>
 </Project>

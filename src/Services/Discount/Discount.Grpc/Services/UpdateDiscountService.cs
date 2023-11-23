@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using Discount.Grpc.Src.Entities;
-using Discount.Grpc.Src.Protos;
-using Discount.Grpc.Src.Repositories;
 using Grpc.Core;
+using ShoppingApp.Services.Discount.Grpc.Models;
+using ShoppingApp.Services.Discount.Grpc.Protos;
+using ShoppingApp.Services.Discount.Grpc.Repositories;
 
-namespace Discount.Grpc.Src.Services;
+namespace ShoppingApp.Services.Discount.Grpc.Services;
 
 public class UpdateDiscoutService : UpdateDiscountProtocolBufferService.UpdateDiscountProtocolBufferServiceBase
 {
@@ -13,15 +13,15 @@ public class UpdateDiscoutService : UpdateDiscountProtocolBufferService.UpdateDi
 
 	public UpdateDiscoutService(IMapper mapper, IDiscountRepository discountRepository)
 	{
-		this._mapper = mapper;
-		this._repository = discountRepository;
+		_mapper = mapper;
+		_repository = discountRepository;
 	}
 
 	public override async Task<UpdateDiscountProtocolBufferEntity> UpdateDiscount(UpdateDiscountRequest request, ServerCallContext context)
 	{
-		DiscountEntity discountEntity = this._mapper.Map<DiscountEntity>(request.Discount);
+		DiscountModel discountEntity = _mapper.Map<DiscountModel>(request.Discount);
 
-		bool isUpdated = await this._repository.UpdateDiscount(discountEntity);
+		bool isUpdated = await _repository.UpdateDiscount(discountEntity);
 
 
 		if (isUpdated == false)
@@ -30,6 +30,6 @@ public class UpdateDiscoutService : UpdateDiscountProtocolBufferService.UpdateDi
 			throw new RpcException(new Status(StatusCode.Internal, errorResponseMessage));
 		}
 
-		return this._mapper.Map<UpdateDiscountProtocolBufferEntity>(discountEntity);
+		return _mapper.Map<UpdateDiscountProtocolBufferEntity>(discountEntity);
 	}
 }

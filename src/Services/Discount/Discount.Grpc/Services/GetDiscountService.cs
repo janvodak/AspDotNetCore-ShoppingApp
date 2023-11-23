@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using Discount.Grpc.Src.Entities;
-using Discount.Grpc.Src.Protos;
-using Discount.Grpc.Src.Repositories;
 using Grpc.Core;
+using ShoppingApp.Services.Discount.Grpc.Models;
+using ShoppingApp.Services.Discount.Grpc.Protos;
+using ShoppingApp.Services.Discount.Grpc.Repositories;
 
-namespace Discount.Grpc.Src.Services;
+namespace ShoppingApp.Services.Discount.Grpc.Services;
 
 public class GetDiscoutService : GetDiscountProtocolBufferService.GetDiscountProtocolBufferServiceBase
 {
@@ -13,13 +13,13 @@ public class GetDiscoutService : GetDiscountProtocolBufferService.GetDiscountPro
 
 	public GetDiscoutService(IMapper mapper, IDiscountRepository discountRepository)
 	{
-		this._mapper = mapper;
-		this._repository = discountRepository;
+		_mapper = mapper;
+		_repository = discountRepository;
 	}
 
 	public override async Task<GetDiscountProtocolBufferEntity> GetDiscount(GetDiscountRequest request, ServerCallContext context)
 	{
-		DiscountEntity? discountEntity = await this._repository.GetDiscount(request.ProductName);
+		DiscountModel? discountEntity = await _repository.GetDiscount(request.ProductName);
 
 		if (discountEntity == null)
 		{
@@ -27,6 +27,6 @@ public class GetDiscoutService : GetDiscountProtocolBufferService.GetDiscountPro
 			throw new RpcException(new Status(StatusCode.NotFound, errorResponseMessage));
 		}
 
-		return this._mapper.Map<GetDiscountProtocolBufferEntity>(discountEntity);
+		return _mapper.Map<GetDiscountProtocolBufferEntity>(discountEntity);
 	}
 }

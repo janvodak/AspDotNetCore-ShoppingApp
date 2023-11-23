@@ -1,6 +1,6 @@
 ﻿syntax = "proto3";
 
-option csharp_namespace = "Discount.Grpc.Src.Protos";
+option csharp_namespace = "ShoppingApp.Services.Discount.Grpc.Protos";
 
 package discount;
 

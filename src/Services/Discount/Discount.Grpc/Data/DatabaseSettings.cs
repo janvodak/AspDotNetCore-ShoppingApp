@@ -1,4 +1,4 @@
-﻿namespace Discount.Grpc.Src.Data;
+﻿namespace ShoppingApp.Services.Discount.Grpc.Data;
 
 public class DatabaseSettings
 {

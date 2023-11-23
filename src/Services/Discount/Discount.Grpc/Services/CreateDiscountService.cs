@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using Discount.Grpc.Src.Entities;
-using Discount.Grpc.Src.Protos;
-using Discount.Grpc.Src.Repositories;
 using Grpc.Core;
+using ShoppingApp.Services.Discount.Grpc.Models;
+using ShoppingApp.Services.Discount.Grpc.Protos;
+using ShoppingApp.Services.Discount.Grpc.Repositories;
 
-namespace Discount.Grpc.Src.Services;
+namespace ShoppingApp.Services.Discount.Grpc.Services;
 
 public class CreateDiscoutService : CreateDiscountProtocolBufferService.CreateDiscountProtocolBufferServiceBase
 {
@@ -13,15 +13,15 @@ public class CreateDiscoutService : CreateDiscountProtocolBufferService.CreateDi
 
 	public CreateDiscoutService(IMapper mapper, IDiscountRepository discountRepository)
 	{
-		this._mapper = mapper;
-		this._repository = discountRepository;
+		_mapper = mapper;
+		_repository = discountRepository;
 	}
 
 	public override async Task<CreateDiscountProtocolBufferEntity> CreateDiscount(CreateDiscountRequest request, ServerCallContext context)
 	{
-		DiscountEntity discountEntity = this._mapper.Map<DiscountEntity>(request.Discount);
+		DiscountModel discountEntity = _mapper.Map<DiscountModel>(request.Discount);
 
-		bool isCreated = await this._repository.CreateDiscount(discountEntity);
+		bool isCreated = await _repository.CreateDiscount(discountEntity);
 
 		if (isCreated == false)
 		{
@@ -29,6 +29,6 @@ public class CreateDiscoutService : CreateDiscountProtocolBufferService.CreateDi
 			throw new RpcException(new Status(StatusCode.Internal, errorResponseMessage));
 		}
 
-		return this._mapper.Map<CreateDiscountProtocolBufferEntity>(discountEntity);
+		return _mapper.Map<CreateDiscountProtocolBufferEntity>(discountEntity);
 	}
 }
