@@ -301,6 +301,26 @@
 			"name": "Discount.API",
 			"item": [
 				{
+					"name": "Get discounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DISCOUNT_URL}}",
+							"host": [
+								"{{DISCOUNT_URL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get discount by product name",
 					"request": {
 						"method": "GET",
@@ -312,12 +332,11 @@
 							}
 						],
 						"url": {
-							"raw": "{{DISCOUNT_URL}}/GetDiscount/{{PRODUCT_NAME_IPHONE}}",
+							"raw": "{{DISCOUNT_URL}}/{{PRODUCT_NAME_IPHONE}}",
 							"host": [
 								"{{DISCOUNT_URL}}"
 							],
 							"path": [
-								"GetDiscount",
 								"{{PRODUCT_NAME_IPHONE}}"
 							]
 						}
@@ -350,12 +369,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{DISCOUNT_URL}}/UpdateDiscount",
+							"raw": "{{DISCOUNT_URL}}",
 							"host": [
 								"{{DISCOUNT_URL}}"
-							],
-							"path": [
-								"UpdateDiscount"
 							]
 						}
 					},
@@ -387,12 +403,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{DISCOUNT_URL}}/CreateDiscount",
+							"raw": "{{DISCOUNT_URL}}",
 							"host": [
 								"{{DISCOUNT_URL}}"
-							],
-							"path": [
-								"CreateDiscount"
 							]
 						}
 					},
@@ -410,12 +423,11 @@
 							}
 						],
 						"url": {
-							"raw": "{{DISCOUNT_URL}}/DeleteDiscount/{{DISCOUNT_NAME_TEST}}",
+							"raw": "{{DISCOUNT_URL}}/{{DISCOUNT_NAME_TEST}}",
 							"host": [
 								"{{DISCOUNT_URL}}"
 							],
 							"path": [
-								"DeleteDiscount",
 								"{{DISCOUNT_NAME_TEST}}"
 							]
 						}
@@ -849,6 +861,29 @@
 				{
 					"name": "Discount.API Gataway",
 					"item": [
+						{
+							"name": "Get discounts",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{DISCOUNT_URL_OCELOT_GATEWAY}}/{{DISCOUNT_API_PREFIX}}",
+									"host": [
+										"{{DISCOUNT_URL_OCELOT_GATEWAY}}"
+									],
+									"path": [
+										"{{DISCOUNT_API_PREFIX}}"
+									]
+								}
+							},
+							"response": []
+						},
 						{
 							"name": "Get discount by product name",
 							"request": {
