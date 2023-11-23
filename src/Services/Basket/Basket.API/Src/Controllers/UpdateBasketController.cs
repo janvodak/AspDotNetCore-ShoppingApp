@@ -2,7 +2,7 @@
 using Basket.API.Src.Entities;
 using Basket.API.Src.GrpcServices;
 using Basket.API.Src.Repositories;
-using Discount.Grpc.Src.Protos;
+using ShoppingApp.Services.Discount.Grpc.Protos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Basket.API.Src.Controllers

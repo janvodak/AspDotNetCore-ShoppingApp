@@ -2,7 +2,7 @@
 using Basket.API.Src.GrpcServices;
 using Basket.API.Src.Publishers;
 using Basket.API.Src.Repositories;
-using Discount.Grpc.Src.Protos;
+using ShoppingApp.Services.Discount.Grpc.Protos;
 using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);

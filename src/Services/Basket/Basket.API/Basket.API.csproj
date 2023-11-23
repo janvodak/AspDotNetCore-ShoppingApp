@@ -46,7 +46,7 @@
 		<Folder Include="Src\Publishers\" />
 	</ItemGroup>
 	<ItemGroup>
-		<Protobuf Include="..\..\Discount\Discount.Grpc\Src\Protos\getDiscount.proto" GrpcServices="Client">
+		<Protobuf Include="..\..\..\Services\Discount\Discount.Grpc\Protos\getDiscount.proto" GrpcServices="Client">
 			<Link>Src\Protos\getDiscount.proto</Link>
 		</Protobuf>
 	</ItemGroup>
