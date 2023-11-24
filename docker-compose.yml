@@ -4,31 +4,31 @@ services:
     rabbitmq:
         image: rabbitmq:3.12.7-management-alpine
 
-    catalog.api.mongo:
+    catalog-mongo:
         image: ${DOCKER_REGISTRY-}catalog-mongo
         build:
             context: .
-            dockerfile: src/Services/Catalog/Catalog.API/Docker/Mongo60/Dockerfile.image
+            dockerfile: src/Services/Catalog/Catalog.API/Docker/Mongo60/Dockerfile
 
-    catalog.api.mongo.client:
+    catalog-mongo-client:
         image: ${DOCKER_REGISTRY-}catalog-mongo-client
         build:
             context: .
-            dockerfile: src/Services/Catalog/Catalog.API/Docker/MongoClient40/Dockerfile.image
+            dockerfile: src/Services/Catalog/Catalog.API/Docker/MongoClient40/Dockerfile
 
-    catalog.api:
+    catalog-api:
         image: ${DOCKER_REGISTRY-}catalog-api
         build:
             context: .
-            dockerfile: src/Services/Catalog/Catalog.API/Docker/DotNet70/Dockerfile.image
+            dockerfile: src/Services/Catalog/Catalog.API/Docker/DotNet70/Dockerfile
 
-    basket.api.redis:
+    basket-redis:
         image: ${DOCKER_REGISTRY-}basket-redis
         build:
             context: .
-            dockerfile: src/Services/Basket/Basket.API/Docker/Redis72/Dockerfile.image
+            dockerfile: src/Services/Basket/Basket.API/Docker/Redis72/Dockerfile
 
-    basket.api:
+    basket-api:
         image: ${DOCKER_REGISTRY-}basket-api
         build:
             context: .
@@ -58,39 +58,39 @@ services:
             context: .
             dockerfile: src/Services/Discount/Discount.Grpc/Docker/DotNet70/Dockerfile
 
-    order.api.mssql:
+    order-mssql:
         image: ${DOCKER_REGISTRY-}order-mssql
         build:
             context: .
             dockerfile: src/Services/Order/Order.Rest/Docker/MicrosoftSQLServer2022-20/Dockerfile
 
-    order.api:
+    order-api:
         image: ${DOCKER_REGISTRY-}order-api
         build:
             context: .
             dockerfile: src/Services/Order/Order.Rest/Docker/Dotnet70/Dockerfile
 
-    ocelot.api.gateway:
+    ocelot-api-gateway:
         image: ${DOCKER_REGISTRY-}ocelot-apigateway
         build:
             context: .
             dockerfile: src/ApiGateways/OcelotApiGateway/Docker/Dotnet70/Dockerfile
 
-    shopping.aggregator:
+    shopping-aggregator:
         image: ${DOCKER_REGISTRY-}shopping-aggregator
         build:
             context: .
             dockerfile: src/ApiGateways/Shopping.Aggregator/Docker/Dotnet70/Dockerfile
 
-    shopping.webapp:
+    shopping-webapp:
         image: ${DOCKER_REGISTRY-}shopping-webapp
         build:
             context: .
             dockerfile: src/WebApps/Shopping.WebApp/Docker/Dotnet70/Dockerfile
 
 volumes:
-    catalog.api.mongo:
-        name: catalog-api-mongo
+    catalog-mongo:
+        name: catalog-mongo
     discount-postgres:
         name: discount-postgres
     discount-pgadmin:
