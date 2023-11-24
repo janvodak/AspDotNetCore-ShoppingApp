@@ -8,45 +8,46 @@ services:
             - "5672:5672"
             - "15672:15672"
 
-    catalog.api.mongo:
-        container_name: catalog-api-mongo
+    catalog-mongo:
+        container_name: catalog-mongo
         restart: always
         ports:
             - "27017:27017"
         volumes:
-            - catalog.api.mongo:/data/db
+            - catalog-mongo:/data/db
 
-    catalog.api.mongo.client:
-        container_name: catalog-api-mongo-client
+    catalog-mongo-client:
+        container_name: catalog-mongo-client
         depends_on:
-            - catalog.api.mongo
+            - catalog-mongo
         ports:
             - "3000:3000"
 
-    catalog.api:
+    catalog-api:
         container_name: catalog-api
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
-            - "DatabaseSettings:ConnectionString=mongodb://catalog-api-mongo:27017"
+            - "DatabaseSettings:ConnectionString=mongodb://catalog-mongo:27017"
         depends_on:
-            - catalog.api.mongo
+            - catalog-mongo
         ports:
             - "8000:80"
 
-    basket.api.redis:
-        container_name: basket-api-redis
+    basket-redis:
+        container_name: basket-redis
         restart: always
         ports:
             - "6379:6379"
 
-    basket.api:
+    basket-api:
         container_name: basket-api
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
-            - "CacheSettings:ConnectionString=basket-api-redis:6379"
+            - "CacheSettings:ConnectionString=basket-redis:6379"
             - "DiscountGrpcSettings:DiscountUrl=http://discount-grpc"
         depends_on:
-            - basket.api.redis
+            - basket-redis
+            - discount-grpc
             - rabbitmq
         ports:
             - "8001:80"
@@ -95,8 +96,8 @@ services:
         ports:
             - "8003:80"
 
-    order.api.mssql:
-        container_name: order-api-mssql
+    order-mssql:
+        container_name: order-mssql
         environment:
             - "MSSQL_SA_PASSWORD=Admin^1234"
             - "ACCEPT_EULA=Y"
@@ -104,44 +105,44 @@ services:
         ports:
             - "1433:1433"
 
-    order.api:
+    order-api:
         container_name: order-api
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
         depends_on:
-            - order.api.mssql
+            - order-mssql
             - rabbitmq
         ports:
             - "8004:80"
 
-    ocelot.api.gateway:
+    ocelot-api-gateway:
         container_name: ocelot-api-gateway
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
         depends_on:
-            - catalog.api
-            - basket.api
+            - catalog-api
+            - basket-api
             - discount-api
-            - order.api
+            - order-api
         ports:
             - "8010:80"
 
-    shopping.aggregator:
+    shopping-aggregator:
         container_name: shopping-aggregator
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
         depends_on:
-            - catalog.api
-            - basket.api
-            - order.api
+            - catalog-api
+            - basket-api
+            - order-api
         ports:
             - "8005:80"
 
-    shopping.webapp:
+    shopping-webapp:
         container_name: shopping-webapp
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
         depends_on:
-            - ocelot.api.gateway
+            - ocelot-api-gateway
         ports:
             - "8080:80"

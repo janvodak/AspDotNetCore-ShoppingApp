@@ -5,9 +5,9 @@ WORKDIR /app
 EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src
-COPY ["ApiGateways/Shopping.Aggregator/Shopping.Aggregator.csproj", "ApiGateways/Shopping.Aggregator/"]
-RUN dotnet restore "ApiGateways/Shopping.Aggregator/Shopping.Aggregator.csproj"
+WORKDIR /
+COPY ["src/ApiGateways/Shopping.Aggregator/Shopping.Aggregator.csproj", "src/ApiGateways/Shopping.Aggregator/"]
+RUN dotnet restore "src/ApiGateways/Shopping.Aggregator/Shopping.Aggregator.csproj"
 COPY . .
 WORKDIR "/src/ApiGateways/Shopping.Aggregator"
 RUN dotnet build "Shopping.Aggregator.csproj" -c Release -o /app/build

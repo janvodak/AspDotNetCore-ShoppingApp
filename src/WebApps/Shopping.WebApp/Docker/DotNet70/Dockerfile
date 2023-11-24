@@ -5,9 +5,9 @@ WORKDIR /app
 EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src
-COPY ["WebApps/Shopping.WebApp/Shopping.WebApp.csproj", "WebApps/Shopping.WebApp/"]
-RUN dotnet restore "WebApps/Shopping.WebApp/Shopping.WebApp.csproj"
+WORKDIR /
+COPY ["src/WebApps/Shopping.WebApp/Shopping.WebApp.csproj", "src/WebApps/Shopping.WebApp/"]
+RUN dotnet restore "src/WebApps/Shopping.WebApp/Shopping.WebApp.csproj"
 COPY . .
 WORKDIR "/src/WebApps/Shopping.WebApp"
 RUN dotnet build "Shopping.WebApp.csproj" -c Release -o /app/build
