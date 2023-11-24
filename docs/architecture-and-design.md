@@ -1,4 +1,4 @@
-# Architecture and Desing in general
+# Software Architecture and Software Desing in general
 
 Architecture in this repository embraces a monorepo approach housed within a single, unified repository.
 Despite the widespread adoption of microservices and distributed systems, decision to maintain a monorepo structure is intentional
