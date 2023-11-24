@@ -36,8 +36,11 @@ namespace ShoppingApp.Services.Discount.API.Controllers
 			{
 				result = await _repository.DeleteDiscountAsync(productName);
 			}
-			catch(Exception)
+			catch(Exception ex)
 			{
+				_logger.LogError(ex, "Unable to remove discount for product '{ProductName}'",
+					productName);
+
 				return Problem();
 			}
 

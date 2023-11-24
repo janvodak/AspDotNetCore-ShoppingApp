@@ -33,7 +33,7 @@ namespace ShoppingApp.Services.Discount.API.Repositories
 
 		public async Task<int> DeleteDiscountAsync(string productName)
 		{
-			DiscountModel? discountModel = await _discountContext.Discounts.SingleAsync(
+			DiscountModel? discountModel = await _discountContext.Discounts.FirstAsync(
 				d => d.ProductName.ToLower() == productName.ToLower());
 
 			if (discountModel == null)

@@ -1,4 +1,4 @@
-# AspnetMicroservices
+# AspDotNetCore-ShoppingApp
 
 ## Table of Contents
 
