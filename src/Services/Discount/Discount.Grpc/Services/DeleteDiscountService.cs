@@ -27,9 +27,9 @@ public class DeleteDiscoutService : DeleteDiscountProtocolBufferService.DeleteDi
 		{
 			result = await _repository.DeleteDiscountAsync(request.ProductName);
 		}
-		catch (Exception)
+		catch (Exception ex)
 		{
-			_logger.LogError("Unable to remove discount for product '{ProductName}'.",
+			_logger.LogError(ex, "Unable to remove discount for product '{ProductName}'.",
 				request.ProductName);
 
 			Status status = new(
