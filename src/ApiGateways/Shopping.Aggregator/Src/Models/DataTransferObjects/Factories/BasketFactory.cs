@@ -1,9 +1,8 @@
-﻿using Shopping.Aggregator.Src.Models;
-using Shopping.Aggregator.Src.Services;
+﻿using Shopping.Aggregator.Src.Services;
 
-namespace Shopping.Aggregator.Src.Factories
+namespace Shopping.Aggregator.Src.Models.DataTransferObjects.Factories
 {
-	public class BasketFactory
+	public class BasketFactory : IBasketFactory
 	{
 		private readonly IBasketApiService _basketApiService;
 		private readonly IProductApiService _productApiService;
@@ -19,9 +18,9 @@ namespace Shopping.Aggregator.Src.Factories
 			_logger = logger;
 		}
 
-		public async Task<Basket> Create(string userName)
+		public async Task<BasketDataTransferObject> Create(string userName)
 		{
-			Basket basket;
+			BasketDataTransferObject basket;
 
 			try
 			{
@@ -31,15 +30,15 @@ namespace Shopping.Aggregator.Src.Factories
 			{
 				_logger.LogWarning(
 					ex,
-					"Unable to get basket for user '{UserName}'",
+					"Unable to get Basket for user '{UserName}'",
 					userName);
 
 				throw;
 			}
 
-			foreach (BasketProduct basketProduct in basket.Products)
+			foreach (BasketProductDataTransferObject basketProduct in basket.Products)
 			{
-				Product product;
+				ProductDataTransferObject product;
 
 				try
 				{
@@ -49,7 +48,7 @@ namespace Shopping.Aggregator.Src.Factories
 				{
 					_logger.LogWarning(
 						ex,
-						"Unable to get product '{BasketProductID}' for user '{UserName}'",
+						"Unable to get Product '{BasketProductID}' for user '{UserName}'",
 						basketProduct.Id,
 						userName);
 

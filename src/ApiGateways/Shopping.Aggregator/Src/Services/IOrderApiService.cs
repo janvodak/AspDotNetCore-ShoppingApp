@@ -1,9 +1,9 @@
-﻿using Shopping.Aggregator.Src.Models;
+﻿using Shopping.Aggregator.Src.Models.DataTransferObjects;
 
 namespace Shopping.Aggregator.Src.Services
 {
 	public interface IOrderApiService
 	{
-		Task<IEnumerable<Order>> GetUserOrdersAsync(string username);
+		Task<IEnumerable<OrderDataTransferObject>> GetUserOrdersAsync(string username);
 	}
 }

@@ -1,8 +1,8 @@
-﻿namespace Shopping.Aggregator.Src.Models
+﻿namespace Shopping.Aggregator.Src.Models.DataTransferObjects
 {
-	public class Product
+	public class ProductDataTransferObject
 	{
-		public Product(
+		public ProductDataTransferObject(
 			string id,
 			string name,
 			string category,
@@ -11,13 +11,13 @@
 			string imageFile,
 			decimal price)
 		{
-			this.Id = id;
-			this.Name = name;
-			this.Category = category;
-			this.Summary = summary;
-			this.Description = description;
-			this.ImageFile = imageFile;
-			this.Price = price;
+			Id = id;
+			Name = name;
+			Category = category;
+			Summary = summary;
+			Description = description;
+			ImageFile = imageFile;
+			Price = price;
 		}
 
 		public string Id { get; set; }

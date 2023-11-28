@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using Shopping.Aggregator.Src.Models;
-using Shopping.Aggregator.Src.Services;
+﻿using Shopping.Aggregator.Src.Services;
 
-namespace Shopping.Aggregator.Src.Factories
+namespace Shopping.Aggregator.Src.Models.DataTransferObjects.Factories
 {
-	public class OrderFactory
+	public class OrderFactory : IOrderFactory
 	{
 		private readonly IOrderApiService _orderApiService;
 		private readonly ILogger<OrderFactory> _logger;
@@ -17,7 +15,7 @@ namespace Shopping.Aggregator.Src.Factories
 			_logger = logger;
 		}
 
-		public async Task<IEnumerable<Order>> Create(string userName)
+		public async Task<IEnumerable<OrderDataTransferObject>> Create(string userName)
 		{
 			try
 			{
@@ -25,10 +23,10 @@ namespace Shopping.Aggregator.Src.Factories
 			}
 			catch (Exception ex)
 			{
-				_logger.LogWarning(ex, "Unable to get orders for user '{UserName}'", userName);
+				_logger.LogWarning(ex, "Unable to get Orders for user '{UserName}'", userName);
 			}
 
-			return new List<Order>();
+			return new List<OrderDataTransferObject>();
 		}
 	}
 }

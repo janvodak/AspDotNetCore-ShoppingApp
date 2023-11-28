@@ -1,5 +1,4 @@
 ﻿using Shopping.Aggregator.Src.Features;
-using Shopping.Aggregator.Src.Models;
 using Shopping.Aggregator.Src.Models.DataTransferObjects;
 
 namespace Shopping.Aggregator.Src.Services
@@ -17,31 +16,31 @@ namespace Shopping.Aggregator.Src.Services
 			_responseFactory = responseFactory;
 		}
 
-		public async Task<Product> GetProductByIdAsync(string id)
+		public async Task<ProductDataTransferObject> GetProductByIdAsync(string id)
 		{
 			RequestDataTransferObject request = new($"/api/v1/catalog/GetProductById/{id}");
 
 			HttpResponseMessage httpResponseMessage = await _baseService.SendAsync("ProductApi", request);
 
-			return await _responseFactory.Create<Product>(httpResponseMessage);
+			return await _responseFactory.Create<ProductDataTransferObject>(httpResponseMessage);
 		}
 
-		public async Task<IEnumerable<Product>> GetProductsAsync()
+		public async Task<IEnumerable<ProductDataTransferObject>> GetProductsAsync()
 		{
 			RequestDataTransferObject request = new("/api/v1/catalog/GetProducts");
 
 			HttpResponseMessage httpResponseMessage = await _baseService.SendAsync("ProductApi", request);
 
-			return await _responseFactory.Create<IEnumerable<Product>>(httpResponseMessage);
+			return await _responseFactory.Create<IEnumerable<ProductDataTransferObject>>(httpResponseMessage);
 		}
 
-		public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(string category)
+		public async Task<IEnumerable<ProductDataTransferObject>> GetProductsByCategoryAsync(string category)
 		{
 			var request = new RequestDataTransferObject($"/api/v1/catalog/GetProductsByCategory/{category}");
 
 			HttpResponseMessage httpResponseMessage = await _baseService.SendAsync("ProductApi", request);
 
-			return await _responseFactory.Create<IEnumerable<Product>>(httpResponseMessage);
+			return await _responseFactory.Create<IEnumerable<ProductDataTransferObject>>(httpResponseMessage);
 		}
 	}
 }

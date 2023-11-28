@@ -1,8 +1,8 @@
-﻿namespace Shopping.Aggregator.Src.Models
+﻿namespace Shopping.Aggregator.Src.Models.DataTransferObjects
 {
-	public class BasketProduct
+	public class BasketProductDataTransferObject
 	{
-		public BasketProduct(
+		public BasketProductDataTransferObject(
 			string id,
 			string name,
 			int quantity,
@@ -13,15 +13,15 @@
 			string description,
 			string imageFile)
 		{
-			this.Id = id;
-			this.Name = name;
-			this.Quantity = quantity;
-			this.Price = price;
-			this.Color = color;
-			this.Category = category;
-			this.Summary = summary;
-			this.Description = description;
-			this.ImageFile = imageFile;
+			Id = id;
+			Name = name;
+			Quantity = quantity;
+			Price = price;
+			Color = color;
+			Category = category;
+			Summary = summary;
+			Description = description;
+			ImageFile = imageFile;
 		}
 
 		public string Id { get; set; }

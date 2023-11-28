@@ -1,11 +1,13 @@
-﻿namespace Shopping.Aggregator.Src.Models
+﻿using Shopping.Aggregator.Src.Models.DataTransferObjects;
+
+namespace Shopping.Aggregator.Src.Models
 {
 	public class ShoppingAggregateRoot
 	{
 		public ShoppingAggregateRoot(
 			string userName,
-			IEnumerable<Order> orders,
-			Basket? basket = null)
+			IEnumerable<OrderDataTransferObject> orders,
+			BasketDataTransferObject? basket = null)
 		{
 			this.UserName = userName;
 			this.Orders = orders;
@@ -14,8 +16,8 @@
 
 		public string UserName { get; set; }
 
-		public IEnumerable<Order> Orders { get; set; }
+		public IEnumerable<OrderDataTransferObject> Orders { get; set; }
 
-		public Basket? Basket { get; set; } = null;
+		public BasketDataTransferObject? Basket { get; set; } = null;
 	}
 }

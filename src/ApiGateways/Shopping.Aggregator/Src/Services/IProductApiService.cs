@@ -1,13 +1,13 @@
-﻿using Shopping.Aggregator.Src.Models;
+﻿using Shopping.Aggregator.Src.Models.DataTransferObjects;
 
 namespace Shopping.Aggregator.Src.Services
 {
 	public interface IProductApiService
 	{
-		Task<IEnumerable<Product>> GetProductsAsync();
+		Task<IEnumerable<ProductDataTransferObject>> GetProductsAsync();
 
-		Task<IEnumerable<Product>> GetProductsByCategoryAsync(string category);
+		Task<IEnumerable<ProductDataTransferObject>> GetProductsByCategoryAsync(string category);
 
-		Task<Product> GetProductByIdAsync(string id);
+		Task<ProductDataTransferObject> GetProductByIdAsync(string id);
 	}
 }

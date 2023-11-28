@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Shopping.Aggregator.Src.Models
+﻿namespace Shopping.Aggregator.Src.Models.DataTransferObjects
 {
-	public class Order
+	public class OrderDataTransferObject
 	{
-		public Order(
+		public OrderDataTransferObject(
 			string userName,
 			decimal totalPrice,
 			string firstName,
@@ -20,20 +18,20 @@ namespace Shopping.Aggregator.Src.Models
 			string cardVerificationValue,
 			int paymentMethod)
 		{
-			this.UserName = userName;
-			this.TotalPrice = totalPrice;
-			this.FirstName = firstName;
-			this.LastName = lastName;
-			this.EmailAddress = emailAddress;
-			this.AddressLine = addressLine;
-			this.Country = country;
-			this.State = state;
-			this.ZipCode = zipCode;
-			this.CardName = cardName;
-			this.CardNumber = cardNumber;
-			this.Expiration = expiration;
-			this.CardVerificationValue = cardVerificationValue;
-			this.PaymentMethod = paymentMethod;
+			UserName = userName;
+			TotalPrice = totalPrice;
+			FirstName = firstName;
+			LastName = lastName;
+			EmailAddress = emailAddress;
+			AddressLine = addressLine;
+			Country = country;
+			State = state;
+			ZipCode = zipCode;
+			CardName = cardName;
+			CardNumber = cardNumber;
+			Expiration = expiration;
+			CardVerificationValue = cardVerificationValue;
+			PaymentMethod = paymentMethod;
 		}
 
 		public string UserName { get; set; }
