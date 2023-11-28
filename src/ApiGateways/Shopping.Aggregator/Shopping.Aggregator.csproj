@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <DockerComposeProjectPath>../../docker-compose.dcproj</DockerComposeProjectPath>
+    <RootNamespace>ShoppingApp.ApiGateway.ShoppingAggregator</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
@@ -14,31 +15,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Src\" />
-    <None Remove="Src\Models\" />
-    <None Remove="Src\Services\" />
-    <None Remove="Src\Features\" />
-    <None Remove="Src\Settings\" />
-    <None Remove="Src\Controllers\" />
     <None Remove="Docker\" />
     <None Remove="Docker\DotNet70\" />
-    <None Remove="Src\Models\DataTransferObjects\" />
-    <None Remove="Src\Models\Utilities\" />
-    <None Remove="Src\Models\DataTransferObjects\Factories\" />
-    <None Remove="Src\Models\Factories\" />
+    <None Remove="Controllers\" />
+    <None Remove="Features\" />
+    <None Remove="Models\" />
+    <None Remove="Services\" />
+    <None Remove="Settings\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Src\" />
-    <Folder Include="Src\Models\" />
-    <Folder Include="Src\Services\" />
-    <Folder Include="Src\Features\" />
-    <Folder Include="Src\Settings\" />
-    <Folder Include="Src\Controllers\" />
     <Folder Include="Docker\" />
     <Folder Include="Docker\DotNet70\" />
-    <Folder Include="Src\Models\DataTransferObjects\" />
-    <Folder Include="Src\Models\Utilities\" />
-    <Folder Include="Src\Models\DataTransferObjects\Factories\" />
-    <Folder Include="Src\Models\Factories\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Features\" />
+    <Folder Include="Models\" />
+    <Folder Include="Services\" />
+    <Folder Include="Settings\" />
   </ItemGroup>
 </Project>
