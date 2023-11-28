@@ -1,5 +1,4 @@
 ﻿using Shopping.Aggregator.Src.Features;
-using Shopping.Aggregator.Src.Models;
 using Shopping.Aggregator.Src.Models.DataTransferObjects;
 
 namespace Shopping.Aggregator.Src.Services
@@ -17,13 +16,13 @@ namespace Shopping.Aggregator.Src.Services
 			_responseFactory = responseFactory;
 		}
 
-		public async Task<Basket> GetBasketAsync(string username)
+		public async Task<BasketDataTransferObject> GetBasketAsync(string username)
 		{
 			RequestDataTransferObject request = new($"/api/v1/basket/GetBasket/{username}");
 
 			HttpResponseMessage httpResponseMessage = await _baseService.SendAsync("BasketApi", request);
 
-			return await _responseFactory.Create<Basket>(httpResponseMessage);
+			return await _responseFactory.Create<BasketDataTransferObject>(httpResponseMessage);
 		}
 	}
 }

@@ -1,9 +1,9 @@
-﻿using Shopping.Aggregator.Src.Models;
+﻿using Shopping.Aggregator.Src.Models.DataTransferObjects;
 
 namespace Shopping.Aggregator.Src.Services
 {
 	public interface IBasketApiService
 	{
-		Task<Basket> GetBasketAsync(string username);
+		Task<BasketDataTransferObject> GetBasketAsync(string username);
 	}
 }

@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using Shopping.Aggregator.Src.Factories;
 using Shopping.Aggregator.Src.Models;
 using Shopping.Aggregator.Src.Models.DataTransferObjects;
+using Shopping.Aggregator.Src.Models.Factories;
 
 namespace Shopping.Aggregator.Src.Controllers
 {
@@ -11,9 +11,9 @@ namespace Shopping.Aggregator.Src.Controllers
 	[Produces("application/json")]
 	public class ShoppingAggregatorController : ControllerBase
 	{
-		private readonly ShoppingAggregateRootFactory _shoppingAggregateRootFactory;
+		private readonly IShoppingAggregateRootFactory _shoppingAggregateRootFactory;
 
-		public ShoppingAggregatorController(ShoppingAggregateRootFactory shoppingAggregateRootFactory)
+		public ShoppingAggregatorController(IShoppingAggregateRootFactory shoppingAggregateRootFactory)
 		{
 			_shoppingAggregateRootFactory = shoppingAggregateRootFactory;
 		}

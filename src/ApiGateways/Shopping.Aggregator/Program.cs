@@ -1,14 +1,16 @@
-﻿using Shopping.Aggregator.Src.Factories;
-using Shopping.Aggregator.Src.Features;
+﻿using Shopping.Aggregator.Src.Features;
+using Shopping.Aggregator.Src.Models.DataTransferObjects.Factories;
+using Shopping.Aggregator.Src.Models.Factories;
 using Shopping.Aggregator.Src.Services;
 using Shopping.Aggregator.Src.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<BasketFactory>();
-builder.Services.AddScoped<OrderFactory>();
-builder.Services.AddScoped<ShoppingAggregateRootFactory>();
+builder.Services.AddScoped<IBasketFactory, BasketFactory>();
+builder.Services.AddScoped<IOrderFactory, OrderFactory>();
+
+builder.Services.AddScoped<IShoppingAggregateRootFactory, ShoppingAggregateRootFactory>();
 
 builder.Services.AddScoped<IHttpRequestMessageFactory, HttpRequestMessageFactory>();
 builder.Services.AddScoped<IHttpResponseParser, HttpResponseParser>();
@@ -54,4 +56,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
