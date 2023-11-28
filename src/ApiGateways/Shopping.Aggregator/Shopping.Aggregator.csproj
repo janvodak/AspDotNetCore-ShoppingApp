@@ -23,6 +23,8 @@
     <None Remove="Src\Factories\" />
     <None Remove="Docker\" />
     <None Remove="Docker\DotNet70\" />
+    <None Remove="Src\Models\DataTransferObjects\" />
+    <None Remove="Src\Models\Utilities\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Src\" />
@@ -34,5 +36,7 @@
     <Folder Include="Src\Factories\" />
     <Folder Include="Docker\" />
     <Folder Include="Docker\DotNet70\" />
+    <Folder Include="Src\Models\DataTransferObjects\" />
+    <Folder Include="Src\Models\Utilities\" />
   </ItemGroup>
 </Project>

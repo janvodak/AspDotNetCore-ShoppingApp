@@ -1,40 +1,47 @@
 ﻿using Shopping.Aggregator.Src.Features;
 using Shopping.Aggregator.Src.Models;
+using Shopping.Aggregator.Src.Models.DataTransferObjects;
 
 namespace Shopping.Aggregator.Src.Services
 {
 	public class ProductApiService : IProductApiService
 	{
-		private readonly HttpClient _client;
-		private readonly JsonResponseParser _jsonResponseParser;
+		private readonly IBaseService _baseService;
+		private readonly IResponseFactory _responseFactory;
 
 		public ProductApiService(
-			HttpClient client,
-			JsonResponseParser jsonResponseParser)
+			IBaseService baseService,
+			IResponseFactory responseFactory)
 		{
-			this._client = client;
-			this._jsonResponseParser = jsonResponseParser;
+			_baseService = baseService;
+			_responseFactory = responseFactory;
 		}
 
-		public async Task<Product> GetProductById(string id)
+		public async Task<Product> GetProductByIdAsync(string id)
 		{
-			HttpResponseMessage response = await this._client.GetAsync($"/api/v1/catalog/GetProductById/{id}");
+			RequestDataTransferObject request = new($"/api/v1/catalog/GetProductById/{id}");
 
-			return await this._jsonResponseParser.Parse<Product>(response);
+			HttpResponseMessage httpResponseMessage = await _baseService.SendAsync("ProductApi", request);
+
+			return await _responseFactory.Create<Product>(httpResponseMessage);
 		}
 
-		public async Task<IEnumerable<Product>> GetProducts()
+		public async Task<IEnumerable<Product>> GetProductsAsync()
 		{
-			HttpResponseMessage response = await this._client.GetAsync("/api/v1/catalog/GetProducts");
+			RequestDataTransferObject request = new("/api/v1/catalog/GetProducts");
 
-			return await this._jsonResponseParser.Parse<List<Product>>(response);
+			HttpResponseMessage httpResponseMessage = await _baseService.SendAsync("ProductApi", request);
+
+			return await _responseFactory.Create<IEnumerable<Product>>(httpResponseMessage);
 		}
 
-		public async Task<IEnumerable<Product>> GetProductsByCategory(string category)
+		public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(string category)
 		{
-			HttpResponseMessage response = await this._client.GetAsync($"/api/v1/catalog/GetProductsByCategory/{category}");
+			var request = new RequestDataTransferObject($"/api/v1/catalog/GetProductsByCategory/{category}");
 
-			return await this._jsonResponseParser.Parse<List<Product>>(response);
+			HttpResponseMessage httpResponseMessage = await _baseService.SendAsync("ProductApi", request);
+
+			return await _responseFactory.Create<IEnumerable<Product>>(httpResponseMessage);
 		}
 	}
 }

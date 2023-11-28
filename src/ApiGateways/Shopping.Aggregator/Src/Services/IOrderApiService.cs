@@ -4,6 +4,6 @@ namespace Shopping.Aggregator.Src.Services
 {
 	public interface IOrderApiService
 	{
-		Task<IEnumerable<Order>> GetUserOrders(string username);
+		Task<IEnumerable<Order>> GetUserOrdersAsync(string username);
 	}
 }

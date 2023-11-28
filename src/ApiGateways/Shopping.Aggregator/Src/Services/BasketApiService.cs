@@ -1,26 +1,29 @@
 ﻿using Shopping.Aggregator.Src.Features;
 using Shopping.Aggregator.Src.Models;
+using Shopping.Aggregator.Src.Models.DataTransferObjects;
 
 namespace Shopping.Aggregator.Src.Services
 {
 	public class BasketApiService : IBasketApiService
 	{
-		private readonly HttpClient _client;
-		private readonly JsonResponseParser _jsonResponseParser;
+		private readonly IBaseService _baseService;
+		private readonly IResponseFactory _responseFactory;
 
 		public BasketApiService(
-			HttpClient client,
-			JsonResponseParser jsonResponseParser)
+			IBaseService baseService,
+			IResponseFactory responseFactory)
 		{
-			this._client = client;
-			this._jsonResponseParser = jsonResponseParser;
+			_baseService = baseService;
+			_responseFactory = responseFactory;
 		}
 
-		public async Task<Basket> GetBasket(string username)
+		public async Task<Basket> GetBasketAsync(string username)
 		{
-			HttpResponseMessage response = await this._client.GetAsync($"/api/v1/basket/GetBasket/{username}");
+			RequestDataTransferObject request = new($"/api/v1/basket/GetBasket/{username}");
 
-			return await this._jsonResponseParser.Parse<Basket>(response);
+			HttpResponseMessage httpResponseMessage = await _baseService.SendAsync("BasketApi", request);
+
+			return await _responseFactory.Create<Basket>(httpResponseMessage);
 		}
 	}
 }

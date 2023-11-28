@@ -1,5 +1,4 @@
-﻿using System;
-using Shopping.Aggregator.Src.Models;
+﻿using Shopping.Aggregator.Src.Models;
 using Shopping.Aggregator.Src.Services;
 
 namespace Shopping.Aggregator.Src.Factories
@@ -19,11 +18,11 @@ namespace Shopping.Aggregator.Src.Factories
 
 		public async Task<Basket> Create(string userName)
 		{
-			Basket basket = await this._basketApiService.GetBasket(userName);
+			Basket basket = await this._basketApiService.GetBasketAsync(userName);
 
 			foreach (BasketProduct basketProduct in basket.Products)
 			{
-				Product product = await this._productApiService.GetProductById(basketProduct.Id);
+				Product product = await this._productApiService.GetProductByIdAsync(basketProduct.Id);
 
 				basketProduct.Name = product.Name;
 				basketProduct.Category = product.Category;
