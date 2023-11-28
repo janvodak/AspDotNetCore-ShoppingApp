@@ -11,19 +11,29 @@ namespace Shopping.Aggregator.Src.Factories
 			BasketFactory productFactory,
 			OrderFactory orderFactory)
 		{
-			this._basketFactory = productFactory;
-			this._orderFactory = orderFactory;
+			_basketFactory = productFactory;
+			_orderFactory = orderFactory;
 		}
 
 		public async Task<ShoppingAggregateRoot> Create(string userName)
 		{
-			Basket basket = await this._basketFactory.Create(userName);
-			IEnumerable<Order> orders = await this._orderFactory.Create(userName);
+			Basket? basket = null;
+
+			try
+			{
+				basket = await _basketFactory.Create(userName);
+			}
+			catch (Exception)
+			{
+
+			}
+
+			IEnumerable<Order> orders = await _orderFactory.Create(userName);
 
 			return new ShoppingAggregateRoot(
 				userName,
-				basket,
-				orders);
+				orders,
+				basket);
 		}
 	}
 }

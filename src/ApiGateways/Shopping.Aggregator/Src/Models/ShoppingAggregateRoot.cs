@@ -4,18 +4,18 @@
 	{
 		public ShoppingAggregateRoot(
 			string userName,
-			Basket basket,
-			IEnumerable<Order> orders)
+			IEnumerable<Order> orders,
+			Basket? basket = null)
 		{
 			this.UserName = userName;
-			this.Basket = basket;
 			this.Orders = orders;
+			this.Basket = basket;
 		}
 
 		public string UserName { get; set; }
 
-		public Basket Basket { get; set; }
-
 		public IEnumerable<Order> Orders { get; set; }
+
+		public Basket? Basket { get; set; } = null;
 	}
 }
