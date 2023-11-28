@@ -15,7 +15,7 @@ namespace Shopping.Aggregator.Src.Controllers
 
 		public ShoppingAggregatorController(ShoppingAggregateRootFactory shoppingAggregateRootFactory)
 		{
-			this._shoppingAggregateRootFactory = shoppingAggregateRootFactory;
+			_shoppingAggregateRootFactory = shoppingAggregateRootFactory;
 		}
 
 		[HttpGet("{userName}")]
@@ -23,7 +23,7 @@ namespace Shopping.Aggregator.Src.Controllers
 		[ProducesResponseType(typeof(ResponseDataTransferObject), (int)HttpStatusCode.InternalServerError)]
 		public async Task<ActionResult<ResponseDataTransferObject>> GetUserdData(string userName)
 		{
-			ShoppingAggregateRoot shoppingAggregateRoot = await this._shoppingAggregateRootFactory.Create(userName);
+			ShoppingAggregateRoot shoppingAggregateRoot = await _shoppingAggregateRootFactory.Create(userName);
 
 			ResponseDataTransferObject responseDataTransferObject = new()
 			{
