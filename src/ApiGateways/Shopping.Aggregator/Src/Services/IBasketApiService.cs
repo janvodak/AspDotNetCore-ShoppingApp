@@ -4,6 +4,6 @@ namespace Shopping.Aggregator.Src.Services
 {
 	public interface IBasketApiService
 	{
-		Task<Basket> GetBasket(string username);
+		Task<Basket> GetBasketAsync(string username);
 	}
 }

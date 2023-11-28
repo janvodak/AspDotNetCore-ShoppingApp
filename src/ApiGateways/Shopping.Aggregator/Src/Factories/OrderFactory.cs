@@ -14,7 +14,7 @@ namespace Shopping.Aggregator.Src.Factories
 
 		public async Task<IEnumerable<Order>> Create(string userName)
 		{
-			IEnumerable<Order> orders = await this._orderApiService.GetUserOrders(userName);
+			IEnumerable<Order> orders = await this._orderApiService.GetUserOrdersAsync(userName);
 
 			return orders;
 		}

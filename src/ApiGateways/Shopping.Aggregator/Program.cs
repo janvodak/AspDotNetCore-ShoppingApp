@@ -9,12 +9,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<BasketFactory>();
 builder.Services.AddScoped<OrderFactory>();
 builder.Services.AddScoped<ShoppingAggregateRootFactory>();
-builder.Services.AddScoped<JsonResponseParser>();
+
+builder.Services.AddScoped<IHttpRequestMessageFactory, HttpRequestMessageFactory>();
+builder.Services.AddScoped<IHttpResponseParser, HttpResponseParser>();
+builder.Services.AddScoped<IResponseFactory, ResponseFactory>();
 
 ApiServicesSettings apiServicesSettings = new();
 builder.Configuration.GetSection(ApiServicesSettings.NAME_OF_SECTION).Bind(apiServicesSettings);
 
 //Add http client services at ConfigureServices(IServiceCollection services)
+builder.Services.AddScoped<IBaseService, BaseService>();
+
 builder.Services.AddHttpClient<IProductApiService, ProductApiService>(client =>
 {
 	client.BaseAddress = new Uri(apiServicesSettings.ProductApiUrl);

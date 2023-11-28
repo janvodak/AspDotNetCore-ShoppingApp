@@ -4,10 +4,10 @@ namespace Shopping.Aggregator.Src.Services
 {
 	public interface IProductApiService
 	{
-		Task<IEnumerable<Product>> GetProducts();
+		Task<IEnumerable<Product>> GetProductsAsync();
 
-		Task<IEnumerable<Product>> GetProductsByCategory(string category);
+		Task<IEnumerable<Product>> GetProductsByCategoryAsync(string category);
 
-		Task<Product> GetProductById(string id);
+		Task<Product> GetProductByIdAsync(string id);
 	}
 }

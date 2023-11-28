@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Shopping.Aggregator.Src.Factories;
 using Shopping.Aggregator.Src.Models;
+using Shopping.Aggregator.Src.Models.DataTransferObjects;
 
 namespace Shopping.Aggregator.Src.Controllers
 {
@@ -18,13 +19,18 @@ namespace Shopping.Aggregator.Src.Controllers
 		}
 
 		[HttpGet("{userName}")]
-		[ProducesResponseType(typeof(ShoppingAggregateRoot), (int)HttpStatusCode.OK)]
-		[ProducesResponseType(typeof(ShoppingAggregateRoot), (int)HttpStatusCode.InternalServerError)]
-		public async Task<ActionResult<ShoppingAggregateRoot>> GetUserdData(string userName)
+		[ProducesResponseType(typeof(ResponseDataTransferObject), (int)HttpStatusCode.OK)]
+		[ProducesResponseType(typeof(ResponseDataTransferObject), (int)HttpStatusCode.InternalServerError)]
+		public async Task<ActionResult<ResponseDataTransferObject>> GetUserdData(string userName)
 		{
 			ShoppingAggregateRoot shoppingAggregateRoot = await this._shoppingAggregateRootFactory.Create(userName);
 
-			return Ok(shoppingAggregateRoot);
+			ResponseDataTransferObject responseDataTransferObject = new()
+			{
+				Result = shoppingAggregateRoot
+			};
+
+			return Ok(responseDataTransferObject);
 		}
 	}
 }
