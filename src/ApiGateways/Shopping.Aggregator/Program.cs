@@ -1,8 +1,8 @@
-﻿using Shopping.Aggregator.Src.Features;
-using Shopping.Aggregator.Src.Models.DataTransferObjects.Factories;
-using Shopping.Aggregator.Src.Models.Factories;
-using Shopping.Aggregator.Src.Services;
-using Shopping.Aggregator.Src.Settings;
+﻿using ShoppingApp.ApiGateway.ShoppingAggregator.Features;
+using ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects.Factories;
+using ShoppingApp.ApiGateway.ShoppingAggregator.Models.Factories;
+using ShoppingApp.ApiGateway.ShoppingAggregator.Services;
+using ShoppingApp.ApiGateway.ShoppingAggregator.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
