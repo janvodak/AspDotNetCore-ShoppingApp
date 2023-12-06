@@ -10,7 +10,16 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Features
 	{
 		public HttpRequestMessage Create(RequestDataTransferObject request)
 		{
-			HttpRequestMessage message = new();
+			HttpRequestMessage message = new()
+			{
+				Method = request.ApiType switch
+				{
+					ApiTypeEnum.POST => HttpMethod.Post,
+					ApiTypeEnum.DELETE => HttpMethod.Delete,
+					ApiTypeEnum.PUT => HttpMethod.Put,
+					_ => HttpMethod.Get,
+				}
+			};
 
 			try
 			{
@@ -30,31 +39,25 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Features
 				throw new ApplicationException($"Unable to create URI due to reason: '{ex.Message}'", ex);
 			}
 
-			if (request.Data != null)
+			if (request.Data == null)
 			{
-				string dataAsString;
-
-				try
-				{
-					dataAsString = JsonSerializer.Serialize(request.Data);
-				}
-				catch (Exception ex)
-				{
-					throw new ApplicationException($"Unable to serialize data due to reason: '{ex.Message}'", ex);
-				}
-
-				MediaTypeHeaderValue mediaTypeHeaderValue = new("application/json");
-
-				message.Content = new StringContent(dataAsString, Encoding.UTF8, mediaTypeHeaderValue);
+				return message;
 			}
 
-			message.Method = request.ApiType switch
+			string dataAsString;
+
+			try
 			{
-				ApiTypeEnum.POST => HttpMethod.Post,
-				ApiTypeEnum.DELETE => HttpMethod.Delete,
-				ApiTypeEnum.PUT => HttpMethod.Put,
-				_ => HttpMethod.Get,
-			};
+				dataAsString = JsonSerializer.Serialize(request.Data);
+			}
+			catch (Exception ex)
+			{
+				throw new ApplicationException($"Unable to serialize data due to reason: '{ex.Message}'", ex);
+			}
+
+			MediaTypeHeaderValue mediaTypeHeaderValue = new("application/json");
+
+			message.Content = new StringContent(dataAsString, Encoding.UTF8, mediaTypeHeaderValue);
 
 			return message;
 		}

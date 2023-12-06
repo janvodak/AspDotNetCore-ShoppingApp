@@ -5,22 +5,43 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Services
 {
 	public class BasketApiService : IBasketApiService
 	{
-		private readonly IBaseService _baseService;
+		private readonly HttpClient _httpClient;
+		private readonly IHttpRequestMessageFactory _httpRequestMessageFactory;
 		private readonly IResponseFactory _responseFactory;
 
 		public BasketApiService(
-			IBaseService baseService,
+			HttpClient client,
+			IHttpRequestMessageFactory httpRequestMessageFactory,
 			IResponseFactory responseFactory)
 		{
-			_baseService = baseService;
+			_httpClient = client;
+			_httpRequestMessageFactory = httpRequestMessageFactory;
 			_responseFactory = responseFactory;
 		}
 
 		public async Task<BasketDataTransferObject> GetBasketAsync(string username)
 		{
-			RequestDataTransferObject request = new($"/api/v1/basket/GetBasket/{username}");
+			Uri clientBaseAddress = _httpClient.BaseAddress
+				?? throw new ApplicationException("Unable to send client request due problem with external request.");
 
-			HttpResponseMessage httpResponseMessage = await _baseService.SendAsync("BasketApi", request);
+			UriBuilder uriBuilder = new(
+				clientBaseAddress.Scheme,
+				clientBaseAddress.Host,
+				clientBaseAddress.Port,
+				$"/api/v1/Basket/GetBasket/{username}");
+
+			RequestDataTransferObject request = new(uriBuilder.Uri.OriginalString);
+			HttpRequestMessage httpRequestMessage = _httpRequestMessageFactory.Create(request);
+			HttpResponseMessage httpResponseMessage;
+
+			try
+			{
+				httpResponseMessage = await _httpClient.SendAsync(httpRequestMessage);
+			}
+			catch (Exception ex)
+			{
+				throw new ApplicationException($"Unable to send client request due to reason: '{ex.Message}'", ex);
+			}
 
 			return await _responseFactory.Create<BasketDataTransferObject>(httpResponseMessage);
 		}
