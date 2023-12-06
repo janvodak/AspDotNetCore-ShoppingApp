@@ -20,16 +20,14 @@ ApiServicesSettings apiServicesSettings = new();
 builder.Configuration.GetSection(ApiServicesSettings.NAME_OF_SECTION).Bind(apiServicesSettings);
 
 //Add http client services at ConfigureServices(IServiceCollection services)
-builder.Services.AddScoped<IBaseService, BaseService>();
+builder.Services.AddHttpClient<IBasketApiService, BasketApiService>(client =>
+{
+	client.BaseAddress = new Uri(apiServicesSettings.BasketApiUrl);
+});
 
 builder.Services.AddHttpClient<IProductApiService, ProductApiService>(client =>
 {
 	client.BaseAddress = new Uri(apiServicesSettings.ProductApiUrl);
-});
-
-builder.Services.AddHttpClient<IBasketApiService, BasketApiService>(client =>
-{
-	client.BaseAddress = new Uri(apiServicesSettings.BasketApiUrl);
 });
 
 builder.Services.AddHttpClient<IOrderApiService, OrderApiService>(client =>
