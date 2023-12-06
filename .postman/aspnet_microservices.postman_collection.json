@@ -1054,12 +1054,11 @@
 							}
 						],
 						"url": {
-							"raw": "{{SHOPPING_AGGREGATOR_URL}}/GetUserdData/{{USER_NAME_TEST}}",
+							"raw": "{{SHOPPING_AGGREGATOR_URL}}/{{USER_NAME_TEST}}",
 							"host": [
 								"{{SHOPPING_AGGREGATOR_URL}}"
 							],
 							"path": [
-								"GetUserdData",
 								"{{USER_NAME_TEST}}"
 							]
 						}
