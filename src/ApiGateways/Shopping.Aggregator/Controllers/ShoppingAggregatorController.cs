@@ -7,7 +7,7 @@ using ShoppingApp.ApiGateway.ShoppingAggregator.Models.Factories;
 namespace ShoppingApp.ApiGateway.ShoppingAggregator.Controllers
 {
 	[ApiController]
-	[Route("api/v1/shopping/[action]")]
+	[Route("api/v1/ShoppingAggregator")]
 	[Produces("application/json")]
 	public class ShoppingAggregatorController : ControllerBase
 	{
