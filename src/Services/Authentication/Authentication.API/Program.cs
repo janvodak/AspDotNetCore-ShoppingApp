@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using ShoppingApp.Services.Authentication.API.Data;
+using ShoppingApp.Services.Authentication.API.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,7 @@ builder.Services.AddScoped<AuthenticationDbContextMigration>();
 
 // Add Default Identity Configuration
 builder.Services
-	.AddIdentity<IdentityUser, IdentityRole>()
+	.AddIdentity<AuthenticationUser, IdentityRole>()
 	.AddEntityFrameworkStores<AuthenticationDbContext>()
 	.AddDefaultTokenProviders();
 
