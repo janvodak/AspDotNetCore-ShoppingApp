@@ -88,6 +88,18 @@ services:
             context: .
             dockerfile: src/WebApps/Shopping.WebApp/Docker/Dotnet70/Dockerfile
 
+    authentication-mssql:
+        image: ${DOCKER_REGISTRY-}authentication-mssql
+        build:
+            context: .
+            dockerfile: src/Services/Authentication/Authentication.API/Docker/MicrosoftSQLServer2022-20/Dockerfile
+
+    authentication-api:
+        image: ${DOCKER_REGISTRY-}authentication-api
+        build:
+            context: .
+            dockerfile: src/Services/Authentication/Authentication.API/Docker/Dotnet70/Dockerfile
+
 volumes:
     catalog-mongo:
         name: catalog-mongo
