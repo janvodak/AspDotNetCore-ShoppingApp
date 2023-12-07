@@ -28,6 +28,7 @@
 	<None Remove="Docker\MicrosoftSQLServer2022-20\" />
 	<None Remove="Data\" />
 	<None Remove="Migrations\" />
+	<None Remove="Models\" />
   </ItemGroup>
   <ItemGroup>
 	<Folder Include="Controllers\" />
@@ -36,5 +37,9 @@
 	<Folder Include="Docker\MicrosoftSQLServer2022-20\" />
 	<Folder Include="Data\" />
 	<Folder Include="Migrations\" />
+	<Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Migrations\20231207131317_AddUserNameIntoAspNetUser.Designer.cs" />
   </ItemGroup>
 </Project>
