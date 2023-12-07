@@ -67,7 +67,7 @@ To get started with Entity Framework in your .NET project, follow these steps:
 
 ### Step 2: Create Migration
 
-* To set up the initial database schema, we need to create a migration. Run the following command, specifying the desired migration name:
+* To set up the initial database schema, we need to create a migration. Run the following command (from default project directory), specifying the desired migration name:
 	```
 	dotnet ef migrations add InitialCreate
 	```

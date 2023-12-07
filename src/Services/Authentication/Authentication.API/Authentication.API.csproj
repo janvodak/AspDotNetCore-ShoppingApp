@@ -17,13 +17,24 @@
 	<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.14" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.14">
 	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  <PrivateAssets>all</PrivateAssets>
 	</PackageReference>
   </ItemGroup>
 
   <ItemGroup>
 	<None Remove="Controllers\" />
+	<None Remove="Docker\" />
+	<None Remove="Docker\Dotnet70\" />
+	<None Remove="Docker\MicrosoftSQLServer2022-20\" />
+	<None Remove="Data\" />
+	<None Remove="Migrations\" />
   </ItemGroup>
   <ItemGroup>
 	<Folder Include="Controllers\" />
+	<Folder Include="Docker\" />
+	<Folder Include="Docker\Dotnet70\" />
+	<Folder Include="Docker\MicrosoftSQLServer2022-20\" />
+	<Folder Include="Data\" />
+	<Folder Include="Migrations\" />
   </ItemGroup>
 </Project>
