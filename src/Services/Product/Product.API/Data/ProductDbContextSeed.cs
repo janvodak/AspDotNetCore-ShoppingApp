@@ -1,21 +1,21 @@
-﻿using Catalog.API.Src.Entities;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
+using ShoppingApp.Services.Product.API.Models;
 
-namespace Catalog.API.Src.Data
+namespace ShoppingApp.Services.Product.API.Data
 {
-	public class CatalogContextSeed
+	public class ProductDbContextSeed
 	{
-		public static void SeedData(IMongoCollection<Product> productCollection)
+		public static void SeedData(IMongoCollection<ProductModel> productCollection)
 		{
-			IEnumerable<Product> products = GetConfiguredProducts();
+			IEnumerable<ProductModel> products = GetConfiguredProducts();
 			productCollection.InsertManyAsync(products);
 		}
 
-		private static IEnumerable<Product> GetConfiguredProducts()
+		private static IEnumerable<ProductModel> GetConfiguredProducts()
 		{
-			return new List<Product>()
+			return new List<ProductModel>()
 			{
-				new Product(
+				new ProductModel(
 					"602d2149e773f2a3990b47f5",
 					"IPhone X",
 					"Smart Phone",
@@ -24,7 +24,7 @@ namespace Catalog.API.Src.Data
 					"product-1.png",
 					950.00M
 				),
-				new Product(
+				new ProductModel(
 					"602d2149e773f2a3990b47f6",
 					"Samsung 10",
 					"Smart Phone",
@@ -33,7 +33,7 @@ namespace Catalog.API.Src.Data
 					"product-2.png",
 					840.00M
 				),
-				new Product(
+				new ProductModel(
 					"602d2149e773f2a3990b47f7",
 					"Huawei Plus",
 					"White Appliances",
@@ -42,7 +42,7 @@ namespace Catalog.API.Src.Data
 					"product-3.png",
 					650.00M
 				),
-				new Product(
+				new ProductModel(
 					"602d2149e773f2a3990b47f8",
 					"Xiaomi Mi 9",
 					"White Appliances",
@@ -51,7 +51,7 @@ namespace Catalog.API.Src.Data
 					"product-4.png",
 					470.00M
 				),
-				new Product(
+				new ProductModel(
 					"602d2149e773f2a3990b47f9",
 					"HTC U11+ Plus",
 					"Smart Phone",
@@ -60,7 +60,7 @@ namespace Catalog.API.Src.Data
 					"product-5.png",
 					380.00M
 				),
-				new Product(
+				new ProductModel(
 					"602d2149e773f2a3990b47fa",
 					"LG G7 ThinQ",
 					"Home Kitchen",

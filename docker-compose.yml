@@ -4,23 +4,23 @@ services:
     rabbitmq:
         image: rabbitmq:3.12.7-management-alpine
 
-    catalog-mongo:
-        image: ${DOCKER_REGISTRY-}catalog-mongo
+    product-mongo:
+        image: ${DOCKER_REGISTRY-}product-mongo
         build:
             context: .
-            dockerfile: src/Services/Catalog/Catalog.API/Docker/Mongo60/Dockerfile
+            dockerfile: src/Services/Product/Product.API/Docker/Mongo60/Dockerfile
 
-    catalog-mongo-client:
-        image: ${DOCKER_REGISTRY-}catalog-mongo-client
+    product-mongo-client:
+        image: ${DOCKER_REGISTRY-}product-mongo-client
         build:
             context: .
-            dockerfile: src/Services/Catalog/Catalog.API/Docker/MongoClient40/Dockerfile
+            dockerfile: src/Services/Product/Product.API/Docker/MongoClient40/Dockerfile
 
-    catalog-api:
-        image: ${DOCKER_REGISTRY-}catalog-api
+    product-api:
+        image: ${DOCKER_REGISTRY-}product-api
         build:
             context: .
-            dockerfile: src/Services/Catalog/Catalog.API/Docker/DotNet70/Dockerfile
+            dockerfile: src/Services/Product/Product.API/Docker/DotNet70/Dockerfile
 
     basket-redis:
         image: ${DOCKER_REGISTRY-}basket-redis
@@ -101,8 +101,8 @@ services:
             dockerfile: src/Services/Authentication/Authentication.API/Docker/Dotnet70/Dockerfile
 
 volumes:
-    catalog-mongo:
-        name: catalog-mongo
+    product-mongo:
+        name: product-mongo
     discount-postgres:
         name: discount-postgres
     discount-pgadmin:

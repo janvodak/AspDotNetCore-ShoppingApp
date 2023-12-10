@@ -1,10 +1,28 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Catalog.API.Src.Entities
+namespace ShoppingApp.Services.Product.API.Models
 {
-	public class Product
+	public class ProductModel
 	{
+		public ProductModel(
+			string id,
+			string name,
+			string category,
+			string summary,
+			string description,
+			string imageFile,
+			decimal price)
+		{
+			Id = id;
+			Name = name;
+			Category = category;
+			Summary = summary;
+			Description = description;
+			ImageFile = imageFile;
+			Price = price;
+		}
+
 		[BsonId]
 		[BsonRepresentation(BsonType.ObjectId)]
 		public string Id { get; set; }
@@ -21,23 +39,5 @@ namespace Catalog.API.Src.Entities
 		public string ImageFile { get; set; }
 
 		public decimal Price { get; set; }
-
-		public Product(
-			string id,
-			string name,
-			string category,
-			string summary,
-			string description,
-			string imageFile,
-			decimal price)
-		{
-			this.Id = id;
-			this.Name = name;
-			this.Category = category;
-			this.Summary = summary;
-			this.Description = description;
-			this.ImageFile = imageFile;
-			this.Price = price;
-		}
 	}
 }

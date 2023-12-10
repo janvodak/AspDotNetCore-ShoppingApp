@@ -8,28 +8,28 @@ services:
             - "5672:5672"
             - "15672:15672"
 
-    catalog-mongo:
-        container_name: catalog-mongo
+    product-mongo:
+        container_name: product-mongo
         restart: always
         ports:
             - "27017:27017"
         volumes:
-            - catalog-mongo:/data/db
+            - product-mongo:/data/db
 
-    catalog-mongo-client:
-        container_name: catalog-mongo-client
+    product-mongo-client:
+        container_name: product-mongo-client
         depends_on:
-            - catalog-mongo
+            - product-mongo
         ports:
             - "3000:3000"
 
-    catalog-api:
-        container_name: catalog-api
+    product-api:
+        container_name: product-api
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
-            - "DatabaseSettings:ConnectionString=mongodb://catalog-mongo:27017"
+            - "DatabaseSettings:ConnectionString=mongodb://product-mongo:27017"
         depends_on:
-            - catalog-mongo
+            - product-mongo
         ports:
             - "8000:80"
 
@@ -120,7 +120,7 @@ services:
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
         depends_on:
-            - catalog-api
+            - product-api
             - basket-api
             - discount-api
             - order-api
@@ -132,7 +132,7 @@ services:
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
         depends_on:
-            - catalog-api
+            - product-api
             - basket-api
             - order-api
         ports:

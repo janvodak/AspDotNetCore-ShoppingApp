@@ -4,12 +4,12 @@
 	<TargetFramework>net7.0</TargetFramework>
 	<Nullable>enable</Nullable>
 	<ImplicitUsings>enable</ImplicitUsings>
-	<DockerComposeProjectPath>../../../../docker-compose.dcproj</DockerComposeProjectPath>
+	<RootNamespace>ShoppingApp.Services.Product.API</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
-	<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
+	<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.14" />
 	<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 	<PackageReference Include="MongoDB.Driver" Version="2.22.0" />
   </ItemGroup>
@@ -18,21 +18,19 @@
 	<None Remove="src\ValueObjects\" />
 	<None Remove="Docker\DotNet70\" />
 	<None Remove="Docker\Mongo60\" />
-	<None Remove="Src\" />
-	<None Remove="Src\Controllers\" />
-	<None Remove="Src\Data\" />
-	<None Remove="Src\Entities\" />
-	<None Remove="Src\Repositories\" />
 	<None Remove="Docker\MongoClient40\" />
+	<None Remove="Models\" />
+	<None Remove="Repositories\" />
+	<None Remove="Data\" />
+	<None Remove="Controllers\" />
   </ItemGroup>
   <ItemGroup>
 	<Folder Include="Docker\DotNet70\" />
 	<Folder Include="Docker\Mongo60\" />
-	<Folder Include="Src\" />
-	<Folder Include="Src\Controllers\" />
-	<Folder Include="Src\Data\" />
-	<Folder Include="Src\Entities\" />
-	<Folder Include="Src\Repositories\" />
 	<Folder Include="Docker\MongoClient40\" />
+	<Folder Include="Models\" />
+	<Folder Include="Repositories\" />
+	<Folder Include="Data\" />
+	<Folder Include="Controllers\" />
   </ItemGroup>
 </Project>
