@@ -9,7 +9,7 @@ using ShoppingApp.Services.Discount.API.Data;
 
 namespace ShoppingApp.Services.Discount.API.Migrations
 {
-    [DbContext(typeof(DiscountContext))]
+    [DbContext(typeof(DiscountDbContext))]
     partial class DiscountContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

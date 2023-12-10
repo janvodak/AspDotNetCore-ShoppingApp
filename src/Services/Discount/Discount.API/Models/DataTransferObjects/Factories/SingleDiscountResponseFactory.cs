@@ -2,7 +2,9 @@
 {
 	public class SingleDiscountResponseFactory
 	{
-		public ResponseDataTransferObject Create(DiscountDataTransferObject? discountDataTransferObject, string productName)
+		public ResponseDataTransferObject Create(
+			DiscountDataTransferObject? discountDataTransferObject,
+			string productName)
 		{
 			ResponseDataTransferObject response = new()
 			{

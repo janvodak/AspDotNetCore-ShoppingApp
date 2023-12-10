@@ -4,11 +4,11 @@ using ShoppingApp.Services.Discount.API.Models;
 
 namespace ShoppingApp.Services.Discount.API.Data
 {
-	public partial class DiscountContext : DbContext
+	public partial class DiscountDbContext : DbContext
 	{
 		private readonly IOptions<DatabaseSettings> _databaseSettings;
 
-		public DiscountContext(IOptions<DatabaseSettings> databaseSettings)
+		public DiscountDbContext(IOptions<DatabaseSettings> databaseSettings)
 		{
 			_databaseSettings = databaseSettings;
 		}

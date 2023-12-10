@@ -13,8 +13,8 @@ builder.Services.Configure<DatabaseSettings>(
 builder.Services.AddScoped<SingleDiscountResponseFactory>();
 builder.Services.AddScoped<MultipleDiscountsResponseFactory>();
 
-builder.Services.AddScoped<DiscountContext>();
-builder.Services.AddScoped<DiscountContextSeed>();
+builder.Services.AddScoped<DiscountDbContext>();
+builder.Services.AddScoped<DiscountDbContextMigration>();
 builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();
 
 IMapper mapper = MappingConfiguration.RegisterMaps().CreateMapper();
@@ -37,8 +37,8 @@ if (app.Environment.IsDevelopment())
 	// Migrate the database and seed it - just for the testing purpose
 	using (var scope = app.Services.CreateScope())
 	{
-		DiscountContextSeed _discountContextSeedService = scope.ServiceProvider.GetRequiredService<DiscountContextSeed>();
-		await _discountContextSeedService.SeedAsync();
+		DiscountDbContextMigration _discountContextSeedService = scope.ServiceProvider.GetRequiredService<DiscountDbContextMigration>();
+		await _discountContextSeedService.MigrateAsync();
 	}
 }
 

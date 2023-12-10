@@ -10,7 +10,7 @@ using ShoppingApp.Services.Discount.API.Data;
 
 namespace ShoppingApp.Services.Discount.API.Migrations
 {
-    [DbContext(typeof(DiscountContext))]
+    [DbContext(typeof(DiscountDbContext))]
     [Migration("20231120120018_InitialCreate")]
     partial class InitialCreate
     {

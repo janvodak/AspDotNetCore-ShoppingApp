@@ -13,16 +13,16 @@ namespace ShoppingApp.Services.Discount.API.Controllers
 	{
 		private readonly IDiscountRepository _repository;
 		private readonly ILogger<DeleteDiscountController> _logger;
-		private readonly SingleDiscountResponseFactory _responseFactory;
+		private readonly SingleDiscountResponseFactory _singleDiscountResponseFactory;
 
 		public DeleteDiscountController(
 			IDiscountRepository repository,
 			ILogger<DeleteDiscountController> logger,
-			SingleDiscountResponseFactory responseFactory)
+			SingleDiscountResponseFactory singleDiscountResponseFactory)
 		{
 			_repository = repository;
 			_logger = logger;
-			_responseFactory = responseFactory;
+			_singleDiscountResponseFactory = singleDiscountResponseFactory;
 		}
 
 		[HttpDelete("{productName}")]
@@ -52,7 +52,7 @@ namespace ShoppingApp.Services.Discount.API.Controllers
 				return Problem();
 			}
 
-			ResponseDataTransferObject response = _responseFactory.Create(
+			ResponseDataTransferObject response = _singleDiscountResponseFactory.Create(
 				null,
 				productName);
 

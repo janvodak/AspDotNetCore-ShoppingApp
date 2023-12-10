@@ -8,16 +8,16 @@ namespace ShoppingApp.Services.Discount.API.Repositories
 {
 	public class DiscountRepository : IDiscountRepository
 	{
-		private readonly DiscountContext _discountContext;
+		private readonly DiscountDbContext _discountDbContext;
 		private readonly ILogger<DiscountRepository> _logger;
 		private readonly IMapper _mapper;
 
 		public DiscountRepository(
-			DiscountContext discountContext,
+			DiscountDbContext discountDbContext,
 			ILogger<DiscountRepository> logger,
 			IMapper mapper)
 		{
-			_discountContext = discountContext;
+			_discountDbContext = discountDbContext;
 			_logger = logger;
 			_mapper = mapper;
 		}
@@ -26,14 +26,14 @@ namespace ShoppingApp.Services.Discount.API.Repositories
 		{
 			DiscountModel discountModel = _mapper.Map<DiscountModel>(discountDataTransferObject);
 
-			_discountContext.Discounts.Add(discountModel);
+			_discountDbContext.Discounts.Add(discountModel);
 
-			return await _discountContext.SaveChangesAsync();
+			return await _discountDbContext.SaveChangesAsync();
 		}
 
 		public async Task<int> DeleteDiscountAsync(string productName)
 		{
-			DiscountModel? discountModel = await _discountContext.Discounts.FirstAsync(
+			DiscountModel? discountModel = await _discountDbContext.Discounts.FirstAsync(
 				d => d.ProductName.ToLower() == productName.ToLower());
 
 			if (discountModel == null)
@@ -45,14 +45,14 @@ namespace ShoppingApp.Services.Discount.API.Repositories
 				throw new Exception();
 			}
 
-			_discountContext.Discounts.Remove(discountModel);
+			_discountDbContext.Discounts.Remove(discountModel);
 
-			return await _discountContext.SaveChangesAsync();
+			return await _discountDbContext.SaveChangesAsync();
 		}
 
 		public async Task<DiscountDataTransferObject?> GetDiscountByProductNameAsync(string productName)
 		{
-			DiscountModel discountModel = await _discountContext.Discounts.FirstAsync(
+			DiscountModel discountModel = await _discountDbContext.Discounts.FirstAsync(
 				d => d.ProductName.ToLower() == productName.ToLower());
 
 			return _mapper.Map<DiscountDataTransferObject>(discountModel);
@@ -61,7 +61,7 @@ namespace ShoppingApp.Services.Discount.API.Repositories
 
 		public async Task<IEnumerable<DiscountDataTransferObject>> GetDiscountsAsync()
 		{
-			IEnumerable<DiscountModel> discountModels = await _discountContext.Discounts.ToListAsync();
+			IEnumerable<DiscountModel> discountModels = await _discountDbContext.Discounts.ToListAsync();
 
 			return _mapper.Map<IEnumerable<DiscountDataTransferObject>>(discountModels);
 		}
@@ -70,9 +70,9 @@ namespace ShoppingApp.Services.Discount.API.Repositories
 		{
 			DiscountModel discountModel = _mapper.Map<DiscountModel>(discountDataTransferObject);
 
-			_discountContext.Attach(discountModel).State = EntityState.Modified;
+			_discountDbContext.Attach(discountModel).State = EntityState.Modified;
 
-			return await _discountContext.SaveChangesAsync();
+			return await _discountDbContext.SaveChangesAsync();
 		}
 	}
 }
