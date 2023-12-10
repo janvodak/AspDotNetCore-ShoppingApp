@@ -1,5 +1,4 @@
-﻿using Catalog.API.Src.Data;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using ShoppingApp.Services.Product.API.Models;
 

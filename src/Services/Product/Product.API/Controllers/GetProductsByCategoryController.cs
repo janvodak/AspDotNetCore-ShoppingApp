@@ -1,12 +1,12 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using ShoppingApp.Services.Product.API.Models;
+using ShoppingApp.Services.Product.API.Models.DataTransferObjects;
 using ShoppingApp.Services.Product.API.Repositories;
 
 namespace ShoppingApp.Services.Product.API.Controllers
 {
 	[ApiController]
-	[Route("api/v1/Product/[controller]")]
+	[Route("api/v1/Product")]
 	[Produces("application/json")]
 	public class GetProductsByCategoryController : ControllerBase
 	{
@@ -17,13 +17,19 @@ namespace ShoppingApp.Services.Product.API.Controllers
 			_repository = repository;
 		}
 
-		[HttpGet("{category}")]
-		[ProducesResponseType(typeof(IEnumerable<ProductModel>), (int)HttpStatusCode.OK)]
-		public async Task<ActionResult<IEnumerable<ProductModel>>> GetProductsByCategory(string category)
+		[Route("[action]/{category}")]
+		[HttpGet]
+		[ProducesResponseType(typeof(IEnumerable<ResponseDataTransferObject>), (int)HttpStatusCode.OK)]
+		public async Task<ActionResult<IEnumerable<ProductDataTransferObject>>> GetProductsByCategory(string category)
 		{
-			IEnumerable<ProductModel> product = await _repository.GetProductsByCategory(category);
+			IEnumerable<ProductDataTransferObject> productDataTransferObjects = await _repository.GetProductsByCategoryAsync(category);
 
-			return Ok(product);
+			ResponseDataTransferObject response = new()
+			{
+				Result = productDataTransferObjects
+			};
+
+			return Ok(response);
 		}
 	}
 }

@@ -1,12 +1,12 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using ShoppingApp.Services.Product.API.Models;
+using ShoppingApp.Services.Product.API.Models.DataTransferObjects;
 using ShoppingApp.Services.Product.API.Repositories;
 
 namespace ShoppingApp.Services.Product.API.Controllers
 {
 	[ApiController]
-	[Route("api/v1/Product/[controller]")]
+	[Route("api/v1/Product")]
 	[Produces("application/json")]
 	public class DeleteProductController : ControllerBase
 	{
@@ -22,21 +22,24 @@ namespace ShoppingApp.Services.Product.API.Controllers
 		}
 
 		[HttpDelete("{id:length(24)}", Name = "DeleteProduct")]
-		[ProducesResponseType(typeof(ProductModel), (int)HttpStatusCode.NoContent)]
-		[ProducesResponseType((int)HttpStatusCode.NotFound)]
+		[ProducesResponseType(typeof(ResponseDataTransferObject), (int)HttpStatusCode.OK)]
+		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
 		public async Task<IActionResult> DeleteProductById(string id)
 		{
-			bool result = await _repository.DeleteProduct(id);
+			bool result = await _repository.DeleteProductAsync(id);
 
 			if (result == false)
 			{
-				string message = $"Product with id: {id} not found";
-				_logger.LogError(message: message);
+				_logger.LogError("Product with id '{Id}' was not found.", id);
 
-				return NotFound();
+				ResponseDataTransferObject response = new(
+					false,
+					$"Product with id '{id}' was not found.");
+
+				return BadRequest(response);
 			}
 
-			return NoContent();
+			return Ok(new ResponseDataTransferObject());
 		}
 	}
 }
