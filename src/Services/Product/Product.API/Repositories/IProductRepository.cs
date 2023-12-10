@@ -1,21 +1,21 @@
-﻿using ShoppingApp.Services.Product.API.Models;
+﻿using ShoppingApp.Services.Product.API.Models.DataTransferObjects;
 
 namespace ShoppingApp.Services.Product.API.Repositories
 {
 	public interface IProductRepository
 	{
-		Task<IEnumerable<ProductModel>> GetProducts();
+		Task<IEnumerable<ProductDataTransferObject>> GetProductsAsync();
 
-		Task<ProductModel> GetProductById(string id);
+		Task<ProductDataTransferObject?> GetProductByIdAsync(string id);
 
-		Task<IEnumerable<ProductModel>> GetProductsByName(string name);
+		Task<IEnumerable<ProductDataTransferObject>> GetProductsByNameAsync(string name);
 
-		Task<IEnumerable<ProductModel>> GetProductsByCategory(string category);
+		Task<IEnumerable<ProductDataTransferObject>> GetProductsByCategoryAsync(string category);
 
-		Task CreateProduct(ProductModel product);
+		Task CreateProductAsync(ProductDataTransferObject productDataTransferObject);
 
-		Task<bool> UpdateProduct(ProductModel product);
+		Task<bool> UpdateProductAsync(ProductDataTransferObject productDataTransferObject);
 
-		Task<bool> DeleteProduct(string id);
+		Task<bool> DeleteProductAsync(string id);
 	}
 }

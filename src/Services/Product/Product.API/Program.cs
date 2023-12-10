@@ -1,4 +1,6 @@
-﻿using ShoppingApp.Services.Product.API.Data;
+﻿using AutoMapper;
+using ShoppingApp.Services.Product.API.Data;
+using ShoppingApp.Services.Product.API.Mappings;
 using ShoppingApp.Services.Product.API.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,10 @@ builder.Services.Configure<DatabaseSettings>(
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductDbContext, ProductDbContext>();
+
+IMapper mapper = MappingConfiguration.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddControllers();
 

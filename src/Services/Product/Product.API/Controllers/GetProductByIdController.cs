@@ -1,12 +1,12 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using ShoppingApp.Services.Product.API.Models;
+using ShoppingApp.Services.Product.API.Models.DataTransferObjects;
 using ShoppingApp.Services.Product.API.Repositories;
 
 namespace ShoppingApp.Services.Product.API.Controllers
 {
 	[ApiController]
-	[Route("api/v1/Product/[controller]")]
+	[Route("api/v1/Product")]
 	[Produces("application/json")]
 	public class GetProductByIdController : ControllerBase
 	{
@@ -21,23 +21,31 @@ namespace ShoppingApp.Services.Product.API.Controllers
 			_logger = logger;
 		}
 
-		[HttpGet("{id:length(24)}", Name = "GetProductById")]
-		[ProducesResponseType(typeof(ProductModel), (int)HttpStatusCode.OK)]
-		[ProducesResponseType((int)HttpStatusCode.NotFound)]
-		public async Task<ActionResult<ProductModel>> GetProductById(string id)
+		[Route("[action]/{id:length(24)}", Name = "GetProductById")]
+		[HttpGet]
+		[ProducesResponseType(typeof(ResponseDataTransferObject), (int)HttpStatusCode.OK)]
+		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
+		public async Task<ActionResult<ProductDataTransferObject>> GetProductById(string id)
 		{
-			ProductModel product = await _repository.GetProductById(id);
+			ProductDataTransferObject? productDataTransferObject = await _repository.GetProductByIdAsync(id);
 
-			if (product == null)
+			if (productDataTransferObject == null)
 			{
-				string message = $"Product with id: {id} not found";
-				_logger.LogError(message: message);
+				_logger.LogError("Product with id '{Id}' was not found.", id);
 
-				return NotFound();
+				ResponseDataTransferObject errorResponse = new(
+					false,
+					$"Product with id '{id}' was not found.");
+
+				return BadRequest(errorResponse);
 			}
 
-			return Ok(product);
-		}
+			ResponseDataTransferObject response = new()
+			{
+				Result = productDataTransferObject
+			};
 
+			return Ok(response);
+		}
 	}
 }
