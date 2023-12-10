@@ -13,16 +13,16 @@ namespace ShoppingApp.Services.Discount.API.Controllers
 	{
 		private readonly IDiscountRepository _repository;
 		private readonly ILogger<GetDiscountsController> _logger;
-		private readonly MultipleDiscountsResponseFactory _responseFactory;
+		private readonly MultipleDiscountsResponseFactory _multipleDiscountsResponseFactory;
 
 		public GetDiscountsController(
 			IDiscountRepository repository,
 			ILogger<GetDiscountsController> logger,
-			MultipleDiscountsResponseFactory responseFactory)
+			MultipleDiscountsResponseFactory multipleDiscountsResponseFactory)
 		{
 			_repository = repository;
 			_logger = logger;
-			_responseFactory = responseFactory;
+			_multipleDiscountsResponseFactory = multipleDiscountsResponseFactory;
 		}
 
 		[HttpGet]
@@ -45,7 +45,7 @@ namespace ShoppingApp.Services.Discount.API.Controllers
 				return Problem();
 			}
 
-			ResponseDataTransferObject response = _responseFactory.CreateEnumerableDiscount(discountDataTransferObjects);
+			ResponseDataTransferObject response = _multipleDiscountsResponseFactory.Create(discountDataTransferObjects);
 
 			return Ok(response);
 		}

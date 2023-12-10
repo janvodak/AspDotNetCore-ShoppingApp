@@ -2,7 +2,7 @@
 {
 	public class MultipleDiscountsResponseFactory
 	{
-		public ResponseDataTransferObject CreateEnumerableDiscount(IEnumerable<DiscountDataTransferObject> discountDataTransferObjects)
+		public ResponseDataTransferObject Create(IEnumerable<DiscountDataTransferObject> discountDataTransferObjects)
 		{
 			ResponseDataTransferObject response = new()
 			{

@@ -4,23 +4,23 @@
 	{
 		public ResponseDataTransferObject()
 		{
-			Result = null;
 			IsSuccess = true;
 			Message = "Success";
+			Result = null;
 		}
 
 		public ResponseDataTransferObject(
-			object? result,
 			bool isSuccess,
-			string message)
+			string message,
+			object? result = null)
 		{
-			Result = result;
 			IsSuccess = isSuccess;
 			Message = message;
+			Result = result;
 		}
 
-		public object? Result { get; set; }
 		public bool IsSuccess { get; set; }
 		public string Message { get; set; }
+		public object? Result { get; set; }
 	}
 }
