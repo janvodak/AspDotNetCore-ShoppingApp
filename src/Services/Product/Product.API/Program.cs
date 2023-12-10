@@ -1,14 +1,14 @@
-﻿using Catalog.API.Src.Data;
-using Catalog.API.Src.Repositories;
+﻿using ShoppingApp.Services.Product.API.Data;
+using ShoppingApp.Services.Product.API.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.Configure<DatabaseSettings>(
-	builder.Configuration.GetSection("DatabaseSettings"));
+	builder.Configuration.GetSection(DatabaseSettings.SECTION_NAME));
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<ICatalogContext, CatalogContext>();
+builder.Services.AddScoped<IProductDbContext, ProductDbContext>();
 
 builder.Services.AddControllers();
 

@@ -1,12 +1,12 @@
 ﻿using System.Net;
-using Catalog.API.Src.Entities;
-using Catalog.API.Src.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using ShoppingApp.Services.Product.API.Models;
+using ShoppingApp.Services.Product.API.Repositories;
 
-namespace Catalog.API.Controllers
+namespace ShoppingApp.Services.Product.API.Controllers
 {
 	[ApiController]
-	[Route("api/v1/catalog/[controller]")]
+	[Route("api/v1/Product/[controller]")]
 	[Produces("application/json")]
 	public class GetProductsController : ControllerBase
 	{
@@ -14,12 +14,12 @@ namespace Catalog.API.Controllers
 
 		public GetProductsController(IProductRepository repository)
 		{
-			this._repository = repository;
+			_repository = repository;
 		}
 
 		[HttpGet]
-		[ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
-		public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+		[ProducesResponseType(typeof(IEnumerable<ProductModel>), (int)HttpStatusCode.OK)]
+		public async Task<ActionResult<IEnumerable<ProductModel>>> GetProducts()
 		{
 			var products = await _repository.GetProducts();
 			return Ok(products);
