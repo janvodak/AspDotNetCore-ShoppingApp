@@ -137,12 +137,9 @@
 							}
 						],
 						"url": {
-							"raw": "{{PRODUCT_URL}}/GetProducts",
+							"raw": "{{PRODUCT_URL}}",
 							"host": [
 								"{{PRODUCT_URL}}"
-							],
-							"path": [
-								"GetProducts"
 							]
 						}
 					},
@@ -222,12 +219,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{PRODUCT_URL}}/CreateProduct",
+							"raw": "{{PRODUCT_URL}}",
 							"host": [
 								"{{PRODUCT_URL}}"
-							],
-							"path": [
-								"CreateProduct"
 							]
 						}
 					},
@@ -259,12 +253,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{PRODUCT_URL}}/UpdateProduct",
+							"raw": "{{PRODUCT_URL}}",
 							"host": [
 								"{{PRODUCT_URL}}"
-							],
-							"path": [
-								"UpdateProduct"
 							]
 						}
 					},
@@ -282,12 +273,11 @@
 							}
 						],
 						"url": {
-							"raw": "{{PRODUCT_URL}}/DeleteProduct/{{PRODUCT_ID_TEST}}",
+							"raw": "{{PRODUCT_URL}}/{{PRODUCT_ID_TEST}}",
 							"host": [
 								"{{PRODUCT_URL}}"
 							],
 							"path": [
-								"DeleteProduct",
 								"{{PRODUCT_ID_TEST}}"
 							]
 						}
@@ -597,7 +587,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n        \"userName\": \"{{USER_NAME_SWN}}\",\n        \"firstName\": \"Test\",\n        \"lastName\": \"Test\",\n        \"emailAddress\": \"test@test.com\",\n        \"addressLine\": \"Brno\",\n        \"country\": \"Czech republic\",\n        \"state\": \"Czech republic\",\n        \"zipCode\": \"60200\",\n        \"totalPrice\": 350.00,\n        \"paymentMethod\": 1,\n        \"cardName\": \"Test Card\",\n        \"cardNumber\": \"5555555555554444\",\n        \"expiration\": \"03/2030\",\n        \"cardVerificationValue\": \"737\"\n    }"
+							"raw": "    {\n        \"userName\": \"{{USER_NAME_TEST}}\",\n        \"firstName\": \"Test\",\n        \"lastName\": \"Test\",\n        \"emailAddress\": \"test@test.com\",\n        \"addressLine\": \"Brno\",\n        \"country\": \"Czech republic\",\n        \"state\": \"Czech republic\",\n        \"zipCode\": \"60200\",\n        \"totalPrice\": 350.00,\n        \"paymentMethod\": 1,\n        \"cardName\": \"Test Card\",\n        \"cardNumber\": \"5555555555554444\",\n        \"expiration\": \"03/2030\",\n        \"cardVerificationValue\": \"737\"\n    }"
 						},
 						"url": {
 							"raw": "{{ORDER_URL}}/CheckoutOrder",

@@ -27,7 +27,7 @@
 	```
 1. You can **launch microservices** as below urls:
 
-* **Catalog API -> http://host.docker.internal:8000/swagger/index.html**
+* **Product API -> http://host.docker.internal:8000/swagger/index.html**
 * **Basket API -> http://host.docker.internal:8001/swagger/index.html**
 * **Discount API -> http://host.docker.internal:8002/swagger/index.html**
 * **Discount Grpc -> http://host.docker.internal:8003**
