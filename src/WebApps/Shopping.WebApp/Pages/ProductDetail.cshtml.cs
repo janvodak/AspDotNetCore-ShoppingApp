@@ -21,7 +21,7 @@ public class ProductDetailModel : PageModel
 		this._basketApiService = basketApiService;
 	}
 
-	public Product Product { get; set; } = null!;
+	public Product? Product { get; set; } = null!;
 
 	[BindProperty]
 	public string Color { get; set; } = null!;
@@ -48,8 +48,13 @@ public class ProductDetailModel : PageModel
 
 	public async Task<IActionResult> OnPostAddToBasketAsync(string productId)
 	{
-		Product product = await this._productApiService.GetProductById(productId);
+		Product? product = await this._productApiService.GetProductById(productId);
 		Basket basket = await this._basketApiService.GetBasket(Basket.DEFAULT_USER_NAME);
+
+		if (product == null)
+		{
+			return NotFound();
+		}
 
 		BasketProduct basketProduct = new(
 			productId,

@@ -31,8 +31,13 @@ public class IndexModel : PageModel
 
 	public async Task<IActionResult> OnPostAddToBasketAsync(string productId)
 	{
-		Product product = await this._productApiService.GetProductById(productId);
+		Product? product = await this._productApiService.GetProductById(productId);
 		Basket basket = await this._basketApiService.GetBasket(Basket.DEFAULT_USER_NAME);
+
+		if (product == null)
+		{
+			return NotFound();
+		}
 
 		BasketProduct basketProduct = new(
 			productId,

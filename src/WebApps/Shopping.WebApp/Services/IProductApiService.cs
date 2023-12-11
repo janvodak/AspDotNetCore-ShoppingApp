@@ -8,8 +8,8 @@ namespace Shopping.WebApp.Services
 
 		Task<IEnumerable<Product>> GetProductsByCategory(string category);
 
-		Task<Product> GetProductById(string id);
+		Task<Product?> GetProductById(string id);
 
-		Task<Product> CreateProduct(Product	product);
+		Task<Product?> CreateProduct(Product	product);
 	}
 }
