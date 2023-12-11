@@ -2,11 +2,11 @@
 	"Routes": [
 		//Catalog API
 		{
-			"DownstreamPathTemplate": "/api/v1/Catalog/GetProducts",
+			"DownstreamPathTemplate": "/api/v1/Product",
 			"DownstreamScheme": "http",
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "catalog-api",
+					"Host": "product-api",
 					"Port": "80"
 				}
 			],
@@ -15,11 +15,11 @@
 			"FileCacheOptions": { "TtlSeconds": 30 }
 		},
 		{
-			"DownstreamPathTemplate": "/api/v1/Catalog/UpdateProduct",
+			"DownstreamPathTemplate": "/api/v1/Product",
 			"DownstreamScheme": "http",
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "catalog-api",
+					"Host": "product-api",
 					"Port": "80"
 				}
 			],
@@ -28,11 +28,11 @@
 			"FileCacheOptions": { "TtlSeconds": 30 }
 		},
 		{
-			"DownstreamPathTemplate": "/api/v1/Catalog/CreateProduct",
+			"DownstreamPathTemplate": "/api/v1/Product",
 			"DownstreamScheme": "http",
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "catalog-api",
+					"Host": "product-api",
 					"Port": "80"
 				}
 			],
@@ -41,11 +41,11 @@
 			"FileCacheOptions": { "TtlSeconds": 30 }
 		},
 		{
-			"DownstreamPathTemplate": "/api/v1/Catalog/GetProductsByCategory/{category}",
+			"DownstreamPathTemplate": "/api/v1/Product/GetProductsByCategory/{category}",
 			"DownstreamScheme": "http",
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "catalog-api",
+					"Host": "product-api",
 					"Port": "80"
 				}
 			],
@@ -53,11 +53,11 @@
 			"UpstreamHttpMethod": [ "GET" ]
 		},
 		{
-			"DownstreamPathTemplate": "/api/v1/Catalog/GetProductById/{id}",
+			"DownstreamPathTemplate": "/api/v1/Product/GetProductById/{id}",
 			"DownstreamScheme": "http",
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "catalog-api",
+					"Host": "product-api",
 					"Port": "80"
 				}
 			],
@@ -65,11 +65,11 @@
 			"UpstreamHttpMethod": [ "GET" ]
 		},
 		{
-			"DownstreamPathTemplate": "/api/v1/Catalog/DeleteProduct/{id}",
+			"DownstreamPathTemplate": "/api/v1/Product/{id}",
 			"DownstreamScheme": "http",
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "catalog-api",
+					"Host": "product-api",
 					"Port": "80"
 				}
 			],
