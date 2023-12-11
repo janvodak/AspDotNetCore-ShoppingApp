@@ -1,7 +1,7 @@
 ﻿namespace ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects.Factories
 {
-	public interface IBasketFactory
+	public interface IProductFactory
 	{
-		Task<BasketDataTransferObject> Create(string userName);
+		Task<ProductDataTransferObject?> Create(string id);
 	}
 }

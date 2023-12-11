@@ -1,4 +1,5 @@
-﻿using ShoppingApp.ApiGateway.ShoppingAggregator.Features;
+﻿using System.Collections.Generic;
+using ShoppingApp.ApiGateway.ShoppingAggregator.Features;
 using ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects;
 
 namespace ShoppingApp.ApiGateway.ShoppingAggregator.Services
@@ -19,7 +20,7 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Services
 			_responseFactory = responseFactory;
 		}
 
-		public async Task<ProductDataTransferObject> GetProductByIdAsync(string id)
+		public async Task<ResponseDataTransferObject<ProductDataTransferObject>> GetProductByIdAsync(string id)
 		{
 			Uri clientBaseAddress = _httpClient.BaseAddress
 				?? throw new ApplicationException("Unable to send client request due problem with external request.");
@@ -28,7 +29,7 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Services
 				clientBaseAddress.Scheme,
 				clientBaseAddress.Host,
 				clientBaseAddress.Port,
-				$"/api/v1/Catalog/GetProductById/{id}");
+				$"/api/v1/Product/GetProductById/{id}");
 
 			RequestDataTransferObject request = new(uriBuilder.Uri.OriginalString);
 			HttpRequestMessage httpRequestMessage = _httpRequestMessageFactory.Create(request);
@@ -43,10 +44,10 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Services
 				throw new ApplicationException($"Unable to send client request due to reason: '{ex.Message}'", ex);
 			}
 
-			return await _responseFactory.Create<ProductDataTransferObject>(httpResponseMessage);
+			return await _responseFactory.Create<ResponseDataTransferObject<ProductDataTransferObject>>(httpResponseMessage);
 		}
 
-		public async Task<IEnumerable<ProductDataTransferObject>> GetProductsAsync()
+		public async Task<ResponseDataTransferObject<IEnumerable<ProductDataTransferObject>>> GetProductsAsync()
 		{
 			Uri clientBaseAddress = _httpClient.BaseAddress
 				?? throw new ApplicationException("Unable to send client request due problem with external request.");
@@ -55,7 +56,7 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Services
 				clientBaseAddress.Scheme,
 				clientBaseAddress.Host,
 				clientBaseAddress.Port,
-				$"/api/v1/Catalog/GetProducts");
+				$"/api/v1/Product");
 
 			RequestDataTransferObject request = new(uriBuilder.Uri.OriginalString);
 			HttpRequestMessage httpRequestMessage = _httpRequestMessageFactory.Create(request);
@@ -70,10 +71,10 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Services
 				throw new ApplicationException($"Unable to send client request due to reason: '{ex.Message}'", ex);
 			}
 
-			return await _responseFactory.Create<IEnumerable<ProductDataTransferObject>>(httpResponseMessage);
+			return await _responseFactory.Create<ResponseDataTransferObject<IEnumerable<ProductDataTransferObject>>>(httpResponseMessage);
 		}
 
-		public async Task<IEnumerable<ProductDataTransferObject>> GetProductsByCategoryAsync(string category)
+		public async Task<ResponseDataTransferObject<IEnumerable<ProductDataTransferObject>>> GetProductsByCategoryAsync(string category)
 		{
 			Uri clientBaseAddress = _httpClient.BaseAddress
 				?? throw new ApplicationException("Unable to send client request due problem with external request.");
@@ -82,7 +83,7 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Services
 				clientBaseAddress.Scheme,
 				clientBaseAddress.Host,
 				clientBaseAddress.Port,
-				$"/api/v1/Catalog/GetProductsByCategory/{category}");
+				$"/api/v1/Product/GetProductsByCategory/{category}");
 
 			RequestDataTransferObject request = new(uriBuilder.Uri.OriginalString);
 			HttpRequestMessage httpRequestMessage = _httpRequestMessageFactory.Create(request);
@@ -97,7 +98,7 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Services
 				throw new ApplicationException($"Unable to send client request due to reason: '{ex.Message}'", ex);
 			}
 
-			return await _responseFactory.Create<IEnumerable<ProductDataTransferObject>>(httpResponseMessage);
+			return await _responseFactory.Create<ResponseDataTransferObject<IEnumerable<ProductDataTransferObject>>>(httpResponseMessage);
 		}
 	}
 }

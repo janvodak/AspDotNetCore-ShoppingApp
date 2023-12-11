@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<IBasketFactory, BasketFactory>();
 builder.Services.AddScoped<IOrderFactory, OrderFactory>();
+builder.Services.AddScoped<IProductFactory, ProductFactory>();
 
 builder.Services.AddScoped<IShoppingAggregateRootFactory, ShoppingAggregateRootFactory>();
 

@@ -5,16 +5,16 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects.F
 	public class BasketFactory : IBasketFactory
 	{
 		private readonly IBasketApiService _basketApiService;
-		private readonly IProductApiService _productApiService;
+		private readonly IProductFactory _productFactory;
 		private readonly ILogger<BasketFactory> _logger;
 
 		public BasketFactory(
 			IBasketApiService basketApiService,
-			IProductApiService productApiService,
+			IProductFactory productFactory,
 			ILogger<BasketFactory> logger)
 		{
 			_basketApiService = basketApiService;
-			_productApiService = productApiService;
+			_productFactory = productFactory;
 			_logger = logger;
 		}
 
@@ -38,28 +38,18 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects.F
 
 			foreach (BasketProductDataTransferObject basketProduct in basket.Products)
 			{
-				ProductDataTransferObject product;
+				ProductDataTransferObject? productDataTransferObject = await _productFactory.Create(basketProduct.Id);
 
-				try
+				if (productDataTransferObject == null)
 				{
-					product = await _productApiService.GetProductByIdAsync(basketProduct.Id);
-				}
-				catch (Exception ex)
-				{
-					_logger.LogWarning(
-						ex,
-						"Unable to get Product '{BasketProductID}' for user '{UserName}'",
-						basketProduct.Id,
-						userName);
-
 					break;
 				}
 
-				basketProduct.Name = product.Name;
-				basketProduct.Category = product.Category;
-				basketProduct.Summary = product.Summary;
-				basketProduct.Description = product.Description;
-				basketProduct.ImageFile = product.ImageFile;
+				basketProduct.Name = productDataTransferObject.Name;
+				basketProduct.Category = productDataTransferObject.Category;
+				basketProduct.Summary = productDataTransferObject.Summary;
+				basketProduct.Description = productDataTransferObject.Description;
+				basketProduct.ImageFile = productDataTransferObject.ImageFile;
 			}
 
 			return basket;
