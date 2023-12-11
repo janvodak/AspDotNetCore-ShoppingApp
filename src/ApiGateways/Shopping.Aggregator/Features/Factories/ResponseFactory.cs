@@ -1,6 +1,7 @@
 ﻿using System.Net;
+using ShoppingApp.ApiGateway.ShoppingAggregator.Features.Parsers;
 
-namespace ShoppingApp.ApiGateway.ShoppingAggregator.Features
+namespace ShoppingApp.ApiGateway.ShoppingAggregator.Features.Factories
 {
 	public class ResponseFactory : IResponseFactory
 	{

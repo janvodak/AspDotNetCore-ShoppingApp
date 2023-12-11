@@ -1,21 +1,22 @@
-﻿using ShoppingApp.ApiGateway.ShoppingAggregator.Services;
+﻿using ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects;
+using ShoppingApp.ApiGateway.ShoppingAggregator.Services;
 
-namespace ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects.Factories
+namespace ShoppingApp.ApiGateway.ShoppingAggregator.Features.Handlers
 {
-	public class ProductFactory : IProductFactory
+	public class ProductHandler : IProductHandler
 	{
 		private readonly IProductApiService _productApiService;
-		private readonly ILogger<BasketFactory> _logger;
+		private readonly ILogger<BasketHandler> _logger;
 
-		public ProductFactory(
+		public ProductHandler(
 			IProductApiService productApiService,
-			ILogger<BasketFactory> logger)
+			ILogger<BasketHandler> logger)
 		{
 			_productApiService = productApiService;
 			_logger = logger;
 		}
 
-		public async Task<ProductDataTransferObject?> Create(string id)
+		public async Task<ProductDataTransferObject?> Handle(string id)
 		{
 			ResponseDataTransferObject<ProductDataTransferObject> responseDataTransferObject;
 

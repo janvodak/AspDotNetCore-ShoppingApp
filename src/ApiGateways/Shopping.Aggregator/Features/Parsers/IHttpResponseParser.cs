@@ -1,4 +1,4 @@
-﻿namespace ShoppingApp.ApiGateway.ShoppingAggregator.Features
+﻿namespace ShoppingApp.ApiGateway.ShoppingAggregator.Features.Parsers
 {
 	public interface IHttpResponseParser
 	{

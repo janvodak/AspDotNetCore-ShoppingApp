@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace ShoppingApp.ApiGateway.ShoppingAggregator.Features
+namespace ShoppingApp.ApiGateway.ShoppingAggregator.Features.Parsers
 {
 	public class HttpResponseParser : IHttpResponseParser
 	{

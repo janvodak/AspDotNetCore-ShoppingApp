@@ -22,6 +22,9 @@
     <None Remove="Models\" />
     <None Remove="Services\" />
     <None Remove="Settings\" />
+    <None Remove="Features\Factories\" />
+    <None Remove="Features\Handlers\" />
+    <None Remove="Features\Parsers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Docker\" />
@@ -31,5 +34,8 @@
     <Folder Include="Models\" />
     <Folder Include="Services\" />
     <Folder Include="Settings\" />
+    <Folder Include="Features\Factories\" />
+    <Folder Include="Features\Handlers\" />
+    <Folder Include="Features\Parsers\" />
   </ItemGroup>
 </Project>
