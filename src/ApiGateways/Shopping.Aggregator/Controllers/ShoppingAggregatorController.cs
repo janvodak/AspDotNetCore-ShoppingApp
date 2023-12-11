@@ -19,13 +19,13 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Controllers
 		}
 
 		[HttpGet("{userName}")]
-		[ProducesResponseType(typeof(ResponseDataTransferObject), (int)HttpStatusCode.OK)]
-		[ProducesResponseType(typeof(ResponseDataTransferObject), (int)HttpStatusCode.InternalServerError)]
-		public async Task<ActionResult<ResponseDataTransferObject>> GetUserdData(string userName)
+		[ProducesResponseType(typeof(ResponseDataTransferObject<ShoppingAggregateRoot>), (int)HttpStatusCode.OK)]
+		[ProducesResponseType(typeof(ResponseDataTransferObject<ShoppingAggregateRoot>), (int)HttpStatusCode.InternalServerError)]
+		public async Task<ActionResult<ResponseDataTransferObject<ShoppingAggregateRoot>>> GetUserdData(string userName)
 		{
 			ShoppingAggregateRoot shoppingAggregateRoot = await _shoppingAggregateRootFactory.Create(userName);
 
-			ResponseDataTransferObject responseDataTransferObject = new()
+			ResponseDataTransferObject<ShoppingAggregateRoot> responseDataTransferObject = new()
 			{
 				Result = shoppingAggregateRoot
 			};

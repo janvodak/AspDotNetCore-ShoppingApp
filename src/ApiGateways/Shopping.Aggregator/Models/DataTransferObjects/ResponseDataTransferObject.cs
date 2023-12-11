@@ -1,6 +1,6 @@
 ﻿namespace ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects
 {
-	public class ResponseDataTransferObject
+	public class ResponseDataTransferObject<T> where T : class
 	{
 		public ResponseDataTransferObject()
 		{
@@ -12,7 +12,7 @@
 		public ResponseDataTransferObject(
 			string message,
 			bool isSuccess,
-			object? result = null)
+			T? result = null)
 		{
 			Message = message;
 			IsSuccess = isSuccess;
@@ -21,7 +21,7 @@
 
 		public string Message { get; set; }
 		public bool IsSuccess { get; set; }
-		public object? Result { get; set; }
+		public T? Result { get; set; }
 	}
 }
 
