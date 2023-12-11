@@ -1,5 +1,6 @@
 ﻿using Shopping.WebApp.Features;
 using Shopping.WebApp.Models;
+using Shopping.WebApp.Models.DataTransferObjects;
 
 namespace Shopping.WebApp.Services
 {
@@ -8,45 +9,127 @@ namespace Shopping.WebApp.Services
 		private readonly HttpClient _client;
 		private readonly JsonResponseParser _jsonResponseParser;
 		private readonly JsonRequestFactory _jsonRequestFactory;
+		private readonly ILogger<ProductApiService> _logger;
 
 		public ProductApiService(
 			HttpClient client,
 			JsonResponseParser jsonResponseParser,
-			JsonRequestFactory jsonRequestFactory)
+			JsonRequestFactory jsonRequestFactory,
+			ILogger<ProductApiService> logger)
 		{
-			this._client = client;
-			this._jsonResponseParser = jsonResponseParser;
-			this._jsonRequestFactory = jsonRequestFactory;
+			_client = client;
+			_jsonResponseParser = jsonResponseParser;
+			_jsonRequestFactory = jsonRequestFactory;
+			_logger = logger;
 		}
 
-		public async Task<Product> CreateProduct(Product product)
+		public async Task<Product?> CreateProduct(Product product)
 		{
-			StringContent content = this._jsonRequestFactory.CreateNewApiRequest<Product>(product);
+			HttpResponseMessage httpResponseMessage;
+			StringContent content = _jsonRequestFactory.CreateNewApiRequest(product);
 
-			HttpResponseMessage response = await this._client.PostAsync("/Catalog", content);
+			try
+			{
+				httpResponseMessage = await _client.PostAsync("/Product", content);
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError("Unable to send client request due to reason: '{Message}'", ex.Message);
 
-			return await this._jsonResponseParser.ParseResponse<Product>(response);
+				return null;
+			}
+
+			ResponseDataTransferObject<Product> responseDataTransferObject = await _jsonResponseParser.ParseResponse<ResponseDataTransferObject<Product>>(httpResponseMessage);
+
+			if (responseDataTransferObject.IsSuccess == false || responseDataTransferObject.Result == null)
+			{
+				_logger.LogError("Unable to parse product response.");
+
+				return null;
+			}
+
+			return responseDataTransferObject.Result;
 		}
 
-		public async Task<Product> GetProductById(string id)
+		public async Task<Product?> GetProductById(string id)
 		{
-			HttpResponseMessage response = await this._client.GetAsync($"/Product/{id}");
+			HttpResponseMessage httpResponseMessage;
 
-			return await this._jsonResponseParser.ParseResponse<Product>(response);
+			try
+			{
+				httpResponseMessage = await _client.GetAsync($"/Product/{id}");
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError("Unable to send client request due to reason: '{Message}'", ex.Message);
+
+				return null;
+			}
+
+			ResponseDataTransferObject<Product> responseDataTransferObject = await _jsonResponseParser.ParseResponse<ResponseDataTransferObject<Product>>(httpResponseMessage);
+
+			if (responseDataTransferObject.IsSuccess == false || responseDataTransferObject.Result == null)
+			{
+				_logger.LogError("Unable to parse product response.");
+
+				return null;
+			}
+
+			return responseDataTransferObject.Result;
 		}
 
 		public async Task<IEnumerable<Product>> GetProducts()
 		{
-			HttpResponseMessage response = await this._client.GetAsync("/Product");
+			HttpResponseMessage httpResponseMessage;
 
-			return await this._jsonResponseParser.ParseResponse<List<Product>>(response);
+			try
+			{
+				httpResponseMessage = await _client.GetAsync("/Product");
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError("Unable to send client request due to reason: '{Message}'", ex.Message);
+
+				return new List<Product>();
+			}
+
+			ResponseDataTransferObject<IEnumerable<Product>> responseDataTransferObject = await _jsonResponseParser.ParseResponse<ResponseDataTransferObject<IEnumerable<Product>>>(httpResponseMessage);
+
+			if (responseDataTransferObject.IsSuccess == false || responseDataTransferObject.Result == null)
+			{
+				_logger.LogError("Unable to parse product response.");
+
+				return new List<Product>();
+			}
+
+			return responseDataTransferObject.Result;
 		}
 
 		public async Task<IEnumerable<Product>> GetProductsByCategory(string category)
 		{
-			HttpResponseMessage response = await this._client.GetAsync($"/Product/{category}");
+			HttpResponseMessage httpResponseMessage;
 
-			return await this._jsonResponseParser.ParseResponse<List<Product>>(response);
+			try
+			{
+				httpResponseMessage = await _client.GetAsync($"/Product/{category}");
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError("Unable to send client request due to reason: '{Message}'", ex.Message);
+
+				return new List<Product>();
+			}
+
+			ResponseDataTransferObject<IEnumerable<Product>> responseDataTransferObject = await _jsonResponseParser.ParseResponse<ResponseDataTransferObject<IEnumerable<Product>>>(httpResponseMessage);
+
+			if (responseDataTransferObject.IsSuccess == false || responseDataTransferObject.Result == null)
+			{
+				_logger.LogError("Unable to parse product response.");
+
+				return new List<Product>();
+			}
+
+			return responseDataTransferObject.Result;
 		}
 	}
 }
