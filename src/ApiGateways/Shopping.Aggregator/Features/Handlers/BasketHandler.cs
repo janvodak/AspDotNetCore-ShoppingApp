@@ -1,24 +1,25 @@
-﻿using ShoppingApp.ApiGateway.ShoppingAggregator.Services;
+﻿using ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects;
+using ShoppingApp.ApiGateway.ShoppingAggregator.Services;
 
-namespace ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects.Factories
+namespace ShoppingApp.ApiGateway.ShoppingAggregator.Features.Handlers
 {
-	public class BasketFactory : IBasketFactory
+	public class BasketHandler : IBasketHandler
 	{
 		private readonly IBasketApiService _basketApiService;
-		private readonly IProductFactory _productFactory;
-		private readonly ILogger<BasketFactory> _logger;
+		private readonly IProductHandler _productHandler;
+		private readonly ILogger<BasketHandler> _logger;
 
-		public BasketFactory(
+		public BasketHandler(
 			IBasketApiService basketApiService,
-			IProductFactory productFactory,
-			ILogger<BasketFactory> logger)
+			IProductHandler productHandler,
+			ILogger<BasketHandler> logger)
 		{
 			_basketApiService = basketApiService;
-			_productFactory = productFactory;
+			_productHandler = productHandler;
 			_logger = logger;
 		}
 
-		public async Task<BasketDataTransferObject> Create(string userName)
+		public async Task<BasketDataTransferObject> Handle(string userName)
 		{
 			BasketDataTransferObject basket;
 
@@ -38,7 +39,7 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects.F
 
 			foreach (BasketProductDataTransferObject basketProduct in basket.Products)
 			{
-				ProductDataTransferObject? productDataTransferObject = await _productFactory.Create(basketProduct.Id);
+				ProductDataTransferObject? productDataTransferObject = await _productHandler.Handle(basketProduct.Id);
 
 				if (productDataTransferObject == null)
 				{

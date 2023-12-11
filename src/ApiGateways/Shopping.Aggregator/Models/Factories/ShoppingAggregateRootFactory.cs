@@ -1,19 +1,19 @@
-﻿using ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects;
-using ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects.Factories;
+﻿using ShoppingApp.ApiGateway.ShoppingAggregator.Features.Handlers;
+using ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects;
 
 namespace ShoppingApp.ApiGateway.ShoppingAggregator.Models.Factories
 {
 	public class ShoppingAggregateRootFactory : IShoppingAggregateRootFactory
 	{
-		private readonly IBasketFactory _basketFactory;
-		private readonly IOrderFactory _orderFactory;
+		private readonly IBasketHandler _basketHandler;
+		private readonly IOrderHandler _orderHandler;
 
 		public ShoppingAggregateRootFactory(
-			IBasketFactory productFactory,
-			IOrderFactory orderFactory)
+			IBasketHandler productHandler,
+			IOrderHandler orderHandler)
 		{
-			_basketFactory = productFactory;
-			_orderFactory = orderFactory;
+			_basketHandler = productHandler;
+			_orderHandler = orderHandler;
 		}
 
 		public async Task<ShoppingAggregateRoot> Create(string userName)
@@ -22,14 +22,14 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Models.Factories
 
 			try
 			{
-				basket = await _basketFactory.Create(userName);
+				basket = await _basketHandler.Handle(userName);
 			}
 			catch (Exception)
 			{
 
 			}
 
-			IEnumerable<OrderDataTransferObject> orders = await _orderFactory.Create(userName);
+			IEnumerable<OrderDataTransferObject> orders = await _orderHandler.Handle(userName);
 
 			return new ShoppingAggregateRoot(
 				userName,

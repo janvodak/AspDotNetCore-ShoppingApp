@@ -4,7 +4,7 @@ using System.Text.Json;
 using ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects;
 using ShoppingApp.ApiGateway.ShoppingAggregator.Models.Utilities;
 
-namespace ShoppingApp.ApiGateway.ShoppingAggregator.Features
+namespace ShoppingApp.ApiGateway.ShoppingAggregator.Features.Factories
 {
 	public class HttpRequestMessageFactory : IHttpRequestMessageFactory
 	{

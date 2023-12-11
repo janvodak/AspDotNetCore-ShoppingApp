@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using ShoppingApp.ApiGateway.ShoppingAggregator.Features;
+﻿using ShoppingApp.ApiGateway.ShoppingAggregator.Features.Factories;
 using ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects;
 
 namespace ShoppingApp.ApiGateway.ShoppingAggregator.Services

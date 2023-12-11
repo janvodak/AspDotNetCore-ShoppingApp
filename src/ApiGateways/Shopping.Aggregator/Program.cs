@@ -1,5 +1,6 @@
-﻿using ShoppingApp.ApiGateway.ShoppingAggregator.Features;
-using ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects.Factories;
+﻿using ShoppingApp.ApiGateway.ShoppingAggregator.Features.Factories;
+using ShoppingApp.ApiGateway.ShoppingAggregator.Features.Handlers;
+using ShoppingApp.ApiGateway.ShoppingAggregator.Features.Parsers;
 using ShoppingApp.ApiGateway.ShoppingAggregator.Models.Factories;
 using ShoppingApp.ApiGateway.ShoppingAggregator.Services;
 using ShoppingApp.ApiGateway.ShoppingAggregator.Settings;
@@ -7,9 +8,9 @@ using ShoppingApp.ApiGateway.ShoppingAggregator.Settings;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<IBasketFactory, BasketFactory>();
-builder.Services.AddScoped<IOrderFactory, OrderFactory>();
-builder.Services.AddScoped<IProductFactory, ProductFactory>();
+builder.Services.AddScoped<IBasketHandler, BasketHandler>();
+builder.Services.AddScoped<IOrderHandler, OrderHandler>();
+builder.Services.AddScoped<IProductHandler, ProductHandler>();
 
 builder.Services.AddScoped<IShoppingAggregateRootFactory, ShoppingAggregateRootFactory>();
 

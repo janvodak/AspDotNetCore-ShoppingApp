@@ -1,6 +1,6 @@
 ﻿using ShoppingApp.ApiGateway.ShoppingAggregator.Models.DataTransferObjects;
 
-namespace ShoppingApp.ApiGateway.ShoppingAggregator.Features
+namespace ShoppingApp.ApiGateway.ShoppingAggregator.Features.Factories
 {
 	public interface IHttpRequestMessageFactory
 	{
