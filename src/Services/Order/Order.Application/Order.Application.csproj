@@ -4,48 +4,33 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<RootNamespace>ShoppingApp.Services.Order.API.Application</RootNamespace>
 	</PropertyGroup>
 
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	  <DefineConstants>TRACE;RELEASE;NET;NET7_0;NETCOREAPP</DefineConstants>
+	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Order.Domain\Order.Domain.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <None Remove="Src\" />
-	  <None Remove="Src\Behaviours\" />
-	  <None Remove="Src\Contracts\" />
-	  <None Remove="Src\Features\" />
-	  <None Remove="Src\Contracts\Persistence\" />
-	  <None Remove="Src\Models\" />
-	  <None Remove="Src\Mappings\" />
-	  <None Remove="Src\Features\Order\" />
-	  <None Remove="Src\Features\Order\Commands\" />
-	  <None Remove="Src\Features\Order\Queries\" />
-	  <None Remove="Src\Features\Order\Queries\GetOrdersList\" />
-	  <None Remove="Src\Features\Order\Commands\CheckoutOrder\" />
-	  <None Remove="Src\Features\Order\Commands\UpdateOrder\" />
-	  <None Remove="Src\Services\" />
-	  <None Remove="Src\Features\Order\Commands\DeleteOrder\" />
-	  <None Remove="Src\Exceptions\" />
-	  <None Remove="Src\Contracts\Notifications\" />
+	  <None Remove="Behaviours\" />
+	  <None Remove="Contracts\" />
+	  <None Remove="Exceptions\" />
+	  <None Remove="Features\" />
+	  <None Remove="Mappings\" />
+	  <None Remove="Models\" />
+	  <None Remove="Services\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Src\" />
-	  <Folder Include="Src\Behaviours\" />
-	  <Folder Include="Src\Contracts\" />
-	  <Folder Include="Src\Features\" />
-	  <Folder Include="Src\Contracts\Persistence\" />
-	  <Folder Include="Src\Models\" />
-	  <Folder Include="Src\Mappings\" />
-	  <Folder Include="Src\Features\Order\" />
-	  <Folder Include="Src\Features\Order\Commands\" />
-	  <Folder Include="Src\Features\Order\Queries\" />
-	  <Folder Include="Src\Features\Order\Queries\GetOrdersList\" />
-	  <Folder Include="Src\Features\Order\Commands\CheckoutOrder\" />
-	  <Folder Include="Src\Features\Order\Commands\UpdateOrder\" />
-	  <Folder Include="Src\Services\" />
-	  <Folder Include="Src\Features\Order\Commands\DeleteOrder\" />
-	  <Folder Include="Src\Exceptions\" />
-	  <Folder Include="Src\Contracts\Notifications\" />
+	  <Folder Include="Behaviours\" />
+	  <Folder Include="Contracts\" />
+	  <Folder Include="Exceptions\" />
+	  <Folder Include="Features\" />
+	  <Folder Include="Mappings\" />
+	  <Folder Include="Models\" />
+	  <Folder Include="Services\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="AutoMapper" Version="12.0.1" />
