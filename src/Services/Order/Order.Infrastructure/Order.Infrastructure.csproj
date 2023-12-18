@@ -4,28 +4,23 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<RootNamespace>ShoppingApp.Services.Order.API.Infrastructure</RootNamespace>
 	</PropertyGroup>
 
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	  <WarningsNotAsErrors></WarningsNotAsErrors>
+	  <Nullable></Nullable>
+	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Order.Application\Order.Application.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <None Remove="Src\" />
-	  <None Remove="Src\Persistence\" />
-	  <None Remove="Src\Notifications\" />
-	  <None Remove="Src\Persistence\Context\" />
-	  <None Remove="Src\Persistence\Repositories\" />
-	  <None Remove="Src\Persistence\Extensions\" />
-	  <None Remove="Src\Persistence\Migrations\" />
+	  <None Remove="Notifications\" />
+	  <None Remove="Persistence\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Src\" />
-	  <Folder Include="Src\Persistence\" />
-	  <Folder Include="Src\Notifications\" />
-	  <Folder Include="Src\Persistence\Context\" />
-	  <Folder Include="Src\Persistence\Repositories\" />
-	  <Folder Include="Src\Persistence\Extensions\" />
-	  <Folder Include="Src\Persistence\Migrations\" />
+	  <Folder Include="Notifications\" />
+	  <Folder Include="Persistence\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.12" />

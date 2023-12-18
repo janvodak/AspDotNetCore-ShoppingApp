@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using EventBus.Messages.Src.Shared;
 using MassTransit;
-using Order.Application.Src;
-using Order.Infrastructure.Src;
-using Order.Infrastructure.Src.Persistence.Context;
-using Order.Infrastructure.Src.Persistence.Extensions;
-using Order.Rest.Src.Consumers;
+using ShoppingApp.Services.Order.API.Application;
+using ShoppingApp.Services.Order.API.Infrastructure;
+using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context;
+using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Extensions;
+using ShoppingApp.Services.Order.API.Rest.Consumers;
 
 var builder = WebApplication.CreateBuilder(args);
 

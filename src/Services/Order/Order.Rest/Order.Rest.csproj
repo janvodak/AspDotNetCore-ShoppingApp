@@ -5,6 +5,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<DockerComposeProjectPath>../../../../docker-compose.dcproj</DockerComposeProjectPath>
+		<RootNamespace>ShoppingApp.Services.Order.API.Rest</RootNamespace>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
@@ -40,19 +41,17 @@
 	<ItemGroup>
 	  <None Remove="Docker\" />
 	  <None Remove="Docker\MicrosoftSQLServer2022-20\" />
-	  <None Remove="Src\" />
-	  <None Remove="Src\Mappings\" />
-	  <None Remove="Src\Controllers\" />
-	  <None Remove="Src\Consumers\" />
 	  <None Remove="Docker\Dotnet70\" />
+	  <None Remove="Consumers\" />
+	  <None Remove="Controllers\" />
+	  <None Remove="Mappings\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Docker\" />
 	  <Folder Include="Docker\MicrosoftSQLServer2022-20\" />
-	  <Folder Include="Src\" />
-	  <Folder Include="Src\Mappings\" />
-	  <Folder Include="Src\Controllers\" />
-	  <Folder Include="Src\Consumers\" />
 	  <Folder Include="Docker\Dotnet70\" />
+	  <Folder Include="Consumers\" />
+	  <Folder Include="Controllers\" />
+	  <Folder Include="Mappings\" />
 	</ItemGroup>
 </Project>
