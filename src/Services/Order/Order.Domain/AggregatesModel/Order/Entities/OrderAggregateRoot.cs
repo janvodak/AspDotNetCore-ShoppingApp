@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using ShoppingApp.Services.Order.API.Domain.Shared;
+using ShoppingApp.Services.Order.API.Domain.SeedWork;
 
-namespace ShoppingApp.Services.Order.API.Domain.Order
+namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities
 {
-	public class OrderEntity : EntityBase
+	public class OrderAggregateRoot : EntityBase, IAggregateRoot
 	{
 		public string UserName { get; set; } = null!;
 
@@ -26,7 +26,7 @@ namespace ShoppingApp.Services.Order.API.Domain.Order
 		public string CardVerificationValue { get; set; } = null!;
 		public int PaymentMethod { get; set; }
 
-		public OrderEntity(
+		public OrderAggregateRoot(
 			string userName,
 			decimal totalPrice,
 			string firstName,

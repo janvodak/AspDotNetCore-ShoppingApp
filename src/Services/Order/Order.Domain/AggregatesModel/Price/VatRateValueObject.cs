@@ -1,9 +1,11 @@
-﻿using ShoppingApp.Services.Order.API.Domain.Shared;
+﻿using ShoppingApp.Services.Order.API.Domain.SeedWork;
 
-namespace ShoppingApp.Services.Order.API.Domain.Price
+namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Price
 {
 	public class VatRateValueObject : ValueObjectBase
 	{
+		public VatRateValueObject() { }
+
 		public VatRateValueObject(int value)
 		{
 			if (value < 0 || value > 100)

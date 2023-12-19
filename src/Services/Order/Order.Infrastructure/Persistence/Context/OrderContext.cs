@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using ShoppingApp.Services.Order.API.Domain.Order;
-using ShoppingApp.Services.Order.API.Domain.Shared;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
+using ShoppingApp.Services.Order.API.Domain.SeedWork;
 
 namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 {
@@ -9,7 +9,7 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 	{
 		private const string AUTOMAT_NAME = "swn";
 
-		public virtual DbSet<OrderEntity> Orders { get; set; } = null!;
+		public virtual DbSet<OrderAggregateRoot> Orders { get; set; } = null!;
 
 		private readonly string _connectionString;
 

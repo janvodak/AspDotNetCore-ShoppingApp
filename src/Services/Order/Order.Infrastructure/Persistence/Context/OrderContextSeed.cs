@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using ShoppingApp.Services.Order.API.Domain.Order;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
 
 namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 {
@@ -19,11 +19,11 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 			}
 		}
 
-		private static IEnumerable<OrderEntity> GetPreconfiguredOrders()
+		private static IEnumerable<OrderAggregateRoot> GetPreconfiguredOrders()
 		{
-			return new List<OrderEntity>
+			return new List<OrderAggregateRoot>
 			{
-				new OrderEntity(
+				new OrderAggregateRoot(
 					"swn",
 					350,
 					"Jan",

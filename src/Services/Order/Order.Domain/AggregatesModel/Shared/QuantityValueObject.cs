@@ -1,10 +1,10 @@
-﻿namespace ShoppingApp.Services.Order.API.Domain.Shared
+﻿using ShoppingApp.Services.Order.API.Domain.SeedWork;
+
+namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Shared
 {
 	public class QuantityValueObject : ValueObjectBase
 	{
-		public QuantityValueObject()
-		{
-		}
+		public QuantityValueObject() { }
 
 		public QuantityValueObject(int value)
 		{

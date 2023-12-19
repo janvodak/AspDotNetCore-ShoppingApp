@@ -1,4 +1,4 @@
-﻿namespace ShoppingApp.Services.Order.API.Domain.Price
+﻿namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Price
 {
 	public static class CurrencyExtensions
 	{

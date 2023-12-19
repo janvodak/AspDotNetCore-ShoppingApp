@@ -2,7 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using ShoppingApp.Services.Order.API.Application.Contracts.Notifications;
-using ShoppingApp.Services.Order.API.Application.Contracts.Persistence;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Repositories;
+using ShoppingApp.Services.Order.API.Domain.SeedWork;
 using ShoppingApp.Services.Order.API.Infrastructure.Notifications;
 using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context;
 using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Repositories;

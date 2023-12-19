@@ -1,6 +1,6 @@
-﻿using ShoppingApp.Services.Order.API.Domain.Shared;
+﻿using ShoppingApp.Services.Order.API.Domain.SeedWork;
 
-namespace ShoppingApp.Services.Order.API.Domain.Payment
+namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Payment
 {
 	public class PaymentMethodValueObject : EnumerationBase
 	{

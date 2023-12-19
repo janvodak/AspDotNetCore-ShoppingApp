@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using ShoppingApp.Services.Order.API.Application.Contracts.Persistence;
 using ShoppingApp.Services.Order.API.Application.Services;
-using ShoppingApp.Services.Order.API.Domain.Order;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Repositories;
 
 namespace ShoppingApp.Services.Order.API.Application.Features.Order.Commands.CheckoutOrder
 {
@@ -28,9 +28,9 @@ namespace ShoppingApp.Services.Order.API.Application.Features.Order.Commands.Che
 
 		public async Task<int> Handle(CheckoutOrderCommand request, CancellationToken cancellationToken)
 		{
-			OrderEntity orderEntity = _mapper.Map<OrderEntity>(request);
+			OrderAggregateRoot orderEntity = _mapper.Map<OrderAggregateRoot>(request);
 
-			OrderEntity newOrder = await _orderRepository.AddAsync(orderEntity);
+			OrderAggregateRoot newOrder = await _orderRepository.AddAsync(orderEntity);
 
 			_logger.LogInformation(
 				"Order '{OrderId}' was successfully created.",

@@ -1,6 +1,6 @@
-﻿using ShoppingApp.Services.Order.API.Domain.Shared;
+﻿using ShoppingApp.Services.Order.API.Domain.SeedWork;
 
-namespace ShoppingApp.Services.Order.API.Domain.Address
+namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Address
 {
 	public class AddressValueObject : ValueObjectBase
 	{

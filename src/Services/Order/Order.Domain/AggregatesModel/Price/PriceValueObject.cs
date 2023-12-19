@@ -1,6 +1,7 @@
-﻿using ShoppingApp.Services.Order.API.Domain.Shared;
+﻿using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Shared;
+using ShoppingApp.Services.Order.API.Domain.SeedWork;
 
-namespace ShoppingApp.Services.Order.API.Domain.Price
+namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Price
 {
 	public class PriceValueObject : ValueObjectBase
 	{

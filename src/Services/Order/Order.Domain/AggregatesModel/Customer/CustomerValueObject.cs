@@ -1,6 +1,6 @@
-﻿using ShoppingApp.Services.Order.API.Domain.Shared;
+﻿using ShoppingApp.Services.Order.API.Domain.SeedWork;
 
-namespace ShoppingApp.Services.Order.API.Domain.Customer
+namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Customer
 {
 	public class CustomerValueObject : ValueObjectBase
 	{
@@ -9,7 +9,7 @@ namespace ShoppingApp.Services.Order.API.Domain.Customer
 			UserName = userName;
 		}
 
-		public string UserName { get; set; }
+		public string UserName { get; private set; }
 
 		protected override IEnumerable<object> GetEqualityComponents()
 		{
