@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using ShoppingApp.Services.Order.API.Application.Contracts.Notifications;
 using ShoppingApp.Services.Order.API.Application.Models;
-using ShoppingApp.Services.Order.API.Domain.Order;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
 
 namespace ShoppingApp.Services.Order.API.Application.Services
 {
@@ -18,7 +18,7 @@ namespace ShoppingApp.Services.Order.API.Application.Services
 			_logger = logger;
 		}
 
-		public async Task Send(OrderEntity order)
+		public async Task Send(OrderAggregateRoot order)
 		{
 			var email = new Email(
 				to: order.EmailAddress,

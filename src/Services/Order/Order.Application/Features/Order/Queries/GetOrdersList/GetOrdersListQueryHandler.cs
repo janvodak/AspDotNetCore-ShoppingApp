@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
-using ShoppingApp.Services.Order.API.Application.Contracts.Persistence;
-using ShoppingApp.Services.Order.API.Domain.Order;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Repositories;
 
 namespace ShoppingApp.Services.Order.API.Application.Features.Order.Queries.GetOrdersList
 {
@@ -18,7 +18,7 @@ namespace ShoppingApp.Services.Order.API.Application.Features.Order.Queries.GetO
 
 		public async Task<List<OrderDataTransferObject>> Handle(GetOrdersListQuery request, CancellationToken cancellationToken)
 		{
-			IEnumerable<OrderEntity> orderList = await _orderRepository.GetOrdersByUserName(request.UserName);
+			IEnumerable<OrderAggregateRoot> orderList = await _orderRepository.GetOrdersByUserName(request.UserName);
 
 			return _mapper.Map<List<OrderDataTransferObject>>(orderList);
 		}

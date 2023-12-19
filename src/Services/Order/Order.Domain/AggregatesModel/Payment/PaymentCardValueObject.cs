@@ -1,6 +1,6 @@
-﻿using ShoppingApp.Services.Order.API.Domain.Shared;
+﻿using ShoppingApp.Services.Order.API.Domain.SeedWork;
 
-namespace ShoppingApp.Services.Order.API.Domain.Payment
+namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Payment
 {
 	public class PaymentCardValueObject : ValueObjectBase
 	{
@@ -15,7 +15,7 @@ namespace ShoppingApp.Services.Order.API.Domain.Payment
 		public string CardName { get; private set; }
 		public string CardNumber { get; private set; }
 		public string Expiration { get; private set; }
-		public string CardVerificationValue { get; set; }
+		public string CardVerificationValue { get; private set; }
 
 		protected override IEnumerable<object> GetEqualityComponents()
 		{

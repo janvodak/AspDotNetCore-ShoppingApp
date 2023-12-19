@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using ShoppingApp.Services.Order.API.Application.Contracts.Persistence;
 using ShoppingApp.Services.Order.API.Application.Exceptions;
-using ShoppingApp.Services.Order.API.Domain.Order;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Repositories;
 
 namespace ShoppingApp.Services.Order.API.Application.Features.Order.Commands.UpdateOrder
 {
@@ -25,10 +25,10 @@ namespace ShoppingApp.Services.Order.API.Application.Features.Order.Commands.Upd
 
 		public async Task<Unit> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
 		{
-			OrderEntity? order = await _orderRepository.GetByIdAsync(request.Id)
-				?? throw new NotFoundException(nameof(OrderEntity), request.Id);
+			OrderAggregateRoot? order = await _orderRepository.GetByIdAsync(request.Id)
+				?? throw new NotFoundException(nameof(OrderAggregateRoot), request.Id);
 
-			_mapper.Map(request, order, typeof(UpdateOrderCommand), typeof(OrderEntity));
+			_mapper.Map(request, order, typeof(UpdateOrderCommand), typeof(OrderAggregateRoot));
 
 			await _orderRepository.UpdateAsync(order);
 

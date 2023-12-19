@@ -3,7 +3,7 @@ using ShoppingApp.Services.Order.API.Application.Features.Order.Commands.Checkou
 using ShoppingApp.Services.Order.API.Application.Features.Order.Commands.DeleteOrder;
 using ShoppingApp.Services.Order.API.Application.Features.Order.Commands.UpdateOrder;
 using ShoppingApp.Services.Order.API.Application.Features.Order.Queries.GetOrdersList;
-using ShoppingApp.Services.Order.API.Domain.Order;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
 
 namespace ShoppingApp.Services.Order.API.Application.Mappings
 {
@@ -11,10 +11,10 @@ namespace ShoppingApp.Services.Order.API.Application.Mappings
 	{
 		public MappingProfile()
 		{
-			CreateMap<OrderEntity, OrderDataTransferObject>().ReverseMap();
-			CreateMap<OrderEntity, CheckoutOrderCommand>().ReverseMap();
-			CreateMap<OrderEntity, UpdateOrderCommand>().ReverseMap();
-			CreateMap<OrderEntity, DeleteOrderCommand>().ReverseMap();
+			CreateMap<OrderAggregateRoot, OrderDataTransferObject>().ReverseMap();
+			CreateMap<OrderAggregateRoot, CheckoutOrderCommand>().ReverseMap();
+			CreateMap<OrderAggregateRoot, UpdateOrderCommand>().ReverseMap();
+			CreateMap<OrderAggregateRoot, DeleteOrderCommand>().ReverseMap();
 		}
 	}
 }

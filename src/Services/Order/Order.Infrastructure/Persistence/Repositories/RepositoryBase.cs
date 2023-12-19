@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using ShoppingApp.Services.Order.API.Application.Contracts.Persistence;
-using ShoppingApp.Services.Order.API.Domain.Shared;
+using ShoppingApp.Services.Order.API.Domain.SeedWork;
 using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context;
 
 namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Repositories

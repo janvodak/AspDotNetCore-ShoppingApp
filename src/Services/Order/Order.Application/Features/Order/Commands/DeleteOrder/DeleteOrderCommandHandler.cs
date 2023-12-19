@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using ShoppingApp.Services.Order.API.Application.Contracts.Persistence;
 using ShoppingApp.Services.Order.API.Application.Exceptions;
-using ShoppingApp.Services.Order.API.Domain.Order;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Repositories;
 
 namespace ShoppingApp.Services.Order.API.Application.Features.Order.Commands.DeleteOrder
 {
@@ -21,8 +21,8 @@ namespace ShoppingApp.Services.Order.API.Application.Features.Order.Commands.Del
 
 		public async Task<Unit> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
 		{
-			OrderEntity? order = await _orderRepository.GetByIdAsync(request.Id)
-				?? throw new NotFoundException(nameof(OrderEntity), request.Id);
+			OrderAggregateRoot? order = await _orderRepository.GetByIdAsync(request.Id)
+				?? throw new NotFoundException(nameof(OrderAggregateRoot), request.Id);
 
 			await _orderRepository.DeleteAsync(order);
 

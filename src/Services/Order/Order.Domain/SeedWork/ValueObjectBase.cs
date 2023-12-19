@@ -1,10 +1,15 @@
-﻿namespace ShoppingApp.Services.Order.API.Domain.Shared
+﻿namespace ShoppingApp.Services.Order.API.Domain.SeedWork
 {
 	public abstract class ValueObjectBase
 	{
-		protected static bool EqualOperator(ValueObjectBase left, ValueObjectBase right)
+		protected static bool EqualOperator(ValueObjectBase? left, ValueObjectBase? right)
 		{
-			if (left is null ^ right is null)
+			if (left is null && right is null)
+			{
+				return true;
+			}
+
+			if (left is null || right is null)
 			{
 				return false;
 			}

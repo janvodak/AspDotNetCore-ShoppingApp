@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
-using ShoppingApp.Services.Order.API.Domain.Shared;
 
-namespace ShoppingApp.Services.Order.API.Application.Contracts.Persistence
+namespace ShoppingApp.Services.Order.API.Domain.SeedWork
 {
 	public interface IAsyncRepository<T> where T : EntityBase
 	{
