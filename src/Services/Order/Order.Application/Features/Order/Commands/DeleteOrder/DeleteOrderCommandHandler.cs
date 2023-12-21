@@ -24,9 +24,9 @@ namespace ShoppingApp.Services.Order.API.Application.Features.Order.Commands.Del
 			OrderAggregateRoot? order = await _orderRepository.GetByIdAsync(request.Id)
 				?? throw new NotFoundException(nameof(OrderAggregateRoot), request.Id);
 
-			await _orderRepository.DeleteAsync(order);
+			_orderRepository.Delete(order);
 
-			_logger.LogInformation($"Order '{order.Id}' was successfully deleted.");
+			_logger.LogInformation("Order '{ID}' was successfully deleted.", order.Id);
 
 			return Unit.Value;
 		}

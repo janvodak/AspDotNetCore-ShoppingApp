@@ -6,7 +6,7 @@ namespace ShoppingApp.Services.Order.API.Domain.SeedWork
 	{
 		private int? _requestedHashCode;
 		private int _Id;
-		private List<INotification>? _domainEvents;
+		private List<INotification> _domainEvents = null!;
 
 		public virtual int Id
 		{
@@ -21,7 +21,7 @@ namespace ShoppingApp.Services.Order.API.Domain.SeedWork
 			}
 		}
 
-		public List<INotification>? DomainEvents => _domainEvents;
+		public IReadOnlyCollection<INotification> DomainEvents => _domainEvents.AsReadOnly();
 
 		public string CreatedBy { get; set; } = null!;
 
@@ -40,12 +40,12 @@ namespace ShoppingApp.Services.Order.API.Domain.SeedWork
 
 		public void RemoveDomainEvent(INotification eventItem)
 		{
-			if (_domainEvents is null)
-			{
-				return;
-			}
+			_domainEvents?.Remove(eventItem);
+		}
 
-			_domainEvents.Remove(eventItem);
+		public void ClearDomainEvents()
+		{
+			_domainEvents?.Clear();
 		}
 
 		public bool IsTransient()

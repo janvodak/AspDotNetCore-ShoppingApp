@@ -30,7 +30,7 @@ namespace ShoppingApp.Services.Order.API.Application.Features.Order.Commands.Upd
 
 			_mapper.Map(request, order, typeof(UpdateOrderCommand), typeof(OrderAggregateRoot));
 
-			await _orderRepository.UpdateAsync(order);
+			_orderRepository.Update(order);
 
 			_logger.LogInformation("Order '{OrderId}' was successfully updated.", order.Id);
 

@@ -3,8 +3,8 @@ using ShoppingApp.Services.Order.API.Domain.SeedWork;
 
 namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Repositories
 {
-	public interface IOrderRepository : IAsyncRepository<OrderAggregateRoot>
+	public interface IOrderRepository : IRepository<OrderAggregateRoot>
 	{
-		Task<IEnumerable<OrderAggregateRoot>> GetOrdersByUserName(string userName);
+		Task<IEnumerable<OrderAggregateRoot>> GetOrdersByUserNameAsync(string userName);
 	}
 }
