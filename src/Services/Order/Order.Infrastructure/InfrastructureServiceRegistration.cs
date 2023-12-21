@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using ShoppingApp.Services.Order.API.Application.Contracts.Notifications;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Repositories;
-using ShoppingApp.Services.Order.API.Domain.SeedWork;
 using ShoppingApp.Services.Order.API.Infrastructure.Notifications;
 using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context;
 using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Repositories;
@@ -62,7 +61,6 @@ namespace ShoppingApp.Services.Order.API.Infrastructure
 		private static void ConfigureDatabaseContext(IServiceCollection services)
 		{
 			services.AddDbContext<OrderContext>();
-			services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
 			services.AddScoped<IOrderRepository, OrderRepository>();
 		}
 

@@ -2,7 +2,7 @@
 
 namespace ShoppingApp.Services.Order.API.Domain.SeedWork
 {
-	public interface IAsyncRepository<T> where T : EntityBase
+	public interface IAsyncRepository<T> where T : IAggregateRoot
 	{
 		Task<IReadOnlyList<T>> GetAllAsync();
 
