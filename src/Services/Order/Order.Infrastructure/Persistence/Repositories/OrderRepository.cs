@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Repositories;
+using ShoppingApp.Services.Order.API.Domain.SeedWork;
 using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context;
 
 namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Repositories
@@ -15,20 +16,16 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Repositories
 			_dbContext = dbContext;
 		}
 
+		public IUnitOfWork UnitOfWork => _dbContext;
+
 		public async Task<OrderAggregateRoot> AddAsync(OrderAggregateRoot entity)
 		{
-			_dbContext.Orders.Add(entity);
-
-			await _dbContext.SaveChangesAsync();
-
-			return entity;
+			return (await _dbContext.Orders.AddAsync(entity)).Entity;
 		}
 
-		public async Task DeleteAsync(OrderAggregateRoot entity)
+		public void Delete(OrderAggregateRoot entity)
 		{
 			_dbContext.Orders.Remove(entity);
-
-			await _dbContext.SaveChangesAsync();
 		}
 
 		public async Task<IReadOnlyList<OrderAggregateRoot>> GetAllAsync()
@@ -105,21 +102,21 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Repositories
 
 		public async Task<OrderAggregateRoot?> GetByIdAsync(int id)
 		{
-			return await _dbContext.Orders.FindAsync(id);
+			OrderAggregateRoot? order = await _dbContext.Orders.FindAsync(id);
+
+			return order;
 		}
 
-		public async Task<IEnumerable<OrderAggregateRoot>> GetOrdersByUserName(string userName)
+		public async Task<IEnumerable<OrderAggregateRoot>> GetOrdersByUserNameAsync(string userName)
 		{
 			return await _dbContext.Orders
 				.Where(o => o.UserName == userName)
 				.ToListAsync();
 		}
 
-		public async Task UpdateAsync(OrderAggregateRoot entity)
+		public void Update(OrderAggregateRoot entity)
 		{
 			_dbContext.Entry(entity).State = EntityState.Modified;
-
-			await _dbContext.SaveChangesAsync();
 		}
 	}
 }

@@ -2,8 +2,10 @@
 
 namespace ShoppingApp.Services.Order.API.Domain.SeedWork
 {
-	public interface IAsyncRepository<T> where T : IAggregateRoot
+	public interface IRepository<T> where T : IAggregateRoot
 	{
+		IUnitOfWork UnitOfWork { get; }
+
 		Task<IReadOnlyList<T>> GetAllAsync();
 
 		Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate);
@@ -24,8 +26,8 @@ namespace ShoppingApp.Services.Order.API.Domain.SeedWork
 
 		Task<T> AddAsync(T entity);
 
-		Task UpdateAsync(T entity);
+		void Update(T entity);
 
-		Task DeleteAsync(T entity);
+		void Delete(T entity);
 	}
 }

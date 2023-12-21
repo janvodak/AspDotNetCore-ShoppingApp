@@ -18,7 +18,7 @@ namespace ShoppingApp.Services.Order.API.Application.Features.Order.Queries.GetO
 
 		public async Task<List<OrderDataTransferObject>> Handle(GetOrdersListQuery request, CancellationToken cancellationToken)
 		{
-			IEnumerable<OrderAggregateRoot> orderList = await _orderRepository.GetOrdersByUserName(request.UserName);
+			IEnumerable<OrderAggregateRoot> orderList = await _orderRepository.GetOrdersByUserNameAsync(request.UserName);
 
 			return _mapper.Map<List<OrderDataTransferObject>>(orderList);
 		}

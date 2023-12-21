@@ -7,5 +7,15 @@
 		public string DBname { get; set; } = null!;
 		public string User { get; set; } = null!;
 		public string Password { get; set; } = null!;
+
+		public string GetConnectionString()
+		{
+			return string.Format(
+				ConnectionStringTemplate,
+				Server,
+				DBname,
+				User,
+				Password);
+		}
 	}
 }
