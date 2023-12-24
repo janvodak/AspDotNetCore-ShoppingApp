@@ -21,7 +21,7 @@ namespace ShoppingApp.Services.Order.API.Application.Services
 		public async Task Send(OrderAggregateRoot order)
 		{
 			var email = new Email(
-				to: order.EmailAddress,
+				to: order.BillingAddress.EmailAddress,
 				subject: "Order was created",
 				body: $"Order was created.");
 

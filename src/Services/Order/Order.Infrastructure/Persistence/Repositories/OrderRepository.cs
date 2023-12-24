@@ -110,7 +110,7 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Repositories
 		public async Task<IEnumerable<OrderAggregateRoot>> GetOrdersByUserNameAsync(string userName)
 		{
 			return await _dbContext.Orders
-				.Where(o => o.UserName == userName)
+				.Where(o => o.Customer.UserName == userName)
 				.ToListAsync();
 		}
 

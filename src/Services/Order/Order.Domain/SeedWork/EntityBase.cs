@@ -4,9 +4,22 @@ namespace ShoppingApp.Services.Order.API.Domain.SeedWork
 {
 	public abstract class EntityBase
 	{
-		private int? _requestedHashCode;
 		private int _Id;
+
+		private int? _requestedHashCode;
+
 		private List<INotification> _domainEvents = null!;
+
+		// DDD Patterns comment
+		// Using private fields, allowed since EF Core 1.1, is a much better encapsulation
+		// aligned with DDD Aggregates and Domain Entities (Instead of properties and property collections)
+		protected string _createdBy = null!;
+
+		protected DateTime _createdDate;
+
+		protected string? _lastModifiedBy = null;
+
+		protected DateTime? _lastModifiedDate = null;
 
 		public virtual int Id
 		{
@@ -23,14 +36,6 @@ namespace ShoppingApp.Services.Order.API.Domain.SeedWork
 
 		public IReadOnlyCollection<INotification> DomainEvents => _domainEvents.AsReadOnly();
 
-		public string CreatedBy { get; set; } = null!;
-
-		public DateTime CreatedDate { get; set; }
-
-		public string? LastModifiedBy { get; set; } = null;
-
-		public DateTime? LastModifiedDate { get; set; } = null;
-
 		public void AddDomainEvent(INotification eventItem)
 		{
 			_domainEvents ??= new List<INotification>();
@@ -46,6 +51,26 @@ namespace ShoppingApp.Services.Order.API.Domain.SeedWork
 		public void ClearDomainEvents()
 		{
 			_domainEvents?.Clear();
+		}
+
+		public void SetCreatedBy(string name)
+		{
+			_createdBy = name;
+		}
+
+		public void SetCreatedDate(DateTime dateTime)
+		{
+			_createdDate = dateTime;
+		}
+
+		public void SetLastModifiedBy(string name)
+		{
+			_lastModifiedBy = name;
+		}
+
+		public void SetLastModifiedDate(DateTime dateTime)
+		{
+			_lastModifiedDate = dateTime;
 		}
 
 		public bool IsTransient()
