@@ -19,7 +19,7 @@ namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Price
 			return MoneyWithVat.Amount;
 		}
 
-		public CurrencyValueObject GetCurrency()
+		public CurrencyEnumeration GetCurrency()
 		{
 			return MoneyWithVat.Currency;
 		}
@@ -34,7 +34,7 @@ namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Price
 			return (int)Math.Round(MoneyWithVat.Amount / VatRate.GetVatCoefficient());
 		}
 
-		public static PriceValueObject FromFloat(decimal price, CurrencyValueObject currency, VatRateValueObject vatRate)
+		public static PriceValueObject FromFloat(decimal price, CurrencyEnumeration currency, VatRateValueObject vatRate)
 		{
 			decimal roundedPrice = Math.Round(price, 2);
 			int amountWithVat = (int)Math.Round(roundedPrice * 100);

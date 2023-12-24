@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Options;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
 using ShoppingApp.Services.Order.API.Domain.SeedWork;
+using ShoppingApp.Services.Order.API.Infrastructure.Persistence.EntityConfiguration;
 using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Extensions;
 
 namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
@@ -24,6 +25,8 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 			_databaseSettings = databaseSettings;
 			_mediator = mediator;
 		}
+
+		public bool HasActiveTransaction => _currentTransaction != null;
 
 		public virtual DbSet<OrderAggregateRoot> Orders { get; set; } = null!;
 
@@ -51,12 +54,12 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 				switch (entry.State)
 				{
 					case EntityState.Added:
-						entry.Entity.CreatedDate = DateTime.Now;
-						entry.Entity.CreatedBy = AUTOMAT_NAME;
+						entry.Entity.SetCreatedDate(DateTime.Now);
+						entry.Entity.SetCreatedBy(AUTOMAT_NAME);
 						break;
 					case EntityState.Modified:
-						entry.Entity.LastModifiedDate = DateTime.Now;
-						entry.Entity.LastModifiedBy = AUTOMAT_NAME;
+						entry.Entity.SetLastModifiedDate(DateTime.Now);
+						entry.Entity.SetLastModifiedBy(AUTOMAT_NAME);
 						break;
 					default:
 						break;
@@ -119,6 +122,15 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 		protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
 		{
 			dbContextOptionsBuilder.UseSqlServer(_databaseSettings.Value.GetConnectionString());
+		}
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.HasDefaultSchema("OrderSchema");
+
+			modelBuilder.ApplyConfiguration(new OrderEntityTypeConfiguration());
+
+			//modelBuilder.UseIntegrationEventLogs();
 		}
 	}
 }

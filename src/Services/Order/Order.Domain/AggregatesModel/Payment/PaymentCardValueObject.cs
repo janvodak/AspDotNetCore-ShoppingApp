@@ -4,7 +4,11 @@ namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Payment
 {
 	public class PaymentCardValueObject : ValueObjectBase
 	{
-		public PaymentCardValueObject(string cardName, string cardNumber, string expiration, string cardVerificationValue)
+		public PaymentCardValueObject(
+			string cardName,
+			string cardNumber,
+			string expiration,
+			string cardVerificationValue)
 		{
 			CardName = cardName;
 			CardNumber = cardNumber;

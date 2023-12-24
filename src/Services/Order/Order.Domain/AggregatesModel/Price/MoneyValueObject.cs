@@ -4,14 +4,14 @@ namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Price
 {
 	public class MoneyValueObject : ValueObjectBase
 	{
-		public MoneyValueObject(int amount, CurrencyValueObject currency)
+		public MoneyValueObject(int amount, CurrencyEnumeration currency)
 		{
 			Amount = amount;
 			Currency = currency;
 		}
 
 		public int Amount { get; private set; }
-		public CurrencyValueObject Currency { get; private set; }
+		public CurrencyEnumeration Currency { get; private set; }
 
 		public MoneyValueObject Add(MoneyValueObject money)
 		{

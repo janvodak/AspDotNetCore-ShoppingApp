@@ -84,7 +84,7 @@ Plus in this specific startup project, you need to have these two packages insta
 
 Final command could looks like this (executed from repository root folder):
 ```
-dotnet ef migrations add InitialCreate --output-dir Src/Persistence/Migrations --startup-project src/Services/Order/Order.Rest/Order.Rest.csproj --project src/Services/Order/Order.Infrastructure/Order.Infrastructure.csproj
+dotnet ef migrations add InitialCreate --output-dir Persistence/Migrations --startup-project src/Services/Order/Order.Rest/Order.Rest.csproj --project src/Services/Order/Order.Infrastructure/Order.Infrastructure.csproj
 ```
 
 ### Step 3: Apply the Migration to the Database

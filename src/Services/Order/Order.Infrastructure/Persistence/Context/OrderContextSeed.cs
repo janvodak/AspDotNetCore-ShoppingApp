@@ -23,22 +23,22 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 		{
 			return new List<OrderAggregateRoot>
 			{
-				new OrderAggregateRoot(
-					"swn",
-					350,
-					"Jan",
-					"Vodak",
-					"janvodak92@gmail.com",
-					"Brno",
-					"Czech republic",
-					"Czech republic",
-					"60200",
-					"Test Card",
-					"5555555555554444",
-					"03/2030",
-					"737",
-					1
-				)
+				//new OrderAggregateRoot(
+				//	"swn",
+				//	350,
+				//	"Jan",
+				//	"Vodak",
+				//	"janvodak92@gmail.com",
+				//	"Brno",
+				//	"Czech republic",
+				//	"Czech republic",
+				//	"60200",
+				//	"Test Card",
+				//	"5555555555554444",
+				//	"03/2030",
+				//	"737",
+				//	1
+				//)
 			};
 		}
 	}
