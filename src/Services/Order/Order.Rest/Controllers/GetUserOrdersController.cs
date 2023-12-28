@@ -1,12 +1,12 @@
 ﻿using System.Net;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ShoppingApp.Services.Order.API.Application.Features.Order.Queries.GetOrdersList;
+using ShoppingApp.Services.Order.API.Application.Queries.GetOrdersList;
 
 namespace ShoppingApp.Services.Order.API.Rest.Controllers
 {
 	[ApiController]
-	[Route("api/v1/order/[controller]")]
+	[Route("api/v1/Order")]
 	[Produces("application/json")]
 	public class GetUserOrdersController : ControllerBase
 	{

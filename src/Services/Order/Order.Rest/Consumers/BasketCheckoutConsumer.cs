@@ -2,7 +2,7 @@
 using EventBus.Messages.Src.Events;
 using MassTransit;
 using MediatR;
-using ShoppingApp.Services.Order.API.Application.Features.Order.Commands.CheckoutOrder;
+using ShoppingApp.Services.Order.API.Application.Commands.CheckoutOrder;
 
 namespace ShoppingApp.Services.Order.API.Rest.Consumers
 {
@@ -24,7 +24,7 @@ namespace ShoppingApp.Services.Order.API.Rest.Consumers
 
 		public async Task Consume(ConsumeContext<BasketCheckoutEvent> context)
 		{
-			CheckoutOrderCommand command = _mapper.Map<CheckoutOrderCommand>(context.Message);
+			CreateOrderCommand command = _mapper.Map<CreateOrderCommand>(context.Message);
 
 			int result = await _mediator.Send(command);
 

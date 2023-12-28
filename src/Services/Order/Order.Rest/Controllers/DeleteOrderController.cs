@@ -1,12 +1,13 @@
 ﻿using System.Net;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ShoppingApp.Services.Order.API.Application.Features.Order.Commands.DeleteOrder;
+using ShoppingApp.Services.Order.API.Application.Commands.DeleteOrder;
+using static MassTransit.ValidationResultExtensions;
 
 namespace ShoppingApp.Services.Order.API.Rest.Controllers
 {
 	[ApiController]
-	[Route("api/v1/order/[controller]")]
+	[Route("api/v1/Order")]
 	[Produces("application/json")]
 	public class DeleteOrderController : ControllerBase
 	{
@@ -19,14 +20,15 @@ namespace ShoppingApp.Services.Order.API.Rest.Controllers
 
 		[HttpDelete("{id}")]
 		[ProducesResponseType((int)HttpStatusCode.NoContent)]
-		[ProducesResponseType((int)HttpStatusCode.NotFound)]
+		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
 		[ProducesDefaultResponseType]
 		public async Task<ActionResult> DeleteOrder(int id)
 		{
-			DeleteOrderCommand command = new() { Id = id };
-			await _mediator.Send(command);
+			DeleteOrderCommand command = new(id);
 
-			return NoContent();
+			bool result = await _mediator.Send(command);
+
+			return result ? NoContent() : BadRequest();
 		}
 	}
 }

@@ -1,6 +1,6 @@
 ﻿using ShoppingApp.Services.Order.API.Domain.SeedWork;
 
-namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Customer
+namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.ValueObjects
 {
 	public class CustomerValueObject : ValueObjectBase
 	{

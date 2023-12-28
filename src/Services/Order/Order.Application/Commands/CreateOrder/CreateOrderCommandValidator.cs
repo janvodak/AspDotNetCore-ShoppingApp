@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace ShoppingApp.Services.Order.API.Application.Features.Order.Commands.CheckoutOrder
+namespace ShoppingApp.Services.Order.API.Application.Commands.CheckoutOrder
 {
-	public class CheckoutOrderCommandValidator : AbstractValidator<CheckoutOrderCommand>
+	public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
 	{
-		public CheckoutOrderCommandValidator()
+		public CreateOrderCommandValidator()
 		{
 			RuleFor(p => p.UserName)
 				.NotEmpty().WithMessage("{UserName} is required")

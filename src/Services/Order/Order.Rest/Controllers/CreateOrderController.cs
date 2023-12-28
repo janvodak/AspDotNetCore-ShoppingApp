@@ -1,27 +1,27 @@
 ﻿using System.Net;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ShoppingApp.Services.Order.API.Application.Commands.UpdateOrder;
+using ShoppingApp.Services.Order.API.Application.Commands.CheckoutOrder;
 
 namespace ShoppingApp.Services.Order.API.Rest.Controllers
 {
 	[ApiController]
 	[Route("api/v1/Order")]
 	[Produces("application/json")]
-	public class UpdateOrderController : ControllerBase
+	public class CreateOrderController : ControllerBase
 	{
 		private readonly IMediator _mediator;
 
-		public UpdateOrderController(IMediator mediator)
+		public CreateOrderController(IMediator mediator)
 		{
 			_mediator = mediator;
 		}
 
-		[HttpPut]
+		[Route("[action]")]
+		[HttpPost]
 		[ProducesResponseType((int)HttpStatusCode.NoContent)]
 		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
-		[ProducesDefaultResponseType]
-		public async Task<ActionResult> UpdateOrder([FromBody] UpdateOrderCommand command)
+		public async Task<ActionResult<int>> CreateOrder([FromBody] CreateOrderCommand command)
 		{
 			bool result = await _mediator.Send(command);
 
@@ -29,4 +29,3 @@ namespace ShoppingApp.Services.Order.API.Rest.Controllers
 		}
 	}
 }
-

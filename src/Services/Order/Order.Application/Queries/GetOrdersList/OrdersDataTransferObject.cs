@@ -1,8 +1,6 @@
-﻿using MediatR;
-
-namespace ShoppingApp.Services.Order.API.Application.Features.Order.Commands.UpdateOrder
+﻿namespace ShoppingApp.Services.Order.API.Application.Queries.GetOrdersList
 {
-	public class UpdateOrderCommand : IRequest
+	public class OrderDataTransferObject
 	{
 		public int Id { get; set; }
 
