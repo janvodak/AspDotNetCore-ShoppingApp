@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace ShoppingApp.Services.Order.API.Application.Features.Order.Queries.GetOrdersList
+namespace ShoppingApp.Services.Order.API.Application.Queries.GetOrdersList
 {
 	public class GetOrdersListQuery : IRequest<List<OrderDataTransferObject>>
 	{

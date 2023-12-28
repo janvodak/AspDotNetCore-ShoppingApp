@@ -4,9 +4,9 @@ using ShoppingApp.Services.Order.API.Application.Exceptions;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Repositories;
 
-namespace ShoppingApp.Services.Order.API.Application.Features.Order.Commands.DeleteOrder
+namespace ShoppingApp.Services.Order.API.Application.Commands.DeleteOrder
 {
-	public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand>
+	public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand, bool>
 	{
 		private readonly IOrderRepository _orderRepository;
 		private readonly ILogger<DeleteOrderCommandHandler> _logger;
@@ -19,16 +19,16 @@ namespace ShoppingApp.Services.Order.API.Application.Features.Order.Commands.Del
 			_logger = logger;
 		}
 
-		public async Task<Unit> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
+		public async Task<bool> Handle(DeleteOrderCommand command, CancellationToken cancellationToken)
 		{
-			OrderAggregateRoot? order = await _orderRepository.GetByIdAsync(request.Id)
-				?? throw new NotFoundException(nameof(OrderAggregateRoot), request.Id);
+			OrderAggregateRoot? order = await _orderRepository.GetByIdAsync(command.Id)
+				?? throw new NotFoundException(nameof(OrderAggregateRoot), command.Id);
 
 			_orderRepository.Delete(order);
 
 			_logger.LogInformation("Order '{ID}' was successfully deleted.", order.Id);
 
-			return Unit.Value;
+			return await _orderRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 		}
 	}
 }

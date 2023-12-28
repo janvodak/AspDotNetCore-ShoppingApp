@@ -9,8 +9,6 @@
 
   <ItemGroup>
     <None Remove="AggregatesModel\" />
-    <None Remove="AggregatesModel\Address\" />
-    <None Remove="AggregatesModel\Customer\" />
     <None Remove="AggregatesModel\Order\" />
     <None Remove="AggregatesModel\Payment\" />
     <None Remove="AggregatesModel\Price\" />
@@ -18,12 +16,12 @@
     <None Remove="AggregatesModel\Shared\" />
     <None Remove="AggregatesModel\Order\Entities\" />
     <None Remove="AggregatesModel\Order\Repositories\" />
+    <None Remove="AggregatesModel\Order\Factories\" />
+    <None Remove="AggregatesModel\Order\ValueObjects\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AggregatesModel\Order\" />
     <Folder Include="AggregatesModel\" />
-    <Folder Include="AggregatesModel\Address\" />
-    <Folder Include="AggregatesModel\Customer\" />
     <Folder Include="AggregatesModel\Order\" />
     <Folder Include="AggregatesModel\Payment\" />
     <Folder Include="AggregatesModel\Price\" />
@@ -31,6 +29,8 @@
     <Folder Include="AggregatesModel\Shared\" />
     <Folder Include="AggregatesModel\Order\Entities\" />
     <Folder Include="AggregatesModel\Order\Repositories\" />
+    <Folder Include="AggregatesModel\Order\Factories\" />
+    <Folder Include="AggregatesModel\Order\ValueObjects\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="11.1.0" />

@@ -3,7 +3,7 @@ using MediatR;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Repositories;
 
-namespace ShoppingApp.Services.Order.API.Application.Features.Order.Queries.GetOrdersList
+namespace ShoppingApp.Services.Order.API.Application.Queries.GetOrdersList
 {
 	public class GetOrdersListQueryHandler : IRequestHandler<GetOrdersListQuery, List<OrderDataTransferObject>>
 	{
