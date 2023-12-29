@@ -1,7 +1,7 @@
 ﻿using System;
 namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Payment
 {
-	public class PaymentCardFactory
+	public class PaymentCardFactory : IPaymentCardFactory
 	{
 		public PaymentCardValueObject Create(
 			string cardName,

@@ -1,7 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Enumerations;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.ValueObjects;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Payment;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Price;
+using ShoppingApp.Services.Order.API.Domain.Events;
+using ShoppingApp.Services.Order.API.Domain.Exceptions;
 using ShoppingApp.Services.Order.API.Domain.SeedWork;
 
 namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities
@@ -21,13 +24,16 @@ namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities
 			PriceValueObject totalPrice,
 			AddressValueObject billingAddress,
 			PaymentCardValueObject paymentCard,
-			PaymentMethodEnumeration paymentMethod)
+			PaymentMethodEnumeration paymentMethod) : this()
 		{
 			Customer = customer;
 			TotalPrice = totalPrice;
 			BillingAddress = billingAddress;
 			PaymentCard = paymentCard;
 			PaymentMethod = paymentMethod;
+			OrderStatus = OrderStatusEnumeration.Submitted;
+
+			AddDomainEvent(new OrderCreatedDomainEvent(this));
 		}
 
 		[Required]
@@ -44,5 +50,26 @@ namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities
 
 		[Required]
 		public PaymentMethodEnumeration PaymentMethod { get; private set; }
+
+		[Required]
+		public OrderStatusEnumeration OrderStatus { get; private set; }
+
+		public void SetCancelledStatus()
+		{
+			if (OrderStatus == OrderStatusEnumeration.Paid
+				|| OrderStatus == OrderStatusEnumeration.Shipped)
+			{
+				throw new DomainException($"Is not possible to change the order status from {OrderStatus.Name} to {OrderStatusEnumeration.Cancelled.Name}.");
+			}
+
+			OrderStatus = OrderStatusEnumeration.Cancelled;
+
+			AddDomainEvent(new OrderCancelledDomainEvent(this));
+		}
+
+		public void ChangeBillingAddress(AddressValueObject addressValueObject)
+		{
+			BillingAddress = addressValueObject;
+		}
 	}
 }

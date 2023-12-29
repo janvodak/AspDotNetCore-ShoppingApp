@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Enumerations;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Payment;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Price;
 
@@ -63,6 +64,15 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.EntityConfig
 				.HasConversion(
 					v => v.Id,
 					v => new PaymentMethodEnumeration(v, PaymentMethodEnumeration.Card.Name)
+				);
+
+			orderConfiguration
+				.Property(o => o.OrderStatus)
+				.HasColumnName("OrderStatusId")
+				.HasColumnType("int")
+				.HasConversion(
+					v => v.Id,
+					v => OrderStatusEnumeration.From(v)
 				);
 
 			orderConfiguration

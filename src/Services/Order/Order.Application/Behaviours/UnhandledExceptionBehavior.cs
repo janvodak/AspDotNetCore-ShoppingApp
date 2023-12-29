@@ -3,11 +3,11 @@ using Microsoft.Extensions.Logging;
 
 namespace ShoppingApp.Services.Order.API.Application.Behaviours
 {
-	public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+	public class UnhandledExceptionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 	{
 		private readonly ILogger<TRequest> _logger;
 
-		public UnhandledExceptionBehaviour(ILogger<TRequest> logger)
+		public UnhandledExceptionBehavior(ILogger<TRequest> logger)
 		{
 			_logger = logger;
 		}

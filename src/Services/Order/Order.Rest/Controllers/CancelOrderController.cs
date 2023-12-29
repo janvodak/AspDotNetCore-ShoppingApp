@@ -9,22 +9,23 @@ namespace ShoppingApp.Services.Order.API.Rest.Controllers
 	[ApiController]
 	[Route("api/v1/Order")]
 	[Produces("application/json")]
-	public class DeleteOrderController : ControllerBase
+	public class CancelOrderController : ControllerBase
 	{
 		private readonly IMediator _mediator;
 
-		public DeleteOrderController(IMediator mediator)
+		public CancelOrderController(IMediator mediator)
 		{
 			_mediator = mediator;
 		}
 
-		[HttpDelete("{id}")]
+		[Route("[action]/{id:length(24)}")]
+		[HttpDelete]
 		[ProducesResponseType((int)HttpStatusCode.NoContent)]
 		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
 		[ProducesDefaultResponseType]
-		public async Task<ActionResult> DeleteOrder(int id)
+		public async Task<ActionResult> CancelOrder(int id)
 		{
-			DeleteOrderCommand command = new(id);
+			CancelOrderCommand command = new(id);
 
 			bool result = await _mediator.Send(command);
 

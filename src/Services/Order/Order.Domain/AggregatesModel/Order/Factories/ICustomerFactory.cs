@@ -2,11 +2,8 @@
 
 namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Factories
 {
-	public class CustomerFactory : ICustomerFactory
+	public interface ICustomerFactory
 	{
-		public CustomerValueObject Create(string userName)
-		{
-			return new CustomerValueObject(userName);
-		}
+		CustomerValueObject Create(string userName);
 	}
 }

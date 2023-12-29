@@ -3,7 +3,6 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using ShoppingApp.Services.Order.API.Application.Behaviours;
-using ShoppingApp.Services.Order.API.Application.Services;
 
 namespace ShoppingApp.Services.Order.API.Application
 {
@@ -15,10 +14,9 @@ namespace ShoppingApp.Services.Order.API.Application
 			services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 			services.AddMediatR(Assembly.GetExecutingAssembly());
 
-			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
-			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-
-			services.AddScoped<CheckoutOrderEmailService>();
+			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehavior<,>));
+			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorBehavior<,>));
 
 			return services;
 		}

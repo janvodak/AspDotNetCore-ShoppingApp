@@ -2,7 +2,7 @@
 
 namespace ShoppingApp.Services.Order.API.Application.Exceptions
 {
-	public class ValidationException : ApplicationException
+	public class ValidationException : AbstractException
 	{
 		public ValidationException()
 			: base("Orne or more validation failures have occured.")

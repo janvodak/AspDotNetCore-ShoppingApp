@@ -1,30 +1,30 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using ShoppingApp.Services.Order.API.Application.Exceptions;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Factories;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Repositories;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.ValueObjects;
 
 namespace ShoppingApp.Services.Order.API.Application.Commands.UpdateOrder
 {
-	public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand, bool>
+	public class ChangeBillingAddressCommandHandler : IRequestHandler<ChangeBillingAddressCommand, bool>
 	{
 		private readonly IOrderRepository _orderRepository;
-		private readonly IOrderFactory _orderFactory;
-		private readonly ILogger<UpdateOrderCommandHandler> _logger;
+		private readonly IAddressFactory _addressFactory;
+		private readonly ILogger<ChangeBillingAddressCommandHandler> _logger;
 
-		public UpdateOrderCommandHandler(
+		public ChangeBillingAddressCommandHandler(
 			IOrderRepository orderRepository,
-			IOrderFactory orderFactory,
-			ILogger<UpdateOrderCommandHandler> logger)
+			IAddressFactory addressFactory,
+			ILogger<ChangeBillingAddressCommandHandler> logger)
 		{
 			_orderRepository = orderRepository;
-			_orderFactory = orderFactory;
+			_addressFactory = addressFactory;
 			_logger = logger;
 		}
 
-		public async Task<bool> Handle(UpdateOrderCommand command, CancellationToken cancellationToken)
+		public async Task<bool> Handle(ChangeBillingAddressCommand command, CancellationToken cancellationToken)
 		{
 			OrderAggregateRoot? order = await _orderRepository.GetByIdAsync(command.Id)
 				?? throw new NotFoundException(nameof(OrderAggregateRoot), command.Id);
@@ -34,8 +34,18 @@ namespace ShoppingApp.Services.Order.API.Application.Commands.UpdateOrder
 			// DDD patterns comment: Add child entities and value-objects through the Aggregate-Root
 			// methods and constructor so validations, invariants and business logic
 			// make sure that consistency is preserved across the whole aggregate
+			AddressValueObject address = _addressFactory.Create(
+				command.FirstName,
+				command.LastName,
+				command.EmailAddress,
+				command.AddressLine,
+				command.Country,
+				command.State,
+				command.ZipCode);
 
-			_logger.LogInformation("----- Updating Order - Order: {@Order}", order);
+			order.ChangeBillingAddress(address);
+
+			_logger.LogInformation("----- Updating Billing Address - Order: {@Order}", order);
 
 			_orderRepository.Update(order);
 
