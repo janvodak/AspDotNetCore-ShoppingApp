@@ -6,27 +6,29 @@ using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Repositories;
 
 namespace ShoppingApp.Services.Order.API.Application.Commands.DeleteOrder
 {
-	public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand, bool>
+	public class CancelOrderCommandHandler : IRequestHandler<CancelOrderCommand, bool>
 	{
 		private readonly IOrderRepository _orderRepository;
-		private readonly ILogger<DeleteOrderCommandHandler> _logger;
+		private readonly ILogger<CancelOrderCommandHandler> _logger;
 
-		public DeleteOrderCommandHandler(
+		public CancelOrderCommandHandler(
 			IOrderRepository orderRepository,
-			ILogger<DeleteOrderCommandHandler> logger)
+			ILogger<CancelOrderCommandHandler> logger)
 		{
 			_orderRepository = orderRepository;
 			_logger = logger;
 		}
 
-		public async Task<bool> Handle(DeleteOrderCommand command, CancellationToken cancellationToken)
+		public async Task<bool> Handle(CancelOrderCommand command, CancellationToken cancellationToken)
 		{
 			OrderAggregateRoot? order = await _orderRepository.GetByIdAsync(command.Id)
 				?? throw new NotFoundException(nameof(OrderAggregateRoot), command.Id);
 
-			_orderRepository.Delete(order);
+			order.SetCancelledStatus();
 
-			_logger.LogInformation("Order '{ID}' was successfully deleted.", order.Id);
+			_logger.LogInformation("Order '{ID}' was successfully cancelled.", order.Id);
+
+			_orderRepository.Update(order);
 
 			return await _orderRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 		}

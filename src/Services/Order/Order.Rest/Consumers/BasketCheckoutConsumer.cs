@@ -26,11 +26,20 @@ namespace ShoppingApp.Services.Order.API.Rest.Consumers
 		{
 			CreateOrderCommand command = _mapper.Map<CreateOrderCommand>(context.Message);
 
-			int result = await _mediator.Send(command);
+			bool result = await _mediator.Send(command);
 
-			_logger.LogInformation(
-				"BasketCheckoutEvent was consumed successfully. Order with id: '{OrderId}' was successfully created.",
-				result);
+			if (result == true)
+			{
+				_logger.LogInformation(
+					"BasketCheckoutEvent was consumed successfully. Order command '{@Order}' was successfully processed.",
+					command);
+			}
+			else
+			{
+				_logger.LogWarning(
+					"There was an error during BasketCheckoutEvent was consumtion. Order command '{@Order}'.",
+					command);
+			}
 		}
 	}
 }

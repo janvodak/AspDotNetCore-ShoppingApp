@@ -7,14 +7,14 @@ namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Factories
 {
 	public class OrderFactory : IOrderFactory
 	{
-		private readonly CustomerFactory _customerFactory;
-		private readonly AddressFactory _addressFactory;
-		private readonly PaymentCardFactory _paymentCardFactory;
+		private readonly ICustomerFactory _customerFactory;
+		private readonly IAddressFactory _addressFactory;
+		private readonly IPaymentCardFactory _paymentCardFactory;
 
 		public OrderFactory(
-			CustomerFactory customerFactory,
-			AddressFactory addressFactory,
-			PaymentCardFactory paymentCardFactory)
+			ICustomerFactory customerFactory,
+			IAddressFactory addressFactory,
+			IPaymentCardFactory paymentCardFactory)
 		{
 			_customerFactory = customerFactory;
 			_addressFactory = addressFactory;

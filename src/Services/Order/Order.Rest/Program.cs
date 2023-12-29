@@ -2,6 +2,7 @@
 using EventBus.Messages.Src.Shared;
 using MassTransit;
 using ShoppingApp.Services.Order.API.Application;
+using ShoppingApp.Services.Order.API.Domain;
 using ShoppingApp.Services.Order.API.Infrastructure;
 using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context;
 using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Extensions;
@@ -10,6 +11,7 @@ using ShoppingApp.Services.Order.API.Rest.Consumers;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDomainServices();
 builder.Services.AddAplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 

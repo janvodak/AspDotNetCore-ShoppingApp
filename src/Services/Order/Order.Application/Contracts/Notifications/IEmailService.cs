@@ -7,4 +7,3 @@ namespace ShoppingApp.Services.Order.API.Application.Contracts.Notifications
 		Task<bool> SendEmail(Email email);
 	}
 }
-

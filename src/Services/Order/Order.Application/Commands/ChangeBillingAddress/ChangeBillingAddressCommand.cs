@@ -3,14 +3,10 @@ using MediatR;
 
 namespace ShoppingApp.Services.Order.API.Application.Commands.UpdateOrder
 {
-	[DataContract]
-	public class UpdateOrderCommand : IRequest<bool>
+	public class ChangeBillingAddressCommand : IRequest<bool>
 	{
 		[DataMember]
 		public int Id { get; private set; }
-
-		[DataMember]
-		public string UserName { get; private set; }
 
 		[DataMember]
 		public string FirstName { get; private set; }
@@ -33,43 +29,17 @@ namespace ShoppingApp.Services.Order.API.Application.Commands.UpdateOrder
 		[DataMember]
 		public string ZipCode { get; private set; }
 
-		[DataMember]
-		public decimal TotalPrice { get; private set; }
-
-		[DataMember]
-		public int PaymentMethod { get; private set; }
-
-		[DataMember]
-		public string CardName { get; private set; }
-
-		[DataMember]
-		public string CardNumber { get; private set; }
-
-		[DataMember]
-		public string Expiration { get; private set; }
-
-		[DataMember]
-		public string CardVerificationValue { get; private set; }
-
-		public UpdateOrderCommand(
+		public ChangeBillingAddressCommand(
 			int id,
-			string userName,
 			string firstName,
 			string lastName,
 			string emailAddress,
 			string addressLine,
 			string country,
 			string state,
-			string zipCode,
-			decimal totalPrice,
-			int paymentMethod,
-			string cardName,
-			string cardNumber,
-			string expiration,
-			string cardVerificationValue)
+			string zipCode)
 		{
 			Id = id;
-			UserName = userName;
 			FirstName = firstName;
 			LastName = lastName;
 			EmailAddress = emailAddress;
@@ -77,12 +47,6 @@ namespace ShoppingApp.Services.Order.API.Application.Commands.UpdateOrder
 			Country = country;
 			State = state;
 			ZipCode = zipCode;
-			TotalPrice = totalPrice;
-			PaymentMethod = paymentMethod;
-			CardName = cardName;
-			CardNumber = cardNumber;
-			Expiration = expiration;
-			CardVerificationValue = cardVerificationValue;
 		}
 	}
 }

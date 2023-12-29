@@ -2,25 +2,15 @@
 
 namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Factories
 {
-	public class AddressFactory : IAddressFactory
+	public interface IAddressFactory
 	{
-		public AddressValueObject Create(
+		AddressValueObject Create(
 			string firstName,
 			string lastName,
 			string emailAddress,
 			string addressLine,
 			string country,
 			string state,
-			string zipCode)
-		{
-			return new AddressValueObject(
-				firstName,
-				lastName,
-				emailAddress,
-				addressLine,
-				country,
-				state,
-				zipCode);
-		}
+			string zipCode);
 	}
 }

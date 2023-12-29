@@ -19,18 +19,22 @@
 	  <None Remove="Contracts\" />
 	  <None Remove="Exceptions\" />
 	  <None Remove="Models\" />
-	  <None Remove="Services\" />
 	  <None Remove="Commands\" />
 	  <None Remove="Queries\" />
+	  <None Remove="DomainEventsHandlers\" />
+	  <None Remove="Validators\" />
+	  <None Remove="Extensions\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Behaviours\" />
 	  <Folder Include="Contracts\" />
 	  <Folder Include="Exceptions\" />
 	  <Folder Include="Models\" />
-	  <Folder Include="Services\" />
 	  <Folder Include="Commands\" />
 	  <Folder Include="Queries\" />
+	  <Folder Include="DomainEventsHandlers\" />
+	  <Folder Include="Validators\" />
+	  <Folder Include="Extensions\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="AutoMapper" Version="12.0.1" />

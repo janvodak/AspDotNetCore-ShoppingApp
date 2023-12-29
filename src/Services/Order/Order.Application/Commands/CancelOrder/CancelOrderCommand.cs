@@ -3,13 +3,12 @@ using MediatR;
 
 namespace ShoppingApp.Services.Order.API.Application.Commands.DeleteOrder
 {
-	[DataContract]
-	public class DeleteOrderCommand : IRequest<bool>
+	public class CancelOrderCommand : IRequest<bool>
 	{
 		[DataMember]
 		public int Id { get; private set; }
 
-		public DeleteOrderCommand(int id)
+		public CancelOrderCommand(int id)
 		{
 			Id = id;
 		}
