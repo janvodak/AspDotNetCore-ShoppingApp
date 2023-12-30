@@ -45,6 +45,8 @@
 	  <None Remove="Docker\Dotnet70\" />
 	  <None Remove="Consumers\" />
 	  <None Remove="Controllers\" />
+	  <None Remove="Models\" />
+	  <None Remove="Models\DataTransferObjects\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Docker\" />
@@ -52,5 +54,7 @@
 	  <Folder Include="Docker\Dotnet70\" />
 	  <Folder Include="Consumers\" />
 	  <Folder Include="Controllers\" />
+	  <Folder Include="Models\" />
+	  <Folder Include="Models\DataTransferObjects\" />
 	</ItemGroup>
 </Project>

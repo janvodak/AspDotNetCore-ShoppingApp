@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingApp.Services.Order.API.Application.Queries.GetOrdersList;
+using ShoppingApp.Services.Order.API.Rest.Models.DataTransferObjects;
 
 namespace ShoppingApp.Services.Order.API.Rest.Controllers
 {
@@ -25,7 +26,7 @@ namespace ShoppingApp.Services.Order.API.Rest.Controllers
 
 			List<OrderDataTransferObject> orders = await _mediator.Send(query);
 
-			return Ok(orders);
+			return Ok(new ResponseDataTransferObject(orders));
 		}
 	}
 }
