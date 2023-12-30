@@ -15,6 +15,38 @@ namespace ShoppingApp.Services.Order.API.Application.Commands.CreateOrder
 	[DataContract]
 	public class CreateOrderCommand : IRequest<bool>
 	{
+		public CreateOrderCommand(
+			string userName,
+			string firstName,
+			string lastName,
+			string emailAddress,
+			string addressLine,
+			string country,
+			string state,
+			string zipCode,
+			decimal totalPrice,
+			int paymentMethod,
+			string cardName,
+			string cardNumber,
+			string expiration,
+			string cardVerificationValue)
+		{
+			UserName = userName;
+			FirstName = firstName;
+			LastName = lastName;
+			EmailAddress = emailAddress;
+			AddressLine = addressLine;
+			Country = country;
+			State = state;
+			ZipCode = zipCode;
+			TotalPrice = totalPrice;
+			PaymentMethod = paymentMethod;
+			CardName = cardName;
+			CardNumber = cardNumber;
+			Expiration = expiration;
+			CardVerificationValue = cardVerificationValue;
+		}
+
 		[DataMember]
 		public string UserName { get; private set; }
 
@@ -56,37 +88,5 @@ namespace ShoppingApp.Services.Order.API.Application.Commands.CreateOrder
 
 		[DataMember]
 		public string CardVerificationValue { get; private set; }
-
-		public CreateOrderCommand(
-			string userName,
-			string firstName,
-			string lastName,
-			string emailAddress,
-			string addressLine,
-			string country,
-			string state,
-			string zipCode,
-			decimal totalPrice,
-			int paymentMethod,
-			string cardName,
-			string cardNumber,
-			string expiration,
-			string cardVerificationValue)
-		{
-			UserName = userName;
-			FirstName = firstName;
-			LastName = lastName;
-			EmailAddress = emailAddress;
-			AddressLine = addressLine;
-			Country = country;
-			State = state;
-			ZipCode = zipCode;
-			TotalPrice = totalPrice;
-			PaymentMethod = paymentMethod;
-			CardName = cardName;
-			CardNumber = cardNumber;
-			Expiration = expiration;
-			CardVerificationValue = cardVerificationValue;
-		}
 	}
 }

@@ -26,6 +26,7 @@
 	  <None Remove="Extensions\" />
 	  <None Remove="Commands\Shared\" />
 	  <None Remove="Contracts\Idempotency\" />
+	  <None Remove="Models\DataTransferObjects\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Behaviours\" />
@@ -39,10 +40,9 @@
 	  <Folder Include="Extensions\" />
 	  <Folder Include="Commands\Shared\" />
 	  <Folder Include="Contracts\Idempotency\" />
+	  <Folder Include="Models\DataTransferObjects\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="AutoMapper" Version="12.0.1" />
-	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
 	  <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
 	  <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
 	  <PackageReference Include="FluentValidation" Version="11.8.0" />

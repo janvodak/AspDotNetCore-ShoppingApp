@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ShoppingApp.Services.Order.API.Application.Commands.ChangeBillingAddress;
 using ShoppingApp.Services.Order.API.Application.Commands.Shared;
 using ShoppingApp.Services.Order.API.Application.Extensions;
+using ShoppingApp.Services.Order.API.Rest.Models.DataTransferObjects;
 
 namespace ShoppingApp.Services.Order.API.Rest.Controllers
 {
@@ -25,7 +26,7 @@ namespace ShoppingApp.Services.Order.API.Rest.Controllers
 
 		[Route("[action]")]
 		[HttpPut]
-		[ProducesResponseType((int)HttpStatusCode.NoContent)]
+		[ProducesResponseType((int)HttpStatusCode.OK)]
 		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
 		[ProducesDefaultResponseType]
 		public async Task<ActionResult> ChangeBillingAddress(
@@ -34,7 +35,11 @@ namespace ShoppingApp.Services.Order.API.Rest.Controllers
 		{
 			if (requestId == Guid.Empty)
 			{
-				return BadRequest("Empty GUID is not valid for request ID");
+				ResponseDataTransferObject response = new(
+					false,
+					"Empty GUID is not valid for request ID.");
+
+				return BadRequest(response);
 			}
 
 			IdentifiedCommand<ChangeBillingAddressCommand, bool> requestChangeBillingAddress = new(command, requestId);
@@ -50,10 +55,14 @@ namespace ShoppingApp.Services.Order.API.Rest.Controllers
 
 			if (commandResult == false)
 			{
-				return BadRequest();
+				ResponseDataTransferObject response = new(
+					false,
+					"There was a problem processing the request.");
+
+				return BadRequest(response);
 			}
 
-			return NoContent();
+			return Ok(new ResponseDataTransferObject());
 		}
 	}
 }

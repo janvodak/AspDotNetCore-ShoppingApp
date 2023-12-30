@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System.Runtime.Serialization;
+using MediatR;
 
 namespace ShoppingApp.Services.Order.API.Application.Queries.GetOrdersList
 {
@@ -9,6 +10,7 @@ namespace ShoppingApp.Services.Order.API.Application.Queries.GetOrdersList
 			UserName = userName;
 		}
 
-		public string UserName { get; set; }
+		[DataMember]
+		public string UserName { get; private set; }
 	}
 }

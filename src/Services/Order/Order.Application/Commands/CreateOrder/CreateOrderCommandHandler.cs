@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Factories;

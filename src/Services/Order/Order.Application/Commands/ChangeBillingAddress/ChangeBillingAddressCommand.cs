@@ -5,6 +5,26 @@ namespace ShoppingApp.Services.Order.API.Application.Commands.ChangeBillingAddre
 {
 	public class ChangeBillingAddressCommand : IRequest<bool>
 	{
+		public ChangeBillingAddressCommand(
+			int id,
+			string firstName,
+			string lastName,
+			string emailAddress,
+			string addressLine,
+			string country,
+			string state,
+			string zipCode)
+		{
+			Id = id;
+			FirstName = firstName;
+			LastName = lastName;
+			EmailAddress = emailAddress;
+			AddressLine = addressLine;
+			Country = country;
+			State = state;
+			ZipCode = zipCode;
+		}
+
 		[DataMember]
 		public int Id { get; private set; }
 
@@ -28,25 +48,5 @@ namespace ShoppingApp.Services.Order.API.Application.Commands.ChangeBillingAddre
 
 		[DataMember]
 		public string ZipCode { get; private set; }
-
-		public ChangeBillingAddressCommand(
-			int id,
-			string firstName,
-			string lastName,
-			string emailAddress,
-			string addressLine,
-			string country,
-			string state,
-			string zipCode)
-		{
-			Id = id;
-			FirstName = firstName;
-			LastName = lastName;
-			EmailAddress = emailAddress;
-			AddressLine = addressLine;
-			Country = country;
-			State = state;
-			ZipCode = zipCode;
-		}
 	}
 }

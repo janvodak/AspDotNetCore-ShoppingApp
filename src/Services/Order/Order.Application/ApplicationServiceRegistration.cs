@@ -10,7 +10,6 @@ namespace ShoppingApp.Services.Order.API.Application
 	{
 		public static IServiceCollection AddAplicationServices(this IServiceCollection services)
 		{
-			services.AddAutoMapper(Assembly.GetExecutingAssembly());
 			services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 			services.AddMediatR(Assembly.GetExecutingAssembly());
 
