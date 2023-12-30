@@ -6,7 +6,7 @@ using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Factories;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Repositories;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.ValueObjects;
 
-namespace ShoppingApp.Services.Order.API.Application.Commands.UpdateOrder
+namespace ShoppingApp.Services.Order.API.Application.Commands.ChangeBillingAddress
 {
 	public class ChangeBillingAddressCommandHandler : IRequestHandler<ChangeBillingAddressCommand, bool>
 	{

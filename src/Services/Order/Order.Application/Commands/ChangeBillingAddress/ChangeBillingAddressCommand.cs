@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using MediatR;
 
-namespace ShoppingApp.Services.Order.API.Application.Commands.UpdateOrder
+namespace ShoppingApp.Services.Order.API.Application.Commands.ChangeBillingAddress
 {
 	public class ChangeBillingAddressCommand : IRequest<bool>
 	{

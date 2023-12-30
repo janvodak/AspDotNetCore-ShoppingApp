@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using MediatR;
 
-namespace ShoppingApp.Services.Order.API.Application.Commands.DeleteOrder
+namespace ShoppingApp.Services.Order.API.Application.Commands.CancelOrder
 {
 	public class CancelOrderCommand : IRequest<bool>
 	{

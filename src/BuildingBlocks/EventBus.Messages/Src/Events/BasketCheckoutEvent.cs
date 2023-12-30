@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace EventBus.Messages.Src.Events
+﻿namespace EventBus.Messages.Src.Events
 {
 	public class BasketCheckoutEvent : IntegrationBaseEvent
 	{
+		public Guid CommandId { get; set; }
+
 		public string UserName { get; set; } = null!;
 
 		public decimal TotalPrice { get; set; }

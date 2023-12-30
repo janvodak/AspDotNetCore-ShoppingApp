@@ -128,6 +128,7 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 		{
 			modelBuilder.HasDefaultSchema("OrderSchema");
 
+			modelBuilder.ApplyConfiguration(new ClientRequestEntityTypeConfiguration());
 			modelBuilder.ApplyConfiguration(new OrderEntityTypeConfiguration());
 
 			//modelBuilder.UseIntegrationEventLogs();
