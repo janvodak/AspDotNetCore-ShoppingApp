@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using EventBus.Messages.Src.Shared;
+﻿using EventBus.Messages.Src.Shared;
 using MassTransit;
 using ShoppingApp.Services.Order.API.Application;
 using ShoppingApp.Services.Order.API.Domain;
@@ -16,7 +15,6 @@ builder.Services.AddAplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
 // General configuration
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<BasketCheckoutConsumer>();
 
 // MassTransit-RabbitMQ Configuration

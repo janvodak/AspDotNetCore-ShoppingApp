@@ -21,6 +21,9 @@
 	  <None Remove="Persistence\EntityConfiguration\" />
 	  <None Remove="Persistence\Migrations\" />
 	  <None Remove="Exceptions\" />
+	  <None Remove="Idempotency\" />
+	  <None Remove="Idempotency\DataTransferObjects\" />
+	  <None Remove="Idempotency\Services\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Notifications\" />
@@ -28,6 +31,9 @@
 	  <Folder Include="Persistence\EntityConfiguration\" />
 	  <Folder Include="Persistence\Migrations\" />
 	  <Folder Include="Exceptions\" />
+	  <Folder Include="Idempotency\" />
+	  <Folder Include="Idempotency\DataTransferObjects\" />
+	  <Folder Include="Idempotency\Services\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.12" />

@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using MediatR;
 
-namespace ShoppingApp.Services.Order.API.Application.Commands.CheckoutOrder
+namespace ShoppingApp.Services.Order.API.Application.Commands.CreateOrder
 {
 	// DDD and CQRS patterns comment: Note that it is recommended to implement immutable Commands
 	// In this case, its immutability is achieved by having all the setters as private

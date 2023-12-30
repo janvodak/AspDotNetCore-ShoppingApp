@@ -24,6 +24,8 @@
 	  <None Remove="DomainEventsHandlers\" />
 	  <None Remove="Validators\" />
 	  <None Remove="Extensions\" />
+	  <None Remove="Commands\Shared\" />
+	  <None Remove="Contracts\Idempotency\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Behaviours\" />
@@ -35,6 +37,8 @@
 	  <Folder Include="DomainEventsHandlers\" />
 	  <Folder Include="Validators\" />
 	  <Folder Include="Extensions\" />
+	  <Folder Include="Commands\Shared\" />
+	  <Folder Include="Contracts\Idempotency\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="AutoMapper" Version="12.0.1" />

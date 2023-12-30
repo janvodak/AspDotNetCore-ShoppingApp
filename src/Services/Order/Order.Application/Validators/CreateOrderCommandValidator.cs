@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.Logging;
+using ShoppingApp.Services.Order.API.Application.Commands.CreateOrder;
 
 namespace ShoppingApp.Services.Order.API.Application.Commands.CheckoutOrder
 {

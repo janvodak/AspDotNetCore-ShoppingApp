@@ -5,7 +5,7 @@ using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Factories;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Repositories;
 
-namespace ShoppingApp.Services.Order.API.Application.Commands.CheckoutOrder
+namespace ShoppingApp.Services.Order.API.Application.Commands.CreateOrder
 {
 	public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, bool>
 	{

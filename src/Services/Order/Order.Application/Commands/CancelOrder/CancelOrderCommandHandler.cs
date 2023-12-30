@@ -4,7 +4,7 @@ using ShoppingApp.Services.Order.API.Application.Exceptions;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Repositories;
 
-namespace ShoppingApp.Services.Order.API.Application.Commands.DeleteOrder
+namespace ShoppingApp.Services.Order.API.Application.Commands.CancelOrder
 {
 	public class CancelOrderCommandHandler : IRequestHandler<CancelOrderCommand, bool>
 	{
