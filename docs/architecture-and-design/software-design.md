@@ -10,6 +10,7 @@ It is more about the "how" of implementation within a specific module or class.
 - [SOLID Principles](#solid-principles)
 - [Hexagonal Architecture / Onion Architecture](#hexagonal-architecture--onion-architecture) 
 - [Domain-Driven Design (DDD)](#domain-driven-design-ddd)
+    - [Implementtion principles and patterns used in DDD](domain-driven-design.md)
 - [Command Query Responsibility Segregation (CQRS)](#command-query-responsibility-segregation-cqrs)
 
 ## Clean Architecture
