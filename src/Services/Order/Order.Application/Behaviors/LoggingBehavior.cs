@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using ShoppingApp.Services.Order.API.Application.Extensions;
 
-namespace ShoppingApp.Services.Order.API.Application.Behaviours
+namespace ShoppingApp.Services.Order.API.Application.Behaviors
 {
 	public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 	{

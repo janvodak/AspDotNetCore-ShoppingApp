@@ -6,7 +6,7 @@ using ShoppingApp.Services.Order.API.Application.Extensions;
 using ShoppingApp.Services.Order.API.Domain.Exceptions;
 using ValidationException = ShoppingApp.Services.Order.API.Application.Exceptions.ValidationException;
 
-namespace ShoppingApp.Services.Order.API.Application.Behaviours
+namespace ShoppingApp.Services.Order.API.Application.Behaviors
 {
 	public class ValidatorBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 	{
@@ -26,25 +26,21 @@ namespace ShoppingApp.Services.Order.API.Application.Behaviours
 			RequestHandlerDelegate<TResponse> next,
 			CancellationToken cancellationToken)
 		{
-			if (_validators.Any() == false)
-			{
-				return await next();
-			}
+			string typeName = request.GetGenericTypeName();
 
-			ValidationContext<TRequest> context = new(request);
+			_logger.LogInformation("Validating command {CommandType}", typeName);
 
-			ValidationResult[] validationResults = await Task.WhenAll(
-				_validators.Select(v => v.ValidateAsync(context, cancellationToken)));
-
-			List<ValidationFailure> failures = validationResults
-				.SelectMany(r => r.Errors)
-				.Where(f => f != null).ToList();
+			List<ValidationFailure> failures = _validators
+				.Select(v => v.Validate(request))
+				.SelectMany(result => result.Errors)
+				.Where(error => error != null)
+				.ToList();
 
 			if (failures.Any() == true)
 			{
 				_logger.LogWarning(
 					"Validation errors - {CommandType} - Command: {@Command} - Errors: {@ValidationErrors}",
-					request.GetGenericTypeName(),
+					typeName,
 					request,
 					failures);
 

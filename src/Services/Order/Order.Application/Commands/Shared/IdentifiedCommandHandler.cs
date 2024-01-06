@@ -55,10 +55,12 @@ namespace ShoppingApp.Services.Order.API.Application.Commands.Shared
 
 			switch (command)
 			{
+				// There should be user ID instead of email address
 				case CreateOrderCommand createOrderCommand:
 					idProperty = nameof(createOrderCommand.EmailAddress);
 					commandId = createOrderCommand.EmailAddress;
 					break;
+				// There should be order number instead of email address
 				case CancelOrderCommand cancelOrderCommand:
 					idProperty = nameof(cancelOrderCommand.Id);
 					commandId = $"{cancelOrderCommand.Id}";
@@ -85,7 +87,7 @@ namespace ShoppingApp.Services.Order.API.Application.Commands.Shared
 			}
 			catch
 			{
-				return default;
+				return default!;
 			}
 
 			_logger.LogInformation(

@@ -14,24 +14,24 @@ namespace ShoppingApp.Services.Order.API.Rest.Controllers
 	public class CancelOrderController : ControllerBase
 	{
 		private readonly IMediator _mediator;
-		private readonly ILogger<CreateOrderController> _logger;
+		private readonly ILogger<CancelOrderController> _logger;
 
 		public CancelOrderController(
 			IMediator mediator,
-			ILogger<CreateOrderController> logger)
+			ILogger<CancelOrderController> logger)
 		{
 			_mediator = mediator;
 			_logger = logger;
 		}
 
-		[Route("[action]/{id:length(24)}")]
-		[HttpDelete]
+		[Route("[action]")]
+		[HttpPost]
 		[ProducesResponseType((int)HttpStatusCode.OK)]
 		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
 		[ProducesDefaultResponseType]
 		public async Task<ActionResult> CancelOrder(
-			[FromHeader(Name = "x-requestid")] Guid requestId,
-			int id)
+			[FromHeader(Name = "X-Request-ID")] Guid requestId,
+			[FromBody] CancelOrderCommand command)
 		{
 			if (requestId == Guid.Empty)
 			{
@@ -42,8 +42,6 @@ namespace ShoppingApp.Services.Order.API.Rest.Controllers
 				return BadRequest(response);
 			}
 
-			CancelOrderCommand command = new(id);
-
 			IdentifiedCommand<CancelOrderCommand, bool> requestCancelOrder = new(command, requestId);
 
 			_logger.LogInformation(
@@ -53,7 +51,28 @@ namespace ShoppingApp.Services.Order.API.Rest.Controllers
 				requestCancelOrder.Command.Id,
 				requestCancelOrder);
 
-			bool commandResult = await _mediator.Send(command);
+			bool commandResult;
+
+			try
+			{
+				commandResult = await _mediator.Send(requestCancelOrder);
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(
+					ex,
+					"Handling command error: {CommandName} - {IdProperty}: {CommandId} ({@Command})",
+					requestCancelOrder.GetGenericTypeName(),
+					nameof(requestCancelOrder.Command.Id),
+					requestCancelOrder.Command.Id,
+					requestCancelOrder);
+
+				ResponseDataTransferObject response = new(
+					false,
+					"There was a problem processing the request.");
+
+				return BadRequest(response);
+			}
 
 			if (commandResult == false)
 			{

@@ -24,6 +24,7 @@
 	  <None Remove="Idempotency\" />
 	  <None Remove="Idempotency\DataTransferObjects\" />
 	  <None Remove="Idempotency\Services\" />
+	  <None Remove="Persistence\Behaviors\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Notifications\" />
@@ -34,6 +35,7 @@
 	  <Folder Include="Idempotency\" />
 	  <Folder Include="Idempotency\DataTransferObjects\" />
 	  <Folder Include="Idempotency\Services\" />
+	  <Folder Include="Persistence\Behaviors\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.12" />
