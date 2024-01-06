@@ -8,7 +8,7 @@ namespace ShoppingApp.Services.Order.API.Domain.SeedWork
 
 		private int? _requestedHashCode;
 
-		private List<INotification> _domainEvents = null!;
+		private List<INotification>? _domainEvents;
 
 		// DDD Patterns comment
 		// Using private fields, allowed since EF Core 1.1, is a much better encapsulation
@@ -34,7 +34,7 @@ namespace ShoppingApp.Services.Order.API.Domain.SeedWork
 			}
 		}
 
-		public IReadOnlyCollection<INotification> DomainEvents => _domainEvents.AsReadOnly();
+		public IReadOnlyCollection<INotification>? DomainEvents => _domainEvents?.AsReadOnly();
 
 		public void AddDomainEvent(INotification eventItem)
 		{

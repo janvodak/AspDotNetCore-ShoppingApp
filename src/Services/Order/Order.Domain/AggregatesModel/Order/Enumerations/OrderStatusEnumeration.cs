@@ -5,17 +5,27 @@ namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Enumeratio
 {
 	public class OrderStatusEnumeration : EnumerationBase
 	{
-		public static OrderStatusEnumeration Submitted = new OrderStatusEnumeration(1, nameof(Submitted).ToLowerInvariant());
-		public static OrderStatusEnumeration AwaitingValidation = new OrderStatusEnumeration(2, nameof(AwaitingValidation).ToLowerInvariant());
-		public static OrderStatusEnumeration StockConfirmed = new OrderStatusEnumeration(3, nameof(StockConfirmed).ToLowerInvariant());
-		public static OrderStatusEnumeration Paid = new OrderStatusEnumeration(4, nameof(Paid).ToLowerInvariant());
-		public static OrderStatusEnumeration Shipped = new OrderStatusEnumeration(5, nameof(Shipped).ToLowerInvariant());
-		public static OrderStatusEnumeration Cancelled = new OrderStatusEnumeration(6, nameof(Cancelled).ToLowerInvariant());
-
 		public OrderStatusEnumeration(int id, string name) : base(id, name) { }
 
-		public static IEnumerable<OrderStatusEnumeration> List() =>
-			new[] { Submitted, AwaitingValidation, StockConfirmed, Paid, Shipped, Cancelled };
+		public static readonly OrderStatusEnumeration Submitted = new(1, nameof(Submitted).ToLowerInvariant());
+		public static readonly OrderStatusEnumeration AwaitingValidation = new(2, nameof(AwaitingValidation).ToLowerInvariant());
+		public static readonly OrderStatusEnumeration StockConfirmed = new(3, nameof(StockConfirmed).ToLowerInvariant());
+		public static readonly OrderStatusEnumeration Paid = new(4, nameof(Paid).ToLowerInvariant());
+		public static readonly OrderStatusEnumeration Shipped = new(5, nameof(Shipped).ToLowerInvariant());
+		public static readonly OrderStatusEnumeration Cancelled = new(6, nameof(Cancelled).ToLowerInvariant());
+
+		public static IEnumerable<OrderStatusEnumeration> List()
+		{
+			return new[]
+			{
+				Submitted,
+				AwaitingValidation,
+				StockConfirmed,
+				Paid,
+				Shipped,
+				Cancelled
+			};
+		}
 
 		public static OrderStatusEnumeration FromName(string name)
 		{
@@ -32,7 +42,7 @@ namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Enumeratio
 
 		public static OrderStatusEnumeration From(int id)
 		{
-			var state = List().SingleOrDefault(s => s.Id == id);
+			OrderStatusEnumeration? state = List().SingleOrDefault(s => s.Id == id);
 
 			if (state == null)
 			{

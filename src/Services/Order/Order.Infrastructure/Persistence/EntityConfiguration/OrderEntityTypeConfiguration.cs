@@ -25,12 +25,13 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.EntityConfig
 					customer.Property(c => c.UserName).HasColumnName("UserName");
 				});
 
+			// TODO: Price configuration should be done from outside (app configuration)
 			orderConfiguration
 				.Property(o => o.TotalPrice)
 				.HasColumnName("TotalPrice")
 				.HasColumnType("decimal(6,2)")
 				.HasConversion(
-					v => v.MoneyWithVat.Amount + v.GetVatAmount(),
+					v => v.ToFloat(),
 					v => PriceValueObject.FromFloat(v, CurrencyEnumeration.EUR, new VatRateValueObject(20))
 				);
 
@@ -63,7 +64,7 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.EntityConfig
 				.HasColumnType("int")
 				.HasConversion(
 					v => v.Id,
-					v => new PaymentMethodEnumeration(v, PaymentMethodEnumeration.Card.Name)
+					v => PaymentMethodEnumeration.From(v)
 				);
 
 			orderConfiguration
