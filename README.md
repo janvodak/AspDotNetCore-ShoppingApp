@@ -5,7 +5,7 @@
 - [Introduction](#introduction)
 - [Installation](docs/installation.md)
 - [Usage](docs/usage.md)
-- [Architecture](docs/architecture-and-design.md)
+- [Design and Architecture](docs/architecture-and-design.md)
 - [Contributing](docs/contributing.md)
 
 ## Introduction
