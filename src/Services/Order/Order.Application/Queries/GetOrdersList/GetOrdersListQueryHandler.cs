@@ -31,7 +31,7 @@ namespace ShoppingApp.Services.Order.API.Application.Queries.GetOrdersList
 					orderAggregate.BillingAddress.Country,
 					orderAggregate.BillingAddress.State,
 					orderAggregate.BillingAddress.ZipCode,
-					orderAggregate.TotalPrice.GetAmountWithVat(),
+					orderAggregate.TotalPrice.ToFloat(),
 					orderAggregate.PaymentMethod.Id,
 					orderAggregate.PaymentCard.CardName,
 					orderAggregate.PaymentCard.CardNumber,

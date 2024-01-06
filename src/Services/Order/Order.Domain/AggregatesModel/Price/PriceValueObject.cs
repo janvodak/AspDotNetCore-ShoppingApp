@@ -44,6 +44,11 @@ namespace ShoppingApp.Services.Order.API.Domain.AggregatesModel.Price
 			return new(money, vatRate);
 		}
 
+		public decimal ToFloat()
+		{
+			return GetAmountWithVat() / 100;
+		}
+
 		public PriceValueObject Add(PriceValueObject price)
 		{
 			ValidateFitness(price);
