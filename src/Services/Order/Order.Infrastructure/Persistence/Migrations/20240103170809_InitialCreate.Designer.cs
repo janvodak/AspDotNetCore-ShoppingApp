@@ -12,8 +12,8 @@ using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context;
 namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(OrderContext))]
-    [Migration("20231230102913_ImplementIdempotentCommands")]
-    partial class ImplementIdempotentCommands
+    [Migration("20240103170809_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

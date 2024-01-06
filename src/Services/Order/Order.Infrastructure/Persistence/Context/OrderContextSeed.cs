@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.ValueObjects;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Payment;
+using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Price;
 
 namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 {
@@ -21,24 +24,38 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 
 		private static IEnumerable<OrderAggregateRoot> GetPreconfiguredOrders()
 		{
+			CustomerValueObject customer = new("swn");
+
+			PriceValueObject price = PriceValueObject.FromFloat(
+				350,
+				CurrencyEnumeration.GBP,
+				new VatRateValueObject(20));
+
+			AddressValueObject billingAddress = new(
+				"Jan",
+				"Vodak",
+				"admin@admin.com",
+				"Brno",
+				"Czech republic",
+				"Czech republic",
+				"60200");
+
+			PaymentCardValueObject paymentCard = new(
+				"Test Card",
+				"5555555555554444",
+				"03/2030",
+				"737");
+
+			PaymentMethodEnumeration paymentMethod = PaymentMethodEnumeration.Card;
+
 			return new List<OrderAggregateRoot>
 			{
-				//new OrderAggregateRoot(
-				//	"swn",
-				//	350,
-				//	"Jan",
-				//	"Vodak",
-				//	"janvodak92@gmail.com",
-				//	"Brno",
-				//	"Czech republic",
-				//	"Czech republic",
-				//	"60200",
-				//	"Test Card",
-				//	"5555555555554444",
-				//	"03/2030",
-				//	"737",
-				//	1
-				//)
+				new OrderAggregateRoot(
+					customer,
+					price,
+					billingAddress,
+					paymentCard,
+					paymentMethod)
 			};
 		}
 	}
