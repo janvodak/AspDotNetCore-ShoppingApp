@@ -14,11 +14,11 @@ namespace ShoppingApp.Services.Order.API.Rest.Controllers
 	public class ChangeBillingAddressController : ControllerBase
 	{
 		private readonly IMediator _mediator;
-		private readonly ILogger<CreateOrderController> _logger;
+		private readonly ILogger<ChangeBillingAddressController> _logger;
 
 		public ChangeBillingAddressController(
 			IMediator mediator,
-			ILogger<CreateOrderController> logger)
+			ILogger<ChangeBillingAddressController> logger)
 		{
 			_mediator = mediator;
 			_logger = logger;
@@ -30,7 +30,7 @@ namespace ShoppingApp.Services.Order.API.Rest.Controllers
 		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
 		[ProducesDefaultResponseType]
 		public async Task<ActionResult> ChangeBillingAddress(
-			[FromHeader(Name = "x-requestid")] Guid requestId,
+			[FromHeader(Name = "X-Request-ID")] Guid requestId,
 			[FromBody] ChangeBillingAddressCommand command)
 		{
 			if (requestId == Guid.Empty)
@@ -51,7 +51,28 @@ namespace ShoppingApp.Services.Order.API.Rest.Controllers
 				requestChangeBillingAddress.Command.Id,
 				requestChangeBillingAddress);
 
-			bool commandResult = await _mediator.Send(command);
+			bool commandResult;
+
+			try
+			{
+				commandResult = await _mediator.Send(requestChangeBillingAddress);
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(
+					ex,
+					"Handling command error: {CommandName} - {IdProperty}: {CommandId} ({@Command})",
+					requestChangeBillingAddress.GetGenericTypeName(),
+					nameof(requestChangeBillingAddress.Command.Id),
+					requestChangeBillingAddress.Command.Id,
+					requestChangeBillingAddress);
+
+				ResponseDataTransferObject response = new(
+					false,
+					"There was a problem processing the request.");
+
+				return BadRequest(response);
+			}
 
 			if (commandResult == false)
 			{

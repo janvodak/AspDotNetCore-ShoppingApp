@@ -29,7 +29,7 @@ namespace ShoppingApp.Services.Order.API.Rest.Controllers
 		[ProducesResponseType((int)HttpStatusCode.OK)]
 		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
 		public async Task<ActionResult<int>> CreateOrder(
-			[FromHeader(Name = "x-requestid")] Guid requestId,
+			[FromHeader(Name = "X-Request-ID")] Guid requestId,
 			[FromBody] CreateOrderCommand command)
 		{
 			if (requestId == Guid.Empty)
@@ -50,7 +50,28 @@ namespace ShoppingApp.Services.Order.API.Rest.Controllers
 				requestCreateOrder.Command.EmailAddress,
 				requestCreateOrder);
 
-			bool commandResult = await _mediator.Send(requestCreateOrder);
+			bool commandResult;
+
+			try
+			{
+				commandResult = await _mediator.Send(requestCreateOrder);
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(
+					ex,
+					"Handling command error: {CommandName} - {IdProperty}: {CommandId} ({@Command})",
+					requestCreateOrder.GetGenericTypeName(),
+					nameof(requestCreateOrder.Command.EmailAddress),
+					requestCreateOrder.Command.EmailAddress,
+					requestCreateOrder);
+
+				ResponseDataTransferObject response = new(
+					false,
+					"There was a problem processing the request.");
+
+				return BadRequest(response);
+			}
 
 			if (commandResult == false)
 			{

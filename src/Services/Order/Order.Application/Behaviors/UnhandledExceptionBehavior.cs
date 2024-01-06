@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace ShoppingApp.Services.Order.API.Application.Behaviours
+namespace ShoppingApp.Services.Order.API.Application.Behaviors
 {
 	public class UnhandledExceptionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 	{

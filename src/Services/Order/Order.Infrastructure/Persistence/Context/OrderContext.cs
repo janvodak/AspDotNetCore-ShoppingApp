@@ -71,7 +71,10 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 
 		public async Task<IDbContextTransaction?> BeginTransactionAsync()
 		{
-			if (_currentTransaction != null) return null;
+			if (_currentTransaction != null)
+			{
+				return null;
+			}
 
 			_currentTransaction = await Database.BeginTransactionAsync(IsolationLevel.ReadCommitted);
 
@@ -80,8 +83,15 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 
 		public async Task CommitTransactionAsync(IDbContextTransaction transaction)
 		{
-			if (transaction == null) throw new ArgumentNullException(nameof(transaction));
-			if (transaction != _currentTransaction) throw new InvalidOperationException($"Transaction {transaction.TransactionId} is not current");
+			if (transaction == null)
+			{
+				throw new ArgumentNullException(nameof(transaction));
+			}
+
+			if (transaction != _currentTransaction)
+			{
+				throw new InvalidOperationException($"Transaction {transaction.TransactionId} is not current");
+			}
 
 			try
 			{
@@ -93,6 +103,7 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 				RollbackTransaction();
 				throw;
 			}
+
 			finally
 			{
 				if (_currentTransaction != null)
@@ -130,8 +141,6 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 
 			modelBuilder.ApplyConfiguration(new ClientRequestEntityTypeConfiguration());
 			modelBuilder.ApplyConfiguration(new OrderEntityTypeConfiguration());
-
-			//modelBuilder.UseIntegrationEventLogs();
 		}
 	}
 }

@@ -14,7 +14,7 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Extensions
 				.Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any());
 
 			List<INotification> domainEvents = domainEntities
-				.SelectMany(x => x.Entity.DomainEvents)
+				.SelectMany(x => x.Entity.DomainEvents ?? Enumerable.Empty<INotification>())
 				.ToList();
 
 			domainEntities.ToList()

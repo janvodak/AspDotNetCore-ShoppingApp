@@ -15,7 +15,6 @@
 		<ProjectReference Include="..\Order.Domain\Order.Domain.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <None Remove="Behaviours\" />
 	  <None Remove="Contracts\" />
 	  <None Remove="Exceptions\" />
 	  <None Remove="Models\" />
@@ -27,9 +26,10 @@
 	  <None Remove="Commands\Shared\" />
 	  <None Remove="Contracts\Idempotency\" />
 	  <None Remove="Models\DataTransferObjects\" />
+	  <None Remove="Behaviors\" />
+	  <None Remove="Contracts\Persistence\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Behaviours\" />
 	  <Folder Include="Contracts\" />
 	  <Folder Include="Exceptions\" />
 	  <Folder Include="Models\" />
@@ -41,11 +41,13 @@
 	  <Folder Include="Commands\Shared\" />
 	  <Folder Include="Contracts\Idempotency\" />
 	  <Folder Include="Models\DataTransferObjects\" />
+	  <Folder Include="Behaviors\" />
+	  <Folder Include="Contracts\Persistence\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
-	  <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
-	  <PackageReference Include="FluentValidation" Version="11.8.0" />
-	  <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.0" />
+	  <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+	  <PackageReference Include="FluentValidation" Version="11.9.0" />
+	  <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
+	  <PackageReference Include="MediatR" Version="12.2.0" />
 	</ItemGroup>
 </Project>

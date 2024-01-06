@@ -1,8 +1,12 @@
 ﻿using System.Reflection;
 using FluentValidation;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using ShoppingApp.Services.Order.API.Application.Behaviours;
+using ShoppingApp.Services.Order.API.Application.Behaviors;
+using ShoppingApp.Services.Order.API.Application.Commands.CancelOrder;
+using ShoppingApp.Services.Order.API.Application.Commands.CheckoutOrder;
+using ShoppingApp.Services.Order.API.Application.Commands.CreateOrder;
+using ShoppingApp.Services.Order.API.Application.Commands.Shared;
+using ShoppingApp.Services.Order.API.Application.Validators;
 
 namespace ShoppingApp.Services.Order.API.Application
 {
@@ -10,12 +14,21 @@ namespace ShoppingApp.Services.Order.API.Application
 	{
 		public static IServiceCollection AddAplicationServices(this IServiceCollection services)
 		{
-			services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-			services.AddMediatR(Assembly.GetExecutingAssembly());
+			// Configure mediatR
+			services.AddMediatR(cfg =>
+			{
+				cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
 
-			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehavior<,>));
-			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorBehavior<,>));
+				cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+				cfg.AddOpenBehavior(typeof(UnhandledExceptionBehavior<,>));
+				cfg.AddOpenBehavior(typeof(ValidatorBehavior<,>));
+				cfg.AddOpenBehavior(typeof(TransactionBehaviorDecorator<,>));
+			});
+
+			// Register the command validators for the validator behavior (validators based on FluentValidation library)
+			services.AddSingleton<IValidator<CancelOrderCommand>, CancelOrderCommandValidator>();
+			services.AddSingleton<IValidator<CreateOrderCommand>, CreateOrderCommandValidator>();
+			services.AddSingleton<IValidator<IdentifiedCommand<CreateOrderCommand, bool>>, IdentifiedCommandValidator>();
 
 			return services;
 		}

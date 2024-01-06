@@ -1,9 +1,13 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using ShoppingApp.Services.Order.API.Application.Contracts.Idempotency;
 using ShoppingApp.Services.Order.API.Application.Contracts.Notifications;
+using ShoppingApp.Services.Order.API.Application.Contracts.Persistence;
 using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Repositories;
+using ShoppingApp.Services.Order.API.Infrastructure.Idempotency.Services;
 using ShoppingApp.Services.Order.API.Infrastructure.Notifications;
+using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Behaviors;
 using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context;
 using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Repositories;
 
@@ -18,14 +22,19 @@ namespace ShoppingApp.Services.Order.API.Infrastructure
 			this IServiceCollection services,
 			IConfiguration configuration)
 		{
-			ConfigureDatabaseSettings(services, configuration);
-			ConfigureDatabaseContext(services);
-			ConfigureEmailSettings(services, configuration);
+			ConfigureIdempotency(services);
+			ConfigurePersistence(services, configuration);
+			ConfigureNotifications(services, configuration);
 
 			return services;
 		}
 
-		private static void ConfigureDatabaseSettings(
+		private static void ConfigureIdempotency(IServiceCollection services)
+		{
+			services.AddScoped<IRequestManager, RequestManager>();
+		}
+
+		private static void ConfigurePersistence(
 			IServiceCollection services,
 			IConfiguration configuration)
 		{
@@ -56,19 +65,19 @@ namespace ShoppingApp.Services.Order.API.Infrastructure
 			});
 
 			services.AddSingleton(c => c.GetRequiredService<IOptions<DatabaseSettings>>().Value);
-		}
 
-		private static void ConfigureDatabaseContext(IServiceCollection services)
-		{
 			services.AddDbContext<OrderContext>();
+
+			// Register your interfaces and implementations here
 			services.AddScoped<IOrderRepository, OrderRepository>();
+			services.AddScoped(typeof(ITransactionBehavior<,>), typeof(TransactionBehavior<,>));
 		}
 
-		private static void ConfigureEmailSettings(
+		private static void ConfigureNotifications(
 			IServiceCollection services,
 			IConfiguration configuration)
 		{
-			services.AddTransient<IEmailService, EmailService>();
+			services.AddScoped<IEmailService, EmailService>();
 
 			IConfigurationSection emailConfigurationSection = configuration.GetSection(EMAIL_SETTINGS_SECTION_NAME);
 
