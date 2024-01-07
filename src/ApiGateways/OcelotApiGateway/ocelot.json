@@ -195,7 +195,7 @@
 		},
 		//Order API
 		{
-			"DownstreamPathTemplate": "/api/v1/Order/GetUserOrders/{userName}",
+			"DownstreamPathTemplate": "/api/v1/Order/{userName}",
 			"DownstreamScheme": "http",
 			"DownstreamHostAndPorts": [
 				{

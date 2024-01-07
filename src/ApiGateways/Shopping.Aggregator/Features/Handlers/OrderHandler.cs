@@ -18,16 +18,33 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Features.Handlers
 
 		public async Task<IEnumerable<OrderDataTransferObject>> Handle(string userName)
 		{
+			ResponseDataTransferObject<IEnumerable<OrderDataTransferObject>> responseDataTransferObject;
+
 			try
 			{
-				return await _orderApiService.GetUserOrdersAsync(userName);
+				responseDataTransferObject = await _orderApiService.GetUserOrdersAsync(userName);
 			}
 			catch (Exception ex)
 			{
-				_logger.LogWarning(ex, "Unable to get Orders for user '{UserName}'", userName);
+				_logger.LogWarning(
+					ex,
+					"Unable to get orders for user '{UserName}'.",
+					userName);
+
+				return new List<OrderDataTransferObject>();
 			}
 
-			return new List<OrderDataTransferObject>();
+
+			if (responseDataTransferObject.IsSuccess == false || responseDataTransferObject.Result == null)
+			{
+				_logger.LogWarning(
+					"Unable to parse orders response  for user '{UserName}'.",
+					userName);
+
+				return new List<OrderDataTransferObject>();
+			}
+
+			return responseDataTransferObject.Result;
 		}
 	}
 }
