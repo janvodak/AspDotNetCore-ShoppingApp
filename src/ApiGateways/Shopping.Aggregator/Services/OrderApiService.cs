@@ -19,7 +19,7 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Services
 			_responseFactory = responseFactory;
 		}
 
-		public async Task<IEnumerable<OrderDataTransferObject>> GetUserOrdersAsync(string username)
+		public async Task<ResponseDataTransferObject<IEnumerable<OrderDataTransferObject>>> GetUserOrdersAsync(string username)
 		{
 			Uri clientBaseAddress = _httpClient.BaseAddress
 				?? throw new ApplicationException("Unable to send client request due problem with external request.");
@@ -28,7 +28,7 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Services
 				clientBaseAddress.Scheme,
 				clientBaseAddress.Host,
 				clientBaseAddress.Port,
-				$"/api/v1/Order/GetUserOrders/{username}");
+				$"/api/v1/Order/{username}");
 
 			RequestDataTransferObject request = new(uriBuilder.Uri.OriginalString);
 			HttpRequestMessage httpRequestMessage = _httpRequestMessageFactory.Create(request);
@@ -43,7 +43,7 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Services
 				throw new ApplicationException($"Unable to send client request due to reason: '{ex.Message}'", ex);
 			}
 
-			return await _responseFactory.Create<IEnumerable<OrderDataTransferObject>>(httpResponseMessage);
+			return await _responseFactory.Create<ResponseDataTransferObject<IEnumerable<OrderDataTransferObject>>>(httpResponseMessage);
 		}
 	}
 }

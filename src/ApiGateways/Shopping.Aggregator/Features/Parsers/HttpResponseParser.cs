@@ -17,7 +17,9 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Features.Parsers
 			}
 			catch (Exception ex)
 			{
-				throw new InvalidDataException($"Unable to deserialize JSON data due to reason: '{ex.Message}'", ex);
+				throw new InvalidDataException(
+					$"Unable to deserialize JSON data '{dataAsString}' due to reason: '{ex.Message}'",
+					ex);
 			}
 
 		}

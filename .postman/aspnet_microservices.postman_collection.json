@@ -557,12 +557,11 @@
 							}
 						],
 						"url": {
-							"raw": "{{ORDER_URL}}/GetUserOrders/{{USER_NAME_TEST}}",
+							"raw": "{{ORDER_URL}}/{{USER_NAME_TEST}}",
 							"host": [
 								"{{ORDER_URL}}"
 							],
 							"path": [
-								"GetUserOrders",
 								"{{USER_NAME_TEST}}"
 							]
 						}
@@ -570,7 +569,7 @@
 					"response": []
 				},
 				{
-					"name": "Checkout order (create)",
+					"name": "Create order",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -583,6 +582,11 @@
 								"key": "Content-Type",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "X-Request-ID",
+								"value": "{{$guid}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -590,19 +594,19 @@
 							"raw": "    {\n        \"userName\": \"{{USER_NAME_TEST}}\",\n        \"firstName\": \"Test\",\n        \"lastName\": \"Test\",\n        \"emailAddress\": \"test@test.com\",\n        \"addressLine\": \"Brno\",\n        \"country\": \"Czech republic\",\n        \"state\": \"Czech republic\",\n        \"zipCode\": \"60200\",\n        \"totalPrice\": 350.00,\n        \"paymentMethod\": 1,\n        \"cardName\": \"Test Card\",\n        \"cardNumber\": \"5555555555554444\",\n        \"expiration\": \"03/2030\",\n        \"cardVerificationValue\": \"737\"\n    }"
 						},
 						"url": {
-							"raw": "{{ORDER_URL}}/CheckoutOrder",
+							"raw": "{{ORDER_URL}}/CreateOrder",
 							"host": [
 								"{{ORDER_URL}}"
 							],
 							"path": [
-								"CheckoutOrder"
+								"CreateOrder"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Update order",
+					"name": "Change billing address",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -615,43 +619,61 @@
 								"key": "Content-Type",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "X-Request-ID",
+								"value": "{{$guid}}",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\n        \"id\": 1,\n        \"userName\": \"{{USER_NAME_SWN}}\",\n        \"firstName\": \"Test update\",\n        \"lastName\": \"Test update\",\n        \"emailAddress\": \"test@test.com\",\n        \"addressLine\": \"Brno\",\n        \"country\": \"Czech republic\",\n        \"state\": \"Czech republic\",\n        \"zipCode\": \"60200\",\n        \"totalPrice\": 350.00,\n        \"paymentMethod\": 1,\n        \"cardName\": \"Test Card\",\n        \"cardNumber\": \"5555555555554444\",\n        \"expiration\": \"03/2030\",\n        \"cardVerificationValue\": \"737\"\n    }"
+							"raw": "    {\n        \"id\": 2,\n        \"userName\": \"{{USER_NAME_TEST}}\",\n        \"firstName\": \"Updated\",\n        \"lastName\": \"Updated\",\n        \"emailAddress\": \"test@test.com\",\n        \"addressLine\": \"Brno\",\n        \"country\": \"Czech republic\",\n        \"state\": \"Czech republic\",\n        \"zipCode\": \"60200\"\n    }"
 						},
 						"url": {
-							"raw": "{{ORDER_URL}}/UpdateOrder",
+							"raw": "{{ORDER_URL}}/ChangeBillingAddress",
 							"host": [
 								"{{ORDER_URL}}"
 							],
 							"path": [
-								"UpdateOrder"
+								"ChangeBillingAddress"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Delete order",
+					"name": "Cancel order",
 					"request": {
-						"method": "DELETE",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Accept",
-								"value": " application/json",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Request-ID",
+								"value": "{{$guid}}",
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": 2\n    }"
+						},
 						"url": {
-							"raw": "{{ORDER_URL}}/DeleteOrder/2",
+							"raw": "{{ORDER_URL}}/CancelOrder",
 							"host": [
 								"{{ORDER_URL}}"
 							],
 							"path": [
-								"DeleteOrder",
-								"2"
+								"CancelOrder"
 							]
 						}
 					},
@@ -1125,6 +1147,16 @@
 									{
 										"key": "Accept",
 										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
 										"type": "text"
 									}
 								],
