@@ -1,5 +1,5 @@
-﻿using EventBus.Messages.Src.Shared;
-using MassTransit;
+﻿using MassTransit;
+using ShoppingApp.Components.EventBus.Messages.Shared;
 using ShoppingApp.Services.Order.API.Application;
 using ShoppingApp.Services.Order.API.Domain;
 using ShoppingApp.Services.Order.API.Infrastructure;

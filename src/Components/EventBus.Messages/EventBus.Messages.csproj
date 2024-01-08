@@ -4,16 +4,15 @@
 	<TargetFramework>net7.0</TargetFramework>
 	<ImplicitUsings>enable</ImplicitUsings>
 	<Nullable>enable</Nullable>
+	<RootNamespace>ShoppingApp.Components.EventBus.Messages</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-	<None Remove="Src\" />
-	<None Remove="Src\Events\" />
-	<None Remove="Src\Shared\" />
+	<None Remove="Events\" />
+	<None Remove="Shared\" />
   </ItemGroup>
   <ItemGroup>
-	<Folder Include="Src\" />
-	<Folder Include="Src\Events\" />
-	<Folder Include="Src\Shared\" />
+	<Folder Include="Events\" />
+	<Folder Include="Shared\" />
   </ItemGroup>
 </Project>
