@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Basket.API.Src.Entities;
 using Basket.API.Src.Repositories;
-using EventBus.Messages.Src.Events;
 using MassTransit;
+using ShoppingApp.Components.EventBus.Messages.Events;
 
 namespace Basket.API.Src.Publishers
 {

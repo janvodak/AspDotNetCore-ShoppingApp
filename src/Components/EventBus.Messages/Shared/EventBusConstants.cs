@@ -1,4 +1,4 @@
-﻿namespace EventBus.Messages.Src.Shared
+﻿namespace ShoppingApp.Components.EventBus.Messages.Shared
 {
 	public static class EventBusConstants
 	{

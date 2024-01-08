@@ -1,6 +1,6 @@
-﻿using EventBus.Messages.Src.Events;
-using MassTransit;
+﻿using MassTransit;
 using MediatR;
+using ShoppingApp.Components.EventBus.Messages.Events;
 using ShoppingApp.Services.Order.API.Application.Commands.CreateOrder;
 using ShoppingApp.Services.Order.API.Application.Commands.Shared;
 using ShoppingApp.Services.Order.API.Application.Extensions;

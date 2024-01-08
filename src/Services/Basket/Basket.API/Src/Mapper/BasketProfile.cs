@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Basket.API.Src.Entities;
-using EventBus.Messages.Src.Events;
+using ShoppingApp.Components.EventBus.Messages.Events;
 
 namespace Basket.API.Src.Mapper
 {

@@ -1,4 +1,4 @@
-﻿namespace EventBus.Messages.Src.Events
+﻿namespace ShoppingApp.Components.EventBus.Messages.Events
 {
 	public class BasketCheckoutEvent : IntegrationBaseEvent
 	{

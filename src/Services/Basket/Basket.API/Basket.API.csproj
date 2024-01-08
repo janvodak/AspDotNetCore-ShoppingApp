@@ -51,7 +51,7 @@
 		</Protobuf>
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\BuildingBlocks\EventBus.Messages\EventBus.Messages.csproj">
+	  <ProjectReference Include="..\..\..\Components\EventBus.Messages\EventBus.Messages.csproj">
 	    <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
 	  </ProjectReference>
 	</ItemGroup>

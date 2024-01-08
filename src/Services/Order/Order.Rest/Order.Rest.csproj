@@ -32,10 +32,10 @@
 	<ProjectReference Include="..\Order.Infrastructure\Order.Infrastructure.csproj">
 		<GlobalPropertiesToRemove></GlobalPropertiesToRemove>
 	</ProjectReference>
-	<ProjectReference Include="..\..\..\BuildingBlocks\EventBus.Messages\EventBus.Messages.csproj">
+	<ProjectReference Include="..\Order.Domain\Order.Domain.csproj">
 	  <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
 	</ProjectReference>
-	<ProjectReference Include="..\Order.Domain\Order.Domain.csproj">
+	<ProjectReference Include="..\..\..\Components\EventBus.Messages\EventBus.Messages.csproj">
 	  <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
 	</ProjectReference>
 	</ItemGroup>
