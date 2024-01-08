@@ -23,9 +23,14 @@ _get_docker_compose_file_names() {
 		-f "${SCRIPT_DIR}/../docker-compose.override.yml"
 	)
 
-	# Check if an additional file should be added to run portainer
+	# Check if an additional file with portainer should be added to run portainer
 	if [[ "${WITH_PORTAINER}" == "1" ]]; then
 		filenames+=(-f "${SCRIPT_DIR}/../docker-compose.portainer.yml")
+	fi
+
+	# Check if an additional file with elasticsearch should be added to run portainer
+	if [[ "${WITH_ELASTIC_STACK}" == "1" ]]; then
+		filenames+=(-f "${SCRIPT_DIR}/../docker-compose.elastic-stack.yml")
 	fi
 
 	echo "${filenames[@]}"

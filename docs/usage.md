@@ -13,7 +13,14 @@
 		```
 		This command is used to start and manage Docker containers for a specific project or application. The `WITH_PORTAINER=1` environment variable is set to enable Portainer,
 		a container management tool, which allows for an easier and more visual way to manage Docker containers.
-	* Without Portainer (WITH_PORTAINER=0 or unset):
+
+	* With Elastick Stack (WITH_ELASTIC_STACK=1):
+		```
+		WITH_ELASTIC_STACK=1 bash ./scripts/dc.sh up --detach
+		```
+		This command is used to start and manage Docker containers for a specific project or application. The `WITH_ELASTIC_STACK=1` environment variable is set to enable Elastick Stack for distributted logging.
+
+	* Without any aditional files (WITH_PORTAINER=0 or unset):
 		```
 		bash ./scripts/dc.sh up --detach
 		```
@@ -25,6 +32,13 @@
 	```
 	bash ./scripts/dc.sh up --detach --build basket.api
 	```
+
+	> **Note:** You can even combined environment variables in one command:
+
+	```
+	WITH_PORTAINER=1 WITH_ELASTIC_STACK=1 bash ./scripts/dc.sh up --detach product-api
+	```
+
 1. You can **launch microservices** as below urls:
 
 * **Product API -> http://host.docker.internal:8000/swagger/index.html**
@@ -33,9 +47,6 @@
 * **Discount Grpc -> http://host.docker.internal:8003**
 * **Order API -> http://host.docker.internal:8004/swagger/index.html**
 * **Shopping.Aggregator -> http://host.docker.internal:8005/swagger/index.html**
-* **API Gateway -> http://host.docker.internal:8010/**
-* **Rabbit Management Dashboard -> http://host.docker.internal:15672**   -- guest/guest
-* **Portainer -> http://host.docker.internal:9000**
 * **Mongo Client -> http://host.docker.internal:3000**
 * **pgAdmin PostgreSQL -> http://host.docker.internal:5050**   -- admin@aspnetrun.com/admin1234
 	* The first time you use it, you need to add a server. Click on the "Add New Server" icon on the main dashboard and fill in:
@@ -44,7 +55,11 @@
 		You can find it in `docker-composer.yml` file, or in `appsettings.json` file for the specific environment. For `Development` environment it is `discount-postgres`.
 		* `Username` in `Connection` tab. In default it is `admin`, but again, you can check the values in `docker-composer.yml` file or in `appsettings.json` file for the specific environment.
 		* `Password` in `Connection` tab. In default it is `admin1234`, but again, you can check the values in `docker-composer.yml` file or in `appsettings.json` file for the specific environment.
-
+* **API Gateway -> http://host.docker.internal:8010/**
+* **Rabbit Management Dashboard -> http://host.docker.internal:15672**   -- guest/guest
+* **Portainer -> http://host.docker.internal:9000**
+* **Elasticsearch -> http://host.docker.internal:9200**
+* **Kibana -> http://host.docker.internal:5601**
 * **Web UI -> http://host.docker.internal:8080**
 
 1. Launch http://host.docker.internal:8080 in your browser to view the Web UI.
