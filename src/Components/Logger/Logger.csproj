@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ShoppingApp.Components.Logger</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
+    <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="9.0.3" />
+    <PackageReference Include="Serilog.Enrichers.Environment" Version="2.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Handlers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Handlers\" />
+  </ItemGroup>
+</Project>

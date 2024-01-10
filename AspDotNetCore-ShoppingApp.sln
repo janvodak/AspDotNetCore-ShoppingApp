@@ -57,6 +57,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product.API", "src\Services
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Messages", "src\Components\EventBus.Messages\EventBus.Messages.csproj", "{0F5FFEEA-F9BA-4FCC-930A-36B326796C7F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "src\Components\Logger\Logger.csproj", "{CBB20359-1955-4986-BE70-E0244950CDAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +117,10 @@ Global
 		{0F5FFEEA-F9BA-4FCC-930A-36B326796C7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F5FFEEA-F9BA-4FCC-930A-36B326796C7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F5FFEEA-F9BA-4FCC-930A-36B326796C7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBB20359-1955-4986-BE70-E0244950CDAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBB20359-1955-4986-BE70-E0244950CDAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBB20359-1955-4986-BE70-E0244950CDAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBB20359-1955-4986-BE70-E0244950CDAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,5 +151,6 @@ Global
 		{CE6723E1-2073-4171-8ECB-717CABDB3C9B} = {C7D2C0C4-2F0D-40DA-8956-1F12E9918B93}
 		{4AF12D65-09BC-43D2-878F-A875BF2DCC62} = {17578471-6FAA-461C-834D-3CE8A757A69A}
 		{0F5FFEEA-F9BA-4FCC-930A-36B326796C7F} = {E46028BE-B24C-4249-B54B-5D2B80687A32}
+		{CBB20359-1955-4986-BE70-E0244950CDAF} = {E46028BE-B24C-4249-B54B-5D2B80687A32}
 	EndGlobalSection
 EndGlobal

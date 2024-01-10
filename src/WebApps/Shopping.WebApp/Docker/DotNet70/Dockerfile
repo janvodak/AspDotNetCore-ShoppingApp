@@ -7,6 +7,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /
 COPY ["src/WebApps/Shopping.WebApp/Shopping.WebApp.csproj", "src/WebApps/Shopping.WebApp/"]
+COPY ["src/Components/Logger/Logger.csproj", "src/Components/Logger/"]
 RUN dotnet restore "src/WebApps/Shopping.WebApp/Shopping.WebApp.csproj"
 COPY . .
 WORKDIR "/src/WebApps/Shopping.WebApp"
