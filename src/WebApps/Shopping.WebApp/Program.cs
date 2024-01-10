@@ -1,10 +1,16 @@
-﻿using Shopping.WebApp.Features;
+﻿using Serilog;
+using Shopping.WebApp.Features;
 using Shopping.WebApp.Services;
 using Shopping.WebApp.Settings;
+using ShoppingApp.Components.Logger;
+using ShoppingApp.Components.Logger.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.UseSerilog(SeriLogger.Configure);
+
 // Add services to the container.
+builder.Services.AddTransient<ExternalRecordLoggerDelegatingHandler>();
 builder.Services.AddScoped<JsonResponseParser>();
 builder.Services.AddScoped<JsonRequestFactory>();
 
@@ -15,17 +21,20 @@ builder.Configuration.GetSection(ApiServicesSettings.NAME_OF_SECTION).Bind(apiSe
 builder.Services.AddHttpClient<IProductApiService, ProductApiService>(client =>
 {
 	client.BaseAddress = new Uri(apiServicesSettings.OcelotApiGatewayUrl);
-});
+})
+	.AddHttpMessageHandler<ExternalRecordLoggerDelegatingHandler>();
 
 builder.Services.AddHttpClient<IBasketApiService, BasketApiService>(client =>
 {
 	client.BaseAddress = new Uri(apiServicesSettings.OcelotApiGatewayUrl);
-});
+})
+	.AddHttpMessageHandler<ExternalRecordLoggerDelegatingHandler>();
 
 builder.Services.AddHttpClient<IOrderApiService, OrderApiService>(client =>
 {
 	client.BaseAddress = new Uri(apiServicesSettings.OcelotApiGatewayUrl);
-});
+})
+	.AddHttpMessageHandler<ExternalRecordLoggerDelegatingHandler>();
 
 builder.Services.AddRazorPages();
 

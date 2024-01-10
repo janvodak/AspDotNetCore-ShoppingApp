@@ -142,6 +142,8 @@ services:
         container_name: shopping-webapp
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
+            - "ApiSettings:OcelotApiGatewayUrl=http://ocelot-api-gateway"
+            - "ElasticConfiguration:Uri=http://elasticsearch:9200"
         depends_on:
             - ocelot-api-gateway
         ports:
