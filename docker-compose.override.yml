@@ -28,6 +28,7 @@ services:
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
             - "DatabaseSettings:ConnectionString=mongodb://product-mongo:27017"
+            - "ElasticConfiguration:Uri=http://elasticsearch:9200"
         depends_on:
             - product-mongo
         ports:
@@ -45,6 +46,10 @@ services:
             - ASPNETCORE_ENVIRONMENT=Development
             - "CacheSettings:ConnectionString=basket-redis:6379"
             - "DiscountGrpcSettings:DiscountUrl=http://discount-grpc"
+            - "EventBusSettings:HostAddress=rabbitmq"
+            - "EventBusSettings:Username=guest"
+            - "EventBusSettings:Password=guest"
+            - "ElasticConfiguration:Uri=http://elasticsearch:9200"
         depends_on:
             - basket-redis
             - discount-grpc
@@ -81,6 +86,13 @@ services:
         container_name: discount-api
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
+            - "DatabaseSettings:ConnectionStringTemplate=User ID={0};Password={1};Host={2};Port={3};Database={4};"
+            - "DatabaseSettings:User=admin"
+            - "DatabaseSettings:Password=admin1234"
+            - "DatabaseSettings:Host=discount-postgres"
+            - "DatabaseSettings:Port=5432"
+            - "DatabaseSettings:DBname=DiscountDB"
+            - "ElasticConfiguration:Uri=http://elasticsearch:9200"
         depends_on:
             - discount-postgres
         ports:
@@ -90,7 +102,13 @@ services:
         container_name: discount-grpc
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
+            - "DatabaseSettings:ConnectionStringTemplate=User ID={0};Password={1};Host={2};Port={3};Database={4};"
+            - "DatabaseSettings:User=admin"
+            - "DatabaseSettings:Password=admin1234"
             - "DatabaseSettings:Host=discount-postgres"
+            - "DatabaseSettings:Port=5432"
+            - "DatabaseSettings:DBname=DiscountDB"
+            - "ElasticConfiguration:Uri=http://elasticsearch:9200"
         depends_on:
             - discount-postgres
         ports:
@@ -109,6 +127,15 @@ services:
         container_name: order-api
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
+            - "DatabaseSettings:ConnectionStringTemplate=Server={0};Database={1};User ID={2};Password={3};trusted_connection=false;Persist Security Info=False;Encrypt=False;"
+            - "DatabaseSettings:Server=order-mssql"
+            - "DatabaseSettings:DBname=OrderDB"
+            - "DatabaseSettings:User=sa"
+            - "DatabaseSettings:Password=Admin^1234"
+            - "EventBusSettings:HostAddress=rabbitmq"
+            - "EventBusSettings:Username=guest"
+            - "EventBusSettings:Password=guest"
+            - "ElasticConfiguration:Uri=http://elasticsearch:9200"
         depends_on:
             - order-mssql
             - rabbitmq
@@ -119,6 +146,7 @@ services:
         container_name: ocelot-api-gateway
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
+            - "ElasticConfiguration:Uri=http://elasticsearch:9200"
         depends_on:
             - product-api
             - basket-api
@@ -131,6 +159,10 @@ services:
         container_name: shopping-aggregator
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
+            - "ApiSettings:BasketApiUrl=http://basket-api"
+            - "ApiSettings:ProductApiUrl=http://product-api"
+            - "ApiSettings:OrderApiUrl=http://order-api"
+            - "ElasticConfiguration:Uri=http://elasticsearch:9200"
         depends_on:
             - product-api
             - basket-api
@@ -162,6 +194,12 @@ services:
         container_name: authentication-api
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
+            - "DatabaseSettings:ConnectionStringTemplate=Server={0};Database={1};User ID={2};Password={3};trusted_connection=false;Persist Security Info=False;Encrypt=False;"
+            - "DatabaseSettings:Server=authentication-mssql"
+            - "DatabaseSettings:DBname=AuthenticationDB"
+            - "DatabaseSettings:User=sa"
+            - "DatabaseSettings:Password=Admin^1234"
+            - "ElasticConfiguration:Uri=http://elasticsearch:9200"
         depends_on:
             - authentication-mssql
         ports:

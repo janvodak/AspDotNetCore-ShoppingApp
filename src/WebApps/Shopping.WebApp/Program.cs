@@ -7,6 +7,7 @@ using ShoppingApp.Components.Logger.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add Serilog logger component to use distribbuted logging with Kibana stack
 builder.Host.UseSerilog(SeriLogger.Configure);
 
 // Add services to the container.

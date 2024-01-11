@@ -7,6 +7,8 @@ It addresses the organization of the entire system.
 Scope: Architectural decisions encompass components, their relationships, and the overall layout of the system.
 It often involves choosing patterns, frameworks, and defining the major building blocks of the application.
 
+## Table of Contents
+
 - [Event Sourcing and Its Connection with CQRS](#event-sourcing-and-its-connection-with-cqrs)
 - [Grpc](#grpc)
 - [API Gateway Integration](#api-gateway-integration)

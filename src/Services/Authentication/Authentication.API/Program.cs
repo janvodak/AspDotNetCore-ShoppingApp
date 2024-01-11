@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Serilog;
+using ShoppingApp.Components.Logger;
 using ShoppingApp.Services.Authentication.API.Data;
 using ShoppingApp.Services.Authentication.API.Models;
 using ShoppingApp.Services.Authentication.API.Models.Factories;
@@ -6,6 +8,9 @@ using ShoppingApp.Services.Authentication.API.Repositories;
 using ShoppingApp.Services.Authentication.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add Serilog logger component to use distribbuted logging with Kibana stack
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 // Add services to the container.
 builder.Services.Configure<DatabaseSettings>(

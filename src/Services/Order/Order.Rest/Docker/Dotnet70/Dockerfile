@@ -10,7 +10,8 @@ COPY ["src/Services/Order/Order.Rest/Order.Rest.csproj", "src/Services/Order/Ord
 COPY ["src/Services/Order/Order.Application/Order.Application.csproj", "src/Services/Order/Order.Application/"]
 COPY ["src/Services/Order/Order.Domain/Order.Domain.csproj", "src/Services/Order/Order.Domain/"]
 COPY ["src/Services/Order/Order.Infrastructure/Order.Infrastructure.csproj", "src/Services/Order/Order.Infrastructure/"]
-COPY ["src/BuildingBlocks/EventBus.Messages/EventBus.Messages.csproj", "src/BuildingBlocks/EventBus.Messages/"]
+COPY ["src/Components/EventBus.Messages/EventBus.Messages.csproj", "src/Components/EventBus.Messages/"]
+COPY ["src/Components/Logger/Logger.csproj", "src/Components/Logger/"]
 RUN dotnet restore "src/Services/Order/Order.Rest/Order.Rest.csproj"
 COPY . .
 WORKDIR "/src/Services/Order/Order.Rest"

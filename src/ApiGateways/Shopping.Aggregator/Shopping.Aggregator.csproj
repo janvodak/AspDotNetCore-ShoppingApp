@@ -38,4 +38,9 @@
     <Folder Include="Features\Handlers\" />
     <Folder Include="Features\Parsers\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Components\Logger\Logger.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

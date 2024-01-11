@@ -7,6 +7,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /
 COPY ["src/Services/Product/Product.API/Product.API.csproj", "src/Services/Product/Product.API/"]
+COPY ["src/Components/Logger/Logger.csproj", "src/Components/Logger/"]
 RUN dotnet restore "src/Services/Product/Product.API/Product.API.csproj"
 COPY . .
 WORKDIR "/src/Services/Product/Product.API"

@@ -44,5 +44,9 @@ In summary, software design deals with the detailed design decisions within indi
 while software architecture addresses the high-level structure and organization of the entire software system.
 Both are crucial aspects of the software development process, and understanding the distinction can help in effective communication and collaboration within development teams.
 
+## Where to next
+
 - [Software Architecture](architecture-and-design/software-architecture.md)
 - [Software Design](architecture-and-design/software-design.md)
+    - [Implementtion principles and patterns used in DDD](architecture-and-design/domain-driven-design.md)
+- [Microservices Observability, Resilience and Monitoring](architecture-and-design/observability-resilience-monitoring.md)

@@ -1,52 +1,56 @@
 ﻿using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Serilog;
+using ShoppingApp.Components.Logger;
 
 internal class Program
 {
 	private static void Main(string[] args)
 	{
-		CreateHostBuilder().Build().Run();
+		CreateHostBuilder(args).Build().Run();
 	}
 
-	private static IWebHostBuilder CreateHostBuilder() =>
-		new WebHostBuilder()
-			.UseKestrel()
-			.UseContentRoot(Directory.GetCurrentDirectory())
-			.ConfigureAppConfiguration((hostingContext, config) =>
+	private static IHostBuilder CreateHostBuilder(string[] args) =>
+		Host.CreateDefaultBuilder(args)
+			.ConfigureWebHostDefaults(webBuilder =>
 			{
-				config
-					.SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
-					.AddJsonFile("appsettings.json", true, true)
-					.AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
-					.AddJsonFile("ocelot.json")
-					.AddJsonFile($"ocelot.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
-					.AddEnvironmentVariables();
-			})
-			.ConfigureServices(services =>
-			{
-				services.AddOcelot()
-					.AddCacheManager(settings => settings.WithDictionaryHandle());
-			})
-			.ConfigureLogging((hostingContext, logging) =>
-			{
-				logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
-				logging.AddConsole();
-				logging.AddDebug();
-			})
-			.UseIISIntegration()
-			.Configure(app =>
-			{
-				app.UseRouting();
-
-				app.UseEndpoints(endpoints =>
+				webBuilder
+				.UseKestrel()
+				.UseContentRoot(Directory.GetCurrentDirectory())
+				.ConfigureAppConfiguration((hostingContext, config) =>
 				{
-					endpoints.MapGet("/", async context =>
-					{
-						await context.Response.WriteAsync("Hello World!");
-					});
-				});
+					config
+						.SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
+						.AddJsonFile("appsettings.json", true, true)
+						.AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
+						.AddJsonFile("ocelot.json")
+						.AddJsonFile($"ocelot.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
+						.AddEnvironmentVariables();
+				})
+				.ConfigureServices(services =>
+				{
+					services.AddOcelot()
+							.AddCacheManager(settings => settings.WithDictionaryHandle());
+				})
+				.UseIISIntegration()
+				.Configure(app =>
+				{
+					app.UseRouting();
 
-				app.UseOcelot().Wait();
+					app.UseEndpoints(endpoints =>
+					{
+						endpoints.MapGet("/", async context =>
+						{
+							await context.Response.WriteAsync("Hello World!");
+						});
+					});
+
+					app.UseOcelot().Wait();
+				});
+			})
+			.UseSerilog((hostingContext, loggerConfiguration) =>
+			{
+				SeriLogger.Configure(hostingContext, loggerConfiguration);
 			});
 }

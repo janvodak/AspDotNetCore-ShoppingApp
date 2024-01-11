@@ -51,4 +51,9 @@
 	<Folder Include="Mappings\" />
 	<Folder Include="Models\DataTransferObjects\Factories\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Components\Logger\Logger.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

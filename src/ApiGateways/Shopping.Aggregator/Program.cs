@@ -1,13 +1,20 @@
-﻿using ShoppingApp.ApiGateway.ShoppingAggregator.Features.Factories;
+﻿using Serilog;
+using ShoppingApp.ApiGateway.ShoppingAggregator.Features.Factories;
 using ShoppingApp.ApiGateway.ShoppingAggregator.Features.Handlers;
 using ShoppingApp.ApiGateway.ShoppingAggregator.Features.Parsers;
 using ShoppingApp.ApiGateway.ShoppingAggregator.Models.Factories;
 using ShoppingApp.ApiGateway.ShoppingAggregator.Services;
 using ShoppingApp.ApiGateway.ShoppingAggregator.Settings;
+using ShoppingApp.Components.Logger;
+using ShoppingApp.Components.Logger.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add Serilog logger component to use distribbuted logging with Kibana stack
+builder.Host.UseSerilog(SeriLogger.Configure);
+
 // Add services to the container.
+builder.Services.AddTransient<ExternalRecordLoggerDelegatingHandler>();
 builder.Services.AddScoped<IBasketHandler, BasketHandler>();
 builder.Services.AddScoped<IOrderHandler, OrderHandler>();
 builder.Services.AddScoped<IProductHandler, ProductHandler>();
@@ -25,17 +32,20 @@ builder.Configuration.GetSection(ApiServicesSettings.NAME_OF_SECTION).Bind(apiSe
 builder.Services.AddHttpClient<IBasketApiService, BasketApiService>(client =>
 {
 	client.BaseAddress = new Uri(apiServicesSettings.BasketApiUrl);
-});
+})
+	.AddHttpMessageHandler<ExternalRecordLoggerDelegatingHandler>();
 
 builder.Services.AddHttpClient<IProductApiService, ProductApiService>(client =>
 {
 	client.BaseAddress = new Uri(apiServicesSettings.ProductApiUrl);
-});
+})
+	.AddHttpMessageHandler<ExternalRecordLoggerDelegatingHandler>();
 
 builder.Services.AddHttpClient<IOrderApiService, OrderApiService>(client =>
 {
 	client.BaseAddress = new Uri(apiServicesSettings.OrderApiUrl);
-});
+})
+	.AddHttpMessageHandler<ExternalRecordLoggerDelegatingHandler>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

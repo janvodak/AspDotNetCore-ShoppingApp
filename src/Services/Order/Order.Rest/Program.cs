@@ -1,5 +1,7 @@
 ﻿using MassTransit;
+using Serilog;
 using ShoppingApp.Components.EventBus.Messages.Shared;
+using ShoppingApp.Components.Logger;
 using ShoppingApp.Services.Order.API.Application;
 using ShoppingApp.Services.Order.API.Domain;
 using ShoppingApp.Services.Order.API.Infrastructure;
@@ -8,6 +10,9 @@ using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Extensions;
 using ShoppingApp.Services.Order.API.Rest.Consumers;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add Serilog logger component to use distribbuted logging with Kibana stack
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 // Add services to the container.
 builder.Services.AddDomainServices();

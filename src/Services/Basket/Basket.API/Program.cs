@@ -4,8 +4,13 @@ using Basket.API.Src.Publishers;
 using Basket.API.Src.Repositories;
 using ShoppingApp.Services.Discount.Grpc.Protos;
 using MassTransit;
+using Serilog;
+using ShoppingApp.Components.Logger;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add Serilog logger component to use distribbuted logging with Kibana stack
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 // Add services to the container.
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());

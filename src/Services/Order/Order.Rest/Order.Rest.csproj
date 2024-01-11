@@ -38,6 +38,9 @@
 	<ProjectReference Include="..\..\..\Components\EventBus.Messages\EventBus.Messages.csproj">
 	  <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
 	</ProjectReference>
+	<ProjectReference Include="..\..\..\Components\Logger\Logger.csproj">
+	  <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+	</ProjectReference>
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Docker\" />
