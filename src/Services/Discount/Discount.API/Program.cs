@@ -1,10 +1,15 @@
 ﻿using AutoMapper;
+using Serilog;
+using ShoppingApp.Components.Logger;
 using ShoppingApp.Services.Discount.API.Data;
 using ShoppingApp.Services.Discount.API.Mappings;
 using ShoppingApp.Services.Discount.API.Models.DataTransferObjects.Factories;
 using ShoppingApp.Services.Discount.API.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add Serilog logger component to use distribbuted logging with Kibana stack
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 // Add services to the container.
 builder.Services.Configure<DatabaseSettings>(

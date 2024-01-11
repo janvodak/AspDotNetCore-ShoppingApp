@@ -4,6 +4,41 @@
 DDD provides a structured way to capture and express domain knowledge, ensuring that the software system closely aligns with real-world business processes.
 It plays a significant role in the development of modern software architectures, including Hexagonal Architecture (Onion Architecture), and greatly influences Clean Architecture.
 
+## Table of Contents
+
+- [Key Principles of Domain-Driven Design](#key-principles-of-domain-driven-design)
+- [Implementation principles and patterns in Domain layer](#implementation-principles-and-patterns-in-domain-layer)
+    - [Implement domain entities as POCO classes](#implement-domain-entities-as-poco-classes)
+    - [Encapsulation of Data in Domain Entities](#encapsulation-of-data-in-domain-entities)
+    - [Persisting Value Objects with Owned Entity Types](#persisting-value-objects-with-owned-entity-types)
+    - [Using Domain Events for Explicit Implementation of Side Effects](#using-domain-events-for-explicit-implementation-of-side-effects)
+    - [Utilizing Domain Events for Consistency Across Aggregates](#utilizing-domain-events-for-consistency-across-aggregates)
+    - [Choosing Between Single Transaction and Eventual Consistency](#choosing-between-single-transaction-and-eventual-consistency)
+- [Implementation principles and patterns in Infrastructure layer](#implementation-principles-and-patterns-in-infrastructure-layer)
+    - [Data Persistence Components in Microservices](#data-persistence-components-in-microservices)
+    - [The Repository Pattern](#the-repository-pattern)
+    - [One Repository per Aggregate Root](#one-repository-per-aggregate-root)
+    - [Enforcing Aggregate Root Relationships](#enforcing-aggregate-root-relationships)
+    - [Unit of Work Pattern](#unit-of-work-pattern)
+    - [Repositories and Testing](#repositories-and-testing)
+    - [Custom Repositories: Optional Yet Valuable](#custom-repositories-optional-yet-valuable)
+    - [Table Mapping in Entity Framework Core](#table-mapping-in-entity-framework-core)
+        - [Data Annotations vs. Fluent API](#data-annotations-vs-fluent-api)
+        - [The Hi/Lo Algorithm](#the-hilo-algorithm)
+        - [Mapping Fields Instead of Properties](#mapping-fields-instead-of-properties)
+        - [Shadow Properties in EF Core](#shadow-properties-in-ef-core)
+- [Implementation principles and patterns in Application layer](#implementation-principles-and-patterns-in-application-layer)
+    - [Command Pattern Overview](#command-pattern-overview)
+    - [Command Class](#command-class)
+    - [Command Handler Class](#command-handler-class)
+    - [Implementing Command Process Pipeline in EF Core](#implementing-command-process-pipeline-in-ef-core)
+        - [Command Process Invocation](#command-process-invocation)
+            - [In-Memory Mediator Pattern](#in-memory-mediator-pattern)
+            - [Message Queues in Command's Pipeline](#message-queues-in-commands-pipeline)
+            - [Implementation with MediatR](#implementation-with-mediatr)
+        - [Idempotent Commands](#idempotent-commands)
+        - [Cross-Cutting Concerns with Behaviors in MediatR](#cross-cutting-concerns-with-behaviors-in-mediatr)
+
 ## Key Principles of Domain-Driven Design
 
 1. **Ubiquitous Language**: DDD introduces the concept of a "ubiquitous language" where both technical and non-technical team members use the same terminology to describe the domain.
@@ -18,7 +53,7 @@ Entities represent objects with unique identities, while value objects are objec
 4. **Aggregates and Repositories**: DDD introduces "aggregates" to group related entities and value objects.
 "Repositories" are responsible for retrieving and storing aggregates. This pattern simplifies data access and ensures consistency.
 
-## Implementtion principles and patterns in Domain layer
+## Implementation principles and patterns in Domain layer
 
 ### Implement domain entities as POCO classes
 
@@ -98,7 +133,7 @@ and code complexity tolerance. Bogard suggests dispatching domain events just be
 The approach, whether eventual consistency or single transaction, hinges on careful consideration of business requirements
 and collaboration with domain experts.
 
-## Implementtion principles and patterns in Infrastructure layer
+## Implementation principles and patterns in Infrastructure layer
 
 ### Data Persistence Components in Microservices
 
@@ -107,6 +142,7 @@ typically its database. These components encompass the implementation of key ele
 often realized through custom Entity Framework (EF) DbContext objects.
 
 ### The Repository Pattern
+
 The Repository pattern, a cornerstone of Domain-Driven Design (DDD), serves the purpose of isolating persistence concerns
 from the domain model. It introduces one or more persistence abstractions, usually in the form of interfaces defined within the domain model.
 Implementations of these interfaces, acting as persistence-specific adapters, reside elsewhere in the application.
@@ -125,11 +161,13 @@ This strict control is critical for maintaining the integrity of the data and en
 with the business rules encapsulated in the aggregate roots.
 
 ### Enforcing Aggregate Root Relationships
+
 To further reinforce the connection between repositories and aggregate roots, it's beneficial to structure the repository
 design to enforce the rule that only aggregate roots should have repositories. This can be achieved by implementing
 a generic IRepository base interface, specifying that entities must adhere to the IAggregateRoot marker interface.
 
 ### Unit of Work Pattern
+
 The Unit of Work pattern, closely related to the Repository pattern, revolves around managing multiple insert,
 update, or delete operations within a single transaction. This pattern becomes especially pertinent when a user action,
 such as registration on a website, involves multiple database operations.
@@ -138,12 +176,14 @@ In the context of EF, the Unit of Work pattern is executed when the SaveChanges 
 This approach improves application performance, reduces the risk of inconsistencies, and minimizes transaction blocking in database tables.
 
 ### Repositories and Testing
+
 The Repository pattern significantly aids in testing application logic with unit tests.
 By defining repository interfaces in the domain model layer and using Dependency Injection,
 developers can implement mock repositories for unit tests.
 This decoupled approach facilitates unit testing without requiring database connectivity.
 
 ### Custom Repositories: Optional Yet Valuable
+
 While custom repositories prove valuable for many reasons, they are not mandatory components in DDD designs or general .NET development.
 Some developers, like Jimmy Bogard, argue against repositories, emphasizing that they might obscure the crucial details
 of the underlying persistence mechanism. Choosing to use the Repository pattern or not depends on the specific project requirements

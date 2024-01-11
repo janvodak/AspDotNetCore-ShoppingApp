@@ -101,7 +101,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"email\": \"{{{{USER_EMAIL_TEST}}}}\",\n  \"role\": \"{{USER_ADMIN_ROLE}}\"\n}",
+							"raw": "{\n  \"email\": \"{{USER_EMAIL_TEST}}\",\n  \"role\": \"{{USER_ADMIN_ROLE}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -146,7 +146,7 @@
 					"response": []
 				},
 				{
-					"name": "Get products by ID",
+					"name": "Get product by ID",
 					"request": {
 						"method": "GET",
 						"header": [

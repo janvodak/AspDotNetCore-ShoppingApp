@@ -54,4 +54,9 @@
   <ItemGroup>
     <Compile Remove="Migrations\20231207131317_AddUserNameIntoAspNetUser.Designer.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Components\Logger\Logger.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

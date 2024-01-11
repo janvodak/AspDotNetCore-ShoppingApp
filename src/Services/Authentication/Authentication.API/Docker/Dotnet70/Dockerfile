@@ -7,6 +7,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /
 COPY ["src/Services/Authentication/Authentication.API/Authentication.API.csproj", "src/Services/Authentication/Authentication.API/"]
+COPY ["src/Components/Logger/Logger.csproj", "src/Components/Logger/"]
 RUN dotnet restore "src/Services/Authentication/Authentication.API/Authentication.API.csproj"
 COPY . .
 WORKDIR "/src/Services/Authentication/Authentication.API"

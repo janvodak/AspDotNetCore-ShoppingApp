@@ -6,6 +6,8 @@ It involves making decisions about individual modules, classes, and functions, i
 Scope: Design decisions at this level often involve low-level considerations such as algorithms, data structures, and the internal workings of specific components.
 It is more about the "how" of implementation within a specific module or class.
 
+## Table of Contents
+
 - [Clean Architecture](#clean-architecture)
 - [SOLID Principles](#solid-principles)
 - [Hexagonal Architecture / Onion Architecture](#hexagonal-architecture--onion-architecture) 

@@ -1,10 +1,15 @@
 ﻿using AutoMapper;
+using Serilog;
+using ShoppingApp.Components.Logger;
 using ShoppingApp.Services.Discount.Grpc.Data;
 using ShoppingApp.Services.Discount.Grpc.Mappings;
 using ShoppingApp.Services.Discount.Grpc.Repositories;
 using ShoppingApp.Services.Discount.Grpc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add Serilog logger component to use distribbuted logging with Kibana stack
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 // Additional configuration is required to successfully run gRPC on macOS.
 // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682

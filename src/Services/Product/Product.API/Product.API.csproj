@@ -39,4 +39,9 @@
 	<Folder Include="Models\DataTransferObjects\" />
 	<Folder Include="Mappings\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Components\Logger\Logger.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

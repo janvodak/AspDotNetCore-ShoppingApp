@@ -6,6 +6,10 @@
 - [Installation](docs/installation.md)
 - [Usage](docs/usage.md)
 - [Design and Architecture](docs/architecture-and-design.md)
+    - [Software Architecture](docs/architecture-and-design/software-architecture.md)
+    - [Software Design](docs/architecture-and-design/software-design.md)
+        - [Implementtion principles and patterns used in DDD](docs/architecture-and-design/domain-driven-design.md)
+    - [Microservices Observability, Resilience and Monitoring](docs/architecture-and-design/observability-resilience-monitoring.md)
 - [Contributing](docs/contributing.md)
 
 ## Introduction
