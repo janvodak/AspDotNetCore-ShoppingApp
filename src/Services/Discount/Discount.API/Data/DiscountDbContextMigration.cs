@@ -1,32 +1,59 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using Polly.Retry;
 
 namespace ShoppingApp.Services.Discount.API.Data
 {
 	public class DiscountDbContextMigration
 	{
 		private readonly DiscountDbContext _discountDbContext;
+
 		private readonly ILogger<DiscountDbContextMigration> _logger;
+
+		private readonly RetryPolicy _retryPolicy;
 
 		public DiscountDbContextMigration(
 			DiscountDbContext discountDbContext,
-			ILogger<DiscountDbContextMigration> logger)
+			ILogger<DiscountDbContextMigration> logger,
+			RetryPolicy retryPolicy)
 		{
 			_discountDbContext = discountDbContext;
 			_logger = logger;
+			_retryPolicy = retryPolicy;
 		}
 
-		public async Task MigrateAsync()
+		public void Migrate()
 		{
-			IEnumerable<string> _pendingMigrations = _discountDbContext.Database.GetPendingMigrations();
+			int _numberOfMigrations = 0;
 
-			if (_pendingMigrations.Any() == true)
+			_logger.LogInformation(
+				"Migrating database associated with context '{DbContextName}'.",
+				typeof(DiscountDbContextMigration).Name);
+
+			try
 			{
-				await _discountDbContext.Database.MigrateAsync();
+				_retryPolicy.Execute(() =>
+				{
+					_numberOfMigrations = _discountDbContext.Database.GetPendingMigrations().Count();
 
-				_logger.LogInformation(
-					"Seed database associated with context '{DbContextName}'",
-					typeof(DiscountDbContext).Name);
+					if (_numberOfMigrations > 0)
+					{
+						_discountDbContext.Database.Migrate();
+					}
+				});
 			}
+			catch (NpgsqlException ex)
+			{
+				_logger.LogError(
+					ex,
+					"An error occurred while migrating the database used on context {DbContextName}.",
+					nameof(DiscountDbContextMigration));
+			}
+
+			_logger.LogInformation(
+				"Database associated with context {DbContextName} was migrated successfully with '{NumberOfMigrations}' new migrations.",
+				nameof(DiscountDbContext),
+				_numberOfMigrations);
 		}
 	}
 }

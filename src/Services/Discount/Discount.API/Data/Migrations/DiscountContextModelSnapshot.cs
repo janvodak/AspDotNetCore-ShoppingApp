@@ -7,7 +7,7 @@ using ShoppingApp.Services.Discount.API.Data;
 
 #nullable disable
 
-namespace ShoppingApp.Services.Discount.API.Migrations
+namespace ShoppingApp.Services.Discount.API.Data.Migrations
 {
     [DbContext(typeof(DiscountDbContext))]
     partial class DiscountContextModelSnapshot : ModelSnapshot

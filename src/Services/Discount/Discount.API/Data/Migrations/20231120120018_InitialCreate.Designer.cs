@@ -8,7 +8,7 @@ using ShoppingApp.Services.Discount.API.Data;
 
 #nullable disable
 
-namespace ShoppingApp.Services.Discount.API.Migrations
+namespace ShoppingApp.Services.Discount.API.Data.Migrations
 {
     [DbContext(typeof(DiscountDbContext))]
     [Migration("20231120120018_InitialCreate")]
