@@ -1,4 +1,4 @@
-﻿namespace ShoppingApp.Services.Authentication.API.Settings
+﻿namespace ShoppingApp.Services.Authentication.API.Data.Policies
 {
 	public class EntityFrameworkPolicySettings
 	{

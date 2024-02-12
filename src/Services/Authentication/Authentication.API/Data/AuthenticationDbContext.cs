@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using ShoppingApp.Services.Authentication.API.Data.Configuration;
+using ShoppingApp.Services.Authentication.API.Data.Policies;
 using ShoppingApp.Services.Authentication.API.Models;
-using ShoppingApp.Services.Authentication.API.Settings;
 
 namespace ShoppingApp.Services.Authentication.API.Data
 {

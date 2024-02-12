@@ -2,11 +2,12 @@
 using Serilog;
 using ShoppingApp.Components.Logger;
 using ShoppingApp.Services.Authentication.API.Data;
+using ShoppingApp.Services.Authentication.API.Data.Configuration;
+using ShoppingApp.Services.Authentication.API.Data.Policies;
 using ShoppingApp.Services.Authentication.API.Models;
 using ShoppingApp.Services.Authentication.API.Models.Factories;
 using ShoppingApp.Services.Authentication.API.Repositories;
 using ShoppingApp.Services.Authentication.API.Services;
-using ShoppingApp.Services.Authentication.API.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,14 +19,16 @@ builder.Services.Configure<DatabaseSettings>(
 	builder.Configuration.GetSection(DatabaseSettings.SECTION_NAME));
 builder.Services.Configure<EntityFrameworkPolicySettings>(
 	builder.Configuration.GetSection(EntityFrameworkPolicySettings.SECTION_NAME));
+builder.Services.Configure<PollyPolicySettings>(
+	builder.Configuration.GetSection(PollyPolicySettings.SECTION_NAME));
 builder.Services.Configure<JwtOptions>(
 	builder.Configuration.GetSection(JwtOptions.SECTION_NAME));
 
 builder.Services.AddDbContext<AuthenticationDbContext>();
 
 builder.Services.AddScoped<PollyyRetryPolicyFactory>();
-builder.Services.AddScoped<AuthenticationDbContextMigration>(provider =>
-	ActivatorUtilities.CreateInstance<AuthenticationDbContextMigration>(
+builder.Services.AddScoped<DbContextMigration>(provider =>
+	ActivatorUtilities.CreateInstance<DbContextMigration>(
 		provider,
 		provider.GetRequiredService<PollyyRetryPolicyFactory>().Create()));
 
@@ -62,7 +65,7 @@ if (app.Environment.IsDevelopment())
 	// Migrate the database - just for the testing purpose
 	using (var scope = app.Services.CreateScope())
 	{
-		AuthenticationDbContextMigration _authenticationDbContextMigration = scope.ServiceProvider.GetRequiredService<AuthenticationDbContextMigration>();
+		DbContextMigration _authenticationDbContextMigration = scope.ServiceProvider.GetRequiredService<DbContextMigration>();
 		_authenticationDbContextMigration.Migrate();
 	}
 }

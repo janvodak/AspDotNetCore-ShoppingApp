@@ -9,7 +9,7 @@ using ShoppingApp.Services.Authentication.API.Data;
 
 #nullable disable
 
-namespace ShoppingApp.Services.Authentication.API.Migrations
+namespace ShoppingApp.Services.Authentication.API.Data.Migrations
 {
     [DbContext(typeof(AuthenticationDbContext))]
     [Migration("20231207132156_AddUserNameIntoAspNetUser")]
