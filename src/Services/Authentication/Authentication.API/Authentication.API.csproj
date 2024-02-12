@@ -19,6 +19,7 @@
 	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  <PrivateAssets>all</PrivateAssets>
 	</PackageReference>
+	<PackageReference Include="Polly" Version="7.2.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +36,7 @@
 	<None Remove="Services\" />
 	<None Remove="Repositories\" />
 	<None Remove="Models\Factories\" />
+	<None Remove="Settings\" />
   </ItemGroup>
   <ItemGroup>
 	<Folder Include="Controllers\" />
@@ -50,6 +52,7 @@
 	<Folder Include="Services\" />
 	<Folder Include="Repositories\" />
 	<Folder Include="Models\Factories\" />
+	<Folder Include="Settings\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Migrations\20231207131317_AddUserNameIntoAspNetUser.Designer.cs" />
