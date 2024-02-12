@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace ShoppingApp.Services.Authentication.API.Migrations
+namespace ShoppingApp.Services.Authentication.API.Data.Migrations
 {
     /// <inheritdoc />
     public partial class AddUserNameIntoAspNetUser : Migration

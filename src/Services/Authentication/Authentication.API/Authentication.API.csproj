@@ -28,7 +28,6 @@
 	<None Remove="Docker\Dotnet70\" />
 	<None Remove="Docker\MicrosoftSQLServer2022-20\" />
 	<None Remove="Data\" />
-	<None Remove="Migrations\" />
 	<None Remove="Models\" />
 	<None Remove="Models\DataTransferObjects\" />
 	<None Remove="Models\DataTransferObjects\Requests\" />
@@ -36,7 +35,9 @@
 	<None Remove="Services\" />
 	<None Remove="Repositories\" />
 	<None Remove="Models\Factories\" />
-	<None Remove="Settings\" />
+	<None Remove="Data\Configuration\" />
+	<None Remove="Data\Policies\" />
+	<None Remove="Data\Migrations\" />
   </ItemGroup>
   <ItemGroup>
 	<Folder Include="Controllers\" />
@@ -44,7 +45,6 @@
 	<Folder Include="Docker\Dotnet70\" />
 	<Folder Include="Docker\MicrosoftSQLServer2022-20\" />
 	<Folder Include="Data\" />
-	<Folder Include="Migrations\" />
 	<Folder Include="Models\" />
 	<Folder Include="Models\DataTransferObjects\" />
 	<Folder Include="Models\DataTransferObjects\Requests\" />
@@ -52,10 +52,12 @@
 	<Folder Include="Services\" />
 	<Folder Include="Repositories\" />
 	<Folder Include="Models\Factories\" />
-	<Folder Include="Settings\" />
+	<Folder Include="Data\Configuration\" />
+	<Folder Include="Data\Policies\" />
+	<Folder Include="Data\Migrations\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Migrations\20231207131317_AddUserNameIntoAspNetUser.Designer.cs" />
+    <Compile Remove="Data\Migrations\20231207131317_AddUserNameIntoAspNetUser.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Components\Logger\Logger.csproj">

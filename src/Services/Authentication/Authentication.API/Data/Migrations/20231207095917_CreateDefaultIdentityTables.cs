@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ShoppingApp.Services.Authentication.API.Migrations
+namespace ShoppingApp.Services.Authentication.API.Data.Migrations
 {
     /// <inheritdoc />
     public partial class CreateDefaultIdentityTables : Migration

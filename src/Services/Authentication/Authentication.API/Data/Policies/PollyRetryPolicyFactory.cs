@@ -3,9 +3,8 @@ using Microsoft.Extensions.Options;
 using Polly;
 using Polly.Retry;
 using Serilog;
-using ShoppingApp.Services.Authentication.API.Data;
 
-namespace ShoppingApp.Services.Authentication.API.Settings
+namespace ShoppingApp.Services.Authentication.API.Data.Policies
 {
 	public class PollyyRetryPolicyFactory
 	{
@@ -22,15 +21,16 @@ namespace ShoppingApp.Services.Authentication.API.Settings
 				.WaitAndRetry(
 					retryCount: _pollyPolicySettings.MaxRetryAttempts,
 					sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(_pollyPolicySettings.SecondsBetweenRetries, retryAttempt)),
-					onRetry: (exception, retryCount, context) =>
+					onRetry: (exception, timeSpan, retry, ctx) =>
 					{
-						Log.Error(
+						Log.Warning(
 							exception,
-							"An error occurred while migrating the database associated with context '{DbContextName}'. Time after retry '{RetryCount}' of policy key '{PolicyKey}' at operation key '{OperationKey}'.",
-							typeof(AuthenticationDbContext).Name,
-							retryCount,
-							context.PolicyKey,
-							context.OperationKey);
+							"[{retry} / {retries}] Error occurred during working with [{prefix}]. Exception '{ExceptionType}' with message '{Message}' was detected.",
+							retry,
+							_pollyPolicySettings.MaxRetryAttempts,
+							nameof(AuthenticationDbContext),
+							exception.GetType().Name,
+							exception.Message);
 					});
 		}
 	}
