@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace ShoppingApp.Services.Discount.API.Migrations
+namespace ShoppingApp.Services.Discount.API.Data.Migrations
 {
     /// <inheritdoc />
     public partial class SeedDiscountData : Migration

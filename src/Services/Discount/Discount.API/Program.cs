@@ -2,8 +2,10 @@
 using Serilog;
 using ShoppingApp.Components.Logger;
 using ShoppingApp.Services.Discount.API.Data;
-using ShoppingApp.Services.Discount.API.Mappings;
+using ShoppingApp.Services.Discount.API.Data.Configuration;
+using ShoppingApp.Services.Discount.API.Data.Policies;
 using ShoppingApp.Services.Discount.API.Models.DataTransferObjects.Factories;
+using ShoppingApp.Services.Discount.API.Models.Mappings;
 using ShoppingApp.Services.Discount.API.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,12 +16,22 @@ builder.Host.UseSerilog(SeriLogger.Configure);
 // Add services to the container.
 builder.Services.Configure<DatabaseSettings>(
 	builder.Configuration.GetSection(DatabaseSettings.SECTION_NAME));
+builder.Services.Configure<EntityFrameworkPolicySettings>(
+	builder.Configuration.GetSection(EntityFrameworkPolicySettings.SECTION_NAME));
+builder.Services.Configure<PollyPolicySettings>(
+	builder.Configuration.GetSection(PollyPolicySettings.SECTION_NAME));
 
 builder.Services.AddScoped<SingleDiscountResponseFactory>();
 builder.Services.AddScoped<MultipleDiscountsResponseFactory>();
 
 builder.Services.AddScoped<DiscountDbContext>();
-builder.Services.AddScoped<DiscountDbContextMigration>();
+
+builder.Services.AddScoped<PollyyRetryPolicyFactory>();
+builder.Services.AddScoped<DiscountDbContextMigration>(provider =>
+	ActivatorUtilities.CreateInstance<DiscountDbContextMigration>(
+		provider,
+		provider.GetRequiredService<PollyyRetryPolicyFactory>().Create()));
+
 builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();
 
 IMapper mapper = MappingConfiguration.RegisterMaps().CreateMapper();
@@ -43,7 +55,7 @@ if (app.Environment.IsDevelopment())
 	using (var scope = app.Services.CreateScope())
 	{
 		DiscountDbContextMigration _discountContextSeedService = scope.ServiceProvider.GetRequiredService<DiscountDbContextMigration>();
-		await _discountContextSeedService.MigrateAsync();
+		_discountContextSeedService.Migrate();
 	}
 }
 

@@ -21,6 +21,7 @@
 	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.12" />
 	<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.12" />
+	<PackageReference Include="Polly" Version="7.2.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,9 +34,11 @@
 	<None Remove="Repositories\" />
 	<None Remove="Models\" />
 	<None Remove="Models\DataTransferObjects\" />
-	<None Remove="Migrations\" />
-	<None Remove="Mappings\" />
 	<None Remove="Models\DataTransferObjects\Factories\" />
+	<None Remove="Data\Policies\" />
+	<None Remove="Data\Configuration\" />
+	<None Remove="Data\Migrations\" />
+	<None Remove="Models\Mappings\" />
   </ItemGroup>
   <ItemGroup>
 	<Folder Include="Docker\" />
@@ -47,9 +50,11 @@
 	<Folder Include="Repositories\" />
 	<Folder Include="Models\" />
 	<Folder Include="Models\DataTransferObjects\" />
-	<Folder Include="Migrations\" />
-	<Folder Include="Mappings\" />
 	<Folder Include="Models\DataTransferObjects\Factories\" />
+	<Folder Include="Data\Policies\" />
+	<Folder Include="Data\Configuration\" />
+	<Folder Include="Data\Migrations\" />
+	<Folder Include="Models\Mappings\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Components\Logger\Logger.csproj">

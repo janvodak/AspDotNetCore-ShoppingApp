@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using ShoppingApp.Services.Discount.API.Models;
 using ShoppingApp.Services.Discount.API.Models.DataTransferObjects;
 
-namespace ShoppingApp.Services.Discount.API.Mappings
+namespace ShoppingApp.Services.Discount.API.Models.Mappings
 {
 	public class MappingConfiguration
 	{
