@@ -26,11 +26,11 @@ builder.Services.Configure<JwtOptions>(
 
 builder.Services.AddDbContext<AuthenticationDbContext>();
 
-builder.Services.AddScoped<PollyyRetryPolicyFactory>();
+builder.Services.AddScoped<PollyRetryPolicyFactory>();
 builder.Services.AddScoped<DbContextMigration>(provider =>
 	ActivatorUtilities.CreateInstance<DbContextMigration>(
 		provider,
-		provider.GetRequiredService<PollyyRetryPolicyFactory>().Create()));
+		provider.GetRequiredService<PollyRetryPolicyFactory>().Create()));
 
 builder.Services.AddScoped<IAuthenticationUserFactory, AuthenticationUserFactory>();
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Polly;
 using Polly.Retry;
@@ -6,11 +7,11 @@ using Serilog;
 
 namespace ShoppingApp.Services.Authentication.API.Data.Policies
 {
-	public class PollyyRetryPolicyFactory
+	public class PollyRetryPolicyFactory
 	{
 		private readonly PollyPolicySettings _pollyPolicySettings;
 
-		public PollyyRetryPolicyFactory(IOptions<PollyPolicySettings> pollyPolicySettings)
+		public PollyRetryPolicyFactory(IOptions<PollyPolicySettings> pollyPolicySettings)
 		{
 			_pollyPolicySettings = pollyPolicySettings.Value;
 		}
@@ -25,10 +26,12 @@ namespace ShoppingApp.Services.Authentication.API.Data.Policies
 					{
 						Log.Warning(
 							exception,
-							"[{retry} / {retries}] Error occurred during working with [{prefix}]. Exception '{ExceptionType}' with message '{Message}' was detected.",
+							"[{retry} / {retries}] Error occurred during work with '[{prefix}]'. Action was retried after '{Timespan}' miliseconds. Context '{PolicyKey}'. Exception '{ExceptionType}' with message '{Message}' was detected.",
 							retry,
 							_pollyPolicySettings.MaxRetryAttempts,
 							nameof(AuthenticationDbContext),
+							timeSpan.TotalMilliseconds,
+							ctx.PolicyKey,
 							exception.GetType().Name,
 							exception.Message);
 					});
