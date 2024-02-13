@@ -25,10 +25,12 @@ namespace ShoppingApp.Services.Discount.API.Data.Policies
 					{
 						Log.Warning(
 							exception,
-							"[{retry} / {retries}] Error occurred during working with [{prefix}]. Exception '{ExceptionType}' with message '{Message}' was detected.",
+							"[{retry} / {retries}] Error occurred during work with '[{prefix}]'. Action was retried after '{Timespan}' miliseconds. Context '{PolicyKey}'. Exception '{ExceptionType}' with message '{Message}' was detected.",
 							retry,
 							_pollyPolicySettings.MaxRetryAttempts,
 							nameof(DiscountDbContext),
+							timeSpan.TotalMilliseconds,
+							ctx.PolicyKey,
 							exception.GetType().Name,
 							exception.Message);
 					});
