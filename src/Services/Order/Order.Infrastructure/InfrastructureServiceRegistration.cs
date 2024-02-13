@@ -9,15 +9,13 @@ using ShoppingApp.Services.Order.API.Infrastructure.Idempotency.Services;
 using ShoppingApp.Services.Order.API.Infrastructure.Notifications;
 using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Behaviors;
 using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context;
+using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Policies;
 using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Repositories;
 
 namespace ShoppingApp.Services.Order.API.Infrastructure
 {
 	public static class InfrastructureServiceRegistration
 	{
-		private const string DATABASE_SETTINGS_SECTION_NAME = "DatabaseSettings";
-		private const string EMAIL_SETTINGS_SECTION_NAME = "EmailSettings";
-
 		public static IServiceCollection AddInfrastructureServices(
 			this IServiceCollection services,
 			IConfiguration configuration)
@@ -38,7 +36,8 @@ namespace ShoppingApp.Services.Order.API.Infrastructure
 			IServiceCollection services,
 			IConfiguration configuration)
 		{
-			IConfigurationSection databaseConfigurationSection = configuration.GetSection(DATABASE_SETTINGS_SECTION_NAME);
+			// Database configuration
+			IConfigurationSection databaseConfigurationSection = configuration.GetSection(DatabaseSettings.SECTION_NAME);
 
 			services.Configure<DatabaseSettings>(options =>
 			{
@@ -66,11 +65,53 @@ namespace ShoppingApp.Services.Order.API.Infrastructure
 
 			services.AddSingleton(c => c.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
+			// Entity Framework Policies configuration
+			IConfigurationSection entityFrameworkPolicyConfigurationSection = configuration.GetSection(EntityFrameworkPolicySettings.SECTION_NAME);
+
+			services.Configure<EntityFrameworkPolicySettings>(options =>
+			{
+				string maxRetryCountValue = entityFrameworkPolicyConfigurationSection[nameof(EntityFrameworkPolicySettings.MaxRetryCount)]
+					?? throw new ArgumentNullException(
+						nameof(options.MaxRetryCount),
+						"value is missing in appsettings.json");
+				options.MaxRetryCount = int.Parse(maxRetryCountValue);
+
+				string MaxRetryDelay = entityFrameworkPolicyConfigurationSection[nameof(EntityFrameworkPolicySettings.MaxRetryDelay)]
+						?? throw new ArgumentNullException(
+							nameof(options.MaxRetryDelay),
+							"value is missing in appsettings.json");
+				options.MaxRetryDelay = int.Parse(MaxRetryDelay);
+			});
+
+			services.AddSingleton(c => c.GetRequiredService<IOptions<EntityFrameworkPolicySettings>>().Value);
+
+			// Polly Policies configuration
+			IConfigurationSection pollyPolicyConfigurationSection = configuration.GetSection(PollyPolicySettings.SECTION_NAME);
+
+			services.Configure<PollyPolicySettings>(options =>
+			{
+				string maxRetryAttemptsValue = pollyPolicyConfigurationSection[nameof(PollyPolicySettings.MaxRetryAttempts)]
+					?? throw new ArgumentNullException(
+						nameof(options.MaxRetryAttempts),
+						"value is missing in appsettings.json");
+				options.MaxRetryAttempts = int.Parse(maxRetryAttemptsValue);
+
+				string secondsBetweenRetriesValue = pollyPolicyConfigurationSection[nameof(PollyPolicySettings.SecondsBetweenRetries)]
+					?? throw new ArgumentNullException(
+						nameof(options.SecondsBetweenRetries),
+						"value is missing in appsettings.json");
+				options.SecondsBetweenRetries = int.Parse(secondsBetweenRetriesValue);
+			});
+
+			services.AddSingleton(c => c.GetRequiredService<IOptions<PollyPolicySettings>>().Value);
+
 			services.AddDbContext<OrderContext>();
 
 			// Register your interfaces and implementations here
 			services.AddScoped<IOrderRepository, OrderRepository>();
 			services.AddScoped(typeof(ITransactionBehavior<,>), typeof(TransactionBehavior<,>));
+
+			services.AddScoped<PollyyRetryPolicyFactory>();
 		}
 
 		private static void ConfigureNotifications(
@@ -79,7 +120,7 @@ namespace ShoppingApp.Services.Order.API.Infrastructure
 		{
 			services.AddScoped<IEmailService, EmailService>();
 
-			IConfigurationSection emailConfigurationSection = configuration.GetSection(EMAIL_SETTINGS_SECTION_NAME);
+			IConfigurationSection emailConfigurationSection = configuration.GetSection(EmailSettings.SECTION_NAME);
 
 			services.Configure<EmailSettings>(options =>
 			{
