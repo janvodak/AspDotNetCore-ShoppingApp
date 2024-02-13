@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 WITH_PORTAINER=${WITH_PORTAINER:-0}  # 0 = no, 1 = yes
+WITH_ELASTIC_STACK=${WITH_ELASTIC_STACK:-0}  # 0 = no, 1 = yes
 
 _eval() {
 	local command=("$@")

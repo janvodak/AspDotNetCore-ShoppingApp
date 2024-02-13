@@ -7,6 +7,7 @@ using ShoppingApp.Services.Order.API.Domain.AggregatesModel.Order.Entities;
 using ShoppingApp.Services.Order.API.Domain.SeedWork;
 using ShoppingApp.Services.Order.API.Infrastructure.Persistence.EntityConfiguration;
 using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Extensions;
+using ShoppingApp.Services.Order.API.Infrastructure.Persistence.Policies;
 
 namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 {
@@ -14,15 +15,21 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 	{
 		private const string AUTOMAT_NAME = "swn";
 
-		private readonly IOptions<DatabaseSettings> _databaseSettings;
+		private readonly DatabaseSettings _databaseSettings;
+
+		private readonly EntityFrameworkPolicySettings _entityFrameworkPolicySettings;
 
 		private readonly IMediator _mediator;
 
 		private IDbContextTransaction? _currentTransaction = null!;
 
-		public OrderContext(IOptions<DatabaseSettings> databaseSettings, IMediator mediator)
+		public OrderContext(
+			IOptions<DatabaseSettings> databaseSettings,
+			IOptions<EntityFrameworkPolicySettings> entityFrameworkPolicySettings,
+			IMediator mediator)
 		{
-			_databaseSettings = databaseSettings;
+			_databaseSettings = databaseSettings.Value;
+			_entityFrameworkPolicySettings = entityFrameworkPolicySettings.Value;
 			_mediator = mediator;
 		}
 
@@ -132,7 +139,15 @@ namespace ShoppingApp.Services.Order.API.Infrastructure.Persistence.Context
 
 		protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
 		{
-			dbContextOptionsBuilder.UseSqlServer(_databaseSettings.Value.GetConnectionString());
+			dbContextOptionsBuilder.UseSqlServer(
+				_databaseSettings.GetConnectionString(),
+				sqlServerOptionsAction: sqlOptions =>
+				{
+					sqlOptions.EnableRetryOnFailure(
+						maxRetryCount: _entityFrameworkPolicySettings.MaxRetryCount,
+						maxRetryDelay: TimeSpan.FromSeconds(_entityFrameworkPolicySettings.MaxRetryDelay),
+						errorNumbersToAdd: null);
+				});
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
