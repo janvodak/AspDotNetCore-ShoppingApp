@@ -38,7 +38,6 @@ builder.Services.Configure<RetryPolicySettings>(
 builder.Services.AddScoped<CircuitBreakerPolicyFactory>();
 builder.Services.AddScoped<RetryPolicyFactory>();
 
-// Retrieve policy-related classes from the DI container.
 // @TODO this is terrible solution, it needs to be rewriten
 CircuitBreakerPolicyFactory circuitBreakerPolicyFactory = builder.Services.BuildServiceProvider().GetRequiredService<CircuitBreakerPolicyFactory>();
 RetryPolicyFactory retryPolicyFactory = builder.Services.BuildServiceProvider().GetRequiredService<RetryPolicyFactory>();
