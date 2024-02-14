@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using ShoppingApp.Services.Discount.Grpc.Configuration.DataTransferObjects;
 using ShoppingApp.Services.Discount.Grpc.Models;
 
 namespace ShoppingApp.Services.Discount.Grpc.Data

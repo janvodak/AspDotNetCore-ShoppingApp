@@ -1,8 +1,12 @@
 ﻿using AutoMapper;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Serilog;
 using ShoppingApp.Components.Logger;
+using ShoppingApp.Services.Discount.Grpc.Configuration;
+using ShoppingApp.Services.Discount.Grpc.Configuration.DataTransferObjects;
 using ShoppingApp.Services.Discount.Grpc.Data;
-using ShoppingApp.Services.Discount.Grpc.Mappings;
 using ShoppingApp.Services.Discount.Grpc.Repositories;
 using ShoppingApp.Services.Discount.Grpc.Services;
 
@@ -27,6 +31,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddGrpc();
 
+builder.Services.ConfigureHealthChecks(builder.Configuration);
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -43,6 +49,31 @@ app.MapGrpcService<CreateDiscoutService>();
 app.MapGrpcService<DeleteDiscoutService>();
 app.MapGrpcService<GetDiscoutService>();
 app.MapGrpcService<UpdateDiscoutService>();
+
 app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+
+app.MapHealthChecks("/health/live", new HealthCheckOptions()
+{
+	Predicate = _ => false,
+	ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+	ResultStatusCodes =
+	{
+		[HealthStatus.Healthy] = StatusCodes.Status200OK,
+		[HealthStatus.Degraded] = StatusCodes.Status200OK,
+		[HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+	}
+});
+
+app.MapHealthChecks("/health/ready", new HealthCheckOptions()
+{
+	Predicate = (check) => check.Tags.Contains("ready") || check.Tags.Contains("db"),
+	ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+	ResultStatusCodes =
+	{
+		[HealthStatus.Healthy] = StatusCodes.Status200OK,
+		[HealthStatus.Degraded] = StatusCodes.Status200OK,
+		[HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+	}
+});
 
 app.Run();

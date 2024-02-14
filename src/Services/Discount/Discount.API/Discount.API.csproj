@@ -22,6 +22,8 @@
 	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.12" />
 	<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.12" />
 	<PackageReference Include="Polly" Version="7.2.4" />
+	<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.1.0" />
+	<PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="7.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,9 +38,10 @@
 	<None Remove="Models\DataTransferObjects\" />
 	<None Remove="Models\DataTransferObjects\Factories\" />
 	<None Remove="Data\Policies\" />
-	<None Remove="Data\Configuration\" />
 	<None Remove="Data\Migrations\" />
 	<None Remove="Models\Mappings\" />
+	<None Remove="Configuration\" />
+	<None Remove="Configuration\DataTransferObjects\" />
   </ItemGroup>
   <ItemGroup>
 	<Folder Include="Docker\" />
@@ -52,9 +55,10 @@
 	<Folder Include="Models\DataTransferObjects\" />
 	<Folder Include="Models\DataTransferObjects\Factories\" />
 	<Folder Include="Data\Policies\" />
-	<Folder Include="Data\Configuration\" />
 	<Folder Include="Data\Migrations\" />
 	<Folder Include="Models\Mappings\" />
+	<Folder Include="Configuration\" />
+	<Folder Include="Configuration\DataTransferObjects\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Components\Logger\Logger.csproj">

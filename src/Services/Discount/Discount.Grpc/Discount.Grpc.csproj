@@ -22,6 +22,8 @@
 		</PackageReference>
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+		<PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="7.1.0" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.1.0" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -41,8 +43,9 @@
 	<None Remove="Data\" />
 	<None Remove="Repositories\" />
 	<None Remove="Services\" />
-	<None Remove="Mappings\" />
 	<None Remove="Models\" />
+	<None Remove="Configuration\" />
+	<None Remove="Configuration\DataTransferObjects\" />
   </ItemGroup>
   <ItemGroup>
 	<Folder Include="Docker\" />
@@ -51,8 +54,9 @@
 	<Folder Include="Data\" />
 	<Folder Include="Repositories\" />
 	<Folder Include="Services\" />
-	<Folder Include="Mappings\" />
 	<Folder Include="Models\" />
+	<Folder Include="Configuration\" />
+	<Folder Include="Configuration\DataTransferObjects\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Components\Logger\Logger.csproj">
