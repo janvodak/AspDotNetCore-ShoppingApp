@@ -14,10 +14,11 @@
 	<PackageReference Include="MongoDB.Driver" Version="2.22.0" />
 	<PackageReference Include="AutoMapper" Version="12.0.1" />
 	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+	<PackageReference Include="AspNetCore.HealthChecks.MongoDb" Version="7.0.0" />
+	<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-	<None Remove="src\ValueObjects\" />
 	<None Remove="Docker\DotNet70\" />
 	<None Remove="Docker\Mongo60\" />
 	<None Remove="Docker\MongoClient40\" />
@@ -26,7 +27,8 @@
 	<None Remove="Data\" />
 	<None Remove="Controllers\" />
 	<None Remove="Models\DataTransferObjects\" />
-	<None Remove="Mappings\" />
+	<None Remove="Configuration\" />
+	<None Remove="Configuration\DataTransferObjects\" />
   </ItemGroup>
   <ItemGroup>
 	<Folder Include="Docker\DotNet70\" />
@@ -37,7 +39,8 @@
 	<Folder Include="Data\" />
 	<Folder Include="Controllers\" />
 	<Folder Include="Models\DataTransferObjects\" />
-	<Folder Include="Mappings\" />
+	<Folder Include="Configuration\" />
+	<Folder Include="Configuration\DataTransferObjects\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Components\Logger\Logger.csproj">
