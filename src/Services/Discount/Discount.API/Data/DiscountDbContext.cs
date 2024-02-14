@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using ShoppingApp.Services.Discount.API.Data.Configuration;
+using ShoppingApp.Services.Discount.API.Configuration.DataTransferObjects;
 using ShoppingApp.Services.Discount.API.Data.Policies;
 using ShoppingApp.Services.Discount.API.Models;
 

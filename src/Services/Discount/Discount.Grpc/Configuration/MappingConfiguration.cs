@@ -2,7 +2,7 @@
 using ShoppingApp.Services.Discount.Grpc.Models;
 using ShoppingApp.Services.Discount.Grpc.Protos;
 
-namespace ShoppingApp.Services.Discount.Grpc.Mappings
+namespace ShoppingApp.Services.Discount.Grpc.Configuration
 {
 	public class MappingConfiguration
 	{

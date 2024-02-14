@@ -1,4 +1,4 @@
-﻿namespace ShoppingApp.Services.Discount.API.Data.Configuration
+﻿namespace ShoppingApp.Services.Discount.API.Configuration.DataTransferObjects
 {
 	public class DatabaseSettings
 	{

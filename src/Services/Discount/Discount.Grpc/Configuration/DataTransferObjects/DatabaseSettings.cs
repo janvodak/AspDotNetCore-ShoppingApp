@@ -1,4 +1,4 @@
-﻿namespace ShoppingApp.Services.Discount.Grpc.Data
+﻿namespace ShoppingApp.Services.Discount.Grpc.Configuration.DataTransferObjects
 {
 	public class DatabaseSettings
 	{
