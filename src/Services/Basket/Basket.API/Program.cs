@@ -1,11 +1,15 @@
 ﻿using System.Reflection;
+using Basket.API.Src.Configuration;
 using Basket.API.Src.GrpcServices;
 using Basket.API.Src.Publishers;
 using Basket.API.Src.Repositories;
-using ShoppingApp.Services.Discount.Grpc.Protos;
+using HealthChecks.UI.Client;
 using MassTransit;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Serilog;
 using ShoppingApp.Components.Logger;
+using ShoppingApp.Services.Discount.Grpc.Protos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,6 +60,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.ConfigureHealthChecks(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -67,4 +73,29 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 app.MapControllers();
+
+app.MapHealthChecks("/health/live", new HealthCheckOptions()
+{
+	Predicate = _ => false,
+	ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+	ResultStatusCodes =
+	{
+		[HealthStatus.Healthy] = StatusCodes.Status200OK,
+		[HealthStatus.Degraded] = StatusCodes.Status200OK,
+		[HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+	}
+});
+
+app.MapHealthChecks("/health/ready", new HealthCheckOptions()
+{
+	Predicate = (check) => check.Tags.Contains("ready") || check.Tags.Contains("db"),
+	ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+	ResultStatusCodes =
+	{
+		[HealthStatus.Healthy] = StatusCodes.Status200OK,
+		[HealthStatus.Degraded] = StatusCodes.Status200OK,
+		[HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+	}
+});
+
 app.Run();
