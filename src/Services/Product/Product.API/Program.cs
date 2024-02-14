@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 using ShoppingApp.Components.Logger;
+using ShoppingApp.Services.Product.API.Configuration;
+using ShoppingApp.Services.Product.API.Configuration.DataTransferObjects;
 using ShoppingApp.Services.Product.API.Data;
-using ShoppingApp.Services.Product.API.Mappings;
 using ShoppingApp.Services.Product.API.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +30,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.ConfigureHealthChecks(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,5 +43,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 app.MapControllers();
-app.Run();
 
+app.MapHealthChecks("/health", new HealthCheckOptions() {
+	Predicate = _ => true,
+	ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
+
+app.Run();

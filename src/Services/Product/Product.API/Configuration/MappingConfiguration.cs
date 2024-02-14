@@ -2,7 +2,7 @@
 using ShoppingApp.Services.Product.API.Models;
 using ShoppingApp.Services.Product.API.Models.DataTransferObjects;
 
-namespace ShoppingApp.Services.Product.API.Mappings
+namespace ShoppingApp.Services.Product.API.Configuration
 {
 	public class MappingConfiguration
 	{

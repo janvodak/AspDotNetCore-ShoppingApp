@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using ShoppingApp.Services.Product.API.Configuration.DataTransferObjects;
 using ShoppingApp.Services.Product.API.Models;
 
 namespace ShoppingApp.Services.Product.API.Data
