@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Serilog;
 using ShoppingApp.Components.Logger;
 using ShoppingApp.Services.Product.API.Configuration;
@@ -44,9 +45,28 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 app.MapControllers();
 
-app.MapHealthChecks("/health", new HealthCheckOptions() {
-	Predicate = _ => true,
-	ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+app.MapHealthChecks("/health/live", new HealthCheckOptions()
+{
+	Predicate = _ => false,
+	ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+	ResultStatusCodes =
+	{
+		[HealthStatus.Healthy] = StatusCodes.Status200OK,
+		[HealthStatus.Degraded] = StatusCodes.Status200OK,
+		[HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+	}
+});
+
+app.MapHealthChecks("/health/ready", new HealthCheckOptions()
+{
+	Predicate = (check) => check.Tags.Contains("ready") || check.Tags.Contains("db"),
+	ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+	ResultStatusCodes =
+	{
+		[HealthStatus.Healthy] = StatusCodes.Status200OK,
+		[HealthStatus.Degraded] = StatusCodes.Status200OK,
+		[HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+	}
 });
 
 app.Run();

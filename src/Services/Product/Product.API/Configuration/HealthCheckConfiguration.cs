@@ -15,7 +15,7 @@ namespace ShoppingApp.Services.Product.API.Configuration
 			services.AddHealthChecks()
 				.AddMongoDb(
 					mongodbConnectionString: databaseSettings.ConnectionString,
-					name: "MongoDB",
+					name: "product-mongodb",
 					timeout: TimeSpan.FromSeconds(10),
 					tags: new[] { "db", "mongodb" });
 
