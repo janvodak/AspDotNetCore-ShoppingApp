@@ -112,6 +112,12 @@ namespace ShoppingApp.Services.Order.API.Infrastructure
 			services.AddScoped(typeof(ITransactionBehavior<,>), typeof(TransactionBehavior<,>));
 
 			services.AddScoped<PollyyRetryPolicyFactory>();
+
+			// Add HealthChecks for Order Context
+			services.AddHealthChecks()
+				.AddDbContextCheck<OrderContext>(
+					name: "order-mssql",
+					tags: new[] { "ready", "db", "mssql" });
 		}
 
 		private static void ConfigureNotifications(
