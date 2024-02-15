@@ -1,4 +1,4 @@
-﻿namespace Shopping.WebApp.Policies.Configuration
+﻿namespace Shopping.WebApp.Configuration.DataTransferObjects
 {
 	public class RetryPolicySettings
 	{
