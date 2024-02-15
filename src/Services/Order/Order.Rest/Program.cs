@@ -1,4 +1,7 @@
-﻿using MassTransit;
+﻿using HealthChecks.UI.Client;
+using MassTransit;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Serilog;
 using ShoppingApp.Components.EventBus.Messages.Shared;
 using ShoppingApp.Components.Logger;
@@ -68,5 +71,29 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 app.MapControllers();
+
+app.MapHealthChecks("/health/live", new HealthCheckOptions()
+{
+	Predicate = _ => false,
+	ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+	ResultStatusCodes =
+	{
+		[HealthStatus.Healthy] = StatusCodes.Status200OK,
+		[HealthStatus.Degraded] = StatusCodes.Status200OK,
+		[HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+	}
+});
+
+app.MapHealthChecks("/health/ready", new HealthCheckOptions()
+{
+	Predicate = (check) => check.Tags.Contains("ready"),
+	ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+	ResultStatusCodes =
+	{
+		[HealthStatus.Healthy] = StatusCodes.Status200OK,
+		[HealthStatus.Degraded] = StatusCodes.Status200OK,
+		[HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+	}
+});
 
 app.Run();
