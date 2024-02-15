@@ -1,23 +1,20 @@
-﻿using Microsoft.Extensions.Options;
-using Polly;
+﻿using Polly;
 using Polly.Extensions.Http;
 using Polly.Retry;
 using Serilog;
-using ShoppingApp.ApiGateway.ShoppingAggregator.Settings;
+using ShoppingApp.ApiGateway.ShoppingAggregator.Configuration.DataTransferObjects;
 
-namespace ShoppingApp.ApiGateway.ShoppingAggregator.Policies
+namespace ShoppingApp.ApiGateway.ShoppingAggregator.Configuration
 {
-	public class RetryPolicyFactory
+	public static class RetryPolicyConfiguration
 	{
-		private readonly RetryPolicySettings _retryPolicySettings;
-
-		public RetryPolicyFactory(IOptions<RetryPolicySettings> retryPolicySettings)
+		public static AsyncRetryPolicy<HttpResponseMessage> Create<T>(
+			IConfiguration configuration) where T : class
 		{
-			_retryPolicySettings = retryPolicySettings.Value;
-		}
+			RetryPolicySettings retryPolicySettings = configuration.GetSection(RetryPolicySettings.SECTION_NAME)
+				.Get<RetryPolicySettings>()
+				?? throw new ApplicationException("CircuitBreakerPolicySettings is null. Make sure the configuration is set correctly.");
 
-		public AsyncRetryPolicy<HttpResponseMessage> Create<T>() where T : class
-		{
 			// exponential back-off: 2, 4, 8 etc
 			//  2 ^ 1 = 2 seconds then
 			//  2 ^ 2 = 4 seconds then
@@ -32,14 +29,14 @@ namespace ShoppingApp.ApiGateway.ShoppingAggregator.Policies
 				.HandleTransientHttpError()
 				.OrResult(msg => msg.StatusCode == System.Net.HttpStatusCode.NotFound)
 				.WaitAndRetryAsync(
-					retryCount: _retryPolicySettings.MaxRetryAttempts,
-					sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(_retryPolicySettings.SecondsBetweenRetries, retryAttempt)) + TimeSpan.FromMilliseconds(jitterer.Next(0, _retryPolicySettings.JittererLimit)),
+					retryCount: retryPolicySettings.MaxRetryAttempts,
+					sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(retryPolicySettings.SecondsBetweenRetries, retryAttempt)) + TimeSpan.FromMilliseconds(jitterer.Next(0, retryPolicySettings.JittererLimit)),
 					onRetry: (result, timeSpan, retry, ctx) =>
 					{
 						Log.Error(
 							"[{retry} / {retries}] Error occurred during work with '[{prefix}]'. Action was retried after '{Timespan}' miliseconds. Context '{PolicyKey}'. Message '{Message}' was detected.",
 							retry,
-							_retryPolicySettings.MaxRetryAttempts,
+							retryPolicySettings.MaxRetryAttempts,
 							className,
 							timeSpan.TotalMilliseconds,
 							ctx.PolicyKey,

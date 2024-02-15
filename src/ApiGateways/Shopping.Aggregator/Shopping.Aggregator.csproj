@@ -13,6 +13,8 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="7.0.15" />
+    <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="7.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,12 +24,11 @@
     <None Remove="Features\" />
     <None Remove="Models\" />
     <None Remove="Services\" />
-    <None Remove="Settings\" />
     <None Remove="Features\Factories\" />
     <None Remove="Features\Handlers\" />
     <None Remove="Features\Parsers\" />
-    <None Remove="Policies\" />
-    <None Remove="Policies\Configuration\" />
+    <None Remove="Configuration\" />
+    <None Remove="Configuration\DataTransferObjects\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Docker\" />
@@ -36,12 +37,11 @@
     <Folder Include="Features\" />
     <Folder Include="Models\" />
     <Folder Include="Services\" />
-    <Folder Include="Settings\" />
     <Folder Include="Features\Factories\" />
     <Folder Include="Features\Handlers\" />
     <Folder Include="Features\Parsers\" />
-    <Folder Include="Policies\" />
-    <Folder Include="Policies\Configuration\" />
+    <Folder Include="Configuration\" />
+    <Folder Include="Configuration\DataTransferObjects\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Components\Logger\Logger.csproj">

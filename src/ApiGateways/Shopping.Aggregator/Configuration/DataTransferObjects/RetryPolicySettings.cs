@@ -1,4 +1,4 @@
-﻿namespace ShoppingApp.ApiGateway.ShoppingAggregator.Settings
+﻿namespace ShoppingApp.ApiGateway.ShoppingAggregator.Configuration.DataTransferObjects
 {
 	public class RetryPolicySettings
 	{

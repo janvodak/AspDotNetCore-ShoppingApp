@@ -1,8 +1,8 @@
-﻿namespace ShoppingApp.ApiGateway.ShoppingAggregator.Settings
+﻿namespace ShoppingApp.ApiGateway.ShoppingAggregator.Configuration.DataTransferObjects
 {
 	public class ApiServicesSettings
 	{
-		public const string NAME_OF_SECTION = "ApiSettings";
+		public const string SECTION_NAME = "ApiSettings";
 
 		public string BasketApiUrl { get; set; } = null!;
 
