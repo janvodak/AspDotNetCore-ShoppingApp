@@ -1,4 +1,4 @@
-﻿namespace ShoppingApp.Services.Authentication.API.Models
+﻿namespace ShoppingApp.Services.Authentication.API.Configuration.DataTransferObjects
 {
 	public class JwtOptions
 	{

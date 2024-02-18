@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Serilog;
 using ShoppingApp.Components.Logger;
+using ShoppingApp.Services.Authentication.API.Configuration;
+using ShoppingApp.Services.Authentication.API.Configuration.DataTransferObjects;
 using ShoppingApp.Services.Authentication.API.Data;
-using ShoppingApp.Services.Authentication.API.Data.Configuration;
 using ShoppingApp.Services.Authentication.API.Data.Policies;
 using ShoppingApp.Services.Authentication.API.Models;
 using ShoppingApp.Services.Authentication.API.Models.Factories;
@@ -54,6 +58,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.ConfigureHealthChecks();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -72,7 +78,30 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
+
+app.MapHealthChecks("/health/live", new HealthCheckOptions()
+{
+	Predicate = _ => false,
+	ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+	ResultStatusCodes =
+	{
+		[HealthStatus.Healthy] = StatusCodes.Status200OK,
+		[HealthStatus.Degraded] = StatusCodes.Status200OK,
+		[HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+	}
+});
+
+app.MapHealthChecks("/health/ready", new HealthCheckOptions()
+{
+	Predicate = (check) => check.Tags.Contains("ready"),
+	ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+	ResultStatusCodes =
+	{
+		[HealthStatus.Healthy] = StatusCodes.Status200OK,
+		[HealthStatus.Degraded] = StatusCodes.Status200OK,
+		[HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+	}
+});
 
 app.Run();

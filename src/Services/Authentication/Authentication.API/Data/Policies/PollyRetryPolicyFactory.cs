@@ -1,9 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Polly;
 using Polly.Retry;
 using Serilog;
+using ShoppingApp.Services.Authentication.API.Configuration.DataTransferObjects;
 
 namespace ShoppingApp.Services.Authentication.API.Data.Policies
 {
