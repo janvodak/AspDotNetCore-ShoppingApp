@@ -17,7 +17,7 @@ namespace ShoppingApp.Services.Discount.Grpc.Configuration
 					connectionString: databaseSettings.GetConnectionString(),
 					name: "discount-postgres",
 					timeout: TimeSpan.FromSeconds(10),
-					tags: new[] { "db", "postgres" });
+					tags: new[] { "ready", "db", "postgres" });
 
 			return services;
 		}

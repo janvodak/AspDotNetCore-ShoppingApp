@@ -59,7 +59,7 @@ app.MapHealthChecks("/health/live", new HealthCheckOptions()
 
 app.MapHealthChecks("/health/ready", new HealthCheckOptions()
 {
-	Predicate = (check) => check.Tags.Contains("ready") || check.Tags.Contains("db"),
+	Predicate = (check) => check.Tags.Contains("ready"),
 	ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
 	ResultStatusCodes =
 	{

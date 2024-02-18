@@ -59,6 +59,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Messages", "src\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "src\Components\Logger\Logger.csproj", "{CBB20359-1955-4986-BE70-E0244950CDAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStatus", "src\WebApps\WebStatus\WebStatus.csproj", "{A615FEB8-2208-4B87-80D7-6B49CCBD09E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +123,10 @@ Global
 		{CBB20359-1955-4986-BE70-E0244950CDAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBB20359-1955-4986-BE70-E0244950CDAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBB20359-1955-4986-BE70-E0244950CDAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A615FEB8-2208-4B87-80D7-6B49CCBD09E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A615FEB8-2208-4B87-80D7-6B49CCBD09E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A615FEB8-2208-4B87-80D7-6B49CCBD09E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A615FEB8-2208-4B87-80D7-6B49CCBD09E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,5 +158,6 @@ Global
 		{4AF12D65-09BC-43D2-878F-A875BF2DCC62} = {17578471-6FAA-461C-834D-3CE8A757A69A}
 		{0F5FFEEA-F9BA-4FCC-930A-36B326796C7F} = {E46028BE-B24C-4249-B54B-5D2B80687A32}
 		{CBB20359-1955-4986-BE70-E0244950CDAF} = {E46028BE-B24C-4249-B54B-5D2B80687A32}
+		{A615FEB8-2208-4B87-80D7-6B49CCBD09E3} = {636808BA-08F8-441E-8FD6-2EC3083F25AD}
 	EndGlobalSection
 EndGlobal

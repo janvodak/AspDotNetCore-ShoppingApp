@@ -1,4 +1,4 @@
-﻿namespace ShoppingApp.Services.Discount.API.Data.Policies
+﻿namespace ShoppingApp.Services.Discount.API.Configuration.DataTransferObjects
 {
 	public class EntityFrameworkPolicySettings
 	{

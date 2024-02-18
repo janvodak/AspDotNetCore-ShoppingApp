@@ -3,6 +3,7 @@ using Npgsql;
 using Polly;
 using Polly.Retry;
 using Serilog;
+using ShoppingApp.Services.Discount.API.Configuration.DataTransferObjects;
 
 namespace ShoppingApp.Services.Discount.API.Data.Policies
 {

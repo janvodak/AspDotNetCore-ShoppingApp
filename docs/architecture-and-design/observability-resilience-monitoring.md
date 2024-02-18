@@ -9,9 +9,9 @@
 - [Microservices Resiliency](#microservices-resiliency)
     - [Strategies to handle partial failure](#strategies-to-handle-partial-failure)
     - [Resiliency Implementation](#resiliency-implementation)
-        - [Retry Pattern in Database Migration]()
-        - [Retry Pattern for SQL Connection]()
-        - [Use IHttpClientFactory to implement resilient HTTP requests with Polly-based middleware]()
+        - [Retry Pattern in Database Migration](#retry-pattern-in-database-migration)
+        - [Retry Pattern for SQL Connection](#retry-pattern-for-sql-connection)
+        - [Use IHttpClientFactory to implement resilient HTTP requests with Polly-based middleware](use-ihttpclientfactory-to-implement-resilient-http-requests-with-Polly-based-middleware)
 
 Resiliency is the ability to recover from failures and continue to function.
 It isn't about avoiding failures but accepting the fact that failures will happen
