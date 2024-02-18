@@ -14,7 +14,7 @@
 					redisConnectionString: databaseSettings,
 					name: "basket-redis",
 					timeout: TimeSpan.FromSeconds(10),
-					tags: new[] { "db", "redis" });
+					tags: new[] { "ready", "db", "redis" });
 
 			return services;
 		}

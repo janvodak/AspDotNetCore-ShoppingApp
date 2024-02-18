@@ -17,7 +17,7 @@ namespace ShoppingApp.Services.Product.API.Configuration
 					mongodbConnectionString: databaseSettings.ConnectionString,
 					name: "product-mongodb",
 					timeout: TimeSpan.FromSeconds(10),
-					tags: new[] { "db", "mongodb" });
+					tags: new[] { "ready", "db", "mongodb" });
 
 			return services;
 		}
