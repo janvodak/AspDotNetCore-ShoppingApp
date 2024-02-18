@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using ShoppingApp.Services.Authentication.API.Configuration.DataTransferObjects;
 using ShoppingApp.Services.Authentication.API.Models;
 
 namespace ShoppingApp.Services.Authentication.API.Services
