@@ -1,4 +1,4 @@
-﻿namespace WebStatus.Models;
+﻿namespace ShoppingApp.WebApps.WebStatus.Models;
 
 public class ErrorViewModel
 {
