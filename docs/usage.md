@@ -60,6 +60,7 @@
 * **Portainer -> http://host.docker.internal:9000**
 * **Elasticsearch -> http://host.docker.internal:9200**
 * **Kibana -> http://host.docker.internal:5601**
+* **Web Status -> http://host.docker.internal:8006**
 * **Web UI -> http://host.docker.internal:8080**
 
 1. Launch http://host.docker.internal:8080 in your browser to view the Web UI.

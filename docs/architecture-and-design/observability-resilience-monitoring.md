@@ -3,15 +3,17 @@
 ## Table of Contents
 
 - [Microservices Observability with Distributed Logging](#microservices-observability-with-distributed-logging)
-    - [Elastic Stack Integration](#elastic-stack-integration)
-        - [Benefits of Distributed Logging](#benefits-of-distributed-logging)
-    - [Observability Implementation](#observability-implementation)
+	- [Elastic Stack Integration](#elastic-stack-integration)
+		- [Benefits of Distributed Logging](#benefits-of-distributed-logging)
+	- [Observability Implementation](#observability-implementation)
 - [Microservices Resiliency](#microservices-resiliency)
-    - [Strategies to handle partial failure](#strategies-to-handle-partial-failure)
-    - [Resiliency Implementation](#resiliency-implementation)
-        - [Retry Pattern in Database Migration](#retry-pattern-in-database-migration)
-        - [Retry Pattern for SQL Connection](#retry-pattern-for-sql-connection)
-        - [Use IHttpClientFactory to implement resilient HTTP requests with Polly-based middleware](use-ihttpclientfactory-to-implement-resilient-http-requests-with-Polly-based-middleware)
+	- [Strategies to handle partial failure](#strategies-to-handle-partial-failure)
+	- [Resiliency Implementation](#resiliency-implementation)
+		- [Retry Pattern in Database Migration](#retry-pattern-in-database-migration)
+		- [Retry Pattern for SQL Connection](#retry-pattern-for-sql-connection)
+		- [Use IHttpClientFactory to implement resilient HTTP requests with Polly-based middleware](use-ihttpclientfactory-to-implement-resilient-http-requests-with-Polly-based-middleware)
+- [Microservices Health Monitoring](#microservices-health-monitoring)
+	- [Microservices Health Monitoring with ASP.NET Core](microservices-health-monitoring-with-asp.net-core)
 
 Resiliency is the ability to recover from failures and continue to function.
 It isn't about avoiding failures but accepting the fact that failures will happen
@@ -164,3 +166,72 @@ optimize resource utilization, and seamlessly integrate resilient policies for r
 A Typed Client (some service using Http Client) is effectively a transient object, that means a new instance is created each time one is needed.
 It receives a new Http Client instance each time it's constructed.
 However, the HttpMessageHandler objects (used by Http Client) in the pool are the objects that are reused by multiple HttpClient instances.
+
+## Microservices Health Monitoring
+
+Effective health monitoring is indispensable for maintaining the operational integrity of microservices and containers in near-real-time.
+Vital for various operational aspects, it becomes crucial during phased application upgrades by orchestrators.
+
+Microservices rely on health checks to keep performance monitors and orchestrators informed about their operational status.
+Without timely "I'm alive" signals, deploying updates carries risks, and detecting failures may be delayed,
+potentially leading to cascading issues and major outages.
+
+Services conventionally report their status, contributing to an aggregated view of the application's health.
+Orchestrators benefit from detailed health information, enabling proactive cluster actions.
+Customized, high-quality health reporting facilitates swift issue detection and resolution,
+enhancing the overall resilience of a running microservices application.
+
+ASP.NET Core provides robust Health Checks Middleware and libraries for real-time reporting on the health of application infrastructure components.
+
+Health checks are exposed as HTTP endpoints, offering versatile configurations for monitoring scenarios.
+Container orchestrators and load balancers utilize health probes to assess an app's status,
+influencing deployment decisions or rerouting traffic based on health.
+Monitoring extends to physical server resources like memory and disk usage, ensuring holistic health monitoring.
+
+App dependencies, such as databases and external services, undergo scrutiny through health checks,
+confirming their availability and functionality.
+These checks are designed to integrate seamlessly with external monitoring services or container orchestrators,
+providing insights into app status. Choose a monitoring system before implementing health checks,
+determining the types of checks and endpoint configurations based on your chosen monitoring solution.
+
+### Microservices Health Monitoring with ASP.NET Core
+
+Health monitoring in ASP.NET Core is essential for real-time insights into the well-being of microservices.
+Leveraging the Health Checks Middleware, developers can expose HTTP endpoints to assess various aspects of an application.
+
+**Capabilities:**
+- **Service Health Monitoring:** Detect issues early by allowing microservices to send periodic "I'm alive" signals,
+crucial for safe deployment and preventing cascading failures.
+- **Integration with Orchestrators:** Enable container orchestrators and load balancers to make deployment decisions based on health checks,
+ensuring continuous operation.
+
+**Integration Steps:**
+1. **Configure Health Checks:** Implement the Health Checks Middleware to expose HTTP endpoints for monitoring.
+2. **Define Custom Checks:** Tailor checks for memory, disk usage, and dependencies like databases or external services.
+3. **Orchestrator Integration:** Integrate health checks with container orchestrators to influence deployment decisions.
+
+**Watchdog Solution in ASP.NET Core:**
+- Consider leveraging Watchdog, a solution for comprehensive health monitoring in ASP.NET Core.
+Watchdog enhances health checks with additional features and customizable hooks for automated actions in response to unhealthy states.
+
+**Example Hooks:**
+1. **Auto-Scaling:** Implement hooks to trigger auto-scaling actions based on health check results.
+For instance, dynamically adjust the number of running instances in response to increased demand or failures.
+
+2. **Notification Services:** Configure hooks to send notifications via email, SMS,
+or other communication channels when critical issues are detected. Keep relevant stakeholders informed in real-time.
+
+3. **Rollback Mechanisms:** Set up hooks to initiate rollback procedures in case of unsuccessful deployments.
+Automatically revert to a stable version to minimize downtime.
+
+4. **Logging and Auditing:** Implement hooks for detailed logging and auditing.
+Capture health check results and actions taken, providing a comprehensive view of system behavior.
+
+**Implementation:**
+- Define custom hooks in the Watchdog configuration, specifying the actions to be performed when specific health conditions are met.
+Hooks can be written as scripts, custom code, or integrated with external services.
+
+Leverage Watchdog's hooks to automate responses,
+ensuring proactive management of microservices health and minimizing the impact of potential issues.
+
+Ensure your microservices ecosystem is robust and responsive with ASP.NET Core's Health Checks and Watchdog capabilities.

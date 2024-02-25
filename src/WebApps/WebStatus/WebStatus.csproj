@@ -1,10 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<RootNamespace>ShoppingApp.WebApps.WebStatus</RootNamespace>
+	</PropertyGroup>
 
-  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+	<ItemGroup>
+		<PackageReference Include="AspNetCore.HealthChecks.UI" Version="7.0.2" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="7.0.0" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Docker\" />
+	  <None Remove="Docker\Dotnet70\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Docker\" />
+	  <Folder Include="Docker\Dotnet70\" />
+	</ItemGroup>
 </Project>
